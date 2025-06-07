@@ -45,6 +45,20 @@ FELO_REPOS=(
   "https://github.com/zeka-stack/felo-pay.git"
 )
 
+# Maven 模板文件列表（可按需增减）
+MAVEN_FILES=(
+  "mvnw"
+  "mvnw.cmd"
+  ".mvn/maven.config"
+  ".mvn/jvm.config"
+  ".mvn/zeka.stack.settings.xml"
+  ".mvn/wrapper/maven-wrapper.properties"
+  ".mvn/wrapper/MavenWrapperDownloader.java"
+)
+
+# 下载缓存目录（脚本执行目录下）
+MAVEN_TMP_DIR="/tmp/zeka-stack-maven-template"
+
 # 创建并进入目录
 create_and_enter_dir() {
   local dir="$1"
@@ -105,6 +119,38 @@ generate_pom() {
   } > "$pom_path"
 
   echo "生成聚合 pom.xml: $pom_path"
+
+  # 下载 maven 模板（只执行一次）
+  download_maven_template
+
+  # 复制模板文件（不重复）
+  if [ ! -f ".maven-copied" ]; then
+    echo "➡️  正在复制 maven 模板到 $(pwd)"
+    cp -r "$MAVEN_TMP_DIR"/. ./
+    touch .maven-copied
+  fi
+}
+
+# 下载 maven 模板文件到本地缓存目录
+download_maven_template() {
+  if [ -d "$MAVEN_TMP_DIR" ]; then
+    echo "✅ 已下载过 maven 模板，跳过重新下载"
+    return
+  fi
+
+  echo "⬇️  正在下载 maven 模板文件..."
+
+  for file in "${MAVEN_FILES[@]}"; do
+    local dir
+    dir="$(dirname "$file")"
+    mkdir -p "$MAVEN_TMP_DIR/$dir"
+    curl -fsSL "https://raw.githubusercontent.com/zeka-stack/supports/main/maven/$file" -o "$MAVEN_TMP_DIR/$file" || {
+      echo "❌ 下载失败: $file"
+      exit 1
+    }
+  done
+
+  echo "✅ maven 模板文件下载完成"
 }
 
 # 构建一个分组
