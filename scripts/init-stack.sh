@@ -85,7 +85,7 @@ generate_pom() {
     echo '    <modelVersion>4.0.0</modelVersion>'
     echo ''
     echo '    <groupId>dev.dong4j</groupId>'
-    echo '    <artifactId>$artifact_id</artifactId>'
+    echo "    <artifactId>$artifact_id</artifactId>"
     echo '    <version>hello.world</version>'
     echo '    <packaging>pom</packaging>'
     echo ''
