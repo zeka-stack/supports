@@ -91,6 +91,10 @@ generate_pom() {
   local pom_path="./pom.xml"
   local artifact_id="$subdir"
 
+  if [ -f "$pom_path" ]; then
+    return
+  fi
+
   {
     echo '<?xml version="1.0" encoding="UTF-8"?>'
     echo '<project xmlns="http://maven.apache.org/POM/4.0.0"'
@@ -118,17 +122,13 @@ generate_pom() {
     echo '</project>'
   } > "$pom_path"
 
-  echo "生成聚合 pom.xml: $pom_path"
+  echo "📦 生成聚合 pom.xml: $pom_path"
 
   # 下载 maven 模板（只执行一次）
   download_maven_template
 
-  # 复制模板文件（不重复）
-  if [ ! -f ".maven-copied" ]; then
-    echo "➡️  正在复制 maven 模板到 $(pwd)"
-    cp -r "$MAVEN_TMP_DIR"/. ./
-    touch .maven-copied
-  fi
+  cp -r "$MAVEN_TMP_DIR"/. ./
+  touch .maven-copied
 }
 
 # 下载 maven 模板文件到本地缓存目录
