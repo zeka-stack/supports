@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 全局更新 zeka-stack 所有项目的的 .gitignore 配置
 # 用法: ./scripts/update-ignore.sh <target_dir1> [target_dir2 ...]
 
 set -e
