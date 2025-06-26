@@ -49,21 +49,27 @@ func main() {
 	}
 
 	for group, repos := range groups {
-		if group == "" {
-			cloneRepos(".", repos)
-		} else {
-			fmt.Printf("📦 处理分组: %s\n", group)
-			os.MkdirAll(group, 0755)
-			os.Chdir(group)
-			cloneRepos(".", repos)
-			if len(repos) > 1 {
-				generatePom(group, repos)
-				downloadMavenTemplate()
-				copyMavenTemplate(".")
-			}
-			os.Chdir("..")
-		}
-	}
+    	if group == "" {
+    		cloneRepos(".", repos)
+    	} else {
+    		fmt.Printf("📦 处理分组: %s\n", group)
+    		os.MkdirAll(group, 0755)
+    		os.Chdir(group)
+    		cloneRepos(".", repos)
+
+    		if len(repos) == 1 {
+    			// 尝试修复 group/group 重复结构
+    			fixSingleRepoLayout(".", repos[0])
+    		}
+
+    		if len(repos) > 1 {
+    			generatePom(group, repos)
+    			downloadMavenTemplate()
+    			copyMavenTemplate(".")
+    		}
+    		os.Chdir("..")
+    	}
+    }
 
 	// todo 处理单项目目录
 	fmt.Println("\n✅ 所有项目克隆并处理完成。")
@@ -120,6 +126,25 @@ func cloneRepos(dir string, repos []string) {
 		if err := cmd.Run(); err != nil {
 			fmt.Printf("❌ 克隆失败: %v\n", err)
 		}
+	}
+}
+
+// 修正目录结构: 如果分组只有一个 git 项目, 为避免存在 2 级同名目录,需要特殊处理
+func fixSingleRepoLayout(group string, repo string) {
+	repoName := strings.TrimSuffix(filepath.Base(repo), ".git")
+	srcPath := filepath.Join(group, repoName)
+
+	// 如果存在重复的 group/group 结构，就进行修正
+	if stat, err := os.Stat(srcPath); err == nil && stat.IsDir() {
+		fmt.Printf("🛠️  修复目录结构: %s -> %s\n", srcPath, group)
+		entries, _ := os.ReadDir(srcPath)
+		for _, entry := range entries {
+			src := filepath.Join(srcPath, entry.Name())
+			dst := filepath.Join(group, entry.Name())
+			_ = os.RemoveAll(dst)
+			_ = os.Rename(src, dst)
+		}
+		_ = os.RemoveAll(srcPath)
 	}
 }
 

@@ -106,7 +106,7 @@ copy_maven_template() {
   touch .maven-copied
 }
 
-# 生成聚合 pom.xml
+# 在多模块项目中自动生成一个聚合 pom.xml
 generate_pom() {
   local subdir="$1"
   shift
@@ -164,6 +164,23 @@ clone_repos() {
   done
 }
 
+# 修正目录结构: 如果分组只有一个 git 项目, 为避免存在 2 级同名目录,需要特殊处理
+fix_single_repo_layout() {
+  local group_dir="$1"
+  local repo_url="$2"
+  local inner_name
+  inner_name=$(basename "$repo_url" .git)
+  local inner_path="$group_dir/$inner_name"
+
+  if [ -d "$inner_path" ]; then
+    info "🛠️  修复目录结构: 将 $inner_path 提升到 $group_dir"
+    shopt -s dotglob  # 拷贝隐藏文件
+    mv "$inner_path"/* "$group_dir"/
+    rm -rf "$inner_path"
+    shopt -u dotglob
+  fi
+}
+
 # 构建分组
 build() {
   local subdir="$1"
@@ -173,6 +190,9 @@ build() {
     mkdir -p "$subdir"
     cd "$subdir"
     clone_repos "${repos[@]}"
+    if [ "${#repos[@]}" -eq 1 ]; then
+      fix_single_repo_layout "." "${repos[0]}"
+    fi
     generate_pom "$subdir" "${repos[@]}"
     cd ..
   else
