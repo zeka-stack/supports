@@ -49,7 +49,7 @@ if [ ! -f "$REPOS_FILE" ]; then
 fi
 
 # 解析分组和仓库
-declare -A GROUPS
+declare -A REPO_GROUPS
 group=""
 while IFS= read -r line || [ -n "$line" ]; do
   line="${line%%#*}"
@@ -59,7 +59,7 @@ while IFS= read -r line || [ -n "$line" ]; do
     group="${BASH_REMATCH[1]}"
     continue
   fi
-  GROUPS["$group"]+="$line "
+  REPO_GROUPS["$group"]+="$line "
 done < "$REPOS_FILE"
 
 mkdir -p "$BASE_DIR"
@@ -164,8 +164,8 @@ build() {
 }
 
 # 主流程
-for group in "${!GROUPS[@]}"; do
-  repos=(${GROUPS[$group]})
+for group in "${!REPO_GROUPS[@]}"; do
+  repos=(${REPO_GROUPS[$group]})
   build "$group" "${repos[@]}"
 done
 
