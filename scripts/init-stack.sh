@@ -2,6 +2,14 @@
 
 set -e
 
+# 确保用 bash 执行（不能用 sh）
+if [ -z "$BASH_VERSION" ]; then
+  echo "❌ 本脚本必须使用 bash 执行。请使用以下命令："
+  echo ""
+  echo "   bash <(curl -fsSL https://raw.githubusercontent.com/zeka-stack/supports/main/scripts/init-stack.sh)"
+  exit 1
+fi
+
 BASE_DIR="zeka.stack"
 REPOS_FILE="repos.txt"
 REPOS_URL="https://raw.githubusercontent.com/zeka-stack/supports/main/scripts/repos.txt"
