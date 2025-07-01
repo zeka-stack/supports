@@ -92,7 +92,9 @@ download_maven_template() {
   for file in "${MAVEN_FILES[@]}"; do
     dir="$(dirname "$file")"
     mkdir -p "$MAVEN_TMP_DIR/$dir"
-    curl -fsSL "https://raw.githubusercontent.com/zeka-stack/supports/main/maven/$file" -o "$MAVEN_TMP_DIR/$file" || {
+    url="https://ghfast.top/https://raw.githubusercontent.com/zeka-stack/supports/refs/heads/main/maven/$file"
+    info "⏳ 正在下载: $url"
+    curl -fsSL "$url" -o "$MAVEN_TMP_DIR/$file" || {
       error "❌ 下载失败: $file"
       exit 1
     }
