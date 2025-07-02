@@ -147,7 +147,47 @@ generate_pom() {
     echo '    </properties>'
     echo '</project>'
   } > "$pom_path"
-  download_maven_template
+  copy_maven_template
+}
+
+# 新增: 为主目录生成聚合 pom.xml
+generate_root_pom() {
+  local pom_path="./pom.xml"
+  if [ -f "$pom_path" ]; then
+      warn "⚠️  根目录的 pom.xml 已存在，跳过生成。"
+      return
+  fi
+
+  info "📦 为根目录生成聚合 pom.xml"
+  cat > "$pom_path" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>$GROUP_ID</groupId>
+    <artifactId>zeka.stack</artifactId>
+    <version>$VERSION</version>
+    <packaging>pom</packaging>
+    <name>Zeka Stack</name>
+
+    <modules>
+EOF
+  # 添加所有分组作为模块
+  for group in "${!REPO_GROUPS[@]}"; do
+      echo "        <module>$group</module>" >> "$pom_path"
+  done
+
+  cat >> "$pom_path" <<EOF
+    </modules>
+
+    <properties>
+        <maven.install.skip>true</maven.install.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+</project>
+EOF
   copy_maven_template
 }
 
@@ -174,11 +214,12 @@ fix_single_repo_layout() {
   inner_name=$(basename "$repo_url" .git)
   local inner_path="$group_dir/$inner_name"
 
-  if [ -d "$inner_path" ]; then
+  # 仅当 group_dir 和 inner_name 相同时才执行提升
+  if [[ "$group_dir" == "$inner_name" ]]; then
     info "🛠️  修复目录结构: 将 $inner_path 提升到 $group_dir"
     shopt -s dotglob  # 拷贝隐藏文件
-    mv "$inner_path"/* "$group_dir"/
-    rm -rf "$inner_path"
+    mv -n "./$inner_name"/* ./ # 跳过同名文件, 避免二次 clone 时覆盖
+    rm -rf "./$inner_name"
     shopt -u dotglob
   fi
 }
@@ -193,7 +234,7 @@ build() {
     cd "$subdir"
     clone_repos "${repos[@]}"
     if [ "${#repos[@]}" -eq 1 ]; then
-      fix_single_repo_layout "." "${repos[0]}"
+      fix_single_repo_layout $subdir "${repos[0]}"
     fi
     generate_pom "$subdir" "${repos[@]}"
     cd ..
@@ -203,10 +244,14 @@ build() {
 }
 
 # 主流程
+download_maven_template  # 提前下载模板
 for group in "${!REPO_GROUPS[@]}"; do
-  repos=(${REPO_GROUPS[$group]})
-  build "$group" "${repos[@]}"
+    repos=(${REPO_GROUPS[$group]})
+    build "$group" "${repos[@]}"
 done
+
+# 新增: 返回基础目录并生成根 pom.xml 和 Maven wrapper
+generate_root_pom
 
 # 用完后如果是自动下载的，删除临时文件
 if [ -n "$TMP_REPOS_FILE" ]; then
@@ -215,7 +260,6 @@ fi
 
 echo ""
 success "✅ 所有项目克隆并处理完成。"
-# todo 处理单项目目录
 echo ""
 info "🧩 所有聚合 pom.xml 中的 <module> 标签默认已被注释；如需启用模块构建，请手动取消对应注释。"
 echo ""
