@@ -191,39 +191,6 @@ EOF
   copy_maven_template
 }
 
-# 克隆仓库
-clone_repos() {
-  local repos=("$@")
-  for repo in "${repos[@]}"; do
-    local repo_name
-    repo_name=$(basename "$repo" .git)
-    if [ -d "$repo_name" ]; then
-      warn "⚠️  $repo_name 已存在，跳过克隆。"
-    else
-      info "⬇️  克隆仓库: $repo"
-      git clone "$repo"
-    fi
-  done
-}
-
-# 修正目录结构: 如果分组只有一个 git 项目, 为避免存在 2 级同名目录,需要特殊处理
-fix_single_repo_layout() {
-  local group_dir="$1"
-  local repo_url="$2"
-  local inner_name
-  inner_name=$(basename "$repo_url" .git)
-  local inner_path="$group_dir/$inner_name"
-
-  # 仅当 group_dir 和 inner_name 相同时才执行提升
-  if [[ "$group_dir" == "$inner_name" ]]; then
-    info "🛠️  修复目录结构: 将 $inner_path 提升到 $group_dir"
-    shopt -s dotglob  # 拷贝隐藏文件
-    mv -n "./$inner_name"/* ./ # 跳过同名文件, 避免二次 clone 时覆盖
-    rm -rf "./$inner_name"
-    shopt -u dotglob
-  fi
-}
-
 # 构建分组
 build() {
   local subdir="$1"
@@ -232,14 +199,58 @@ build() {
   if [ -n "$subdir" ]; then
     mkdir -p "$subdir"
     cd "$subdir"
-    clone_repos "${repos[@]}"
-    if [ "${#repos[@]}" -eq 1 ]; then
-      fix_single_repo_layout $subdir "${repos[0]}"
-    fi
+    clone_repos "$subdir" "${repos[@]}"
     generate_pom "$subdir" "${repos[@]}"
     cd ..
   else
-    clone_repos "${repos[@]}"
+    clone_repos "" "${repos[@]}"
+  fi
+}
+
+# 克隆仓库（并修复目录结构）
+clone_repos() {
+  local group_dir="$1"
+  shift
+  local repos=("$@")
+
+  # 如果当前目录已是 Git 仓库，则跳过所有克隆操作
+  if [ -d ".git" ]; then
+    warn "⚠️  当前目录已是 Git 仓库，跳过所有克隆操作。"
+    return
+  fi
+
+  for repo in "${repos[@]}"; do
+    local repo_name
+    repo_name=$(basename "$repo" .git)
+
+    if [ -d "$repo_name" ]; then
+      warn "⚠️  $repo_name 已存在，跳过克隆。"
+      continue
+    fi
+
+    info "⬇️  克隆仓库: $repo"
+    if git clone "$repo"; then
+      fix_single_repo_layout "$group_dir" "$repo"
+    else
+      error "❌ 克隆失败: $repo"
+    fi
+  done
+}
+
+# 修正目录结构：如果 group_dir 和仓库同名，避免二级目录嵌套
+fix_single_repo_layout() {
+  local group_dir="$1"
+  local repo_url="$2"
+  local inner_name
+  inner_name=$(basename "$repo_url" .git)
+  local inner_path="$group_dir/$inner_name"
+
+  if [[ "$group_dir" == "$inner_name" ]]; then
+    info "🛠️  修复目录结构: 将 $inner_path 提升到 $group_dir"
+    shopt -s dotglob  # 包含隐藏文件
+    mv -n "./$inner_name"/* ./ || true  # 避免覆盖已有文件
+    rm -rf "./$inner_name"
+    shopt -u dotglob
   fi
 }
 

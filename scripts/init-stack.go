@@ -134,33 +134,42 @@ func downloadMavenTemplate() {
 
 func buildGroup(group string, repos []string) {
 	if group == "" {
-		cloneRepos(repos)
+		cloneRepos(repos, group)
 		return
 	}
 	os.MkdirAll(group, 0755)
 	os.Chdir(group)
-	cloneRepos(repos)
-	if len(repos) == 1 {
-		fixSingleRepoLayout(group, repos[0])
-	}
+	cloneRepos(repos, group)
 	generatePom(group, repos)
 	os.Chdir("..")
 }
 
-func cloneRepos(repos []string) {
+func cloneRepos(repos []string, group string) {
 	for _, repo := range repos {
 		name := strings.TrimSuffix(filepath.Base(repo), ".git")
+
+		// 如果目标目录已存在，跳过
 		if _, err := os.Stat(name); err == nil {
 			fmt.Printf("⚠️  %s 已存在，跳过\n", name)
 			continue
 		}
+
+		// 新增：如果当前目录已经是 Git 仓库，跳过克隆
+		if _, err := os.Stat(".git"); err == nil {
+			fmt.Printf("⚠️  当前目录已是 Git 仓库，跳过克隆: %s\n", repo)
+			continue
+		}
+
+		// 执行克隆
 		fmt.Printf("⬇️  克隆仓库: %s\n", repo)
 		cmd := exec.Command("git", "clone", repo)
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		if err := cmd.Run(); err != nil {
 			fmt.Printf("❌ 克隆失败: %v\n", err)
+			continue
 		}
+        fixSingleRepoLayout(group, repo)
 	}
 }
 
@@ -179,7 +188,6 @@ func fixSingleRepoLayout(group, repo string) {
 
 		// 判断目标文件是否已经存在
 		if _, err := os.Stat(dstPath); err == nil {
-			fmt.Printf("⚠️  文件 %s 已存在，跳过移动\n", dstPath)
 			continue
 		}
 
