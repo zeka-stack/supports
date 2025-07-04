@@ -3,6 +3,7 @@
 # 一键拉取 zeka.stack 项目
 # bash <(curl -fsSL https://raw.githubusercontent.com/zeka-stack/supports/main/scripts/init-stack.sh)
 # 本地执行时需要使用 bash: bash init-stack.sh repos.txt
+# declare -A 语法需要 bash 5.x, 所以使用 brew 安装 bash, 执行: /usr/local/bin/bash init-stack.sh repos.txt
 
 set -e
 
