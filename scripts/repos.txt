@@ -4,8 +4,8 @@ https://github.com/zeka-stack/arco-builder.git
 https://github.com/zeka-stack/arco-processor.git
 https://github.com/zeka-stack/arco-maven-plugin.git
 
-[blen-toolkit]
-https://github.com/zeka-stack/blen-toolkit.git
+[blen-kernel]
+https://github.com/zeka-stack/blen-kernel.git
 
 [cubo-starter]
 https://github.com/zeka-stack/cubo-starter.git

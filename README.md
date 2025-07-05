@@ -22,7 +22,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/zeka-stack/supports/main/scr
 zeka.stack/
 ├── arco-meta/                 # Maven 构建体系与依赖管理的元模块集合
 │   └── pom.xml                # 聚合 arco 系列构建模块
-├── blen-toolkit/              # 工具集模块，提供桥接集成与跨模块共用逻辑
+├── blen-kernel/              # 工具集模块，提供桥接集成与跨模块共用逻辑
 ├── cubo-starter/              # Spring Boot 通用组件封装（核心 starter）
 ├── cubo-starter-examples/     # cubo-starter 的使用示例与测试工程
 ├── domi-suite/                # 微服务化项目集合（面向业务的基础能力）

@@ -138,7 +138,7 @@ generate_pom() {
     for repo in "${repos[@]}"; do
       local name
       name=$(basename "$repo" .git)
-      echo "        <!-- <module>$name</module> -->"
+      echo "        <module>$name</module>"
     done
     echo '    </modules>'
     echo ''
