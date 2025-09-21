@@ -1,3 +1,12 @@
+[.github]
+https://github.com/zeka-stack/.github.git
+
+[supports]
+https://github.com/zeka-stack/supports.git
+
+[zeka-stack.github.io]
+https://github.com/zeka-stack/zeka-stack.github.io.git
+
 [arco-meta]
 https://github.com/zeka-stack/arco-supreme.git
 https://github.com/zeka-stack/arco-builder.git
