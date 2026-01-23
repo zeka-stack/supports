@@ -109,10 +109,8 @@ export const FeatureRequests = () => {
         }
     };
 
-    // 本地开发时允许拖拽，生产环境需要管理员权限
-    const isAdmin = import.meta.env.DEV
-        ? true
-        : (authStatus?.loggedIn === true && authStatus?.user?.role === 'admin');
+    // 权限由 authStatus 决定 (包括 dev 环境下的 mock 数据)
+    const isAdmin = authStatus?.loggedIn === true && authStatus?.user?.role === 'admin';
 
     // Debug log
     useEffect(() => {

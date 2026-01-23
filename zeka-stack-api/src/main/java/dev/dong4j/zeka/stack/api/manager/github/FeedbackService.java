@@ -124,11 +124,7 @@ public class FeedbackService {
      */
     private String buildTitle(FeedbackRequest request) {
         String typeLabel = request.getType().getDescription();
-        FeedbackRequest.UserInfo userInfo = request.getUserInfo();
-        String pluginName = userInfo != null && StringUtils.hasText(userInfo.getPluginName())
-                            ? userInfo.getPluginName()
-                            : "插件";
-        return String.format("[%s 反馈] %s: %s", pluginName, typeLabel, request.getTitle());
+        return String.format("%s: %s", typeLabel, request.getTitle());
     }
 
     /**

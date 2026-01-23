@@ -126,7 +126,7 @@ public class FeedbackServiceImpl extends BaseServiceImpl<FeedbackMapper, Feedbac
 
         // 构建用户信息（目前写死）
         FeedbackRequest.UserInfo userInfo = new FeedbackRequest.UserInfo();
-        userInfo.setPluginName("IntelliAI WebUI");
+        userInfo.setPluginName("");
         userInfo.setGithubUsername(""); // 可以从认证信息中获取，目前先写死
         request.setUserInfo(userInfo);
 

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ChevronUp, ExternalLink, Maximize2, MessageSquare, Minimize2, Send, Trash2, X} from 'lucide-react';
+import {ChevronUp, Edit2, ExternalLink, Maximize2, MessageSquare, Minimize2, RotateCcw, Save, Send, Trash2, X} from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -13,6 +13,7 @@ interface RequestDetailModalProps {
     onVote: (id: number) => void;
     onCommentAdded: () => void;
     onDeleted?: (id: number) => void;
+    onUpdated?: () => void; // New callback
 }
 
 const statusColors = {
@@ -23,7 +24,7 @@ const statusColors = {
     'Open': 'bg-gray-100 text-gray-600 border-gray-200',
 };
 
-export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, onClose, onVote, onCommentAdded, onDeleted}) => {
+export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, onClose, onVote, onCommentAdded, onDeleted, onUpdated}) => {
     const [commentText, setCommentText] = useState('');
     const [comments, setComments] = useState<Comment[]>([]);
     const [loadingComments, setLoadingComments] = useState(false);
@@ -33,13 +34,20 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
     const [isDeleting, setIsDeleting] = useState(false);
     const [detailRequest, setDetailRequest] = useState<Request | null>(null);
 
+    // Edit state
+    const [isEditing, setIsEditing] = useState(false);
+    const [editTitle, setEditTitle] = useState('');
+    const [editDescription, setEditDescription] = useState('');
+    const [editStatus, setEditStatus] = useState<Request['status']>('Open');
+    const [editPriority, setEditPriority] = useState<Request['priority']>('Low');
+    const [isSaving, setIsSaving] = useState(false);
+
     const fetchDetail = useCallback(async (requestId: number) => {
         try {
             const data = await api.getFeedbackDetail(requestId);
             setDetailRequest(data as Request);
         } catch (e) {
             console.error('Failed to fetch feedback detail:', e);
-            // 如果获取详情失败，使用传入的 request 作为 fallback
             setDetailRequest(request);
         }
     }, [request]);
@@ -58,16 +66,41 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
 
     useEffect(() => {
         if (request) {
-            // 调用详情接口获取完整数据（包括 issuesUrl）
-            fetchDetail(request.id);
-            fetchComments(request.id);
+            if (detailRequest?.id !== request.id) {
+                fetchDetail(request.id);
+                fetchComments(request.id);
+            }
         } else {
             setDetailRequest(null);
         }
-    }, [request, fetchDetail, fetchComments]);
+    }, [request?.id]);
 
     useEffect(() => {
-        // Fetch auth status to check if user is admin
+        if (request && detailRequest && request.id === detailRequest.id) {
+            if (request.voteCount !== detailRequest.voteCount ||
+                request.status !== detailRequest.status ||
+                request.commentCount !== detailRequest.commentCount) {
+                setDetailRequest(prev => ({
+                    ...prev!,
+                    voteCount: request.voteCount,
+                    status: request.status,
+                    commentCount: request.commentCount
+                }));
+            }
+        }
+    }, [request]);
+
+    // Initialize edit form when entering edit mode or when detailRequest changes
+    useEffect(() => {
+        if (detailRequest) {
+            setEditTitle(detailRequest.title);
+            setEditDescription(detailRequest.description);
+            setEditStatus(detailRequest.status);
+            setEditPriority(detailRequest.priority);
+        }
+    }, [detailRequest, isEditing]);
+
+    useEffect(() => {
         api.getAuthStatus().then(status => {
             setAuthStatus(status);
         }).catch(console.error);
@@ -75,18 +108,19 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') onClose();
+            if (e.key === 'Escape') {
+                if (isEditing) setIsEditing(false);
+                else onClose();
+            }
         };
         window.addEventListener('keydown', handleEsc);
         return () => window.removeEventListener('keydown', handleEsc);
-    }, [onClose]);
+    }, [onClose, isEditing]);
 
-    // Reset maximized state when opening a new request
     useEffect(() => {
         if (request) setIsMaximized(false);
-    }, [request]);
+    }, [request?.id]);
 
-    // 使用详情数据，如果没有则使用传入的 request
     const displayRequest = detailRequest || request;
 
     if (!request || !displayRequest) return null;
@@ -125,10 +159,40 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
         }
     };
 
+    const handleSave = async () => {
+        if (!displayRequest) return;
+        setIsSaving(true);
+        try {
+            await api.updateFeedbackStatus(displayRequest.id, editStatus, {
+                projectId: displayRequest.projectId,
+                title: editTitle,
+                description: editDescription,
+                priority: editPriority
+            });
+
+            // Update local state immediately
+            setDetailRequest(prev => prev ? ({
+                ...prev,
+                title: editTitle,
+                description: editDescription,
+                status: editStatus,
+                priority: editPriority
+            }) : null);
+
+            setIsEditing(false);
+            if (onUpdated) onUpdated();
+        } catch (e) {
+            console.error('Failed to update feedback:', e);
+            alert('保存失败，请稍后重试');
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-200">
             <div className={`bg-white rounded-xl shadow-2xl w-full flex flex-col overflow-hidden animate-in zoom-in-95 duration-200 transition-all ${
-                isMaximized ? 'max-w-6xl h-[90vh]' : 'max-w-3xl h-[60vh] min-h-[400px]'
+                isMaximized ? 'max-w-6xl h-[90vh]' : 'max-w-3xl h-[50vh] min-h-[350px]'
             }`}>
 
                 {/* Header */}
@@ -136,24 +200,38 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                     <div className="flex-1 pr-6">
                         <div className="flex items-center gap-2.5 mb-2">
                             <span className="text-xs font-mono text-gray-400">#{displayRequest.id}</span>
-                            <span className={`px-2 py-0.5 text-[10px] font-bold uppercase rounded-full border ${statusColors[displayRequest.status]}`}>
-                  {displayRequest.status}
-               </span>
+
+                            {isEditing ? (
+                                <select
+                                    value={editStatus}
+                                    onChange={(e) => setEditStatus(e.target.value as Request['status'])}
+                                    className="text-xs font-bold uppercase rounded-full border border-gray-300 bg-white px-2 py-0.5 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                                >
+                                    {Object.keys(statusColors).map(status => (
+                                        <option key={status} value={status}>{status}</option>
+                                    ))}
+                                </select>
+                            ) : (
+                                <span className={`px-2 py-0.5 text-[10px] font-bold uppercase rounded-full border ${statusColors[displayRequest.status]}`}>
+                                    {displayRequest.status}
+                                </span>
+                            )}
+
                             <span className="text-xs font-medium text-gray-400">{formatDate(displayRequest.createTime)}</span>
-                            {displayRequest.issuesUrl && (
+
+                            {!isEditing && displayRequest.issuesUrl && (
                                 <a
                                     href={displayRequest.issuesUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-1 text-xs text-gray-500 hover:text-indigo-600 transition-colors"
+                                    className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 hover:underline transition-all bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100 shadow-sm"
                                     title="查看 GitHub Issue"
                                 >
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                         <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd"/>
                                     </svg>
-                                    <span className="font-medium">
+                                    <span className="font-bold">
                                         {(() => {
-                                            // 从 URL 中提取 issue 编号，例如：https://github.com/owner/repo/issues/123 -> #123
                                             const match = displayRequest.issuesUrl.match(/\/issues\/(\d+)/);
                                             return match ? `#${match[1]}` : 'GitHub Issue';
                                         })()}
@@ -162,18 +240,62 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                                 </a>
                             )}
                         </div>
-                        <h2 className="text-xl font-bold text-gray-900 leading-tight">{displayRequest.title}</h2>
-                    </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                        {isAdmin && (
-                            <button
-                                onClick={() => setShowDeleteConfirm(true)}
-                                className="text-red-400 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
-                                title="删除需求"
-                            >
-                                <Trash2 className="w-5 h-5"/>
-                            </button>
+
+                        {isEditing ? (
+                            <input
+                                type="text"
+                                value={editTitle}
+                                onChange={(e) => setEditTitle(e.target.value)}
+                                className="w-full text-xl font-bold text-gray-900 border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+                                placeholder="Request Title"
+                            />
+                        ) : (
+                            <h2 className="text-xl font-bold text-gray-900 leading-tight">{displayRequest.title}</h2>
                         )}
+                    </div>
+
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                        {isAdmin && !isEditing && (
+                            <>
+                                <button
+                                    onClick={() => setIsEditing(true)}
+                                    className="text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 p-1.5 rounded-lg transition-colors"
+                                    title="编辑详情"
+                                >
+                                    <Edit2 className="w-5 h-5"/>
+                                </button>
+                                <button
+                                    onClick={() => setShowDeleteConfirm(true)}
+                                    className="text-red-400 hover:text-red-600 hover:bg-red-50 p-1.5 rounded-lg transition-colors"
+                                    title="删除需求"
+                                >
+                                    <Trash2 className="w-5 h-5"/>
+                                </button>
+                            </>
+                        )}
+
+                        {isEditing && (
+                            <>
+                                <button
+                                    onClick={handleSave}
+                                    disabled={isSaving}
+                                    className="text-emerald-500 hover:text-emerald-700 hover:bg-emerald-50 p-1.5 rounded-lg transition-colors"
+                                    title="保存"
+                                >
+                                    {isSaving ? <span className="animate-spin text-xs">⏳</span> : <Save className="w-5 h-5"/>}
+                                </button>
+                                <button
+                                    onClick={() => setIsEditing(false)}
+                                    className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
+                                    title="取消"
+                                >
+                                    <RotateCcw className="w-5 h-5"/>
+                                </button>
+                            </>
+                        )}
+
+                        <div className="w-px h-6 bg-gray-200 mx-1"></div>
+
                         <button
                             onClick={() => setIsMaximized(!isMaximized)}
                             className="text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
@@ -196,212 +318,125 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                     {/* Left Panel: Details */}
                     <div className={`flex-1 flex flex-col min-w-0 ${!isMaximized ? 'lg:border-r border-gray-200' : ''}`}>
                         <div className="flex-1 overflow-y-auto p-6">
-                            <style>{`
-                                .markdown-body pre {
-                                    background-color: #f6f8fa;
-                                    border: 1px solid #e1e4e8;
-                                    border-radius: 6px;
-                                    padding: 16px;
-                                    overflow-x: auto;
-                                    font-size: 85%;
-                                    line-height: 1.45;
-                                    margin: 0;
-                                }
-                                .markdown-body pre code {
-                                    background-color: transparent;
-                                    border: 0;
-                                    padding: 0;
-                                    font-size: 100%;
-                                    word-break: normal;
-                                    white-space: pre;
-                                    display: block;
-                                }
-                                /* Override highlight.js styles for better integration */
-                                .markdown-body pre code.hljs {
-                                    padding: 0;
-                                    background: transparent;
-                                }
-                                .markdown-body code {
-                                    background-color: rgba(27, 31, 35, 0.05);
-                                    border-radius: 3px;
-                                    font-size: 85%;
-                                    padding: 0.2em 0.4em;
-                                    color: #e83e8c;
-                                }
-                                .markdown-body table {
-                                    border-spacing: 0;
-                                    border-collapse: collapse;
-                                }
-                                .markdown-body table tr {
-                                    background-color: #fff;
-                                    border-top: 1px solid #d0d7de;
-                                }
-                                .markdown-body table tr:nth-child(2n) {
-                                    background-color: #f6f8fa;
-                                }
-                                .markdown-body table th,
-                                .markdown-body table td {
-                                    padding: 6px 13px;
-                                    border: 1px solid #d0d7de;
-                                }
-                                .markdown-body table th {
-                                    font-weight: 600;
-                                    background-color: #f6f8fa;
-                                }
-                                .markdown-body blockquote {
-                                    padding: 0 1em;
-                                    color: #656d76;
-                                    border-left: 0.25em solid #d0d7de;
-                                }
-                                .markdown-body ul,
-                                .markdown-body ol {
-                                    padding-left: 2em;
-                                }
-                                .markdown-body li {
-                                    margin-top: 0.25em;
-                                }
-                                .markdown-body li > p {
-                                    margin-top: 16px;
-                                }
-                                .markdown-body li + li {
-                                    margin-top: 0.25em;
-                                }
-                                .markdown-body img {
-                                    max-width: 100%;
-                                    box-sizing: content-box;
-                                    background-color: #fff;
-                                }
-                                .markdown-body a {
-                                    color: #0969da;
-                                    text-decoration: none;
-                                }
-                                .markdown-body a:hover {
-                                    text-decoration: underline;
-                                }
-                                .markdown-body input[type="checkbox"] {
-                                    margin-right: 0.5em;
-                                    cursor: default;
-                                }
-                                .markdown-body li > input[type="checkbox"] {
-                                    margin-top: 0.25em;
-                                }
-                            `}</style>
-                            <div className="markdown-body">
-                                <ReactMarkdown
-                                    remarkPlugins={[remarkGfm]}
-                                    rehypePlugins={[rehypeHighlight]}
-                                    components={{
-                                        // Headings
-                                        h1: ({...props}) =>
-                                            <h1 className="text-2xl font-bold mt-6 mb-4 pb-2 border-b border-gray-200 text-gray-900" {...props} />,
-                                        h2: ({...props}) =>
-                                            <h2 className="text-xl font-bold mt-5 mb-3 pb-2 border-b border-gray-200 text-gray-900" {...props} />,
-                                        h3: ({...props}) => <h3 className="text-lg font-semibold mt-4 mb-2 text-gray-900" {...props} />,
-                                        h4: ({...props}) => <h4 className="text-base font-semibold mt-3 mb-2 text-gray-900" {...props} />,
-                                        h5: ({...props}) => <h5 className="text-sm font-semibold mt-2 mb-1 text-gray-900" {...props} />,
-                                        h6: ({...props}) => <h6 className="text-sm font-semibold mt-2 mb-1 text-gray-600" {...props} />,
-                                        // Paragraph
-                                        p: ({...props}) => <p className="mb-4 text-gray-700 leading-7" {...props} />,
-                                        // Lists
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        ul: ({node, ...props}: any) => {
-                                            const isTaskList = node?.children?.some((child: unknown) =>
-                                                (child as { children?: Array<{ type?: string }> })?.children?.some((c: {
-                                                    type?: string
-                                                }) => c?.type === 'input')
-                                            );
-                                            return (
-                                                <ul className={`mb-4 ml-6 space-y-1 ${isTaskList ? 'list-none' : 'list-disc'}`} {...props} />
-                                            );
-                                        },
-                                        ol: ({...props}: React.ComponentPropsWithoutRef<'ol'>) =>
-                                            <ol className="mb-4 ml-6 list-decimal space-y-1" {...props} />,
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        li: ({node, ...props}: any) => {
-                                            const isTaskItem = (node as { children?: Array<{ type?: string }> })?.children?.some((child: {
-                                                type?: string
-                                            }) => child?.type === 'input');
-                                            return (
-                                                <li className={`text-gray-700 leading-7 ${isTaskItem ? 'flex items-start gap-2' : ''}`} {...props} />
-                                            );
-                                        },
-                                        input: ({...props}: React.ComponentPropsWithoutRef<'input'>) => (
-                                            <input
-                                                type="checkbox"
-                                                className="mt-1.5 mr-2 flex-shrink-0"
-                                                disabled
-                                                {...props}
-                                            />
-                                        ),
-                                        // Code blocks - pre handles the container
-                                        pre: ({children, ...props}: React.ComponentPropsWithoutRef<'pre'>) => (
-                                            <pre className="mb-4 rounded-lg overflow-x-auto border border-gray-200" {...props}>
-                                                {children}
-                                            </pre>
-                                        ),
-                                        // Code - handles both inline and block code
-                                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                                        code: ({inline, className, children, ...props}: any) => {
-                                            if (inline) {
-                                                return (
-                                                    <code className="px-1.5 py-0.5 bg-pink-50 text-pink-700 rounded text-sm font-mono" {...props}>
-                                                        {children}
-                                                    </code>
-                                                );
-                                            }
-                                            // Block code - rehype-highlight will handle the highlighting
-                                            return (
-                                                <code className={className} {...props}>
-                                                    {children}
-                                                </code>
-                                            );
-                                        },
-                                        // Blockquote
-                                        blockquote: ({...props}) => (
-                                            <blockquote className="pl-4 border-l-4 border-gray-300 italic text-gray-600 mb-4" {...props} />
-                                        ),
-                                        // Links
-                                        a: ({...props}) => (
-                                            <a className="text-[#0969da] hover:text-[#0550ae] hover:underline" target="_blank" rel="noopener noreferrer" {...props} />
-                                        ),
-                                        // Images
-                                        img: ({...props}) => (
-                                            <img className="max-w-full h-auto rounded-lg my-4" {...props} />
-                                        ),
-                                        // Tables
-                                        table: ({...props}) => (
-                                            <div className="overflow-x-auto my-4">
-                                                <table className="min-w-full border-collapse border border-gray-300" {...props} />
-                                            </div>
-                                        ),
-                                        thead: ({...props}) => (
-                                            <thead className="bg-gray-50" {...props} />
-                                        ),
-                                        th: ({...props}) => (
-                                            <th className="px-4 py-2 text-left border border-gray-300 font-semibold text-gray-900" {...props} />
-                                        ),
-                                        td: ({...props}) => (
-                                            <td className="px-4 py-2 border border-gray-300 text-gray-700" {...props} />
-                                        ),
-                                        // Horizontal rule
-                                        hr: ({...props}) => (
-                                            <hr className="my-6 border-t border-gray-200" {...props} />
-                                        ),
-                                        // Strong and emphasis
-                                        strong: ({...props}) => (
-                                            <strong className="font-semibold text-gray-900" {...props} />
-                                        ),
-                                        em: ({...props}) => (
-                                            <em className="italic" {...props} />
-                                        ),
-                                    }}
-                                >
-                                    {displayRequest.description || ''}
-                                </ReactMarkdown>
-                            </div>
+                            {isEditing ? (
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Description (Markdown)</label>
+                                        <textarea
+                                            value={editDescription}
+                                            onChange={(e) => setEditDescription(e.target.value)}
+                                            rows={15}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 font-mono text-sm resize-none"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                                        <div className="flex gap-2">
+                                            {['Low', 'Medium', 'High'].map((p) => (
+                                                <button
+                                                    key={p}
+                                                    onClick={() => setEditPriority(p as Request['priority'])}
+                                                    className={`px-3 py-1.5 rounded-md text-sm font-medium border transition-colors ${
+                                                        editPriority === p
+                                                            ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
+                                                            : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                                                    }`}
+                                                >
+                                                    {p}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <style>{`
+                                    /* ... styles kept same ... */
+                                    .markdown-body pre { background-color: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 6px; padding: 16px; overflow-x: auto; font-size: 85%; line-height: 1.45; margin: 0; }
+                                    .markdown-body pre code { background-color: transparent; border: 0; padding: 0; font-size: 100%; word-break: normal; white-space: pre; display: block; }
+                                    .markdown-body pre code.hljs { padding: 0; background: transparent; }
+                                    .markdown-body code { background-color: rgba(27, 31, 35, 0.05); border-radius: 3px; font-size: 85%; padding: 0.2em 0.4em; color: #e83e8c; }
+                                    .markdown-body table { border-spacing: 0; border-collapse: collapse; }
+                                    .markdown-body table tr { background-color: #fff; border-top: 1px solid #d0d7de; }
+                                    .markdown-body table tr:nth-child(2n) { background-color: #f6f8fa; }
+                                    .markdown-body table th, .markdown-body table td { padding: 6px 13px; border: 1px solid #d0d7de; }
+                                    .markdown-body table th { font-weight: 600; background-color: #f6f8fa; }
+                                    .markdown-body blockquote { padding: 0 1em; color: #656d76; border-left: 0.25em solid #d0d7de; }
+                                    .markdown-body ul, .markdown-body ol { padding-left: 2em; }
+                                    .markdown-body li { margin-top: 0.25em; }
+                                    .markdown-body li > p { margin-top: 16px; }
+                                    .markdown-body li + li { margin-top: 0.25em; }
+                                    .markdown-body img { max-width: 100%; box-sizing: content-box; background-color: #fff; }
+                                    .markdown-body a { color: #0969da; text-decoration: none; }
+                                    .markdown-body a:hover { text-decoration: underline; }
+                                    .markdown-body input[type="checkbox"] { margin-right: 0.5em; cursor: default; }
+                                    .markdown-body li > input[type="checkbox"] { margin-top: 0.25em; }
+                                `}</style>
+                                    <div className="markdown-body">
+                                        <ReactMarkdown
+                                            remarkPlugins={[remarkGfm]}
+                                            rehypePlugins={[rehypeHighlight]}
+                                            components={{
+                                                h1: ({...props}) =>
+                                                    <h1 className="text-2xl font-bold mt-6 mb-4 pb-2 border-b border-gray-200 text-gray-900" {...props} />,
+                                                h2: ({...props}) =>
+                                                    <h2 className="text-xl font-bold mt-5 mb-3 pb-2 border-b border-gray-200 text-gray-900" {...props} />,
+                                                h3: ({...props}) =>
+                                                    <h3 className="text-lg font-semibold mt-4 mb-2 text-gray-900" {...props} />,
+                                                h4: ({...props}) =>
+                                                    <h4 className="text-base font-semibold mt-3 mb-2 text-gray-900" {...props} />,
+                                                h5: ({...props}) =>
+                                                    <h5 className="text-sm font-semibold mt-2 mb-1 text-gray-900" {...props} />,
+                                                h6: ({...props}) =>
+                                                    <h6 className="text-sm font-semibold mt-2 mb-1 text-gray-600" {...props} />,
+                                                p: ({...props}) => <p className="mb-4 text-gray-700 leading-7" {...props} />,
+                                                ul: ({node, ...props}: any) => {
+                                                    const isTaskList = node?.children?.some((child: unknown) => (child as {
+                                                        children?: Array<{ type?: string }>
+                                                    })?.children?.some((c: { type?: string }) => c?.type === 'input'));
+                                                    return <ul className={`mb-4 ml-6 space-y-1 ${isTaskList ? 'list-none' : 'list-disc'}`} {...props} />;
+                                                },
+                                                ol: ({...props}: React.ComponentPropsWithoutRef<'ol'>) =>
+                                                    <ol className="mb-4 ml-6 list-decimal space-y-1" {...props} />,
+                                                li: ({node, ...props}: any) => {
+                                                    const isTaskItem = (node as {
+                                                        children?: Array<{ type?: string }>
+                                                    })?.children?.some((child: { type?: string }) => child?.type === 'input');
+                                                    return <li className={`text-gray-700 leading-7 ${isTaskItem ? 'flex items-start gap-2' : ''}`} {...props} />;
+                                                },
+                                                input: ({...props}: React.ComponentPropsWithoutRef<'input'>) =>
+                                                    <input type="checkbox" className="mt-1.5 mr-2 flex-shrink-0" disabled {...props} />,
+                                                pre: ({children, ...props}: React.ComponentPropsWithoutRef<'pre'>) =>
+                                                    <pre className="mb-4 rounded-lg overflow-x-auto border border-gray-200" {...props}>{children}</pre>,
+                                                code: ({inline, className, children, ...props}: any) => inline ?
+                                                    <code className="px-1.5 py-0.5 bg-pink-50 text-pink-700 rounded text-sm font-mono" {...props}>{children}</code> :
+                                                    <code className={className} {...props}>{children}</code>,
+                                                blockquote: ({...props}) =>
+                                                    <blockquote className="pl-4 border-l-4 border-gray-300 italic text-gray-600 mb-4" {...props} />,
+                                                a: ({...props}) =>
+                                                    <a className="text-[#0969da] hover:text-[#0550ae] hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                                                img: ({...props}) => <img className="max-w-full h-auto rounded-lg my-4" {...props} />,
+                                                table: ({...props}) => <div className="overflow-x-auto my-4">
+                                                    <table className="min-w-full border-collapse border border-gray-300" {...props} />
+                                                </div>,
+                                                thead: ({...props}) => <thead className="bg-gray-50" {...props} />,
+                                                th: ({...props}) =>
+                                                    <th className="px-4 py-2 text-left border border-gray-300 font-semibold text-gray-900" {...props} />,
+                                                td: ({...props}) =>
+                                                    <td className="px-4 py-2 border border-gray-300 text-gray-700" {...props} />,
+                                                hr: ({...props}) => <hr className="my-6 border-t border-gray-200" {...props} />,
+                                                strong: ({...props}) => <strong className="font-semibold text-gray-900" {...props} />,
+                                                em: ({...props}) => <em className="italic" {...props} />,
+                                            }}
+                                        >
+                                            {displayRequest.description || ''}
+                                        </ReactMarkdown>
+                                    </div>
+                                </>
+                            )}
                         </div>
 
-                        {/* Voting - Fixed at bottom of left panel */}
+                        {/* Voting */}
                         {!isMaximized && (
                             <div className="px-6 py-4 border-t border-gray-200 bg-gray-50/30 flex-shrink-0 h-[82px] flex items-center">
                                 <div className="flex items-center justify-between w-full">
@@ -423,6 +458,7 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                     {/* Right Panel: Comments */}
                     {!isMaximized && (
                         <div className="lg:w-80 flex flex-col flex-shrink-0 border-t lg:border-t-0 border-gray-200 bg-gray-50/50">
+                            {/* ... same comments section ... */}
                             <div className="px-4 py-3 border-b border-gray-200 bg-gray-50/50 flex items-center justify-between flex-shrink-0">
                                 <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
                                     <MessageSquare className="w-3.5 h-3.5"/>
@@ -430,7 +466,6 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                                 </h3>
                             </div>
 
-                            {/* Comments List */}
                             <div className="flex-1 overflow-y-auto p-4 space-y-3">
                                 {loadingComments ? (
                                     <div className="text-center py-4 text-gray-400 text-sm">Loading comments...</div>
@@ -452,7 +487,6 @@ export const RequestDetailModal: React.FC<RequestDetailModalProps> = ({request, 
                                 )}
                             </div>
 
-                            {/* Comment Form */}
                             <div className="p-4 border-t border-gray-200 bg-gray-50/30 flex-shrink-0 h-[82px] flex items-center">
                                 <form onSubmit={handleSubmitComment} className="relative w-full">
                                     <div className="absolute -top-3 right-0">

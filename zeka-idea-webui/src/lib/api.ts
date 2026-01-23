@@ -107,6 +107,30 @@ export const api = {
     },
 
     getAuthStatus: async (): Promise<AuthStatus | null> => {
+        // Local Development Mocking
+        if (import.meta.env.DEV) {
+            const params = new URLSearchParams(window.location.search);
+            const mockRole = params.get('role');
+            if (mockRole) {
+                if (mockRole === 'guest') return null;
+
+                return {
+                    loggedIn: true,
+                    user: {
+                        id: mockRole === 'admin' ? 1 : 2,
+                        githubId: 1000 + (mockRole === 'admin' ? 1 : 2),
+                        githubLogin: `dev-${mockRole}`,
+                        githubName: `Dev ${mockRole.charAt(0).toUpperCase() + mockRole.slice(1)}`,
+                        avatarUrl: `https://ui-avatars.com/api/?name=${mockRole}&background=random`,
+                        email: `${mockRole}@local.dev`,
+                        role: mockRole, // 'admin' or 'user'
+                        deviceId: 'dev-device-id',
+                        lastLoginTime: new Date().toISOString()
+                    }
+                };
+            }
+        }
+
         const token = authStorage.getToken();
         if (!token) return null;
         try {
