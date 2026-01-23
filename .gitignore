@@ -74,3 +74,5 @@ rebel.xml
 *.hprof
 .fastRequest
 .maven-copied
+dist
+node_modules
