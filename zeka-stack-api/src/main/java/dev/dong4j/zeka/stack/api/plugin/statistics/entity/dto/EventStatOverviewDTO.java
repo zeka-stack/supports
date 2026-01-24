@@ -126,6 +126,28 @@ public class EventStatOverviewDTO implements Serializable {
      */
     @Schema(description = "按天事件类型次数")
     private Map<String, Map<String, Long>> countByDayEventType;
+    /**
+     * 按天统计的用户行为次数
+     * <p> 外层键为日期, 内层键为用户行为, 值为对应次数 </p>
+     * <p> 示例:{"2026-01-19": {"editor_context_menu": 120, "shortcut": 45}}</p>
+     *
+     * @see Map
+     * @see String
+     * @see Long
+     */
+    @Schema(description = "按天用户行为次数")
+    private Map<String, Map<String, Long>> countByDayUserAction;
+    /**
+     * 按天统计的结果状态次数
+     * <p> 外层键为日期, 内层键为结果状态, 值为对应次数 </p>
+     * <p> 示例:{"2026-01-19": {"success": 480, "failed": 5}}</p>
+     *
+     * @see Map
+     * @see String
+     * @see Long
+     */
+    @Schema(description = "按天结果状态次数")
+    private Map<String, Map<String, Long>> countByDayResultStatus;
 
     /**
      * 最近窗口统计

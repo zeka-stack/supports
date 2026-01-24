@@ -126,7 +126,7 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
                                             0, 0, 0,
                                             Map.of(), Map.of(), Map.of(), Map.of(),
                                             Map.of(), Map.of(), Map.of(), Map.of(),
-                                            Map.of(), List.of());
+                                            Map.of(), Map.of(), Map.of(), List.of());
         }
 
         long totalCount = 0;
@@ -148,6 +148,8 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
         Map<String, Long> countByDay = new LinkedHashMap<>();
         Map<String, Long> tokenByDay = new LinkedHashMap<>();
         Map<String, Map<String, Long>> countByDayEventType = new LinkedHashMap<>();
+        Map<String, Map<String, Long>> countByDayUserAction = new LinkedHashMap<>();
+        Map<String, Map<String, Long>> countByDayResultStatus = new LinkedHashMap<>();
 
         for (EventStat30m item : list) {
             long count = nullSafe(item.getTotalCount());
@@ -186,6 +188,15 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
             addTo(tokenByDay, day, token);
             countByDayEventType.computeIfAbsent(day, k -> new HashMap<>());
             addTo(countByDayEventType.get(day), item.getEventType().getDesc(), count);
+
+            // 按天统计用户行为次数
+            countByDayUserAction.computeIfAbsent(day, k -> new HashMap<>());
+            addTo(countByDayUserAction.get(day), safeKey(item.getUserAction()), count);
+
+            // 按天统计结果状态次数 (从 success_count 和 failed_count 推导)
+            countByDayResultStatus.computeIfAbsent(day, k -> new HashMap<>());
+            addTo(countByDayResultStatus.get(day), "success", success);
+            addTo(countByDayResultStatus.get(day), "failed", failed);
         }
 
         long latencyAvg = totalCount > 0 ? Math.round((double) latencyTotal / totalCount) : 0;
@@ -231,6 +242,8 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
             countByDay,
             tokenByDay,
             countByDayEventType,
+            countByDayUserAction,
+            countByDayResultStatus,
             recentBuckets
         );
     }

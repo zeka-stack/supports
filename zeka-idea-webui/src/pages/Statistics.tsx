@@ -82,6 +82,8 @@ type EventStatOverviewDTO = {
     countByDay: Record<string, number>;
     tokenByDay: Record<string, number>;
     countByDayEventType: Record<string, Record<string, number>>;
+    countByDayUserAction: Record<string, Record<string, number>>;
+    countByDayResultStatus: Record<string, Record<string, number>>;
     recentBuckets: EventStat30mDTO[];
 };
 
@@ -133,6 +135,8 @@ export const Statistics: React.FC = () => {
         const countByDay: Record<string, number> = {};
         const tokenByDay: Record<string, number> = {};
         const countByDayEventType: Record<string, Record<string, number>> = {};
+        const countByDayUserAction: Record<string, Record<string, number>> = {};
+        const countByDayResultStatus: Record<string, Record<string, number>> = {};
         records.forEach((r) => {
             const et = typeof r.eventType === 'object' ? r.eventType.value : r.eventType;
             countByEventType[et] = (countByEventType[et] || 0) + 1;
@@ -146,13 +150,18 @@ export const Statistics: React.FC = () => {
             tokenByDay[day] = (tokenByDay[day] || 0) + (r.tokenCount || 0);
             countByDayEventType[day] = countByDayEventType[day] || {};
             countByDayEventType[day][et] = (countByDayEventType[day][et] || 0) + 1;
+            countByDayUserAction[day] = countByDayUserAction[day] || {};
+            countByDayUserAction[day][r.userAction] = (countByDayUserAction[day][r.userAction] || 0) + 1;
+            countByDayResultStatus[day] = countByDayResultStatus[day] || {};
+            const status = r.resultStatus || 'unknown';
+            countByDayResultStatus[day][status] = (countByDayResultStatus[day][status] || 0) + 1;
         });
 
         return {
             totalCount, successCount, failedCount, tokenTotal, inputTokenTotal, outputTokenTotal,
             latencyAvgMs, latencyMaxMs, latencyMinMs, countByEventType, tokenByEventType,
             countByProvider, countByUserAction, tokenByProject, countByProject,
-            countByDay, tokenByDay, countByDayEventType, recentBuckets: []
+            countByDay, tokenByDay, countByDayEventType, countByDayUserAction, countByDayResultStatus, recentBuckets: []
         };
     };
 
@@ -340,6 +349,83 @@ export const Statistics: React.FC = () => {
         };
     };
 
+    // Color palette for stacked line charts
+    const stackedColors = [
+        '#8B5CF6', // Purple
+        '#6366F1', // Indigo
+        '#3B82F6', // Blue
+        '#06B6D4', // Cyan
+        '#10B981', // Emerald
+        '#F59E0B', // Amber
+        '#EF4444', // Red
+        '#EC4899', // Pink
+        '#F97316', // Orange
+        '#84CC16', // Lime
+    ];
+
+    // Generate stacked line chart option for daily breakdown by category
+    const getStackedLineOption = (
+        dataByDay: Record<string, Record<string, number>>,
+        title: string
+    ) => {
+        // Get all unique days sorted
+        const days = Object.keys(dataByDay).sort();
+        // Get all unique categories across all days
+        const categories = new Set<string>();
+        Object.values(dataByDay).forEach(dayData => {
+            Object.keys(dayData).forEach(cat => categories.add(cat));
+        });
+        const categoryList = Array.from(categories);
+
+        // Build series data for each category
+        const series = categoryList.map((cat, idx) => ({
+            name: cat,
+            type: 'line',
+            smooth: true,
+            stack: 'Total',
+            areaStyle: {},
+            emphasis: {focus: 'series'},
+            data: days.map(day => dataByDay[day]?.[cat] || 0),
+            itemStyle: {color: stackedColors[idx % stackedColors.length]},
+        }));
+
+        return {
+            title: {
+                text: title,
+                left: 'center',
+                textStyle: {fontSize: 14, fontWeight: 'normal', color: '#374151'}
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {type: 'cross', label: {show: false}}
+            },
+            legend: {
+                data: categoryList,
+                bottom: 0,
+                type: 'scroll'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                top: '15%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: days.map(d => d.slice(5)), // Show MM-DD format
+                axisLine: {lineStyle: {color: '#9CA3AF'}}
+            },
+            yAxis: {
+                type: 'value',
+                axisLine: {lineStyle: {color: '#9CA3AF'}},
+                splitLine: {lineStyle: {color: '#E5E7EB', type: 'dashed'}}
+            },
+            series
+        };
+    };
+
     return (
         <div className="min-h-screen bg-[#F9FAFB] p-6 font-sans">
             <div className="max-w-7xl mx-auto">
@@ -392,6 +478,29 @@ export const Statistics: React.FC = () => {
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
                             <Activity className="w-5 h-5 text-indigo-600"/> Entry Point Usage</h3>
                         <ReactECharts option={getBarOption(byUserAction, 'Actions', '#6366F1')} style={{height: '300px'}}/>
+                    </div>
+                </div>
+
+                {/* Stacked Line Charts Section */}
+                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
+                    <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
+                        <Layers className="w-5 h-5 text-indigo-600"/> Daily Event Type Breakdown
+                    </h3>
+                    <ReactECharts option={getStackedLineOption(overview.countByDayEventType || {}, 'Events by Type Over Time')} style={{height: '320px'}}/>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Activity className="w-5 h-5 text-indigo-600"/> Daily Action Breakdown
+                        </h3>
+                        <ReactECharts option={getStackedLineOption(overview.countByDayUserAction || {}, 'Actions by Day')} style={{height: '300px'}}/>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Zap className="w-5 h-5 text-indigo-600"/> Daily Success/Failure Breakdown
+                        </h3>
+                        <ReactECharts option={getStackedLineOption(overview.countByDayResultStatus || {}, 'Status by Day')} style={{height: '300px'}}/>
                     </div>
                 </div>
 
