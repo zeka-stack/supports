@@ -4,8 +4,10 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github.css';
 import {History} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const Changelog: React.FC = () => {
+    const {t} = useTranslation();
     const [content, setContent] = useState('');
 
     useEffect(() => {
@@ -23,8 +25,8 @@ export const Changelog: React.FC = () => {
                         <History className="w-8 h-8 text-indigo-600"/>
                     </div>
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">更新日志</h1>
-                        <p className="text-gray-500 mt-1">查看 IntelliAI 插件的历史版本更新记录</p>
+                        <h1 className="text-3xl font-bold text-gray-900">{t('changelog.title')}</h1>
+                        <p className="text-gray-500 mt-1">{t('changelog.description')}</p>
                     </div>
                 </div>
 

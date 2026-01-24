@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {AlertCircle, Check, CheckCircle2, Hammer, Play, RefreshCw, Settings, Sparkles, Zap} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const RepairerHome: React.FC = () => {
+    const {t} = useTranslation();
     const [codeState, setCodeState] = useState<'error' | 'fixing' | 'fixed'>('error');
 
     useEffect(() => {
@@ -31,45 +33,44 @@ export const RepairerHome: React.FC = () => {
                         <div className="text-left space-y-8">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-900/30 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
                                 <Hammer className="w-3 h-3"/>
-                                <span>Auto-Fix Engine</span>
+                                <span>{t('plugins.repairer.hero.badge')}</span>
                             </div>
 
                             <h1 className="text-5xl lg:text-6xl font-black text-white leading-[1.1]">
-                                Code Quality, <br/>
+                                {t('plugins.repairer.hero.title')}
+                                <br/>
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
-                                    Restored.
+                                    {t('plugins.repairer.hero.subtitle')}
                                 </span>
                             </h1>
 
                             <p className="text-lg text-stone-400 leading-relaxed max-w-xl">
-                                告别繁琐的 Checkstyle 和 PMD 报错。
-                                <br/>
-                                Repairer 就像一位不知疲倦的代码医生，为您自动诊断并一键修复代码规范问题。
+                                {t('plugins.repairer.hero.description')}
                             </p>
 
                             <div className="flex flex-wrap gap-4">
                                 <button className="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold transition-all shadow-lg shadow-emerald-900/20 flex items-center gap-2 group">
-                                    立即修复
+                                    {t('plugins.repairer.hero.fix_button')}
                                     <Sparkles className="w-4 h-4 group-hover:scale-110 transition-transform"/>
                                 </button>
                                 <button className="px-8 py-3.5 bg-[#1c1917] hover:bg-[#292524] border border-stone-800 text-stone-200 rounded-lg font-medium transition-all flex items-center gap-2">
                                     <Play className="w-4 h-4"/>
-                                    观看演示
+                                    {t('plugins.repairer.hero.demo_button')}
                                 </button>
                             </div>
 
                             <div className="pt-8 border-t border-stone-800/50 flex items-center gap-6 text-sm text-stone-500 font-mono">
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                                    Checkstyle
+                                    {t('plugins.repairer.hero.supported_tools.checkstyle')}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse delay-75"></div>
-                                    PMD
+                                    {t('plugins.repairer.hero.supported_tools.pmd')}
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse delay-150"></div>
-                                    Alibaba Guide
+                                    {t('plugins.repairer.hero.supported_tools.alibaba_guide')}
                                 </div>
                             </div>
                         </div>
@@ -152,27 +153,27 @@ export const RepairerHome: React.FC = () => {
             <section className="py-24 bg-[#141210] border-t border-stone-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     <div className="text-center max-w-2xl mx-auto mb-16">
-                        <h2 className="text-3xl font-bold text-white mb-4">精准的外科手术式修复</h2>
+                        <h2 className="text-3xl font-bold text-white mb-4">{t('plugins.repairer.features.title')}</h2>
                         <p className="text-stone-400">
-                            不仅发现问题，更提供解决方案。Repairer 确保每一次修改都安全、准确、符合规范。
+                            {t('plugins.repairer.features.subtitle')}
                         </p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <FeatureCard
                             icon={<Zap className="w-6 h-6 text-yellow-400"/>}
-                            title="QuickFix 集成"
-                            description="直接在 IDE 的报错悬浮窗中提供修复选项。一键点击，即刻修正，无需手动重写代码。"
+                            title={t('plugins.repairer.features.quickfix.title')}
+                            description={t('plugins.repairer.features.quickfix.desc')}
                         />
                         <FeatureCard
                             icon={<Settings className="w-6 h-6 text-emerald-400"/>}
-                            title="可配置规则"
-                            description="支持自定义修复策略。无论是缩进风格、命名规范还是复杂的逻辑重构，完全由您掌控。"
+                            title={t('plugins.repairer.features.configurable_rules.title')}
+                            description={t('plugins.repairer.features.configurable_rules.desc')}
                         />
                         <FeatureCard
                             icon={<Check className="w-6 h-6 text-blue-400"/>}
-                            title="批量处理模式"
-                            description="针对遗留项目，支持全项目扫描并批量应用修复补丁，大幅降低技术债务清理成本。"
+                            title={t('plugins.repairer.features.batch_processing.title')}
+                            description={t('plugins.repairer.features.batch_processing.desc')}
                         />
                     </div>
                 </div>
@@ -182,12 +183,12 @@ export const RepairerHome: React.FC = () => {
             <section className="py-20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-emerald-900/10"></div>
                 <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-6">准备好清理您的代码了吗？</h2>
+                    <h2 className="text-3xl font-bold text-white mb-6">{t('plugins.repairer.cta.title')}</h2>
                     <p className="text-stone-400 mb-8 text-lg">
-                        加入成千上万的开发者，体验 AI 驱动的代码质量守护。
+                        {t('plugins.repairer.cta.description')}
                     </p>
                     <button className="px-10 py-4 bg-white text-stone-900 rounded-full font-bold hover:bg-stone-200 transition-colors shadow-xl">
-                        开始免费使用
+                        {t('plugins.repairer.cta.button')}
                     </button>
                 </div>
             </section>

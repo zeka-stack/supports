@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import {ArrowRight, Box, Braces, Code2, Copy, FileJson, Globe, Play, Server, Settings, Terminal, Zap} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const SwaggerHome: React.FC = () => {
+    const {t} = useTranslation();
     const [activeTab, setActiveTab] = useState<'params' | 'headers' | 'body'>('params');
     const [requestStatus, setRequestStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
@@ -29,27 +31,25 @@ export const SwaggerHome: React.FC = () => {
                     <div className="max-w-2xl">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/30 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-wider mb-6">
                             <Globe className="w-3 h-3"/>
-                            <span>API First Development</span>
+                            <span>{t('plugins.swagger.badge')}</span>
                         </div>
                         <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight mb-6">
-                            Instant <br/>
+                            {t('plugins.swagger.heroTitle1')} <br/>
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-                                Open API Spec.
+                                {t('plugins.swagger.heroHighlight')}
                             </span>
                         </h1>
                         <p className="text-lg text-slate-400 leading-relaxed">
-                            从 Java 代码直接生成 Swagger/OpenAPI 文档。
-                            <br/>
-                            内置现代化调试器，让 IDEA 变身 Postman，接口开发从未如此流畅。
+                            {t('plugins.swagger.heroDescription')}
                         </p>
                     </div>
                     <div className="flex gap-4">
                         <button className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-all flex items-center gap-2 border border-slate-700">
                             <FileJson className="w-4 h-4 text-amber-500"/>
-                            Export JSON
+                            {t('plugins.swagger.exportJsonButton')}
                         </button>
                         <button className="px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-all shadow-lg shadow-amber-900/20 flex items-center gap-2">
-                            安装插件
+                            {t('plugins.swagger.installButton')}
                             <ArrowRight className="w-4 h-4"/>
                         </button>
                     </div>
@@ -62,11 +62,11 @@ export const SwaggerHome: React.FC = () => {
                         <div className="flex gap-2">
                             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded text-xs text-slate-400 border border-slate-700/50">
                                 <Server className="w-3 h-3"/>
-                                <span>dev-environment</span>
+                                <span>{t('plugins.swagger.consoleDevEnv')}</span>
                             </div>
                             <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded text-xs text-slate-400 border border-slate-700/50">
                                 <Settings className="w-3 h-3"/>
-                                <span>config.json</span>
+                                <span>{t('plugins.swagger.consoleConfig')}</span>
                             </div>
                         </div>
                         <div className="flex gap-1.5">
@@ -78,7 +78,7 @@ export const SwaggerHome: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
                         {/* Sidebar: Endpoints */}
                         <div className="lg:col-span-3 border-r border-slate-800 bg-[#161619] p-4 hidden lg:block">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 pl-2">Endpoints</div>
+                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 pl-2">{t('plugins.swagger.endpointsLabel')}</div>
                             <div className="space-y-1">
                                 {[
                                     {method: 'GET', path: '/users', active: false},
@@ -123,18 +123,18 @@ export const SwaggerHome: React.FC = () => {
                                 {/* Left: Request Body */}
                                 <div className="border-r border-slate-800 p-4">
                                     <div className="flex gap-4 mb-4 border-b border-slate-800/50 pb-2">
-                                        {['Params', 'Headers', 'Body'].map(tab => (
+                                        {[t('plugins.swagger.paramsTab'), t('plugins.swagger.headersTab'), t('plugins.swagger.bodyTab')].map((tab, idx) => (
                                             <button
                                                 key={tab}
-                                                onClick={() => setActiveTab(tab.toLowerCase() as any)}
-                                                className={`text-xs font-bold pb-2 transition-colors ${activeTab === tab.toLowerCase() ? 'text-amber-500 border-b-2 border-amber-500' : 'text-slate-500 hover:text-slate-300'}`}
+                                                onClick={() => setActiveTab(['params', 'headers', 'body'][idx] as any)}
+                                                className={`text-xs font-bold pb-2 transition-colors ${activeTab === ['params', 'headers', 'body'][idx] ? 'text-amber-500 border-b-2 border-amber-500' : 'text-slate-500 hover:text-slate-300'}`}
                                             >
                                                 {tab}
                                             </button>
                                         ))}
                                     </div>
                                     <div className="font-mono text-sm text-slate-400 leading-6">
-                                        <div className="text-slate-500">{'// Request Body (JSON)'}</div>
+                                        <div className="text-slate-500">{t('plugins.swagger.requestComment')}</div>
                                         <div className="text-yellow-500">{'{'}</div>
                                         <div className="pl-4">
                                             <span className="text-sky-400">"username"</span>: <span className="text-emerald-400">"dong4j"</span>,
@@ -152,10 +152,10 @@ export const SwaggerHome: React.FC = () => {
                                 {/* Right: Response */}
                                 <div className="bg-[#0c0c0e] p-4 relative">
                                     <div className="flex justify-between items-center mb-4">
-                                        <div className="text-xs font-bold text-slate-500 uppercase">Response</div>
+                                        <div className="text-xs font-bold text-slate-500 uppercase">{t('plugins.swagger.responseLabel')}</div>
                                         {requestStatus === 'success' && (
                                             <div className="flex gap-3 text-xs">
-                                                <span className="text-emerald-400">200 OK</span>
+                                                <span className="text-emerald-400">{t('plugins.swagger.status200')}</span>
                                                 <span className="text-slate-500">145ms</span>
                                                 <span className="text-slate-500">1.2KB</span>
                                             </div>
@@ -165,7 +165,7 @@ export const SwaggerHome: React.FC = () => {
                                     {requestStatus === 'idle' && (
                                         <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-3">
                                             <Zap className="w-10 h-10 opacity-20"/>
-                                            <span className="text-xs">Click Send to trigger request</span>
+                                            <span className="text-xs">{t('plugins.swagger.clickSendHint')}</span>
                                         </div>
                                     )}
 
@@ -207,9 +207,9 @@ export const SwaggerHome: React.FC = () => {
                         <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Code2 className="w-6 h-6 text-amber-500"/>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">零侵入生成</h3>
+                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature1Title')}</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">
-                            直接解析 JavaDoc 与 Controller 代码逻辑。无需添加繁琐的 `@Operation` 或 `@Api` 注解，保持代码纯净。
+                            {t('plugins.swagger.feature1Desc')}
                         </p>
                     </div>
 
@@ -218,9 +218,9 @@ export const SwaggerHome: React.FC = () => {
                         <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Box className="w-6 h-6 text-orange-500"/>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">多环境管理</h3>
+                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature2Title')}</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">
-                            一键切换 Dev/Test/Prod 环境变量。自动同步 Authorization Header，告别手动复制 Token 的痛苦。
+                            {t('plugins.swagger.feature2Desc')}
                         </p>
                     </div>
 
@@ -229,9 +229,9 @@ export const SwaggerHome: React.FC = () => {
                         <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                             <Terminal className="w-6 h-6 text-red-500"/>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3">格式兼容</h3>
+                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature3Title')}</h3>
                         <p className="text-slate-400 text-sm leading-relaxed">
-                            完美支持 OpenAPI 3.0 与 Swagger 2.0 标准。支持导出为 Markdown、HTML 或 Postman Collection。
+                            {t('plugins.swagger.feature3Desc')}
                         </p>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ export const SwaggerHome: React.FC = () => {
                 <div className="mt-24 border-t border-slate-800 pt-16 text-center">
                     <div className="inline-flex items-center gap-2 text-slate-500 mb-6 font-mono text-sm">
                         <Braces className="w-4 h-4"/>
-                        <span>Configured via simple annotations if needed</span>
+                        <span>{t('plugins.swagger.configHint')}</span>
                     </div>
                     <div className="max-w-3xl mx-auto bg-[#161619] border border-slate-800 rounded-xl p-6 text-left shadow-2xl relative group">
                         <div className="absolute top-4 right-4 text-slate-600 group-hover:text-amber-500 cursor-pointer transition-colors">

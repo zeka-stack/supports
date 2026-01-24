@@ -1,11 +1,13 @@
 import React from 'react';
 import {BookOpen, Github, Home} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 interface FooterProps {
     variant?: 'default' | 'dark' | 'transparent' | 'transparent-dark';
 }
 
 export const Footer: React.FC<FooterProps> = ({variant = 'default'}) => {
+    const {t} = useTranslation();
     const isDark = variant === 'dark';
     const isTransparent = variant === 'transparent'; // White text on transparent
     const isTransparentDark = variant === 'transparent-dark'; // Dark text on transparent
@@ -52,11 +54,11 @@ export const Footer: React.FC<FooterProps> = ({variant = 'default'}) => {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
                     {/* Meta Info */}
                     <div className={`flex flex-wrap items-center justify-center gap-3 ${textClasses}`}>
-                        <span>© 2025 IntelliAI Engine</span>
+                        <span>{t('footer.copyright')}</span>
                         <span className={`w-1 h-1 rounded-full ${dotClasses}`}></span>
-                        <span>Powered by zeka.stack</span>
+                        <span>{t('footer.poweredBy')}</span>
                         <span className={`hidden sm:block w-1 h-1 rounded-full ${dotClasses}`}></span>
-                        <span className="hidden sm:inline">Engine powers every AI plugin · Build beyond limits</span>
+                        <span className="hidden sm:inline">{t('footer.tagline')}</span>
                     </div>
 
                     {/* Links */}
@@ -69,27 +71,27 @@ export const Footer: React.FC<FooterProps> = ({variant = 'default'}) => {
                             title="GitHub"
                         >
                             <Github className="w-4 h-4"/>
-                            <span>GitHub</span>
+                            <span>{t('footer.github')}</span>
                         </a>
                         <a
                             href="https://home.dong4j.site"
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`flex items-center gap-2 transition-colors ${linkHoverClasses}`}
-                            title="个人主页"
+                            title={t('footer.homepage')}
                         >
                             <Home className="w-4 h-4"/>
-                            <span>主页</span>
+                            <span>{t('footer.homepage')}</span>
                         </a>
                         <a
                             href="https://blog.dong4j.site"
                             target="_blank"
                             rel="noopener noreferrer"
                             className={`flex items-center gap-2 transition-colors ${linkHoverClasses}`}
-                            title="博客"
+                            title={t('footer.blog')}
                         >
                             <BookOpen className="w-4 h-4"/>
-                            <span>博客</span>
+                            <span>{t('footer.blog')}</span>
                         </a>
                     </div>
                 </div>

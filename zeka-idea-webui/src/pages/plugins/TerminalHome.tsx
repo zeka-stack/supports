@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {BookOpen, ChevronRight, Command, Cpu, Download, Hash, ShieldCheck, Terminal} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const TerminalHome: React.FC = () => {
+    const {t} = useTranslation();
     const [terminalState, setTerminalState] = useState({
         showPromptComment: false,
         typedComment: '',
@@ -10,8 +12,8 @@ export const TerminalHome: React.FC = () => {
         typedCommand: ''
     });
 
-    const commentText = '# 查找所有包含 "TODO" 的 Java 文件';
-    const commandText = 'find . -name "*.java" -exec grep -l "TODO" {} \\;';
+    const commentText = t('plugins.terminal.demo.comment_text');
+    const commandText = t('plugins.terminal.demo.command_text');
 
     useEffect(() => {
         const runSequence = async () => {
@@ -74,7 +76,7 @@ export const TerminalHome: React.FC = () => {
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#33ff00] opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2 w-2 bg-[#33ff00]"></span>
                         </span>
-                        <span className="tracking-widest">SYSTEM ONLINE</span>
+                        <span className="tracking-widest">{t('plugins.terminal.system_online')}</span>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-tight">
@@ -84,17 +86,17 @@ export const TerminalHome: React.FC = () => {
                     </h1>
 
                     <div className="text-xl md:text-2xl text-gray-400 max-w-3xl mb-12 space-y-2">
-                        <p className="flex items-center gap-3">
+                        <p className="flex items-center gap-3 whitespace-nowrap">
                             <span className="text-[#33ff00]">$</span>
-                            <span>将自然语言瞬间转化为 Shell 命令。</span>
+                            <span>{t('plugins.terminal.hero.tagline1')}</span>
                         </p>
-                        <p className="flex items-center gap-3">
+                        <p className="flex items-center gap-3 whitespace-nowrap">
                             <span className="text-[#33ff00]">$</span>
-                            <span>AI 驱动，深度集成于 IDE 终端。</span>
+                            <span>{t('plugins.terminal.hero.tagline2')}</span>
                         </p>
-                        <p className="flex items-center gap-3">
+                        <p className="flex items-center gap-3 whitespace-nowrap">
                             <span className="text-[#33ff00]">$</span>
-                            <span>只需输入描述并按 <span className="text-white bg-slate-800 border-b-4 border-slate-900 px-3 py-1 rounded text-base font-bold mx-1 shadow-lg">TAB</span> 即可生成。</span>
+                            <span dangerouslySetInnerHTML={{__html: t('plugins.terminal.hero.tagline3')}}/>
                         </p>
                     </div>
 
@@ -103,13 +105,13 @@ export const TerminalHome: React.FC = () => {
                             <div className="absolute inset-0 border-2 border-[#33ff00] translate-x-1.5 translate-y-1.5 group-hover:translate-x-2.5 group-hover:translate-y-2.5 transition-transform bg-transparent content-[''] -z-10 border-dashed"></div>
                             <span className="flex items-center gap-2">
                                 <Download className="w-5 h-5"/>
-                                安装插件
+                                {t('plugins.terminal.hero.install_button')}
                             </span>
                         </button>
 
                         <button className="px-8 py-4 bg-transparent border border-gray-700 text-gray-300 font-bold text-lg hover:border-[#33ff00] hover:text-[#33ff00] transition-all flex items-center gap-2 group">
                             <BookOpen className="w-5 h-5 group-hover:scale-110 transition-transform"/>
-                            查看文档
+                            {t('plugins.terminal.hero.docs_button')}
                         </button>
                     </div>
                 </div>
@@ -154,7 +156,7 @@ export const TerminalHome: React.FC = () => {
                             <div className="mb-4 h-8 flex items-center">
                                 {terminalState.showAiAnalysis && (
                                     <div className="pl-4 border-l-2 border-[#33ff00]/30 text-xs text-gray-500 animate-in fade-in slide-in-from-left-2 duration-300">
-                                        <span className="text-[#33ff00]">[AI]</span> 正在分析请求...
+                                        <span className="text-[#33ff00]">[AI]</span> {t('plugins.terminal.demo.analyzing')}
                                     </div>
                                 )}
                             </div>
@@ -180,19 +182,43 @@ export const TerminalHome: React.FC = () => {
                 <div className="max-w-6xl mx-auto">
                     <div className="flex items-center gap-4 mb-16">
                         <h2 className="text-3xl font-bold text-white">
-                            <span className="text-[#33ff00]">./</span>核心功能
+                            <span className="text-[#33ff00]">./</span>{t('plugins.terminal.features.section_title')}
                         </h2>
                         <div className="h-px bg-gray-800 flex-1"></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {[
-                            {icon: Command, title: '命令生成', desc: '自然语言直接转 Shell 命令，消除记忆负担。'},
-                            {icon: Hash, title: '智能提取', desc: '自动剥离提示符（$, >），精准提取用户意图。'},
-                            {icon: ShieldCheck, title: '安全校验', desc: '内置语法校验，确保生成的命令安全可执行。'},
-                            {icon: Cpu, title: '引擎驱动', desc: '基于 IntelliAI Engine，支持 OpenAI、Ollama 等多模型。'},
-                            {icon: Terminal, title: '双模支持', desc: '完美适配 TerminalView 和 JBTerminalWidget。'},
-                            {icon: ChevronRight, title: '灵活配置', desc: '自定义触发前缀与 Prompt 模板，适配个人习惯。'},
+                            {
+                                icon: Command,
+                                title: t('plugins.terminal.features.command_generation.title'),
+                                desc: t('plugins.terminal.features.command_generation.desc')
+                            },
+                            {
+                                icon: Hash,
+                                title: t('plugins.terminal.features.smart_extraction.title'),
+                                desc: t('plugins.terminal.features.smart_extraction.desc')
+                            },
+                            {
+                                icon: ShieldCheck,
+                                title: t('plugins.terminal.features.security_check.title'),
+                                desc: t('plugins.terminal.features.security_check.desc')
+                            },
+                            {
+                                icon: Cpu,
+                                title: t('plugins.terminal.features.engine_powered.title'),
+                                desc: t('plugins.terminal.features.engine_powered.desc')
+                            },
+                            {
+                                icon: Terminal,
+                                title: t('plugins.terminal.features.dual_mode.title'),
+                                desc: t('plugins.terminal.features.dual_mode.desc')
+                            },
+                            {
+                                icon: ChevronRight,
+                                title: t('plugins.terminal.features.flexible_config.title'),
+                                desc: t('plugins.terminal.features.flexible_config.desc')
+                            },
                         ].map((feature, idx) => (
                             <div key={idx} className="p-6 border border-gray-800 bg-[#0f0f0f] hover:border-[#33ff00] hover:bg-[#33ff00]/5 transition-all group relative overflow-hidden">
                                 <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">

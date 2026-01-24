@@ -1,0 +1,754 @@
+{
+  "common": {
+    "appName": "Zeka Stack",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "back": "Back",
+    "close": "Close",
+    "submit": "Submit",
+    "reset": "Reset",
+    "clear": "Clear",
+    "install": "Install",
+    "download": "Download",
+    "viewDocs": "View Documentation",
+    "explore": "Explore"
+  },
+  "header": {
+    "home": "Home",
+    "plugins": "Plugins",
+    "engine": "AI Engine",
+    "javadoc": "Javadoc",
+    "changelog": "Changelog",
+    "terminal": "Terminal",
+    "tracer": "Tracer",
+    "repairer": "Repairer",
+    "swagger": "Swagger",
+    "nacos": "Nacos",
+    "feedback": "Feedback",
+    "statistics": "Statistics",
+    "settings": "Settings",
+    "login": "Login",
+    "logout": "Logout",
+    "language": "Language",
+    "donate": "Donate",
+    "privacy": "Privacy",
+    "engineDesc": "AI Core",
+    "javadocDesc": "AI generates standard Javadoc",
+    "changelogDesc": "AI generates commit/update/release logs",
+    "terminalDesc": "AI Terminal Assistant",
+    "tracerDesc": "Code Flow Analysis",
+    "repairerDesc": "Checkstyle issue fixing",
+    "swaggerDesc": "Swagger annotation generation",
+    "nacosDesc": "Operate Nacos in IDEA"
+  },
+  "home": {
+    "title": "Zeka Stack",
+    "subtitle": "Intelligent Plugin Ecosystem",
+    "description": "A powerful set of IntelliJ IDEA plugins to boost your development productivity",
+    "nowAvailable": "Now Available",
+    "heroTitle": "Zeka Stack",
+    "heroTitleHighlight": "Intelli IDEA Plugin",
+    "heroDescription": "Your ultimate IDE companion. Integrated AI coding engine, Changelog generation, Javadoc auto-generation, Nacos configuration center, and more. Redefining development efficiency.",
+    "installPlugin": "Install Plugin",
+    "githubSource": "GitHub Source",
+    "jetbrainsCertified": "JetBrains Certified",
+    "freeOpenSource": "Free & Open Source",
+    "fullStackToolbox": "Full-Stack Development Toolbox",
+    "toolboxDescription": "Zeka Plugin is more than just AI. It contains all kinds of practical tools for backend development, seamlessly integrated in your IDE.",
+    "aiAgentTitle": "Next-Gen Development Experience:",
+    "aiAgentHighlight": "Intelli AI Agent",
+    "aiAgentDescription": "Beyond simple auto-completion. Zeka Agent can understand your natural language instructions, analyze the entire project codebase, autonomously plan and execute complex modification tasks. From bug fixes to feature migration, all in one go.",
+    "ctaTitle": "Ready to Boost Your Development Efficiency?",
+    "ctaDescription": "Join thousands of developers using Zeka Stack and experience a smarter, smoother coding workflow.",
+    "freeDownload": "Free Download",
+    "viewDocsButton": "View Documentation",
+    "exploreAgentCapabilities": "Explore Agent Capabilities",
+    "projectLevelContext": "Project-level Context Awareness",
+    "automatedRefactoring": "Automated Refactoring & Migration",
+    "smartBugDiagnostics": "Smart Bug Diagnostics & Fixes",
+    "engine": {
+      "title": "Intelli AI Engine",
+      "description": "Context-aware intelligent code completion, natural language code generation, unit test generation, and code explanation. Let AI be your pair programming partner.",
+      "badge": "Core"
+    },
+    "javadoc": {
+      "title": "Javadoc Generator",
+      "description": "Generate standard Java documentation comments with one click. Supports custom templates, automatically parses method signatures, parameters, and return values, keeping docs in sync with code."
+    },
+    "swagger": {
+      "title": "Swagger Manager",
+      "description": "Browse, search, and test Swagger/OpenAPI interfaces directly in your IDE. Supports interface documentation preview and mock data generation."
+    },
+    "nacos": {
+      "title": "Nacos Config",
+      "description": "Manage Nacos configurations without leaving your editor. Supports multi-environment switching, configuration version comparison, and quick modification and publishing."
+    },
+    "tracer": {
+      "title": "Trace Analysis",
+      "description": "Integrated distributed tracing analysis to quickly locate performance bottlenecks and exception nodes in microservice call chains."
+    },
+    "devHelper": {
+      "title": "Dev Helper",
+      "description": "Built-in collection of common development tools: JSON formatting, Base64 encoding/decoding, timestamp conversion, regex testing, and more."
+    },
+    "agent": {
+      "title": "AI Agent",
+      "description": "Autonomous task planning, execute complex refactoring"
+    },
+    "codeUnderstanding": {
+      "title": "Code Understanding",
+      "description": "Deep analysis of project structure and dependencies"
+    }
+  },
+  "statistics": {
+    "dashboard": "Statistics Dashboard",
+    "connectedDevice": "Connected Device",
+    "totalEvents": "Total Events",
+    "successRate": "Success Rate",
+    "avgLatency": "Avg Latency",
+    "totalTokens": "Total Tokens",
+    "activityTrend": "Activity Trend",
+    "tokenConsumption": "Token Consumption",
+    "eventCount": "Event Count",
+    "eventType": "Event Type",
+    "providerUsage": "Provider Usage",
+    "projectTokenUsage": "Project Token Usage",
+    "entryPointUsage": "Entry Point Usage",
+    "dailyEventTypeBreakdown": "Daily Event Type Breakdown",
+    "dailyActionBreakdown": "Daily Action Breakdown",
+    "dailySuccessFailureBreakdown": "Daily Success/Failure Breakdown",
+    "tokenUsageRanking": "Token Usage Ranking",
+    "top5TokenUsers": "Top 5 Token Users",
+    "recentActivityLog": "Recent Activity Log",
+    "page": "Page",
+    "total": "Total",
+    "time": "Time",
+    "type": "Type",
+    "providerModel": "Provider/Model",
+    "latency": "Latency",
+    "tokens": "Tokens",
+    "project": "Project",
+    "status": "Status",
+    "noEventsFound": "No events found",
+    "stable": "Stable",
+    "attention": "Attention",
+    "ms": "ms"
+  },
+  "footer": {
+    "copyright": "© 2026 IntelliAI Plugin",
+    "poweredBy": "Powered by zeka.stack",
+    "tagline": "Engine powers every AI plugin · Build beyond limits",
+    "github": "GitHub",
+    "homepage": "Home",
+    "blog": "Blog"
+  },
+  "login": {
+    "title": "Login to Your AI Workspace",
+    "subtitle": "Bind Your Device, Unlock Exclusive Experience",
+    "badge": "Zeka Stack · GitHub Authentication",
+    "description": "We use GitHub OAuth for login, secure and reliable. After binding your deviceId, your configuration will remain available.",
+    "authorizeToUse": "Authorize to Use",
+    "authorizeDesc": "Read-only permission, privacy safe.",
+    "deviceBinding": "Device Binding",
+    "deviceDesc": "Unique deviceId identifier.",
+    "githubLoginLabel": "GitHub Login",
+    "githubLoginDesc": "Fast, secure authentication.",
+    "bindDeviceAndLogin": "Bind Device and Login",
+    "deviceDesc2": "deviceId will be uniquely bound to your GitHub account.",
+    "deviceIdLabel": "deviceId",
+    "deviceIdPlaceholder": "e.g. dev-xxxx",
+    "changeDeviceIdSettings": "You can change deviceId in settings.",
+    "generateDeviceId": "Generate deviceId",
+    "loginWithGithub": "Login with GitHub",
+    "redirecting": "Redirecting...",
+    "loginFailed": "GitHub login failed, please try again",
+    "loginValidationError": "Login validation failed, please try again",
+    "pleaseFillDeviceId": "Please fill in deviceId first",
+    "cannotGetLoginUrl": "Unable to get login address",
+    "getLoginUrlFailed": "Failed to get GitHub login address",
+    "agreeToPrivacy": "By logging in, you agree to our",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "settings": {
+    "title": "Account Settings",
+    "subtitle": "Your GitHub Binding Information",
+    "logout": "Logout",
+    "loadingAccount": "Loading account information...",
+    "deviceIdLabel": "deviceId",
+    "updateDeviceId": "Update deviceId",
+    "updating": "Updating...",
+    "dangerZone": "Dangerous Operations",
+    "dangerZoneDesc": "Deleting your account will unbind GitHub from deviceId, and all sessions will be cleared.",
+    "deleteAccount": "Delete Account",
+    "deleting": "Deleting...",
+    "confirmDeleteTitle": "Confirm Account Deletion",
+    "confirmDeleteDesc": "This action cannot be undone and will clear account binding and all sessions.",
+    "cancel": "Cancel",
+    "confirmDelete": "Confirm Delete",
+    "cannotGetUserInfo": "Unable to get user information",
+    "deviceIdCannotBeEmpty": "deviceId cannot be empty",
+    "deviceIdUpdateFailed": "deviceId update failed"
+  },
+  "featureRequests": {
+    "title": "Feature Requests",
+    "description": "Vote on existing requests or submit your own ideas to help us improve.",
+    "selectProject": "Select project",
+    "searchPlaceholder": "Search...",
+    "submitIdea": "Submit Idea",
+    "newRequests": "New Requests",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "noRequests": "No requests",
+    "poweredBy": "Powered by"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy & Disclaimer",
+    "subtitle": "How Zeka Engine Plugin Collects, Uses, and Protects Your Information",
+    "section1": {
+      "title": "1. Information We Collect",
+      "description": "To provide better coding assistance services and continuously optimize product experience, the Zeka Engine plugin may collect the following types of information:",
+      "codeContext": {
+        "title": "A. Code Snippets & Context (Temporary Processing Only)",
+        "description": "For code completion, analysis, generation, and refactoring, we need to temporarily read code snippets from your currently active file in the editor and related context (such as cursor position, selected content).",
+        "note": "Note: These data are only used for real-time processing and will be immediately discarded from memory after processing. They will not be persistently stored on our servers."
+      },
+      "usageStats": {
+        "title": "B. Usage Statistics (Anonymized)",
+        "description": "We only collect anonymous statistics related to plugin functionality for performance and feature experience optimization, including the following types of information:",
+        "featureUsage": "Feature Usage: Event types (such as Javadoc/Commit Message/Changelog, etc.) and usage frequency.",
+        "performanceMetrics": "Performance Metrics: Single request duration, success/failure status.",
+        "modelInfo": "Model Information: AI service provider and model name (name only, no credentials).",
+        "tokenConsumption": "Consumption Statistics: Token consumption overview (input/output/total).",
+        "entryPoints": "Trigger Entry: Entry point types such as project tree/editor/shortcut key/commit panel/Git log panel.",
+        "timeDimensions": "Time & Dimensions: Event time, project name (only for statistical dimension, does not include code).",
+        "anonymousDevice": "Anonymous Device Identifier: Locally generated anonymous identifier, only used for statistics deduplication and cross-device consistency.",
+        "noCredentials": "We do not collect or store your API Key, Access Token, Secret, or any credentials."
+      },
+      "notCollect": {
+        "title": "C. Information We Explicitly Do Not Collect",
+        "noApiKeys": "User's API Key, keys, Token, passwords, or any sensitive credentials",
+        "noCodeContent": "Code file content, project source code, commit diffs, or file paths",
+        "noOtherData": "Any data not described in this privacy policy",
+        "statement": "We will not collect any data beyond what is described in this section."
+      }
+    },
+    "section2": {
+      "title": "2. Use of Information",
+      "description": "The data we collect is only used for statistics page data display and aggregation analysis, not for advertising, user profiling, or any personalized marketing.",
+      "usage1": "Display feature usage and event type distribution",
+      "usage2": "Display performance and latency statistics",
+      "usage3": "Display model and provider usage proportions",
+      "usage4": "Display entry source distribution and trend changes"
+    },
+    "section3": {
+      "title": "3. Data Protection & Security",
+      "description": "We take your data security very seriously.",
+      "encryptedTransmission": "Encrypted Transmission: All data transmission uses HTTPS/TLS encryption protocol.",
+      "localFirst": "Local Processing First: We run logic locally as much as possible. For features that must rely on cloud AI, we only send the minimum necessary context.",
+      "sensitiveStorage": "Sensitive Information Storage: Your API keys and other sensitive credentials are stored in the IDE's local secure storage (IntelliJ Password Safe), we cannot directly read them, nor will we upload them.",
+      "noCodeStorage": "No Code Retention: Unless you explicitly participate in a specific data contribution program, we will absolutely not persistently store any of your business code on our servers."
+    },
+    "section4": {
+      "title": "4. Third-Party Services",
+      "description": "This plugin integrates multiple third-party Large Language Model (LLM) service providers (such as OpenAI, Aliyun Qianwen, Anthropic, etc.) to provide AI capabilities. When you configure and use these services, your request data (including code snippets) will be sent directly to the corresponding service providers. The processing of these data will comply with the privacy policies of each third-party service provider. We strongly recommend that you review the privacy terms of relevant service providers before use. We will try our best to screen for compliant and privacy-conscious partners, but make no final guarantees."
+    },
+    "section5": {
+      "title": "5. Disclaimer",
+      "aiAccuracy": {
+        "title": "A. Accuracy of AI-Generated Content",
+        "description": "Content generated by AI models (including code, comments, documentation, etc.) is based on probability prediction and may contain errors, omissions, or inaccuracies. Users must manually review and test the generated content before use. Developers assume no liability for bugs, security vulnerabilities, data loss, or business losses resulting from direct use of AI-generated code."
+      },
+      "asIsSoftware": {
+        "title": "B. Software Provided \"As Is\"",
+        "description": "This plugin is provided on an \"as is\" and \"as available\" basis, without any warranties of any kind, whether express or implied, including but not limited to merchantability, fitness for a particular purpose, and non-infringement."
+      },
+      "securityRisks": {
+        "title": "C. Data Security Risks",
+        "description": "While we have taken reasonable security measures, Internet transmission cannot be guaranteed 100% secure. We assume no legal liability for data leakage or loss caused by force majeure, hacker attacks, system viruses, improper user configuration, or third-party service vulnerabilities."
+      }
+    },
+    "lastUpdated": "Last updated:"
+  },
+  "donate": {
+    "donationMethods": "Donation Methods",
+    "wechatDonation": "WeChat Donation",
+    "alipayDonation": "Alipay Donation",
+    "feedback": "Feedback",
+    "feedbackSubmitted": "Feedback Submitted",
+    "feedbackThanks": "Thank you for your support, we will review it soon.",
+    "viewDiscussion": "View Discussion",
+    "gotIt": "Got It",
+    "feedbackType": "Feedback Type",
+    "bugReport": "Bug Report",
+    "featureSuggestion": "Feature Suggestion",
+    "usageQuestion": "Usage Question",
+    "other": "Other",
+    "title": "Title",
+    "titlePlaceholder": "Enter feedback title",
+    "content": "Content",
+    "contentPlaceholder": "Please describe your feedback in detail...",
+    "maxChars": "Maximum 10000 characters",
+    "githubUsername": "GitHub Username",
+    "githubUsernamePlaceholder": "For @ mentions",
+    "pluginName": "Plugin Name",
+    "pluginNamePlaceholder": "e.g., IntelliAI Javadoc",
+    "pluginVersion": "Plugin Version",
+    "pluginVersionPlaceholder": "e.g., 1.0.0",
+    "ideaVersion": "IDEA Version",
+    "ideaVersionPlaceholder": "e.g., 2024.1",
+    "operatingSystem": "Operating System",
+    "operatingSystemPlaceholder": "e.g., macOS 14.0",
+    "clear": "Clear",
+    "submitFeedback": "Submit Feedback",
+    "submitting": "Submitting...",
+    "requiredField": "Required field",
+    "requiredFields": "Please enter required fields (title and content)",
+    "submittingFeedback": "Submitting feedback, please wait...",
+    "submitSuccess": "Feedback submitted successfully! Thank you for your feedback.",
+    "submitFailed": "Submission failed, please try again later.",
+    "networkError": "Network error"
+  },
+  "changelog": {
+    "title": "Changelog",
+    "description": "View historical version updates for IntelliAI plugins"
+  },
+  "plugins": {
+    "engine": {
+      "badge": "Core Intelligence Infrastructure",
+      "heroTitle": "IntelliAI",
+      "heroHighlight": "Engine",
+      "heroDescription": "Unified AI service orchestration layer. Connecting IDE to infinite intelligence, providing standardized neural power for Zeka family plugins.",
+      "sdkButton": "Access Engine SDK",
+      "configButton": "View Configuration",
+      "matrixTitle": "Panoramic Intelligent Dispatch Matrix",
+      "matrixDesc": "Shield model differences, achieve deep decoupling and efficient collaboration between business plugins and AI capabilities.",
+      "consumersLabel": "Consumers",
+      "providersLabel": "Providers",
+      "engineLabel": "ENGINE",
+      "activeStatus": "Active",
+      "freedomBadge": "Freedom of Choice",
+      "providersTitle": "Connect to 80+ Mainstream AI Service Providers",
+      "providersDesc": "Whether cloud giants or local private models, Engine provides native-level support. Break vendor lock-in, switch freely to the strongest models with one click.",
+      "openaiCardTitle": "OpenAI Compatible Protocol",
+      "openaiCardDesc": "Perfect support for all providers compatible with OpenAI interface specification, from DeepSeek to Moonshot, seamless one-click access.",
+      "openaiCardMore": "+50 more",
+      "anthropicCardTitle": "Anthropic Native Support",
+      "anthropicCardDesc": "Deeply adapted to Claude series models, supporting unique Prompt Caching and ultra-long context vision capabilities.",
+      "localCardTitle": "Local & Private Deployment",
+      "localCardDesc": "Data never leaves the domain. Seamlessly connect to local inference engines to build an extremely secure, zero-latency internal coding environment.",
+      "unifiedApiTitle": "Unified API",
+      "unifiedApiDesc": "Standardized abstraction layer, allowing plugin developers to ignore underlying model differences.",
+      "secureVaultTitle": "Secure Vault",
+      "secureVaultDesc": "API Key encrypted storage in IntelliJ Password Safe, eliminating leaks.",
+      "streamRoutingTitle": "Stream Routing",
+      "streamRoutingDesc": "Support SSE streaming and automatic degradation routing to ensure high service availability.",
+      "contextMgmtTitle": "Context Mgmt",
+      "contextMgmtDesc": "Intelligent context window management, automatic Prompt compression, maximize Token utilization.",
+      "simpleConfigTitle": "Minimal Configuration Experience",
+      "configPath": "IntelliJ Settings > Tools > IntelliAI Engine",
+      "configDesc": "Intuitive configuration panel supporting custom API Endpoint, model parameters, and connection testing."
+    },
+    "javadoc": {
+      "badge": "AI Documentation",
+      "heroTitle": "Javadoc",
+      "heroHighlight": "Generator",
+      "heroDescription": "AI automatically generates standard Java documentation. One-click completion, keeping code and documentation in sync.",
+      "generateButton": "Generate Javadoc",
+      "viewDocsButton": "View Documentation",
+      "stripTitle1": "Intelligent Analysis",
+      "stripDesc1": "Deep understanding of code logic and intent",
+      "stripTitle2": "Standard Format",
+      "stripDesc2": "Follow Java conventions and best practices",
+      "stripTitle3": "Multi-language",
+      "stripDesc3": "Support Chinese and English documentation",
+      "stripTitle4": "Custom Template",
+      "stripDesc4": "Flexible template customization",
+      "demoTitle": "AI-Powered Generation Demo",
+      "demoBefore": "Before",
+      "demoAfter": "After",
+      "demoDesc": "Automatically generates complete documentation comments based on method signatures and code logic",
+      "providerTitle": "Support Multiple AI Providers",
+      "providerDesc": "Choose your preferred AI service, or use local models for privacy",
+      "providerButton": "Configure Provider"
+    },
+    "changelog": {
+      "badge": "IntelliAI Changelog",
+      "heroTitle1": "Turn Git Commits",
+      "heroTitle2": "into",
+      "heroHighlight": "Stories",
+      "heroDescription": "No more copy-pasting from git log. Automatically generate structured changelogs, daily reports, and smart commit messages using AI.",
+      "feature1Title": "Daily & Weekly Reports",
+      "feature1Desc": "Summarize your work for stand-ups instantly.",
+      "feature2Title": "Semantic Changelogs",
+      "feature2Desc": "Group commits by feature, fix, or refactor automatically.",
+      "feature3Title": "Smart Commit Messages",
+      "feature3Desc": "Let AI write your commit messages based on staged diffs.",
+      "gitLogLabel": "GIT LOG",
+      "reportLabel": "REPORT",
+      "reportType": "Daily Report",
+      "reportFormat": "Markdown",
+      "completedFeatures": "Completed Features",
+      "bugFixes": "Bug Fixes",
+      "optimization": "Optimization",
+      "reportDesc1": "Implemented system-wide Dark Mode support.",
+      "reportDesc2": "Resolved NullPointerException in UserService.",
+      "reportDesc3": "Optimized DB queries (+30% speedup).",
+      "section2Title": "Write Commits",
+      "section2Highlight": "Without Writing.",
+      "section2Desc": "Stop staring at empty commit boxes. The AI analyzes your staged changes and generates concise, descriptive messages following Conventional Commits standards.",
+      "feature2_1": "Analyses diffs line-by-line",
+      "feature2_2": "Detects breaking changes automatically",
+      "feature2_3": "Supports custom commit templates",
+      "feature2_4": "Multi-language support",
+      "conventionalBadge": "Conventional Commits Ready",
+      "section3Title": "Your Format, Your Rules.",
+      "section3Desc": "Whether you need a simple bulleted list for Slack or a complex Markdown table for Jira, our template engine has you covered.",
+      "template1Title": "For Slack / Teams",
+      "template1Desc": "Concise bullet points focusing on \"What changed\". Perfect for daily standups.",
+      "template2Badge": "POPULAR",
+      "template2Title": "For Release Notes",
+      "template2Desc": "Categorized by type (Features, Fixes) with links to issues. Professional and clean.",
+      "template3Title": "Custom Freemarker",
+      "template3Desc": "Full control with Freemarker templates. Access commit hash, author, date, and more.",
+      "ctaTitle": "Start saving time today.",
+      "ctaDesc": "Join thousands of developers who have stopped writing manual reports and started coding more.",
+      "installButton": "Install for IntelliJ IDEA",
+      "docsButton": "Documentation",
+      "stat1Label": "Downloads",
+      "stat2Label": "Rating",
+      "stat3Label": "Open Source"
+    },
+    "terminal": {
+      "system_online": "SYSTEM ONLINE",
+      "badge": "AI Terminal",
+      "heroTitle": "Natural Language",
+      "heroHighlight": "to Shell",
+      "heroDescription": "Transform natural language into Shell commands instantly. AI-powered terminal assistant for developers.",
+      "typePlaceholder": "Describe your command in plain language...",
+      "exampleButton": "Try Example",
+      "suggestionsTitle": "Or try these:",
+      "suggestion1": "Find all Java files modified in last 7 days",
+      "suggestion2": "Kill process running on port 8080",
+      "suggestion3": "Compress all log files into archive",
+      "outputTitle": "Generated Command",
+      "copyButton": "Copy",
+      "runButton": "Run in Terminal",
+      "feature1Title": "Natural Language Understanding",
+      "feature1Desc": "Describe what you want in plain English, AI generates accurate shell commands",
+      "feature2Title": "Multi-Shell Support",
+      "feature2Desc": "Support Bash, Zsh, PowerShell and other mainstream shells",
+      "feature3Title": "Safety Check",
+      "feature3Desc": "Warn before executing destructive operations like rm and format",
+      "feature4Title": "Learning & Improvement",
+      "feature4Desc": "AI learns from your usage patterns and provides increasingly accurate suggestions",
+      "ctaTitle": "Boost Your Terminal Productivity",
+      "ctaDesc": "No need to memorize complex commands. Let AI be your terminal expert.",
+      "installButton": "Install Plugin",
+      "hero": {
+        "tagline1": "Transform natural language into Shell commands instantly.",
+        "tagline2": "AI-powered, deeply integrated into your IDE terminal.",
+        "tagline3": "Just type your description and press TAB to generate.",
+        "install_button": "Install Plugin",
+        "docs_button": "View Docs"
+      },
+      "demo": {
+        "comment_text": "# Find all Java files containing \"TODO\"",
+        "command_text": "find . -name \"*.java\" -exec grep -l \"TODO\" {} \\;",
+        "analyzing": "Analyzing input..."
+      },
+      "features": {
+        "section_title": "FEATURES",
+        "command_generation": {
+          "title": "Command Generation",
+          "desc": "AI converts natural language to bash commands instantly"
+        },
+        "smart_extraction": {
+          "title": "Smart Extraction",
+          "desc": "Automatically extracts command patterns from code context"
+        },
+        "security_check": {
+          "title": "Security Check",
+          "desc": "Validates commands before execution to prevent accidents"
+        },
+        "engine_powered": {
+          "title": "Engine Powered",
+          "desc": "Leverage multiple AI providers for best results"
+        },
+        "dual_mode": {
+          "title": "Dual Mode",
+          "desc": "Switch between AI generation and manual input seamlessly"
+        },
+        "flexible_config": {
+          "title": "Flexible Config",
+          "desc": "Customizable prompts and command templates"
+        }
+      }
+    },
+    "tracer": {
+      "badge": "Code Flow Analysis",
+      "heroTitle": "Deep Code Execution",
+      "heroHighlight": "Flow Tracing",
+      "heroDescription": "Track code execution paths across the entire call chain. Visualize data flow and identify performance bottlenecks instantly.",
+      "scanButton": "Scan Code Flow",
+      "diagnosticTitle": "Smart Code Diagnostics",
+      "diagnosticDesc": "AI-powered analysis detects potential issues before runtime:",
+      "diagnostic1": "Identify redundant code paths",
+      "diagnostic2": "Detect null pointer risks",
+      "diagnostic3": "Find circular dependencies",
+      "diagnostic4": "Analyze method complexity",
+      "capabilitiesTitle": "Powerful Capabilities",
+      "capability1Title": "Visual Call Graph",
+      "capability1Desc": "Interactive visualization of method call relationships",
+      "capability2Title": "Data Flow Tracking",
+      "capability2Desc": "Track variable propagation across the entire stack",
+      "capability3Title": "Performance Analysis",
+      "capability3Desc": "Identify hotspots and optimization opportunities",
+      "capability4Title": "AI Insights",
+      "capability4Desc": "Get intelligent suggestions for code optimization",
+      "aiEngineTitle": "Powered by AI Engine",
+      "aiEngineDesc": "Leverage multiple AI models for comprehensive code analysis",
+      "ctaTitle": "Master Your Code Base",
+      "ctaDesc": "Understand complex systems with intelligent tracing.",
+      "hero": {
+        "badge": "Code Flow Analysis",
+        "description": "Track code execution paths across the entire call chain",
+        "install_button": "Install Plugin",
+        "docs_button": "View Docs"
+      },
+      "diagnostic": {
+        "title": "Smart Code Diagnostics",
+        "description": "AI-powered analysis detects potential issues before runtime:",
+        "call_chain": {
+          "title": "Call Chain Analysis",
+          "desc": "Trace method calls across entire project"
+        },
+        "class_modeling": {
+          "title": "Class Modeling",
+          "desc": "Visualize class relationships and dependencies"
+        }
+      },
+      "capabilities": {
+        "title": "Powerful Capabilities",
+        "subtitle": "Everything you need for code flow analysis",
+        "ai_workflow": {
+          "title": "AI Workflow",
+          "desc": "Intelligent workflow automation with AI integration"
+        },
+        "sequence_diagram": {
+          "title": "Sequence Diagram",
+          "desc": "Auto-generate UML sequence diagrams"
+        },
+        "architecture_optimization": {
+          "title": "Architecture Optimization",
+          "desc": "Identify architectural patterns and suggest improvements"
+        }
+      },
+      "engine": {
+        "title": "Powered by AI Engine",
+        "description": "Leverage multiple AI models for comprehensive code analysis"
+      }
+    },
+    "repairer": {
+      "badge": "Auto Fix",
+      "heroTitle": "Code Quality,",
+      "heroHighlight": "Restored",
+      "heroDescription": "AI automatically fixes Checkstyle issues. Precise surgical corrections, maintaining code style consistency.",
+      "scanButton": "Scan Issues",
+      "fixAllButton": "Fix All Issues",
+      "demoTitle": "Watch AI Fix Code in Real-Time",
+      "demoBefore": "Before",
+      "demoAfter": "After",
+      "demoIssue": "Checkstyle Issue",
+      "demoFixed": "Auto Fixed",
+      "feature1Title": "Smart Detection",
+      "feature1Desc": "Automatically identify Checkstyle violations including naming, formatting, and documentation issues",
+      "feature2Title": "Precise Fix",
+      "feature2Desc": "Targeted fixes without affecting unrelated code, preserving logic integrity",
+      "feature3Title": "Batch Processing",
+      "feature3Desc": "Fix multiple files at once, dramatically improving refactoring efficiency",
+      "feature4Title": "Custom Rules",
+      "feature4Desc": "Support custom Checkstyle configurations to match team standards",
+      "ctaTitle": "Say Goodbye to Style Issues",
+      "ctaDesc": "Let AI handle code quality, focus on business logic.",
+      "installButton": "Install Repairer",
+      "hero": {
+        "badge": "Auto Fix",
+        "title": "Code Quality, Restored",
+        "subtitle": "AI automatically fixes Checkstyle issues",
+        "description": "Precise surgical corrections, maintaining code style consistency",
+        "fix_button": "Fix All Issues",
+        "demo_button": "Watch Demo",
+        "supported_tools": {
+          "checkstyle": "Checkstyle",
+          "pmd": "PMD",
+          "alibaba_guide": "Alibaba Java Guide"
+        }
+      },
+      "features": {
+        "title": "Powerful Features",
+        "subtitle": "Everything you need for code quality automation",
+        "quickfix": {
+          "title": "Smart Quickfix",
+          "desc": "AI-powered quickfix suggestions with one-click application"
+        },
+        "configurable_rules": {
+          "title": "Configurable Rules",
+          "desc": "Support for custom Checkstyle configurations"
+        },
+        "batch_processing": {
+          "title": "Batch Processing",
+          "desc": "Fix multiple files across the entire project"
+        }
+      },
+      "cta": {
+        "title": "Say Goodbye to Style Issues",
+        "description": "Let AI handle code quality, focus on business logic.",
+        "button": "Install Plugin"
+      }
+    },
+    "swagger": {
+      "badge": "API First Development",
+      "heroTitle1": "Instant",
+      "heroHighlight": "Open API Spec",
+      "heroDescription": "Generate Swagger/OpenAPI documentation directly from Java code. Built-in modern debugger turns IDEA into Postman, API development has never been smoother.",
+      "exportJsonButton": "Export JSON",
+      "installButton": "Install Plugin",
+      "consoleDevEnv": "dev-environment",
+      "consoleConfig": "config.json",
+      "endpointsLabel": "Endpoints",
+      "paramsTab": "Params",
+      "headersTab": "Headers",
+      "bodyTab": "Body",
+      "requestComment": "// Request Body (JSON)",
+      "responseLabel": "Response",
+      "clickSendHint": "Click Send to trigger request",
+      "status200": "200 OK",
+      "feature1Title": "Annotation Free",
+      "feature1Desc": "Directly parse JavaDoc and Controller code logic. No need to add tedious @Operation or @Api annotations, keep code pure.",
+      "feature2Title": "Multi-Environment",
+      "feature2Desc": "One-click switch between Dev/Test/Prod environment variables. Auto-sync Authorization Header, say goodbye to manual Token copying.",
+      "feature3Title": "Format Compatible",
+      "feature3Desc": "Perfect support for OpenAPI 3.0 and Swagger 2.0 standards. Export to Markdown, HTML or Postman Collection.",
+      "configHint": "Configured via simple annotations if needed"
+    },
+    "nacos": {
+      "badge": "Config Management",
+      "heroTitle": "Nacos Configuration",
+      "heroHighlight": "in Your IDE",
+      "heroDescription": "Manage Nacos configurations without leaving IDEA. Multi-environment switching, version comparison, quick publish.",
+      "connectButton": "Connect to Nacos",
+      "feature1Title": "IDE Native Experience",
+      "feature1Desc": "Say goodbye to browser console, control everything in IDE",
+      "feature2Title": "Multi-Environment Support",
+      "feature2Desc": "Quick switch between Dev, Test, Prod environments",
+      "feature3Title": "Version History",
+      "feature3Desc": "View and compare configuration change history",
+      "feature4Title": "Real-time Sync",
+      "feature4Desc": "Instant push to remote, automatic refresh",
+      "ctaTitle": "Streamline Configuration Management",
+      "ctaDesc": "Efficient, secure, reliable Nacos operations.",
+      "connectNow": "Connect Now",
+      "demoNamespace": "Namespace",
+      "demoGroup": "Group",
+      "demoDataId": "Data ID",
+      "demoConfigFile": "application.yml",
+      "demoAction": "Edit",
+      "demoAction2": "Publish",
+      "hero": {
+        "badge": "Config Management",
+        "title": "Nacos Configuration",
+        "subtitle": "In Your IDE",
+        "description": "Manage Nacos configurations without leaving IDEA. Multi-environment switching, version comparison, quick publish.",
+        "download_button": "Download Plugin",
+        "demo_button": "Watch Demo"
+      },
+      "demo": {
+        "tabs": {
+          "config": "Configuration",
+          "service": "Service"
+        },
+        "sidebar": {
+          "remote_prod": "remote (prod)",
+          "namespaces": "Namespaces",
+          "namespace_public": "public",
+          "namespace_dev": "dev",
+          "file_user_service": "user-service.yml",
+          "file_gateway": "gateway.yml",
+          "file_order": "order-service.yml",
+          "local_dev": "local (dev)"
+        },
+        "editor": {
+          "tab_remote": "Remote",
+          "tab_comparison": "Comparison",
+          "status_valid": "Valid",
+          "status_utf8": "UTF-8",
+          "button_reset": "Reset",
+          "button_publish": "Publish"
+        },
+        "service": {
+          "instances": "Instances",
+          "subscribers": "Subscribers",
+          "filter_placeholder": "Filter by...",
+          "table_header": {
+            "ip": "IP",
+            "port": "Port",
+            "weight": "Weight",
+            "healthy": "Healthy",
+            "metadata": "Metadata"
+          }
+        }
+      },
+      "features": {
+        "title": "Powerful Features",
+        "local_lifecycle": {
+          "title": "Local Lifecycle Management",
+          "desc": "Manage local Nacos server directly from IDE with <strong>one-click start/stop</strong>",
+          "status_running": "Running",
+          "port": "Port: 8848",
+          "version": "v2.2.0"
+        },
+        "version_control": {
+          "title": "Version Control & Comparison",
+          "desc": "Track every configuration change with built-in version history",
+          "history": {
+            "v3": {
+              "msg": "Added cache configuration",
+              "time": "2 min ago"
+            },
+            "v2": {
+              "msg": "Updated database URL",
+              "time": "1 hour ago"
+            },
+            "v1": {
+              "msg": "Initial version",
+              "time": "Yesterday"
+            }
+          }
+        },
+        "intelligent_editor": {
+          "title": "Intelligent Config Editor",
+          "desc": "Syntax highlighting, validation, and auto-completion for YAML and Properties files"
+        },
+        "security": {
+          "title": "Security & Encryption",
+          "desc": "Encrypted credential storage with secure transmission to remote Nacos servers"
+        }
+      },
+      "cta": {
+        "rating": "4.8",
+        "title": "Ready to Streamline Your Configuration Management?",
+        "description": "Join thousands of developers who have simplified their Nacos workflow.",
+        "install_button": "Install Plugin",
+        "docs_button": "View Documentation",
+        "version_info": "Version 2.0.0"
+      }
+    }
+  }
+}

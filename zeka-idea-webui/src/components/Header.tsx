@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ChevronDown, Sparkles} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 import {authHeaders, authStorage} from '../lib/auth';
+import {LanguageSelector} from './LanguageSelector';
 
 export type HeaderVariant = 'default' | 'dark' | 'terminal';
 
@@ -9,6 +11,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
+    const {t} = useTranslation();
     const [isProductsOpen, setIsProductsOpen] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState<{ avatarUrl?: string; githubLogin?: string } | null>(null);
@@ -110,7 +113,7 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
                 </a>
                 <nav className="flex items-center gap-6">
                     <div className={`hidden md:flex items-center gap-6 text-[15px] font-medium ${s.navText} transition-colors`}>
-                        <a href="#/" className={`${s.navHover} transition-colors`}>Home</a>
+                        <a href="#/" className={`${s.navHover} transition-colors`}>{t('header.home')}</a>
 
                         {/* Products Dropdown */}
                         <div
@@ -122,7 +125,7 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
                                 className={`flex items-center gap-1 ${s.navHover} transition-colors focus:outline-none`}
                                 aria-expanded={isProductsOpen}
                             >
-                                Products
+                                {t('header.plugins')}
                                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}/>
                             </button>
 
@@ -132,89 +135,92 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
                                         <img src="/icons/engine.svg" alt="Engine" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Engine</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Core AI infrastructure</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.engineDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/javadoc" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/javadoc.svg" alt="Javadoc" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Javadoc</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated documentation</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.javadocDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/changelog" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/changelog.svg" alt="Changelog" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Changelog</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Smart git reporting</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.changelogDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/terminal" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/terminal.svg" alt="Terminal" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Terminal</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>AI Terminal Assistant</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.terminalDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/tracer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/tracer.svg" alt="Tracer" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Tracer</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Code Flow Analysis</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.tracerDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/repairer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/repairer.svg" alt="Repairer" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Repairer</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated Code Remediation</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.repairerDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/swagger" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/swagger.svg" alt="Swagger" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Swagger</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Instant Open API Spec.</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.swaggerDesc')}</div>
                                         </div>
                                     </a>
                                     <a href="#/plugins/nacos" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
                                         <img src="/icons/nacos.svg" alt="Nacos" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
                                         <div>
                                             <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Nacos</div>
-                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Microservices Governance</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>{t('header.nacosDesc')}</div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <a href="#/feedback" className={`${s.navHover} transition-colors`}>Feedback</a>
-                        <a href="#/statistics" className={`${s.navHover} transition-colors`}>Statistics</a>
-                        <a href="#/donate" className={`${s.navHover} transition-colors`}>Donate</a>
-                        <a href="#/changelog" className={`${s.navHover} transition-colors`}>Changelog</a>
-                        <a href="#/privacy" className={`${s.navHover} transition-colors`}>Privacy</a>
+                        <a href="#/feedback" className={`${s.navHover} transition-colors`}>{t('header.feedback')}</a>
+                        <a href="#/statistics" className={`${s.navHover} transition-colors`}>{t('header.statistics')}</a>
+                        <a href="#/donate" className={`${s.navHover} transition-colors`}>{t('header.donate')}</a>
+                        <a href="#/changelog" className={`${s.navHover} transition-colors`}>{t('header.changelog')}</a>
+                        <a href="#/privacy" className={`${s.navHover} transition-colors`}>{t('header.privacy')}</a>
                         {!loggedIn && (
-                            <a href="#/login" className={`${s.navHover} transition-colors`}>Login</a>
+                            <a href="#/login" className={`${s.navHover} transition-colors`}>{t('header.login')}</a>
                         )}
                         {loggedIn && (
-                            <a href="#/settings" className={`${s.navHover} transition-colors`}>Settings</a>
+                            <a href="#/settings" className={`${s.navHover} transition-colors`}>{t('header.settings')}</a>
                         )}
                     </div>
-                    {loggedIn && (
-                        <a
-                            href="#/settings"
-                            className={`flex items-center gap-2 rounded-full border ${s.userBorder} p-1 shadow-sm transition`}
-                            title={user?.githubLogin || 'Account'}
-                        >
-                            <div className="h-7 w-7 overflow-hidden rounded-full bg-gray-100">
-                                {user?.avatarUrl ? (
-                                    <img src={user.avatarUrl} alt="avatar" className="h-full w-full object-cover"/>
-                                ) : (
-                                    <div className="h-full w-full bg-gradient-to-br from-slate-200 to-slate-100"/>
-                                )}
-                            </div>
-                        </a>
-                    )}
+                    <div className="flex items-center gap-3">
+                        <LanguageSelector/>
+                        {loggedIn && (
+                            <a
+                                href="#/settings"
+                                className={`flex items-center gap-2 rounded-full border ${s.userBorder} p-1 shadow-sm transition`}
+                                title={user?.githubLogin || 'Account'}
+                            >
+                                <div className="h-7 w-7 overflow-hidden rounded-full bg-gray-100">
+                                    {user?.avatarUrl ? (
+                                        <img src={user.avatarUrl} alt="avatar" className="h-full w-full object-cover"/>
+                                    ) : (
+                                        <div className="h-full w-full bg-gradient-to-br from-slate-200 to-slate-100"/>
+                                    )}
+                                </div>
+                            </a>
+                        )}
+                    </div>
                 </nav>
             </div>
         </header>

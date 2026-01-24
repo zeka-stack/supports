@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import {api, type EventRecord, type TokenRanking} from '../lib/api';
 import {authStorage} from '../lib/auth';
+import {useTranslation} from 'react-i18next';
 
 const SAMPLE_DATA = {
     source: 'local-json',
@@ -113,6 +114,8 @@ const StatCard = ({icon: Icon, label, value, trend, trendUp}: {
 );
 
 export const Statistics: React.FC = () => {
+    const {t} = useTranslation();
+
     const buildOverviewFromRecords = (records: any[]): EventStatOverviewDTO => {
         // ... existing fallback logic ...
         const totalCount = records.length;
@@ -284,20 +287,20 @@ export const Statistics: React.FC = () => {
     // ... (Charts options logic same as before) ...
     const getDailyTrendOption = () => ({
         tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
-        legend: {data: ['Token Consumption', 'Event Count']},
+        legend: {data: [t('statistics.tokenConsumption'), t('statistics.eventCount')]},
         grid: {left: '3%', right: '4%', bottom: '3%', containLabel: true},
         xAxis: {type: 'category', data: dayKeys.map(d => d.slice(5)), axisLine: {lineStyle: {color: '#9CA3AF'}}},
         yAxis: [
             {
                 type: 'value',
-                name: 'Tokens',
+                name: t('statistics.tokens'),
                 position: 'left',
                 axisLine: {show: true, lineStyle: {color: '#8B5CF6'}},
                 axisLabel: {color: '#8B5CF6'}
             },
             {
                 type: 'value',
-                name: 'Events',
+                name: t('statistics.eventCount'),
                 position: 'right',
                 axisLine: {show: true, lineStyle: {color: '#6366F1'}},
                 axisLabel: {color: '#6366F1'}
@@ -305,7 +308,7 @@ export const Statistics: React.FC = () => {
         ],
         series: [
             {
-                name: 'Token Consumption',
+                name: t('statistics.tokenConsumption'),
                 type: 'line',
                 smooth: true,
                 yAxisIndex: 0,
@@ -323,7 +326,7 @@ export const Statistics: React.FC = () => {
                 }
             },
             {
-                name: 'Event Count',
+                name: t('statistics.eventCount'),
                 type: 'bar',
                 yAxisIndex: 1,
                 data: dayKeys.map(d => byDay[d] || 0),
@@ -468,7 +471,7 @@ export const Statistics: React.FC = () => {
 
         return {
             title: {
-                text: 'Token Usage Ranking',
+                text: t('statistics.tokenUsageRanking'),
                 left: 'center',
                 textStyle: {fontSize: 18, fontWeight: 'bold', color: '#374151'}
             },
@@ -564,25 +567,25 @@ export const Statistics: React.FC = () => {
                 <div className="mb-8">
                     <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
                         <BarChart3 className="w-7 h-7 text-indigo-600"/>
-                        Statistics Dashboard
+                        {t('statistics.dashboard')}
                     </h1>
                     <p className="text-gray-500 mt-1 text-sm flex items-center gap-2">
-                        <span>Connected Device: <span className="font-mono bg-gray-100 px-1 rounded">{deviceId || 'None'}</span></span>
+                        <span>{t('statistics.connectedDevice')}: <span className="font-mono bg-gray-100 px-1 rounded">{deviceId || 'None'}</span></span>
                     </p>
                 </div>
 
                 {/* 1. Key Metrics Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <StatCard icon={Code2} label="Total Events" value={`${chartTotalEvents}`} trend="12%" trendUp={true}/>
-                    <StatCard icon={Zap} label="Success Rate" value={`${successRate}%`} trend={successRate >= 90 ? "Stable" : "Attention"} trendUp={successRate >= 90}/>
-                    <StatCard icon={Clock} label="Avg Latency" value={`${avgLatency} ms`}/>
-                    <StatCard icon={Calendar} label="Total Tokens" value={(totalTokens / 1000).toFixed(1) + 'k'}/>
+                    <StatCard icon={Code2} label={t('statistics.totalEvents')} value={`${chartTotalEvents}`} trend="12%" trendUp={true}/>
+                    <StatCard icon={Zap} label={t('statistics.successRate')} value={`${successRate}%`} trend={successRate >= 90 ? t('statistics.stable') : t('statistics.attention')} trendUp={successRate >= 90}/>
+                    <StatCard icon={Clock} label={t('statistics.avgLatency')} value={`${avgLatency} ${t('statistics.ms')}`}/>
+                    <StatCard icon={Calendar} label={t('statistics.totalTokens')} value={(totalTokens / 1000).toFixed(1) + 'k'}/>
                 </div>
 
                 {/* 2. Charts Section */}
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-indigo-600"/> Activity Trend
+                        <TrendingUp className="w-5 h-5 text-indigo-600"/> {t('statistics.activityTrend')}
                     </h3>
                     <ReactECharts option={getDailyTrendOption()} style={{height: '350px'}}/>
                 </div>
@@ -590,25 +593,29 @@ export const Statistics: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <Layers className="w-5 h-5 text-indigo-600"/> Event Type</h3>
-                        <ReactECharts option={getPieOption(byEventType, 'Event Type')} style={{height: '300px'}}/>
+                            <Layers className="w-5 h-5 text-indigo-600"/> {t('statistics.eventType')}
+                        </h3>
+                        <ReactECharts option={getPieOption(byEventType, t('statistics.eventType'))} style={{height: '300px'}}/>
                     </div>
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <Cpu className="w-5 h-5 text-indigo-600"/> Provider Usage</h3>
-                        <ReactECharts option={getPieOption(byProvider, 'Provider')} style={{height: '300px'}}/>
+                            <Cpu className="w-5 h-5 text-indigo-600"/> {t('statistics.providerUsage')}
+                        </h3>
+                        <ReactECharts option={getPieOption(byProvider, t('statistics.providerUsage'))} style={{height: '300px'}}/>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <FolderKanban className="w-5 h-5 text-indigo-600"/> Project Token Usage</h3>
-                        <ReactECharts option={getBarOption(byProjectTokens, 'Tokens', '#8B5CF6')} style={{height: '300px'}}/>
+                            <FolderKanban className="w-5 h-5 text-indigo-600"/> {t('statistics.projectTokenUsage')}
+                        </h3>
+                        <ReactECharts option={getBarOption(byProjectTokens, t('statistics.tokens'), '#8B5CF6')} style={{height: '300px'}}/>
                     </div>
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-indigo-600"/> Entry Point Usage</h3>
+                            <Activity className="w-5 h-5 text-indigo-600"/> {t('statistics.entryPointUsage')}
+                        </h3>
                         <ReactECharts option={getBarOption(byUserAction, 'Actions', '#6366F1')} style={{height: '300px'}}/>
                     </div>
                 </div>
@@ -616,7 +623,7 @@ export const Statistics: React.FC = () => {
                 {/* Stacked Line Charts Section */}
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <Layers className="w-5 h-5 text-indigo-600"/> Daily Event Type Breakdown
+                        <Layers className="w-5 h-5 text-indigo-600"/> {t('statistics.dailyEventTypeBreakdown')}
                     </h3>
                     <ReactECharts option={getStackedLineOption(overview.countByDayEventType || {}, 'Events by Type Over Time')} style={{height: '320px'}}/>
                 </div>
@@ -624,13 +631,13 @@ export const Statistics: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <Activity className="w-5 h-5 text-indigo-600"/> Daily Action Breakdown
+                            <Activity className="w-5 h-5 text-indigo-600"/> {t('statistics.dailyActionBreakdown')}
                         </h3>
                         <ReactECharts option={getStackedLineOption(overview.countByDayUserAction || {}, 'Actions by Day')} style={{height: '300px'}}/>
                     </div>
                     <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
                         <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <Zap className="w-5 h-5 text-indigo-600"/> Daily Success/Failure Breakdown
+                            <Zap className="w-5 h-5 text-indigo-600"/> {t('statistics.dailySuccessFailureBreakdown')}
                         </h3>
                         <ReactECharts option={getStackedLineOption(overview.countByDayResultStatus || {}, 'Status by Day')} style={{height: '300px'}}/>
                     </div>
@@ -639,7 +646,7 @@ export const Statistics: React.FC = () => {
                 {/* Token Usage Ranking Bar Race Chart */}
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
-                        <Trophy className="w-5 h-5 text-indigo-600"/> Top 5 Token Users
+                        <Trophy className="w-5 h-5 text-indigo-600"/> {t('statistics.top5TokenUsers')}
                     </h3>
                     <ReactECharts option={getBarRaceOption()} style={{height: '320px'}}/>
                 </div>
@@ -648,12 +655,12 @@ export const Statistics: React.FC = () => {
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="font-bold text-gray-900 flex items-center gap-2">
-                            Recent Activity Log
+                            {t('statistics.recentActivityLog')}
                             {loadingEvents && <span className="animate-spin text-indigo-600 ml-2"><Zap className="w-4 h-4"/></span>}
                         </h3>
                         <div className="flex items-center gap-4">
                             <span className="text-xs text-gray-400">
-                                Page {currentPage} of {totalPages || 1} ({totalEvents} total)
+                                {t('statistics.page')} {currentPage} of {totalPages || 1} ({totalEvents} {t('statistics.total')})
                             </span>
                             <div className="flex items-center gap-2">
                                 <button
@@ -677,13 +684,13 @@ export const Statistics: React.FC = () => {
                         <table className="min-w-full text-sm">
                             <thead className="bg-gray-50 text-gray-500 font-medium">
                             <tr>
-                                <th className="text-left py-3 px-4 rounded-l-lg">Time</th>
-                                <th className="text-left py-3 px-4">Type</th>
-                                <th className="text-left py-3 px-4">Provider/Model</th>
-                                <th className="text-left py-3 px-4">Latency</th>
-                                <th className="text-left py-3 px-4">Tokens</th>
-                                <th className="text-left py-3 px-4">Project</th>
-                                <th className="text-left py-3 px-4 rounded-r-lg">Status</th>
+                                <th className="text-left py-3 px-4 rounded-l-lg">{t('statistics.time')}</th>
+                                <th className="text-left py-3 px-4">{t('statistics.type')}</th>
+                                <th className="text-left py-3 px-4">{t('statistics.providerModel')}</th>
+                                <th className="text-left py-3 px-4">{t('statistics.latency')}</th>
+                                <th className="text-left py-3 px-4">{t('statistics.tokens')}</th>
+                                <th className="text-left py-3 px-4">{t('statistics.project')}</th>
+                                <th className="text-left py-3 px-4 rounded-r-lg">{t('statistics.status')}</th>
                             </tr>
                             </thead>
                             <tbody className={`text-gray-700 divide-y divide-gray-100 transition-opacity duration-200 ${loadingEvents ? 'opacity-50' : 'opacity-100'}`}>
@@ -696,7 +703,7 @@ export const Statistics: React.FC = () => {
                                     <td className="py-3 px-4">
                                         <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">{item.provider}</span> {item.model}
                                     </td>
-                                    <td className="py-3 px-4 text-gray-500">{item.latencyMs} ms</td>
+                                    <td className="py-3 px-4 text-gray-500">{item.latencyMs} {t('statistics.ms')}</td>
                                     <td className="py-3 px-4">{item.tokenCount}</td>
                                     <td className="py-3 px-4 text-gray-500">{item.projectName}</td>
                                     <td className="py-3 px-4">
@@ -710,7 +717,7 @@ export const Statistics: React.FC = () => {
                             ))}
                             {recentEvents.length === 0 && (
                                 <tr>
-                                    <td colSpan={7} className="py-12 text-center text-gray-400">No events found</td>
+                                    <td colSpan={7} className="py-12 text-center text-gray-400">{t('statistics.noEventsFound')}</td>
                                 </tr>
                             )}
                             </tbody>

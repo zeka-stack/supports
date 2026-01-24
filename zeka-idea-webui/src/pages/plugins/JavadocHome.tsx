@@ -1,7 +1,9 @@
 import React from 'react';
 import {BookOpen, Cloud, Settings2, Sparkles, Terminal} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const JavadocHome: React.FC = () => {
+    const {t} = useTranslation();
     return (
         <div className="min-h-screen bg-[#FFFBF0] text-gray-800 font-serif">
             {/* Header / Hero */}
@@ -11,17 +13,18 @@ export const JavadocHome: React.FC = () => {
                         <BookOpen className="w-10 h-10 text-orange-600"/>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">
-                        IntelliAI <span className="text-orange-600 underline decoration-4 underline-offset-4">Javadoc</span>
+                        {t('plugins.javadoc.heroTitle')}
+                        <span className="text-orange-600 underline decoration-4 underline-offset-4">{t('plugins.javadoc.heroHighlight')}</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto mb-10 font-sans">
-                        AI-powered documentation generator. Turn your code into clear, standardized Javadoc with a single click.
+                        {t('plugins.javadoc.heroDescription')}
                     </p>
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 font-sans">
                         <button className="px-8 py-3 bg-gray-900 text-white rounded-md font-bold hover:bg-gray-800 transition-all shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none border-2 border-gray-900">
-                            Install Plugin
+                            {t('plugins.javadoc.generateButton')}
                         </button>
                         <button className="px-8 py-3 bg-white text-gray-900 rounded-md font-bold hover:bg-gray-50 transition-all shadow-[4px_4px_0px_0px_rgba(234,88,12,0.2)] active:translate-y-1 active:shadow-none border-2 border-gray-200">
-                            Read Guide
+                            {t('plugins.javadoc.viewDocsButton')}
                         </button>
                     </div>
                 </div>
@@ -30,10 +33,10 @@ export const JavadocHome: React.FC = () => {
             {/* Feature Strip */}
             <div className="bg-orange-600 text-white py-4 font-sans font-bold text-center tracking-wider overflow-hidden">
                 <div className="flex justify-center gap-12 opacity-90">
-                    <span>★ QIANWEN SUPPORT</span>
-                    <span>★ OLLAMA LOCAL</span>
-                    <span>★ JUNIT INTEGRATION</span>
-                    <span>★ CONTEXT AWARE</span>
+                    <span>★ {t('plugins.javadoc.stripTitle1')}</span>
+                    <span>★ {t('plugins.javadoc.stripTitle2')}</span>
+                    <span>★ {t('plugins.javadoc.stripTitle3')}</span>
+                    <span>★ {t('plugins.javadoc.stripTitle4')}</span>
                 </div>
             </div>
 
@@ -44,18 +47,17 @@ export const JavadocHome: React.FC = () => {
                     <div>
                         <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
                             <Sparkles className="text-orange-500 fill-orange-500"/>
-                            Smart Generation
+                            {t('plugins.javadoc.demoTitle')}
                         </h2>
                         <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                            Stop writing boilerplate documentation manually. IntelliAI Javadoc analyzes your method signatures, parameter
-                            names, and logic to generate comprehensive documentation.
+                            {t('plugins.javadoc.demoDesc')}
                         </p>
                         <ul className="space-y-4">
                             {[
-                                'Auto-detects method context (Class, Field, Method)',
-                                'Supports custom templates for standardization',
-                                'Recognizes JUnit 4/5 tests automatically',
-                                'Incremental updates - preserves existing docs'
+                                t('plugins.javadoc.stripDesc1'),
+                                t('plugins.javadoc.stripDesc2'),
+                                t('plugins.javadoc.stripDesc3'),
+                                t('plugins.javadoc.stripDesc4')
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-gray-700 font-medium">
                                     <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
@@ -89,6 +91,10 @@ export const JavadocHome: React.FC = () => {
                 </div>
 
                 {/* Providers Grid */}
+                <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-gray-800">{t('plugins.javadoc.providerTitle')}</h3>
+                    <p className="text-gray-500 mt-2">{t('plugins.javadoc.providerDesc')}</p>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="bg-white p-8 rounded-xl border-2 border-gray-100 hover:border-orange-200 transition-colors">
                         <Cloud className="w-8 h-8 text-blue-500 mb-4"/>

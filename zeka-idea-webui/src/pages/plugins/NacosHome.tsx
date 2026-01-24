@@ -21,8 +21,10 @@ import {
     Star,
     Terminal
 } from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const NacosHome: React.FC = () => {
+    const {t} = useTranslation();
     const [activeTab, setActiveTab] = useState<'config' | 'service'>('config');
 
     return (
@@ -38,31 +40,29 @@ export const NacosHome: React.FC = () => {
                 <div className="text-center mb-20">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-xs font-bold mb-6">
                         <Cloud className="w-3 h-3"/>
-                        <span>The Ultimate Nacos Client for IntelliJ IDEA</span>
+                        <span>{t('plugins.nacos.hero.badge')}</span>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
-                        告别浏览器控制台，
+                        {t('plugins.nacos.hero.title')}
                         <br/>
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                            在 IDE 中掌控一切。
+                            {t('plugins.nacos.hero.subtitle')}
                         </span>
                     </h1>
 
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
-                        集成本地 Server 管理、远程配置编辑与服务发现于一体。
-                        <br/>
-                        像编辑本地文件一样修改远程 Nacos 配置，体验前所未有的微服务开发效率。
+                        {t('plugins.nacos.hero.description')}
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-xl shadow-blue-200/50 flex items-center gap-2 hover:-translate-y-1">
-                            免费下载插件
+                            {t('plugins.nacos.hero.download_button')}
                             <Download className="w-5 h-5"/>
                         </button>
                         <button className="px-8 py-4 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl font-bold transition-all shadow-sm flex items-center gap-2">
                             <Play className="w-5 h-5 text-slate-400"/>
-                            观看演示视频
+                            {t('plugins.nacos.hero.demo_button')}
                         </button>
                     </div>
                 </div>
@@ -89,13 +89,13 @@ export const NacosHome: React.FC = () => {
                                     onClick={() => setActiveTab('config')}
                                     className={`px-3 py-1 rounded text-xs font-medium transition-colors ${activeTab === 'config' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
-                                    Configuration
+                                    {t('plugins.nacos.demo.tabs.config')}
                                 </button>
                                 <button
                                     onClick={() => setActiveTab('service')}
                                     className={`px-3 py-1 rounded text-xs font-medium transition-colors ${activeTab === 'service' ? 'bg-white shadow-sm text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
                                 >
-                                    Service Discovery
+                                    {t('plugins.nacos.demo.tabs.service')}
                                 </button>
                             </div>
                         </div>
@@ -115,42 +115,42 @@ export const NacosHome: React.FC = () => {
                                 <div className="flex-1 overflow-y-auto p-2 font-mono text-xs text-slate-700 space-y-1">
                                     <div className="flex items-center gap-1.5 py-1 px-2 hover:bg-blue-100 rounded cursor-pointer text-blue-700 font-bold bg-blue-50">
                                         <Globe className="w-3.5 h-3.5"/>
-                                        <span>Remote-Prod (192.168.1.10)</span>
+                                        <span>{t('plugins.nacos.demo.sidebar.remote_prod')}</span>
                                     </div>
                                     <div className="pl-4 space-y-1">
                                         <div className="flex items-center gap-1 text-slate-500">
                                             <ChevronRight className="w-3 h-3"/>
                                             <FolderTree className="w-3.5 h-3.5 text-amber-500"/>
-                                            <span>Namespaces</span>
+                                            <span>{t('plugins.nacos.demo.sidebar.namespaces')}</span>
                                         </div>
                                         <div className="pl-4 space-y-1">
                                             <div className="flex items-center gap-1.5 py-1 px-2 rounded hover:bg-slate-200 cursor-pointer">
                                                 <div className="w-3.5 h-3.5 rounded bg-purple-100 flex items-center justify-center text-[8px] font-bold text-purple-600">P</div>
-                                                <span>public</span>
+                                                <span>{t('plugins.nacos.demo.sidebar.namespace_public')}</span>
                                             </div>
                                             <div className="flex items-center gap-1.5 py-1 px-2 rounded bg-blue-100/50 text-blue-700 cursor-pointer border border-blue-200/50">
                                                 <div className="w-3.5 h-3.5 rounded bg-blue-100 flex items-center justify-center text-[8px] font-bold text-blue-600">D</div>
-                                                <span>dev-group</span>
+                                                <span>{t('plugins.nacos.demo.sidebar.namespace_dev')}</span>
                                             </div>
                                             <div className="pl-6 space-y-1 mt-1">
                                                 <div className="flex items-center gap-2 text-slate-600 py-0.5">
                                                     <FileText className="w-3.5 h-3.5 text-slate-400"/>
-                                                    <span>user-service.yaml</span>
+                                                    <span>{t('plugins.nacos.demo.sidebar.file_user_service')}</span>
                                                 </div>
                                                 <div className="flex items-center gap-2 text-blue-600 font-bold bg-blue-100/50 -mx-2 px-2 py-1 rounded">
                                                     <FileText className="w-3.5 h-3.5"/>
-                                                    <span>gateway.yaml</span>
+                                                    <span>{t('plugins.nacos.demo.sidebar.file_gateway')}</span>
                                                 </div>
                                                 <div className="flex items-center gap-2 text-slate-600 py-0.5">
                                                     <FileText className="w-3.5 h-3.5 text-slate-400"/>
-                                                    <span>order.properties</span>
+                                                    <span>{t('plugins.nacos.demo.sidebar.file_order')}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-1.5 py-1 px-2 hover:bg-slate-200 rounded cursor-pointer mt-4 opacity-70">
                                         <Monitor className="w-3.5 h-3.5"/>
-                                        <span>Local-Dev (localhost:8848)</span>
+                                        <span>{t('plugins.nacos.demo.sidebar.local_dev')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -163,11 +163,11 @@ export const NacosHome: React.FC = () => {
                                         <div className="flex border-b border-slate-200 bg-slate-50">
                                             <div className="px-4 py-2 bg-white border-r border-slate-200 text-xs font-medium text-blue-600 border-t-2 border-t-blue-600 flex items-center gap-2">
                                                 <FileText className="w-3.5 h-3.5"/>
-                                                gateway.yaml (Remote)
+                                                {t('plugins.nacos.demo.editor.tab_remote')}
                                             </div>
                                             <div className="px-4 py-2 border-r border-slate-200 text-xs font-medium text-slate-500 hover:bg-white cursor-pointer flex items-center gap-2">
                                                 <Diff className="w-3.5 h-3.5"/>
-                                                Comparison
+                                                {t('plugins.nacos.demo.editor.tab_comparison')}
                                             </div>
                                         </div>
 
@@ -224,14 +224,14 @@ export const NacosHome: React.FC = () => {
                                         {/* Action Bar */}
                                         <div className="p-3 border-t border-slate-200 bg-slate-50 flex justify-between items-center">
                                             <div className="text-xs text-slate-500 flex gap-2">
-                                                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Valid YAML</span>
-                                                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500"></span> UTF-8</span>
+                                                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> {t('plugins.nacos.demo.editor.status_valid')}</span>
+                                                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-blue-500"></span> {t('plugins.nacos.demo.editor.status_utf8')}</span>
                                             </div>
                                             <div className="flex gap-2">
-                                                <button className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-200 rounded border border-slate-300">Reset</button>
+                                                <button className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-200 rounded border border-slate-300">{t('plugins.nacos.demo.editor.button_reset')}</button>
                                                 <button className="px-3 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded shadow-sm flex items-center gap-1">
                                                     <Save className="w-3 h-3"/>
-                                                    Publish Config
+                                                    {t('plugins.nacos.demo.editor.button_publish')}
                                                 </button>
                                             </div>
                                         </div>
@@ -240,23 +240,23 @@ export const NacosHome: React.FC = () => {
                                     <div className="flex-1 flex flex-col">
                                         <div className="p-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
                                             <div className="flex gap-4 text-sm font-medium text-slate-600">
-                                                <span className="text-blue-600 border-b-2 border-blue-600 pb-1">Instances (12)</span>
-                                                <span>Subscribers (4)</span>
+                                                <span className="text-blue-600 border-b-2 border-blue-600 pb-1">{t('plugins.nacos.demo.service.instances')}</span>
+                                                <span>{t('plugins.nacos.demo.service.subscribers')}</span>
                                             </div>
                                             <div className="relative">
                                                 <Search className="w-3.5 h-3.5 absolute left-2 top-1.5 text-slate-400"/>
-                                                <input type="text" placeholder="Filter IPs..." className="pl-7 pr-3 py-1 text-xs border rounded bg-white w-48"/>
+                                                <input type="text" placeholder={t('plugins.nacos.demo.service.filter_placeholder')} className="pl-7 pr-3 py-1 text-xs border rounded bg-white w-48"/>
                                             </div>
                                         </div>
                                         <div className="p-0">
                                             <table className="w-full text-xs text-left">
                                                 <thead className="bg-slate-50 text-slate-500 font-medium">
                                                 <tr>
-                                                    <th className="px-4 py-2 border-b">IP Address</th>
-                                                    <th className="px-4 py-2 border-b">Port</th>
-                                                    <th className="px-4 py-2 border-b">Weight</th>
-                                                    <th className="px-4 py-2 border-b">Healthy</th>
-                                                    <th className="px-4 py-2 border-b">Metadata</th>
+                                                    <th className="px-4 py-2 border-b">{t('plugins.nacos.demo.service.table_header.ip')}</th>
+                                                    <th className="px-4 py-2 border-b">{t('plugins.nacos.demo.service.table_header.port')}</th>
+                                                    <th className="px-4 py-2 border-b">{t('plugins.nacos.demo.service.table_header.weight')}</th>
+                                                    <th className="px-4 py-2 border-b">{t('plugins.nacos.demo.service.table_header.healthy')}</th>
+                                                    <th className="px-4 py-2 border-b">{t('plugins.nacos.demo.service.table_header.metadata')}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -290,7 +290,7 @@ export const NacosHome: React.FC = () => {
 
                 {/* 3. Deep Dive Features (Bento Grid) */}
                 <div className="mb-24">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">全方位的治理能力</h2>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-12 text-center">{t('plugins.nacos.features.title')}</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-6 auto-rows-[minmax(180px,auto)]">
 
@@ -303,17 +303,14 @@ export const NacosHome: React.FC = () => {
                                 <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center mb-4 text-blue-600">
                                     <Monitor className="w-6 h-6"/>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">本地生命周期托管</h3>
-                                <p className="text-slate-500 mb-6 max-w-md">
-                                    内置 Nacos Server
-                                    下载器与启动器。支持 <span className="font-mono bg-slate-100 px-1 rounded text-slate-700">Standalone</span> 与 <span className="font-mono bg-slate-100 px-1 rounded text-slate-700">Cluster</span> 模式切换。不再需要手动配置环境变量，开箱即用。
-                                </p>
+                                <h3 className="text-xl font-bold text-slate-900 mb-2">{t('plugins.nacos.features.local_lifecycle.title')}</h3>
+                                <p className="text-slate-500 mb-6 max-w-md" dangerouslySetInnerHTML={{__html: t('plugins.nacos.features.local_lifecycle.desc')}}/>
                                 <div className="flex items-center gap-3 text-xs font-mono bg-slate-50 p-2 rounded-lg w-fit border border-slate-100">
-                                    <span className="text-emerald-600">● Running</span>
+                                    <span className="text-emerald-600">{t('plugins.nacos.features.local_lifecycle.status_running')}</span>
                                     <span className="text-slate-400">|</span>
-                                    <span>Port: 8848</span>
+                                    <span>{t('plugins.nacos.features.local_lifecycle.port')}</span>
                                     <span className="text-slate-400">|</span>
-                                    <span>Ver: 2.3.2</span>
+                                    <span>{t('plugins.nacos.features.local_lifecycle.version')}</span>
                                 </div>
                             </div>
                         </div>
@@ -323,16 +320,31 @@ export const NacosHome: React.FC = () => {
                             <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center mb-4 text-indigo-600">
                                 <History className="w-6 h-6"/>
                             </div>
-                            <h3 className="text-xl font-bold text-slate-900 mb-2">配置版本时光机</h3>
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">{t('plugins.nacos.features.version_control.title')}</h3>
                             <p className="text-slate-500 mb-6 text-sm">
-                                所有的配置修改都会自动记录版本。支持查看历史版本差异，一键回滚到任意历史时刻。
+                                {t('plugins.nacos.features.version_control.desc')}
                             </p>
                             <div className="space-y-3 relative">
                                 <div className="absolute left-[7px] top-2 bottom-2 w-px bg-slate-200"></div>
                                 {[
-                                    {ver: 'v3', msg: 'Update timeout', time: 'Just now', active: true},
-                                    {ver: 'v2', msg: 'Add redis config', time: '2h ago', active: false},
-                                    {ver: 'v1', msg: 'Initial commit', time: '1d ago', active: false},
+                                    {
+                                        ver: 'v3',
+                                        msg: t('plugins.nacos.features.version_control.history.v3.msg'),
+                                        time: t('plugins.nacos.features.version_control.history.v3.time'),
+                                        active: true
+                                    },
+                                    {
+                                        ver: 'v2',
+                                        msg: t('plugins.nacos.features.version_control.history.v2.msg'),
+                                        time: t('plugins.nacos.features.version_control.history.v2.time'),
+                                        active: false
+                                    },
+                                    {
+                                        ver: 'v1',
+                                        msg: t('plugins.nacos.features.version_control.history.v1.msg'),
+                                        time: t('plugins.nacos.features.version_control.history.v1.time'),
+                                        active: false
+                                    },
                                 ].map((item) => (
                                     <div key={item.ver} className="flex items-start gap-3 relative z-10">
                                         <div className={`w-3.5 h-3.5 rounded-full border-2 ${item.active ? 'bg-indigo-600 border-indigo-600' : 'bg-white border-slate-300'} mt-1`}></div>
@@ -350,9 +362,9 @@ export const NacosHome: React.FC = () => {
                             <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center mb-3 text-emerald-600">
                                 <Code className="w-5 h-5"/>
                             </div>
-                            <h3 className="text-lg font-bold text-slate-900 mb-2">智能编辑器</h3>
+                            <h3 className="text-lg font-bold text-slate-900 mb-2">{t('plugins.nacos.features.intelligent_editor.title')}</h3>
                             <p className="text-slate-500 text-sm">
-                                完整的 YAML/Properties 语法高亮、校验与自动补全。
+                                {t('plugins.nacos.features.intelligent_editor.desc')}
                             </p>
                         </div>
 
@@ -361,9 +373,9 @@ export const NacosHome: React.FC = () => {
                             <div className="w-8 h-8 bg-amber-50 rounded-lg flex items-center justify-center mb-3 text-amber-600">
                                 <Shield className="w-5 h-5"/>
                             </div>
-                            <h3 className="text-lg font-bold text-slate-900 mb-2">安全鉴权</h3>
+                            <h3 className="text-lg font-bold text-slate-900 mb-2">{t('plugins.nacos.features.security.title')}</h3>
                             <p className="text-slate-500 text-sm">
-                                完美支持 Nacos 鉴权机制。AccessKey 安全加密存储。
+                                {t('plugins.nacos.features.security.desc')}
                             </p>
                         </div>
 
@@ -379,28 +391,28 @@ export const NacosHome: React.FC = () => {
                     <div className="relative z-10 px-8 py-16 md:py-20 text-center">
                         <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium mb-6 border border-white/20">
                             <Star className="w-3 h-3 fill-current text-yellow-300"/>
-                            <span>4.9/5.0 Rating on Marketplace</span>
+                            <span>{t('plugins.nacos.cta.rating')}</span>
                         </div>
                         <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">
-                            Ready to modernize your microservices workflow?
+                            {t('plugins.nacos.cta.title')}
                         </h2>
                         <p className="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">
-                            Join thousands of developers who manage their Nacos configuration directly from IntelliJ IDEA.
+                            {t('plugins.nacos.cta.description')}
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <button className="px-8 py-4 bg-white text-blue-700 rounded-xl font-bold transition-all hover:bg-blue-50 shadow-lg hover:shadow-xl flex items-center gap-2">
                                 <Download className="w-5 h-5"/>
-                                Install Plugin
+                                {t('plugins.nacos.cta.install_button')}
                             </button>
                             <button className="px-8 py-4 bg-blue-800/50 hover:bg-blue-800 text-white rounded-xl font-bold transition-all border border-blue-400/30 flex items-center gap-2 backdrop-blur-sm">
                                 <Terminal className="w-5 h-5"/>
-                                Read Docs
+                                {t('plugins.nacos.cta.docs_button')}
                             </button>
                         </div>
 
                         <div className="mt-8 text-sm text-blue-200/60 font-mono">
-                            Latest Version: v2024.1.2 • Compatible with IDEA 2022.3+
+                            {t('plugins.nacos.cta.version_info')}
                         </div>
                     </div>
                 </div>

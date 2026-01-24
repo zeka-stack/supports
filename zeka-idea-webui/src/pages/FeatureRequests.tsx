@@ -5,8 +5,10 @@ import {RequestDetailModal} from '../components/RequestDetailModal';
 import type {Request} from '../data';
 import {api, type AuthStatus, type Project} from '../lib/api';
 import {CheckCircle2, ChevronDown, Circle, Clock, Plus, Search} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const FeatureRequests = () => {
+    const {t} = useTranslation();
     const [requests, setRequests] = useState<Request[]>([]);
     const [projects, setProjects] = useState<Project[]>([]);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -185,9 +187,9 @@ export const FeatureRequests = () => {
                 {/* Page Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                     <div className="flex-1">
-                        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-3">Feature Requests</h1>
+                        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-3">{t('featureRequests.title')}</h1>
                         <p className="text-[16px] text-gray-500 max-w-2xl">
-                            Vote on existing requests or submit your own ideas to help us improve.
+                            {t('featureRequests.description')}
                         </p>
                     </div>
                     <div className="flex gap-3 flex-col sm:flex-row mt-4 md:mt-0">
@@ -199,7 +201,7 @@ export const FeatureRequests = () => {
                                     onClick={() => setIsProjectDropdownOpen(!isProjectDropdownOpen)}
                                 >
                                     <div className="w-full px-3 py-2.5 pr-9 border border-gray-200 rounded-lg bg-white flex items-center text-sm transition-colors hover:border-indigo-300 shadow-sm">
-                                        <span className="text-gray-700 font-medium">{selectedProject?.name || 'Select project'}</span>
+                                        <span className="text-gray-700 font-medium">{selectedProject?.name || t('featureRequests.selectProject')}</span>
                                     </div>
                                     <ChevronDown className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none transition-transform duration-200 ${isProjectDropdownOpen ? 'rotate-180' : ''}`}/>
                                 </div>
@@ -226,7 +228,7 @@ export const FeatureRequests = () => {
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"/>
                                 <input
                                     type="text"
-                                    placeholder="Search..."
+                                    placeholder={t('featureRequests.searchPlaceholder')}
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm"
@@ -239,7 +241,7 @@ export const FeatureRequests = () => {
                             className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-indigo-700 transition-all shadow-sm active:scale-95 whitespace-nowrap"
                         >
                             <Plus className="w-4 h-4"/>
-                            <span>Submit Idea</span>
+                            <span>{t('featureRequests.submitIdea')}</span>
                         </button>
                     </div>
                 </div>
@@ -247,7 +249,7 @@ export const FeatureRequests = () => {
                 {/* Kanban Board */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
                     <Column
-                        title="新需求"
+                        title={t('featureRequests.newRequests')}
                         icon={Circle}
                         items={newRequests}
                         countColor="text-gray-500"
@@ -258,9 +260,10 @@ export const FeatureRequests = () => {
                         onDrop={(e) => handleDrop(e, 'Open')}
                         onDragEnd={handleDragEnd}
                         targetStatuses={['Open', 'Under Review', 'Planned']}
+                        t={t}
                     />
                     <Column
-                        title="处理中"
+                        title={t('featureRequests.inProgress')}
                         icon={Clock}
                         items={inProgressRequests}
                         countColor="text-amber-500"
@@ -271,9 +274,10 @@ export const FeatureRequests = () => {
                         onDrop={(e) => handleDrop(e, 'In Progress')}
                         onDragEnd={handleDragEnd}
                         targetStatus="In Progress"
+                        t={t}
                     />
                     <Column
-                        title="已完成"
+                        title={t('featureRequests.completed')}
                         icon={CheckCircle2}
                         items={completedRequests}
                         countColor="text-emerald-500"
@@ -284,12 +288,13 @@ export const FeatureRequests = () => {
                         onDrop={(e) => handleDrop(e, 'Complete')}
                         onDragEnd={handleDragEnd}
                         targetStatus="Complete"
+                        t={t}
                     />
                 </div>
 
                 {/* Footer Text */}
                 <div className="mt-16 text-center text-sm text-gray-400">
-                    Powered by <a href="#" className="font-medium text-gray-600 hover:underline">dong4j</a>
+                    {t('featureRequests.poweredBy')} <a href="#" className="font-medium text-gray-600 hover:underline">dong4j</a>
                 </div>
             </main>
 
@@ -326,6 +331,7 @@ interface ColumnProps {
     onDragEnd?: () => void;
     targetStatus?: string;
     targetStatuses?: string[];
+    t: (key: string) => string;
 }
 
 const Column = ({
@@ -339,6 +345,7 @@ const Column = ({
                     onDragOver,
                     onDrop,
                     onDragEnd,
+                    t,
                 }: ColumnProps) => (
     <div className="flex flex-col h-full">
         <div className="flex items-center gap-2 mb-4 px-1">
@@ -369,7 +376,7 @@ const Column = ({
             ))}
             {items.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-32 text-gray-400 text-sm italic">
-                    No requests
+                    {t('featureRequests.noRequests')}
                 </div>
             )}
         </div>

@@ -16,8 +16,10 @@ import {
     Sparkles,
     Terminal
 } from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const ChangelogHome: React.FC = () => {
+    const {t} = useTranslation();
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const scrollToNext = () => {
@@ -37,35 +39,36 @@ export const ChangelogHome: React.FC = () => {
                     <div className="max-w-xl mx-auto md:mx-0">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#166534] text-white text-xs font-bold uppercase tracking-wider mb-8 animate-fade-in-up">
                             <GitCommit className="w-4 h-4"/>
-                            IntelliAI Changelog
+                            {t('plugins.changelog.badge')}
                         </div>
 
                         <h1 className="text-5xl lg:text-7xl font-black text-[#14532D] mb-8 leading-tight animate-fade-in-up delay-100">
-                            Turn Git Commits
-                            into <span className="text-[#16A34A] inline-block hover:scale-105 transition-transform cursor-default">Stories</span>.
+                            {t('plugins.changelog.heroTitle1')}
+                            <br/>
+                            <span className="text-[#16A34A] inline-block hover:scale-105 transition-transform cursor-default">
+                                {t('plugins.changelog.heroTitle2')} {t('plugins.changelog.heroHighlight')}
+                            </span>.
                         </h1>
 
                         <p className="text-xl text-[#15803D] mb-12 font-medium leading-relaxed animate-fade-in-up delay-200">
-                            No more copy-pasting from git log.
-                            <br/>
-                            Automatically generate structured changelogs, daily reports, and smart commit messages using AI.
+                            {t('plugins.changelog.heroDescription')}
                         </p>
 
                         <div className="space-y-8 animate-fade-in-up delay-300">
                             <FeatureItem
                                 icon={Calendar}
-                                title="Daily & Weekly Reports"
-                                desc="Summarize your work for stand-ups instantly."
+                                title={t('plugins.changelog.feature1Title')}
+                                desc={t('plugins.changelog.feature1Desc')}
                             />
                             <FeatureItem
                                 icon={List}
-                                title="Semantic Changelogs"
-                                desc="Group commits by feature, fix, or refactor automatically."
+                                title={t('plugins.changelog.feature2Title')}
+                                desc={t('plugins.changelog.feature2Desc')}
                             />
                             <FeatureItem
                                 icon={FileDiff}
-                                title="Smart Commit Messages"
-                                desc="Let AI write your commit messages based on staged diffs."
+                                title={t('plugins.changelog.feature3Title')}
+                                desc={t('plugins.changelog.feature3Desc')}
                             />
                         </div>
                     </div>
@@ -92,7 +95,7 @@ export const ChangelogHome: React.FC = () => {
                             <div className="flex gap-8 group">
                                 <div className="w-16 flex-shrink-0 flex flex-col items-center">
                                     <div className="w-4 h-4 rounded-full bg-green-300 border-4 border-white shadow-sm mb-2 group-hover:bg-green-500 transition-colors"></div>
-                                    <span className="text-xs text-green-600 font-mono">GIT LOG</span>
+                                    <span className="text-xs text-green-600 font-mono">{t('plugins.changelog.gitLogLabel')}</span>
                                 </div>
                                 <div className="flex-1 bg-white/80 backdrop-blur-sm p-5 rounded-lg border border-green-100 shadow-sm transition-all hover:shadow-md hover:border-green-300">
                                     <div className="font-mono text-xs text-gray-500 space-y-2">
@@ -117,38 +120,40 @@ export const ChangelogHome: React.FC = () => {
                             <div className="flex gap-8">
                                 <div className="w-16 flex-shrink-0 flex flex-col items-center">
                                     <div className="w-4 h-4 rounded-full bg-green-600 border-4 border-white shadow-sm mb-2"></div>
-                                    <span className="text-xs text-green-800 font-bold font-mono">REPORT</span>
+                                    <span className="text-xs text-green-800 font-bold font-mono">{t('plugins.changelog.reportLabel')}</span>
                                 </div>
                                 <div className="flex-1 bg-white p-6 rounded-xl border border-green-200 shadow-xl transform transition-all hover:-translate-y-1 hover:shadow-2xl">
                                     <div className="flex items-center justify-between mb-4 border-b border-green-50 pb-2">
                                         <h3 className="font-bold text-gray-800 flex items-center gap-2">
                                             <Calendar className="w-4 h-4 text-green-600"/>
-                                            Daily Report
+                                            {t('plugins.changelog.reportType')}
                                         </h3>
-                                        <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded">Markdown</span>
+                                        <span className="text-xs text-gray-400 bg-gray-50 px-2 py-1 rounded">{t('plugins.changelog.reportFormat')}</span>
                                     </div>
                                     <div className="space-y-4 text-sm">
                                         <div>
                                             <h4 className="font-semibold text-green-700 flex items-center gap-2 mb-1">
-                                                <CheckSquare className="w-3.5 h-3.5"/> Completed Features
-                                            </h4>
-                                            <p className="text-gray-600 pl-6 leading-relaxed">• Implemented
-                                                system-wide <span className="font-semibold text-gray-800">Dark Mode</span> support.</p>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold text-green-700 flex items-center gap-2 mb-1">
-                                                <CheckSquare className="w-3.5 h-3.5"/> Bug Fixes
+                                                <CheckSquare className="w-3.5 h-3.5"/> {t('plugins.changelog.completedFeatures')}
                                             </h4>
                                             <p className="text-gray-600 pl-6 leading-relaxed">•
-                                                Resolved <code className="bg-red-50 text-red-600 px-1 rounded text-xs">NullPointerException</code> in
-                                                UserService.</p>
+                                                {t('plugins.changelog.reportDesc1')}
+                                            </p>
                                         </div>
                                         <div>
                                             <h4 className="font-semibold text-green-700 flex items-center gap-2 mb-1">
-                                                <CheckSquare className="w-3.5 h-3.5"/> Optimization
+                                                <CheckSquare className="w-3.5 h-3.5"/> {t('plugins.changelog.bugFixes')}
                                             </h4>
-                                            <p className="text-gray-600 pl-6 leading-relaxed">• Optimized DB queries
-                                                (<span className="text-green-600 font-bold">+30% speedup</span>).</p>
+                                            <p className="text-gray-600 pl-6 leading-relaxed">•
+                                                {t('plugins.changelog.reportDesc2')}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-green-700 flex items-center gap-2 mb-1">
+                                                <CheckSquare className="w-3.5 h-3.5"/> {t('plugins.changelog.optimization')}
+                                            </h4>
+                                            <p className="text-gray-600 pl-6 leading-relaxed">•
+                                                {t('plugins.changelog.reportDesc3')}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +212,7 @@ export const ChangelogHome: React.FC = () => {
                         <div className="absolute -right-6 -bottom-6 bg-white p-4 rounded-lg shadow-xl border border-green-100 animate-bounce hidden md:block">
                             <div className="flex items-center gap-2 text-green-700 font-bold">
                                 <Check className="w-5 h-5"/>
-                                <span>Conventional Commits Ready</span>
+                                <span>{t('plugins.changelog.conventionalBadge')}</span>
                             </div>
                         </div>
                     </div>
@@ -215,19 +220,18 @@ export const ChangelogHome: React.FC = () => {
                     {/* Right: Content */}
                     <div className="order-1 md:order-2 space-y-8">
                         <h2 className="text-4xl lg:text-5xl font-bold text-[#064E3B]">
-                            Write Commits <br/>
-                            <span className="text-[#10B981]">Without Writing.</span>
+                            {t('plugins.changelog.section2Title')} <br/>
+                            <span className="text-[#10B981]">{t('plugins.changelog.section2Highlight')}</span>
                         </h2>
                         <p className="text-lg text-[#065F46] leading-relaxed">
-                            Stop staring at empty commit boxes. The AI analyzes your staged changes and generates concise, descriptive
-                            messages following <strong>Conventional Commits</strong> standards.
+                            {t('plugins.changelog.section2Desc')}
                         </p>
                         <ul className="space-y-4">
                             {[
-                                'Analyses diffs line-by-line',
-                                'Detects breaking changes automatically',
-                                'Supports custom commit templates',
-                                'Multi-language support'
+                                t('plugins.changelog.feature2_1'),
+                                t('plugins.changelog.feature2_2'),
+                                t('plugins.changelog.feature2_3'),
+                                t('plugins.changelog.feature2_4')
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-[#047857]">
                                     <div className="w-6 h-6 rounded-full bg-green-200 flex items-center justify-center flex-shrink-0">
@@ -252,10 +256,9 @@ export const ChangelogHome: React.FC = () => {
                     <div className="inline-flex items-center justify-center p-3 bg-green-100 rounded-full mb-6 text-green-600">
                         <LayoutTemplate className="w-8 h-8"/>
                     </div>
-                    <h2 className="text-4xl lg:text-5xl font-bold text-[#14532D] mb-6">Your Format, Your Rules.</h2>
+                    <h2 className="text-4xl lg:text-5xl font-bold text-[#14532D] mb-6">{t('plugins.changelog.section3Title')}</h2>
                     <p className="text-xl text-[#15803D]">
-                        Whether you need a simple bulleted list for Slack or a complex Markdown table for Jira,
-                        our template engine has you covered.
+                        {t('plugins.changelog.section3Desc')}
                     </p>
                 </div>
 
@@ -265,9 +268,8 @@ export const ChangelogHome: React.FC = () => {
                         <div className="h-10 w-10 bg-[#DCFCE7] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#22c55e] transition-colors">
                             <MessageSquare className="w-5 h-5 text-[#15803D] group-hover:text-white"/>
                         </div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">For Slack / Teams</h3>
-                        <p className="text-gray-500 text-sm mb-4">Concise bullet points focusing on "What changed". Perfect for daily
-                            standups.</p>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{t('plugins.changelog.template1Title')}</h3>
+                        <p className="text-gray-500 text-sm mb-4">{t('plugins.changelog.template1Desc')}</p>
                         <div className="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600 border border-gray-100">
                             *Today's Updates*<br/>
                             • Fixed login bug<br/>
@@ -277,13 +279,12 @@ export const ChangelogHome: React.FC = () => {
 
                     {/* Card 2 */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-100 hover:border-green-300 transition-all hover:-translate-y-2 group relative">
-                        <div className="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <div className="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">{t('plugins.changelog.template2Badge')}</div>
                         <div className="h-10 w-10 bg-[#DCFCE7] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#22c55e] transition-colors">
                             <FileText className="w-5 h-5 text-[#15803D] group-hover:text-white"/>
                         </div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">For Release Notes</h3>
-                        <p className="text-gray-500 text-sm mb-4">Categorized by type (Features, Fixes) with links to issues. Professional
-                            and clean.</p>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{t('plugins.changelog.template2Title')}</h3>
+                        <p className="text-gray-500 text-sm mb-4">{t('plugins.changelog.template2Desc')}</p>
                         <div className="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600 border border-gray-100">
                             ## 🚀 Features<br/>
                             - Auth: OAuth2 support<br/><br/>
@@ -297,9 +298,8 @@ export const ChangelogHome: React.FC = () => {
                         <div className="h-10 w-10 bg-[#DCFCE7] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#22c55e] transition-colors">
                             <Code className="w-5 h-5 text-[#15803D] group-hover:text-white"/>
                         </div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Custom Freemarker</h3>
-                        <p className="text-gray-500 text-sm mb-4">Full control with Freemarker templates. Access commit hash, author, date,
-                            and more.</p>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{t('plugins.changelog.template3Title')}</h3>
+                        <p className="text-gray-500 text-sm mb-4">{t('plugins.changelog.template3Desc')}</p>
                         <div className="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600 border border-gray-100">
                             {'{#commits}'}<br/>
                             [{'{shortHash}'}] {'{msg}'}<br/>
@@ -320,35 +320,35 @@ export const ChangelogHome: React.FC = () => {
 
                 <div className="max-w-4xl text-center px-6 relative z-10">
                     <h2 className="text-5xl lg:text-7xl font-black mb-8 tracking-tight">
-                        Start saving time today.
+                        {t('plugins.changelog.ctaTitle')}
                     </h2>
                     <p className="text-xl lg:text-2xl text-green-100 mb-12 max-w-2xl mx-auto">
-                        Join thousands of developers who have stopped writing manual reports and started coding more.
+                        {t('plugins.changelog.ctaDesc')}
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <button className="px-10 py-5 bg-white text-[#14532D] rounded-xl font-bold text-lg hover:bg-green-50 transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-3">
                             <Download className="w-6 h-6"/>
-                            Install for IntelliJ IDEA
+                            {t('plugins.changelog.installButton')}
                         </button>
                         <button className="px-10 py-5 bg-[#166534] text-white border border-[#16A34A] rounded-xl font-bold text-lg hover:bg-[#15803D] transition-all flex items-center justify-center gap-3">
                             <Terminal className="w-6 h-6"/>
-                            Documentation
+                            {t('plugins.changelog.docsButton')}
                         </button>
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-green-800 flex justify-center gap-12 opacity-60">
                         <div className="text-center">
                             <div className="text-3xl font-bold mb-1">50k+</div>
-                            <div className="text-xs uppercase tracking-wider">Downloads</div>
+                            <div className="text-xs uppercase tracking-wider">{t('plugins.changelog.stat1Label')}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl font-bold mb-1">4.8</div>
-                            <div className="text-xs uppercase tracking-wider">Rating</div>
+                            <div className="text-xs uppercase tracking-wider">{t('plugins.changelog.stat2Label')}</div>
                         </div>
                         <div className="text-center">
                             <div className="text-3xl font-bold mb-1">100%</div>
-                            <div className="text-xs uppercase tracking-wider">Open Source</div>
+                            <div className="text-xs uppercase tracking-wider">{t('plugins.changelog.stat3Label')}</div>
                         </div>
                     </div>
                 </div>
