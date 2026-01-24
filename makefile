@@ -19,3 +19,8 @@ install:
 	cd ../../blen-kernel && ./mvnw clean install -Ppackage-source -Dcheckstyle.skip=true -Dpmd.skip=true -Dmaven.test.skip=true -e && \
 	cd ../cubo-starter && ./mvnw clean install -Ppackage-source -Dcheckstyle.skip=true -Dpmd.skip=true -Dmaven.test.skip=true -e && \
 	cd ../cubo-starter-examples && ./mvnw clean install -Ppackage-source -Dcheckstyle.skip=true -Dpmd.skip=true -Dmaven.test.skip=true -e
+
+
+deploy-webui-and-api:
+	cd zeka-idea-webui && ./deploy.sh \
+	&& cd ../zeka-stack-api && ./deploy.sh

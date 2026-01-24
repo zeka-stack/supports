@@ -60,8 +60,11 @@
         <include refid="all_field"/>
         from event as a
         <where>
-            and a.deleted = 0
             <include refid="date_query"/>
+            <if test="query.deviceId != null and query.deviceId != ''">
+                and a.device_id = #{query.deviceId}
+            </if>
         </where>
+        order by create_time desc
     </select>
 </mapper>

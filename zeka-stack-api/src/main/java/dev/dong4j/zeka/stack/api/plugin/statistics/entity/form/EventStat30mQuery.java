@@ -3,6 +3,7 @@ package dev.dong4j.zeka.stack.api.plugin.statistics.entity.form;
 import java.io.Serial;
 
 import dev.dong4j.zeka.kernel.common.base.BaseQuery;
+import dev.dong4j.zeka.stack.api.plugin.statistics.enums.EventType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,7 +52,7 @@ public class EventStat30mQuery extends BaseQuery<Long> {
 
     /** 事件类型 */
     @Schema(description = "事件类型")
-    private String eventType;
+    private EventType eventType;
 
     /** AI 服务商, 用于标识事件所关联的 AI 服务提供方 */
     @Schema(description = "AI 服务商")

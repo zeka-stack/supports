@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.util.Date;
 
 import dev.dong4j.zeka.kernel.common.base.BaseDTO;
+import dev.dong4j.zeka.stack.api.plugin.statistics.enums.EventType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -52,7 +53,7 @@ public class EventStat30mDTO extends BaseDTO<Long> {
     private String pluginId;
     /** 事件类型 */
     @Schema(description = "事件类型")
-    private String eventType;
+    private EventType eventType;
     /** AI 服务商 */
     @Schema(description = "AI 服务商")
     private String provider;

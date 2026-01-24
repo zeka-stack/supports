@@ -3,7 +3,8 @@
     "allow": [
       "Bash(tree:*)",
       "Bash(wc:*)",
-      "mcp__jetbrains__list_directory_tree"
+      "mcp__jetbrains__list_directory_tree",
+      "Bash(ls:*)"
     ]
   }
 }

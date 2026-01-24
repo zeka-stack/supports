@@ -48,7 +48,49 @@ export interface FeedbackComment {
     createTime: string;
 }
 
+// 对应后端 EventRecord
+export interface EventRecord {
+    id?: number;
+    deviceId: string;
+    clientTimestamp: number;
+    projectName: string;
+    pluginId: string;
+    eventType: string | { value: string; desc: string }; // Modified to handle object
+    provider: string;
+    model: string;
+    userAction: string;
+    tokenCount: number;
+    inputToken: number;
+    outputToken: number;
+    latencyMs: number;
+    resultStatus: string;
+    receivedTime?: number;
+}
+
+// 通用分页响应结构
+export interface PageResult<T> {
+    records: T[];
+    total: number;
+    size: number;
+    current: number;
+    pages: number;
+}
+
 export const api = {
+    getRecentEvents: async (deviceId: string, current: number = 1, size: number = 10): Promise<PageResult<EventRecord>> => {
+        const res = await fetch(`${BASE_URL}/plugin/events/page?deviceId=${encodeURIComponent(deviceId)}&page=${current}&size=${size}`);
+        if (!res.ok) throw new Error('Failed to fetch event page');
+        const json = await res.json();
+        const pageData = json?.data ?? json;
+        return {
+            records: Array.isArray(pageData.records) ? pageData.records : [],
+            total: pageData.total || 0,
+            size: pageData.size || size,
+            current: pageData.current || current,
+            pages: pageData.pages || 0
+        };
+    },
+
     getProjects: async (): Promise<Project[]> => {
         const res = await fetch(`${BASE_URL}/projects/list?status=1`);
         if (!res.ok) throw new Error('Failed to fetch projects');
@@ -139,9 +181,7 @@ export const api = {
             });
             if (!res.ok) return null;
             const json = await res.json();
-            // 后端返回的数据结构是 { data: { loggedIn, user } }
             const data = json?.data ?? json;
-            // 确保返回正确的结构
             if (data && typeof data === 'object' && 'loggedIn' in data) {
                 return data as AuthStatus;
             }

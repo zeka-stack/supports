@@ -4,6 +4,7 @@ import java.io.Serial;
 import java.util.Date;
 
 import dev.dong4j.zeka.kernel.common.base.BaseForm;
+import dev.dong4j.zeka.stack.api.plugin.statistics.enums.EventType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -59,8 +60,8 @@ public class EventStat30mForm extends BaseForm<Long> {
     private String pluginId;
     /** 事件类型 */
     @Schema(description = "事件类型")
-    @NotBlank(message = "[事件类型] 必填)")
-    private String eventType;
+    @NotNull(message = "[事件类型] 必填)")
+    private EventType eventType;
     /** AI 服务商 */
     @Schema(description = "AI 服务商")
     @NotBlank(message = "[AI 服务商] 必填)")

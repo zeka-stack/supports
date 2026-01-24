@@ -34,7 +34,6 @@ public class EventQuery extends BaseQuery<Long> {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /** todo: [自动生成的字段, 避免此实体没有字段导致启动失败的问题, 可删除] */
-    @Schema(description = "自动生成的字段, 需要删除!!!")
-    private String autoField;
+    @Schema(description = "设备 ID")
+    private String deviceId;
 }

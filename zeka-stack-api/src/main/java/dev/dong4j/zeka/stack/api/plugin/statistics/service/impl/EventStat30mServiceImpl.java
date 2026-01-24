@@ -174,8 +174,8 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
                 latencyMin = minLatency;
             }
 
-            addTo(countByEventType, safeKey(item.getEventType()), count);
-            addTo(tokenByEventType, safeKey(item.getEventType()), token);
+            addTo(countByEventType, item.getEventType().getDesc(), count);
+            addTo(tokenByEventType, item.getEventType().getDesc(), token);
             addTo(countByProvider, safeKey(item.getProvider()), count);
             addTo(countByUserAction, safeKey(item.getUserAction()), count);
             addTo(tokenByProject, safeKey(item.getProjectName()), token);
@@ -185,7 +185,7 @@ public class EventStat30mServiceImpl extends BaseServiceImpl<EventStat30mMapper,
             addTo(countByDay, day, count);
             addTo(tokenByDay, day, token);
             countByDayEventType.computeIfAbsent(day, k -> new HashMap<>());
-            addTo(countByDayEventType.get(day), safeKey(item.getEventType()), count);
+            addTo(countByDayEventType.get(day), item.getEventType().getDesc(), count);
         }
 
         long latencyAvg = totalCount > 0 ? Math.round((double) latencyTotal / totalCount) : 0;

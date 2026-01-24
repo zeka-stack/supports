@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.util.Date;
 
+import dev.dong4j.zeka.stack.api.plugin.statistics.enums.EventType;
 import dev.dong4j.zeka.starter.mybatis.base.BasePO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -79,7 +80,7 @@ public class Event extends BasePO<Long, Event> {
     private String pluginId;
     /** 事件类型 */
     @TableField("`event_type`")
-    private String eventType;
+    private EventType eventType;
     /** AI 服务商 */
     @TableField("`provider`")
     private String provider;

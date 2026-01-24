@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import dev.dong4j.zeka.kernel.common.api.BaseCodes;
+import dev.dong4j.zeka.kernel.common.util.EnumUtils;
 import dev.dong4j.zeka.stack.api.plugin.statistics.dao.EventMapper;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.converter.EventConverter;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.EventDTO;
@@ -15,6 +16,7 @@ import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventUploadForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventUploadItemForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.po.Event;
+import dev.dong4j.zeka.stack.api.plugin.statistics.enums.EventType;
 import dev.dong4j.zeka.stack.api.plugin.statistics.service.EventService;
 import dev.dong4j.zeka.starter.mybatis.service.impl.BaseServiceImpl;
 import lombok.AllArgsConstructor;
@@ -84,7 +86,9 @@ public class EventServiceImpl extends BaseServiceImpl<EventMapper, Event> implem
             event.setClientTimestamp(form.getClientTimestamp());
             event.setProjectName(nullToEmpty(item.getProjectName()));
             event.setPluginId(item.getPluginId());
-            event.setEventType(item.getEventType());
+            event.setEventType(EnumUtils.of(
+                EventType.class,
+                e -> e.getValue().equals(item.getEventType())).orElse(EventType.UNKNOWN));
             event.setProvider(nullToEmpty(item.getProvider()));
             event.setModel(nullToEmpty(item.getModel()));
             event.setTokenCount(item.getTokenCount());
