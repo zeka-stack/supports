@@ -128,29 +128,61 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
 
                             <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56 transition-all duration-200 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                                 <div className={`${s.dropdown} rounded-xl shadow-xl border overflow-hidden py-1`}>
-                                    <a href="#/plugins/engine" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Engine</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Core AI infrastructure</div>
+                                    <a href="#/plugins/engine" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors group flex items-start gap-3`}>
+                                        <img src="/icons/engine.svg" alt="Engine" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Engine</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Core AI infrastructure</div>
+                                        </div>
                                     </a>
-                                    <a href="#/plugins/javadoc" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Javadoc</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated documentation</div>
+                                    <a href="#/plugins/javadoc" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/javadoc.svg" alt="Javadoc" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Javadoc</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated documentation</div>
+                                        </div>
                                     </a>
-                                    <a href="#/plugins/changelog" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Changelog</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Smart git reporting</div>
+                                    <a href="#/plugins/changelog" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/changelog.svg" alt="Changelog" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Changelog</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Smart git reporting</div>
+                                        </div>
                                     </a>
-                                    <a href="#/plugins/terminal" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Terminal</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>AI Terminal Assistant</div>
+                                    <a href="#/plugins/terminal" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/terminal.svg" alt="Terminal" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Terminal</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>AI Terminal Assistant</div>
+                                        </div>
                                     </a>
-                                    <a href="#/plugins/tracer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Tracer</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Code Flow Analysis</div>
+                                    <a href="#/plugins/tracer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/tracer.svg" alt="Tracer" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Tracer</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Code Flow Analysis</div>
+                                        </div>
                                     </a>
-                                    <a href="#/plugins/repairer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group`}>
-                                        <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Repairer</div>
-                                        <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated Code Remediation</div>
+                                    <a href="#/plugins/repairer" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/repairer.svg" alt="Repairer" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Repairer</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Automated Code Remediation</div>
+                                        </div>
+                                    </a>
+                                    <a href="#/plugins/swagger" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/swagger.svg" alt="Swagger" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Swagger</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Instant Open API Spec.</div>
+                                        </div>
+                                    </a>
+                                    <a href="#/plugins/nacos" onClick={() => setIsProductsOpen(false)} className={`block px-4 py-3 ${s.dropdownItem} transition-colors border-t ${s.dropdownDivider} group flex items-start gap-3`}>
+                                        <img src="/icons/nacos.svg" alt="Nacos" className="w-5 h-5 mt-0.5 opacity-80 group-hover:opacity-100 transition-opacity"/>
+                                        <div>
+                                            <div className={`font-bold ${s.dropdownItemTitle} transition-colors`}>IntelliAI Nacos</div>
+                                            <div className={`text-xs ${s.dropdownItemDesc} mt-0.5`}>Microservices Governance</div>
+                                        </div>
                                     </a>
                                 </div>
                             </div>

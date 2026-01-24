@@ -6,6 +6,9 @@ const plugins = [
     {name: 'IntelliAI Javadoc', icon: '/icons/javadoc.svg'},
     {name: 'IntelliAI Changelog', icon: '/icons/changelog.svg'},
     {name: 'IntelliAI Tracer', icon: '/icons/tracer.svg'},
+    {name: 'IntelliAI Terminal', icon: '/icons/terminal.svg'},
+    {name: 'IntelliAI Repairer', icon: '/icons/repairer.svg'},
+    {name: 'IntelliAI Nacos', icon: '/icons/nacos.svg'},
     {name: 'IntelliAI Swagger', icon: '/icons/swagger.svg'},
 ];
 
@@ -324,7 +327,7 @@ export const Donate: React.FC = () => {
                                 </div>
 
                                 {isPluginDropdownOpen && (
-                                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto overflow-x-hidden">
+                                    <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                         {plugins.map((plugin) => (
                                             <div
                                                 key={plugin.name}

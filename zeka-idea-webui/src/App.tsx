@@ -11,6 +11,8 @@ import {ChangelogHome} from './pages/plugins/ChangelogHome';
 import {TerminalHome} from './pages/plugins/TerminalHome';
 import {TracerHome} from './pages/plugins/TracerHome';
 import {RepairerHome} from './pages/plugins/RepairerHome';
+import {SwaggerHome} from './pages/plugins/SwaggerHome';
+import {NacosHome} from './pages/plugins/NacosHome';
 import {Donate} from './pages/Donate';
 import {Changelog} from './pages/Changelog';
 import {Login} from './pages/Login';
@@ -60,6 +62,14 @@ function App() {
         Component = RepairerHome;
         footerVariant = 'dark';
         headerVariant = 'dark';
+    } else if (route === '#/plugins/swagger') {
+        Component = SwaggerHome;
+        footerVariant = 'dark';
+        headerVariant = 'dark';
+    } else if (route === '#/plugins/nacos') {
+        Component = NacosHome;
+        footerVariant = 'default';
+        headerVariant = 'default';
     } else {
         // Switch for other routes
         switch (route) {
