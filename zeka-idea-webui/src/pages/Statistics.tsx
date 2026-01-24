@@ -1,6 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ReactECharts from 'echarts-for-react';
-import {BarChart3, Calendar, ChevronLeft, ChevronRight, Clock, Code2, Cpu, Layers, TrendingUp, Zap} from 'lucide-react';
+import {
+    Activity,
+    BarChart3,
+    Calendar,
+    ChevronLeft,
+    ChevronRight,
+    Clock,
+    Code2,
+    Cpu,
+    FolderKanban,
+    Layers,
+    TrendingUp,
+    Zap
+} from 'lucide-react';
 import {api, type EventRecord} from '../lib/api';
 import {authStorage} from '../lib/auth';
 
@@ -98,6 +111,7 @@ const StatCard = ({icon: Icon, label, value, trend, trendUp}: {
 
 export const Statistics: React.FC = () => {
     const buildOverviewFromRecords = (records: any[]): EventStatOverviewDTO => {
+        // ... existing fallback logic ...
         const totalCount = records.length;
         const successCount = records.filter((r) => r.resultStatus === 'success').length;
         const failedCount = totalCount - successCount;
@@ -150,6 +164,10 @@ export const Statistics: React.FC = () => {
     const [pageSize] = useState(10);
     const [totalEvents, setTotalEvents] = useState(SAMPLE_DATA.records.length);
 
+    // Use ref to prevent double fetch in strict mode or rapid updates
+    const overviewFetched = useRef(false);
+
+    // Effect 1: Initialize Device ID (Once)
     useEffect(() => {
         const init = async () => {
             let id: string | null = null;
@@ -169,22 +187,26 @@ export const Statistics: React.FC = () => {
             if (!id && import.meta.env.DEV) {
                 id = "8a62de8a-1d21-45aa-862a-e069140545e3";
             }
-
             setDeviceId(id);
-
-            if (id) {
-                fetch(`/api/plugin/event-stat30/overview?deviceId=${encodeURIComponent(id)}`)
-                    .then(r => r.json())
-                    .then(json => {
-                        const data = json?.data ?? json;
-                        if (data && typeof data === 'object') setOverview(data);
-                    })
-                    .catch(e => console.error('Overview fetch failed', e));
-            }
         };
         init();
     }, []);
 
+    // Effect 2: Fetch Overview (Only when deviceId is set and NOT fetched yet)
+    useEffect(() => {
+        if (!deviceId || overviewFetched.current) return;
+
+        overviewFetched.current = true; // Mark as fetched
+        fetch(`/api/plugin/event-stat30/overview?deviceId=${encodeURIComponent(deviceId)}`)
+            .then(r => r.json())
+            .then(json => {
+                const data = json?.data ?? json;
+                if (data && typeof data === 'object') setOverview(data);
+            })
+            .catch(e => console.error('Overview fetch failed', e));
+    }, [deviceId]);
+
+    // Effect 3: Fetch Events (When deviceId is set OR page changes)
     useEffect(() => {
         if (!deviceId) return;
 
@@ -204,6 +226,7 @@ export const Statistics: React.FC = () => {
         fetchEvents();
     }, [deviceId, currentPage, pageSize]);
 
+    // Data for charts
     const chartTotalEvents = overview.totalCount;
     const successRate = chartTotalEvents ? Math.round((overview.successCount / chartTotalEvents) * 100) : 0;
     const totalTokens = overview.tokenTotal;
@@ -218,11 +241,22 @@ export const Statistics: React.FC = () => {
 
     const formatDateTime = (value: string | number) => {
         const date = new Date(value);
-        return Number.isNaN(date.getTime()) ? '-' : date.toLocaleString();
+        if (Number.isNaN(date.getTime())) return '-';
+
+        const Y = date.getFullYear();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = String(date.getHours()).padStart(2, '0');
+        const m = String(date.getMinutes()).padStart(2, '0');
+        const s = String(date.getSeconds()).padStart(2, '0');
+
+        return `${Y}-${M}-${D} ${h}:${m}:${s}`;
     };
 
     const totalPages = Math.ceil(totalEvents / pageSize);
 
+    // --- ECharts Options Generators ---
+    // ... (Charts options logic same as before) ...
     const getDailyTrendOption = () => ({
         tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},
         legend: {data: ['Token Consumption', 'Event Count']},
@@ -319,6 +353,7 @@ export const Statistics: React.FC = () => {
                     </p>
                 </div>
 
+                {/* 1. Key Metrics Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <StatCard icon={Code2} label="Total Events" value={`${chartTotalEvents}`} trend="12%" trendUp={true}/>
                     <StatCard icon={Zap} label="Success Rate" value={`${successRate}%`} trend={successRate >= 90 ? "Stable" : "Attention"} trendUp={successRate >= 90}/>
@@ -326,6 +361,7 @@ export const Statistics: React.FC = () => {
                     <StatCard icon={Calendar} label="Total Tokens" value={(totalTokens / 1000).toFixed(1) + 'k'}/>
                 </div>
 
+                {/* 2. Charts Section */}
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-indigo-600"/> Activity Trend
@@ -346,6 +382,20 @@ export const Statistics: React.FC = () => {
                     </div>
                 </div>
 
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <FolderKanban className="w-5 h-5 text-indigo-600"/> Project Token Usage</h3>
+                        <ReactECharts option={getBarOption(byProjectTokens, 'Tokens', '#8B5CF6')} style={{height: '300px'}}/>
+                    </div>
+                    <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Activity className="w-5 h-5 text-indigo-600"/> Entry Point Usage</h3>
+                        <ReactECharts option={getBarOption(byUserAction, 'Actions', '#6366F1')} style={{height: '300px'}}/>
+                    </div>
+                </div>
+
+                {/* 3. Recent Records Table */}
                 <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="font-bold text-gray-900 flex items-center gap-2">
