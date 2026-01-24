@@ -12,9 +12,10 @@ import {
     FolderKanban,
     Layers,
     TrendingUp,
+    Trophy,
     Zap
 } from 'lucide-react';
-import {api, type EventRecord} from '../lib/api';
+import {api, type EventRecord, type TokenRanking} from '../lib/api';
 import {authStorage} from '../lib/auth';
 
 const SAMPLE_DATA = {
@@ -172,6 +173,7 @@ export const Statistics: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize] = useState(10);
     const [totalEvents, setTotalEvents] = useState(SAMPLE_DATA.records.length);
+    const [tokenRanking, setTokenRanking] = useState<TokenRanking[]>([]);
 
     // Use ref to prevent double fetch in strict mode or rapid updates
     const overviewFetched = useRef(false);
@@ -234,6 +236,20 @@ export const Statistics: React.FC = () => {
 
         fetchEvents();
     }, [deviceId, currentPage, pageSize]);
+
+    // Effect 4: Fetch Token Ranking
+    useEffect(() => {
+        const fetchTokenRanking = async () => {
+            try {
+                const ranking = await api.getTokenRanking(5);
+                setTokenRanking(ranking);
+            } catch (e) {
+                console.error('Token ranking fetch failed', e);
+            }
+        };
+
+        fetchTokenRanking();
+    }, []);
 
     // Data for charts
     const chartTotalEvents = overview.totalCount;
@@ -426,6 +442,122 @@ export const Statistics: React.FC = () => {
         };
     };
 
+    // Generate bar race chart option for token ranking
+    const getBarRaceOption = () => {
+        // Ensure tokenRanking is an array
+        const rankingData = Array.isArray(tokenRanking) ? tokenRanking : [];
+        const sortedData = [...rankingData].sort((a, b) => b.tokenTotal - a.tokenTotal);
+
+        // Medal emojis for each rank
+        const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
+
+        // Red color palette - from dark red to light red based on rank
+        const barColors = [
+            ['#DC2626', '#EF4444'], // 1st - dark red to red
+            ['#EF4444', '#F87171'], // 2nd - red to light red
+            ['#F87171', '#FCA5A5'], // 3rd - light red to pale red
+            ['#FCA5A5', '#FECACA'], // 4th - pale red to lighter
+            ['#FECACA', '#FEE2E2']  // 5th - lighter to lightest
+        ];
+
+        // Names with medal emojis
+        const names = sortedData.map((item, idx) =>
+            `${medals[idx]} ${item.githubName || 'Unknown'}`
+        );
+        const values = sortedData.map(item => item.tokenTotal);
+
+        return {
+            title: {
+                text: 'Token Usage Ranking',
+                left: 'center',
+                textStyle: {fontSize: 18, fontWeight: 'bold', color: '#374151'}
+            },
+            grid: {left: '3%', right: '10%', bottom: '3%', top: '15%', containLabel: true},
+            xAxis: {
+                max: (value: any) => Math.max(value.max * 1.1, 1),
+                type: 'value',
+                axisLine: {show: true, lineStyle: {color: '#9CA3AF'}},
+                splitLine: {show: true, lineStyle: {color: '#E5E7EB', type: 'dashed'}},
+                axisLabel: {color: '#6B7280'}
+            },
+            yAxis: {
+                type: 'category',
+                inverse: true,
+                data: names,
+                axisLine: {show: false},
+                axisTick: {show: false},
+                axisLabel: {
+                    margin: 10,
+                    color: '#374151',
+                    fontSize: 16,
+                    fontWeight: 'bold'
+                }
+            },
+            series: [{
+                type: 'bar',
+                data: values.map((val, idx) => ({
+                    value: val,
+                    itemStyle: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 1,
+                            y2: 0,
+                            colorStops: [
+                                {offset: 0, color: barColors[idx][0]},
+                                {offset: 1, color: barColors[idx][1]}
+                            ]
+                        },
+                        borderRadius: [0, 6, 6, 0]
+                    }
+                })),
+                label: {
+                    show: true,
+                    position: 'right',
+                    valueAnimation: true,
+                    formatter: (params: any) => params.value.toLocaleString(),
+                    color: '#374151',
+                    fontSize: 13,
+                    fontWeight: '500'
+                },
+                barWidth: '55%',
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(220, 38, 38, 0.3)'
+                    }
+                }
+            }],
+            animationDuration: 3000,
+            animationDurationUpdate: 2000,
+            animationEasing: 'cubicOut',
+            animationEasingUpdate: 'cubicInOut',
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {type: 'shadow'},
+                formatter: (params: any) => {
+                    const param = params[0];
+                    const item = sortedData[param.dataIndex];
+                    const medal = medals[param.dataIndex];
+                    return `
+                        <div style="padding: 10px;">
+                            <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">${medal} ${item.githubName}</div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                <span style="color: #6B7280;">Rank:</span>
+                                <span style="font-weight: 600; color: #DC2626;">#${item.rank}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="color: #6B7280;">Tokens:</span>
+                                <span style="font-weight: 600; color: #374151;">${item.tokenTotal.toLocaleString()}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        };
+    };
+
     return (
         <div className="min-h-screen bg-[#F9FAFB] p-6 font-sans">
             <div className="max-w-7xl mx-auto">
@@ -502,6 +634,14 @@ export const Statistics: React.FC = () => {
                         </h3>
                         <ReactECharts option={getStackedLineOption(overview.countByDayResultStatus || {}, 'Status by Day')} style={{height: '300px'}}/>
                     </div>
+                </div>
+
+                {/* Token Usage Ranking Bar Race Chart */}
+                <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-8">
+                    <h3 className="font-bold text-gray-900 mb-6 flex items-center gap-2">
+                        <Trophy className="w-5 h-5 text-indigo-600"/> Top 5 Token Users
+                    </h3>
+                    <ReactECharts option={getBarRaceOption()} style={{height: '320px'}}/>
                 </div>
 
                 {/* 3. Recent Records Table */}

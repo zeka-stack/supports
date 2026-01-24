@@ -17,6 +17,7 @@ import java.util.List;
 import dev.dong4j.zeka.kernel.common.api.BaseCodes;
 import dev.dong4j.zeka.kernel.validation.group.UpdateGroup;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.EventDTO;
+import dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.TokenRankingDTO;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventQuery;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventUploadForm;
@@ -128,6 +129,20 @@ public class EventController extends ServletController {
     public void remove(@RequestBody List<Long> ids) {
         BaseCodes.DATA_ERROR.notEmpty(ids, "带删除的数据标识不能为空");
         this.eventService.removeByIds(ids);
+    }
+
+    /**
+     * 获取 Token 使用量排名
+     *
+     * @param limit 查询数量，默认 5
+     * @return Token 排名列表
+     * @since 1.0.0
+     */
+    @GetMapping("/token-ranking")
+    @Operation(summary = "Token 使用量排名")
+    @ApiOperationSupport(order = 7)
+    public List<TokenRankingDTO> getTokenRanking(@ParameterObject Integer limit) {
+        return this.eventService.getTokenRanking(limit != null && limit > 0 ? limit : 5);
     }
 
 }

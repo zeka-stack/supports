@@ -67,6 +67,14 @@ export interface EventRecord {
     receivedTime?: number;
 }
 
+// Token 排名数据
+export interface TokenRanking {
+    githubName: string;
+    deviceId: string;
+    tokenTotal: number;
+    rank: number;
+}
+
 // 通用分页响应结构
 export interface PageResult<T> {
     records: T[];
@@ -89,6 +97,15 @@ export const api = {
             current: pageData.current || current,
             pages: pageData.pages || 0
         };
+    },
+
+    getTokenRanking: async (limit: number = 5): Promise<TokenRanking[]> => {
+        const res = await fetch(`${BASE_URL}/plugin/events/token-ranking?limit=${limit}`);
+        if (!res.ok) throw new Error('Failed to fetch token ranking');
+        const json = await res.json();
+        // Handle both direct array and wrapped response
+        const data = json?.data ?? json;
+        return Array.isArray(data) ? data : [];
     },
 
     getProjects: async (): Promise<Project[]> => {

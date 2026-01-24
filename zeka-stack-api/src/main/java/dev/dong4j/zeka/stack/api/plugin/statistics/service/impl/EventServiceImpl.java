@@ -12,6 +12,7 @@ import dev.dong4j.zeka.kernel.common.util.EnumUtils;
 import dev.dong4j.zeka.stack.api.plugin.statistics.dao.EventMapper;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.converter.EventConverter;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.EventDTO;
+import dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.TokenRankingDTO;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventUploadForm;
 import dev.dong4j.zeka.stack.api.plugin.statistics.entity.form.EventUploadItemForm;
@@ -127,5 +128,17 @@ public class EventServiceImpl extends BaseServiceImpl<EventMapper, Event> implem
     public void edit(EventForm form) {
         final int updatedCount = this.baseMapper.updateById(EventConverter.INSTANCE.f2p(form));
         BaseCodes.OPTION_FAILURE.isTrue(updatedCount == 1);
+    }
+
+    /**
+     * 获取 Token 使用量排名
+     *
+     * @param limit 查询数量
+     * @return Token 排名列表
+     * @since 1.0.0
+     */
+    @Override
+    public List<TokenRankingDTO> getTokenRanking(int limit) {
+        return this.baseMapper.selectTokenRanking(limit);
     }
 }

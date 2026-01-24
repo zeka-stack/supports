@@ -67,4 +67,16 @@
         </where>
         order by create_time desc
     </select>
+
+    <!-- Token 使用量排名查询 -->
+    <select id="selectTokenRanking" resultType="dev.dong4j.zeka.stack.api.plugin.statistics.entity.dto.TokenRankingDTO">
+        select githubName, deviceId, tokenTotal, row_number() over (order by tokenTotal desc) as `rank`
+        from (select ifnull(ua.github_name, 'Unknown') as githubName, e.device_id as deviceId, sum(e.token_count) as tokenTotal
+              from event                      e
+                       left join user_account ua on e.device_id = ua.device_id
+              group by e.device_id,
+                       ua.github_name) t
+        order by tokenTotal desc
+        limit #{limit}
+    </select>
 </mapper>
