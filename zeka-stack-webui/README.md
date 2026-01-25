@@ -96,7 +96,7 @@ npm run lint
 ## 项目结构
 
 ```
-zeka-idea-webui/
+zeka-stack-webui/
 ├── src/
 │   ├── components/          # 通用组件
 │   │   ├── Header.tsx       # 顶部导航

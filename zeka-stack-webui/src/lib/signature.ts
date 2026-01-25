@@ -5,7 +5,7 @@
 
 // Web UI 的客户端 ID 和 Secret
 // 注意：在生产环境中，Secret 应该通过环境变量配置，而不是硬编码
-const CLIENT_ID = 'zeka-idea-webui';
+const CLIENT_ID = 'zeka-stack-webui';
 const SECRET = import.meta.env.VITE_FEEDBACK_SECRET || '';
 
 /**

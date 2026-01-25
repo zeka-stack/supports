@@ -20,7 +20,7 @@ serves as the API/Support layer, enabling plugins to submit feedback, query AI m
 This is part of the Zeka Stack monorepo architecture:
 
 - **Parent Directory**: `supports/` - contains supporting tools and APIs
-- **Sibling Projects**: `zeka-idea-webui/`, `icons/`, `scripts/`
+- **Sibling Projects**: `zeka-stack-webui/`, `icons/`, `scripts/`
 - **Related Modules**: `arco-meta`, `blen-kernel`, `cubo-starter`, `domi-suite` (managed via parent POM)
 
 The API integrates with GitHub Discussions/Issues as the backend storage for feedback, eliminating the need for a separate feedback
@@ -147,7 +147,7 @@ The feedback API implements HMAC-SHA256 request signing for plugin-to-API commun
 - `dev.dong4j.zeka.stack.idea.plugin.workflow` (Tracer plugin)
 - `dev.dong4j.zeka.stack.idea.plugin.changelog` (Changelog plugin)
 - `dev.dong4j.zeka.stack.idea.plugin.common.ai` (Engine plugin)
-- `zeka-idea-webui` (Web UI)
+- `zeka-stack-webui` (Web UI)
 
 ### Signature Algorithm
 

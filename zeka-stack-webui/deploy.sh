@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 
 # 服务器配置
 SERVER_ALIAS="aliyun"
-REMOTE_DIR="/var/www/zeka-idea-webui/dist"
+REMOTE_DIR="/var/www/zeka-stack-webui/dist"
 REMOTE_NGINX_DIR="/etc/nginx/conf.d"
 NGINX_CONF_LOCAL="zekastack.dong4j.site.conf"
 

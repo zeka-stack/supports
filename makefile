@@ -22,5 +22,5 @@ install:
 
 
 deploy-webui-and-api:
-	cd zeka-idea-webui && ./deploy.sh \
+	cd zeka-stack-webui && ./deploy.sh \
 	&& cd ../zeka-stack-api && ./deploy.sh

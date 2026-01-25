@@ -1,18 +1,6 @@
 package dev.dong4j.zeka.stack.api.project.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.io.Serializable;
-import java.net.URI;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import dev.dong4j.zeka.kernel.common.api.BaseCodes;
 import dev.dong4j.zeka.stack.api.manager.github.client.GitHubIssueClient;
 import dev.dong4j.zeka.stack.api.plugin.feedback.dto.FeedbackRequest;
@@ -27,6 +15,16 @@ import dev.dong4j.zeka.stack.api.project.service.ProjectService;
 import dev.dong4j.zeka.starter.mybatis.service.impl.BaseServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
+import java.net.URI;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p> 反馈表 服务接口实现类 </p>
@@ -132,7 +130,7 @@ public class FeedbackServiceImpl extends BaseServiceImpl<FeedbackMapper, Feedbac
 
         // 构建元数据
         FeedbackRequest.Metadata metadata = new FeedbackRequest.Metadata();
-        metadata.setClientId("zeka-idea-webui");
+        metadata.setClientId("zeka-stack-webui");
         metadata.setTimestamp(System.currentTimeMillis());
         request.setMetadata(metadata);
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project (`zeka-idea-webui`) is the web-based user interface for the **Zeka Stack**, specifically designed to complement the Zeka
+This project (`zeka-stack-webui`) is the web-based user interface for the **Zeka Stack**, specifically designed to complement the Zeka
 IntelliJ IDEA plugin. It is built using **React 19**, **TypeScript**, and **Vite**, styled with **Tailwind CSS**.
 
 The application serves as a dashboard or companion site, hosting various plugin-related modules such as Changelogs, Engine status, Javadoc,
@@ -53,13 +53,13 @@ The project includes a custom deployment script `deploy.sh` targeting an `aliyun
 
 **Usage:**
 
-- `./deploy.sh`: Builds the project, uploads `dist/` to `/var/www/zeka-idea-webui/dist`, and syncs Nginx config.
+- `./deploy.sh`: Builds the project, uploads `dist/` to `/var/www/zeka-stack-webui/dist`, and syncs Nginx config.
 - `./deploy.sh -n`: Skips build/upload and only syncs the Nginx configuration.
 
 **Configuration:**
 
 - **Remote Host:** `aliyun` (SSH alias expected).
-- **Remote Path:** `/var/www/zeka-idea-webui/dist`.
+- **Remote Path:** `/var/www/zeka-stack-webui/dist`.
 - **Nginx Config Path:** `/etc/nginx/conf.d`.
 - **Live Site:** https://zekastack.dong4j.site
 
