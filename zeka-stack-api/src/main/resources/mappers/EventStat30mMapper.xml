@@ -108,7 +108,6 @@
         <include refid="all_field"/>
         from event_stat_30m as a
         <where>
-            and a.deleted = 0
             <include refid="date_query"/>
             <include refid="filters"/>
         </where>
@@ -120,7 +119,6 @@
         <include refid="all_field"/>
         from event_stat_30m as a
         <where>
-            and a.deleted = 0
             <include refid="bucket_query"/>
             <include refid="filters"/>
         </where>
