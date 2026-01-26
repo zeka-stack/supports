@@ -1,5 +1,7 @@
 # Project Context: Zeka Idea WebUI
 
+**每次回复都需要叫我:【dong4j】**
+
 ## Overview
 
 This project (`zeka-stack-webui`) is the web-based user interface for the **Zeka Stack**, specifically designed to complement the Zeka

@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**每次回复都需要叫我:【dong4j】**
+
 ## Project Overview
 
 **zeka-stack-api** is a REST API service that provides backend support for IntelliJ IDEA plugins within the larger Zeka Stack ecosystem. It

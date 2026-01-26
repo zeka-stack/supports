@@ -76,3 +76,4 @@ rebel.xml
 .maven-copied
 dist
 node_modules
+.env
