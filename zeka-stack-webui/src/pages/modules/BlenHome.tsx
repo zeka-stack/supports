@@ -1,6 +1,5 @@
-import React from 'react';
-import { Cpu, ArrowLeft, GitBranch, Code2 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import {ArrowLeft, Code2, Cpu, GitBranch} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 export const BlenHome = () => {
   const { t } = useTranslation();
@@ -22,7 +21,7 @@ export const BlenHome = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-8">
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
              <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('modules.overview')}</h2>

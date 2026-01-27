@@ -1,11 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import {ArrowDown, ChevronDown, Cloud, Download, FolderTree, Star} from 'lucide-react';
 import {useTranslation} from 'react-i18next';
 
 export const NacosHome: React.FC = () => {
     const {t} = useTranslation();
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [activeTab, setActiveTab] = useState<'config' | 'service'>('config');
 
     const scrollToNext = () => {
         if (scrollRef.current) {

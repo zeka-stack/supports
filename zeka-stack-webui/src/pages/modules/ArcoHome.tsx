@@ -1,6 +1,5 @@
-import React from 'react';
-import { Layers, Box, Cpu, ArrowLeft, GitBranch, Terminal } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import {ArrowLeft, GitBranch, Layers, Terminal} from 'lucide-react';
+import {useTranslation} from 'react-i18next';
 
 const ModuleHeader = ({ title, subtitle, icon: Icon, color }: any) => {
   const { t } = useTranslation();
@@ -51,13 +50,13 @@ export const ArcoHome = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
-      <ModuleHeader 
-        title={t('modules.arco.title')} 
-        subtitle={t('modules.arco.subtitle')} 
-        icon={Layers} 
-        color="bg-indigo-600" 
+      <ModuleHeader
+        title={t('modules.arco.title')}
+        subtitle={t('modules.arco.subtitle')}
+        icon={Layers}
+        color="bg-indigo-600"
       />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-8">
         <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('modules.overview')}</h2>

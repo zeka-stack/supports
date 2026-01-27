@@ -1,11 +1,10 @@
 import React, {useRef, useState} from 'react';
-import {ArrowDown, ChevronDown, Code2, FileJson, Globe, Layout, Play, Server, Settings, ShieldCheck, Zap} from 'lucide-react';
+import {ArrowDown, ChevronDown, Code2, FileJson, Globe, Layout, Play, RefreshCw, Server, Settings, ShieldCheck, Zap} from 'lucide-react';
 import {useTranslation} from 'react-i18next';
 
 export const SwaggerHome: React.FC = () => {
     const {t} = useTranslation();
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [activeTab, setActiveTab] = useState<'params' | 'headers' | 'body'>('params');
     const [requestStatus, setRequestStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
     const scrollToNext = () => {
