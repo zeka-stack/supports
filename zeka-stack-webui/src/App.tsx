@@ -2,6 +2,10 @@ import {useEffect, useState} from 'react';
 import {Header} from './components/Header';
 import {Footer} from './components/Footer';
 import {Home} from './pages/Home';
+import {PluginHome} from './pages/plugins/PluginHome';
+import {ArcoHome} from './pages/modules/ArcoHome';
+import {BlenHome} from './pages/modules/BlenHome';
+import {CuboHome} from './pages/modules/CuboHome';
 import {FeatureRequests} from './pages/FeatureRequests';
 import {PrivacyPolicy} from './pages/PrivacyPolicy';
 import {Statistics} from './pages/Statistics';
@@ -73,6 +77,18 @@ function App() {
     } else {
         // Switch for other routes
         switch (route) {
+            case '#/plugin':
+                Component = PluginHome;
+                break;
+            case '#/modules/arco':
+                Component = ArcoHome;
+                break;
+            case '#/modules/blen':
+                Component = BlenHome;
+                break;
+            case '#/modules/cubo':
+                Component = CuboHome;
+                break;
             case '#/feedback':
                 Component = FeatureRequests;
                 break;

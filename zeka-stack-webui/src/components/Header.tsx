@@ -109,25 +109,44 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
                     <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-sm">
                         <Sparkles className="w-5 h-5 text-white"/>
                     </div>
-                    <span className={`font-bold text-lg tracking-tight ${s.logoText} transition-colors`}>Zeka Stack IDEA Plugin</span>
+                    <span className={`font-bold text-lg tracking-tight ${s.logoText} transition-colors`}>Zeka Stack</span>
                 </a>
                 <nav className="flex items-center gap-6">
                     <div className={`hidden md:flex items-center gap-6 text-[15px] font-medium ${s.navText} transition-colors`}>
                         <a href="#/" className={`${s.navHover} transition-colors`}>{t('header.home')}</a>
 
-                        {/* Products Dropdown */}
+                        {/* Modules Dropdown */}
+                        <div className="relative group">
+                            <button className={`flex items-center gap-1 ${s.navHover} transition-colors focus:outline-none`}>
+                                {t('header.modules')}
+                                <ChevronDown className="w-4 h-4" />
+                            </button>
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-[-10px] group-hover:translate-y-0 transition-all duration-200">
+                                <div className={`${s.dropdown} rounded-xl shadow-xl border overflow-hidden py-1`}>
+                                    <a href="#/modules/arco" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.arco.title')}</a>
+                                    <a href="#/modules/blen" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.blen.title')}</a>
+                                    <a href="#/modules/cubo" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.cubo.title')}</a>
+                                    <a href="https://github.com/zeka-stack/zeka-stack/tree/main/domi-suite" target="_blank" rel="noreferrer" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.domi.title')}</a>
+                                    <a href="https://github.com/zeka-stack/zeka-stack/tree/main/eiko-orch" target="_blank" rel="noreferrer" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.eiko.title')}</a>
+                                    <a href="https://github.com/zeka-stack/zeka-stack/tree/main/felo-space" target="_blank" rel="noreferrer" className={`block px-4 py-2 ${s.dropdownItem} transition-colors text-sm font-medium`}>{t('modules.felo.title')}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Plugin Dropdown */}
                         <div
                             className="relative group"
                             onMouseEnter={() => setIsProductsOpen(true)}
                             onMouseLeave={() => setIsProductsOpen(false)}
                         >
-                            <button
+                            <a 
+                                href="#/plugin"
                                 className={`flex items-center gap-1 ${s.navHover} transition-colors focus:outline-none`}
                                 aria-expanded={isProductsOpen}
                             >
                                 {t('header.plugins')}
                                 <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}/>
-                            </button>
+                            </a>
 
                             <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56 transition-all duration-200 ${isProductsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                                 <div className={`${s.dropdown} rounded-xl shadow-xl border overflow-hidden py-1`}>

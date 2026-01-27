@@ -22,6 +22,7 @@
   },
   "header": {
     "home": "首页",
+    "modules": "模块",
     "plugins": "插件",
     "engine": "AI 引擎",
     "javadoc": "Javadoc",
@@ -55,7 +56,11 @@
     "nowAvailable": "现已推出",
     "heroTitle": "Zeka Stack",
     "heroTitleHighlight": "Intelli IDEA 插件",
-    "heroDescription": "您的终极 IDE 伴侣。集成 AI 编码引擎、Changelog 生成、Javadoc 自动生成、Nacos 配置中心等使用插件，重新定义开发效率。",
+    "heroDescription": "基于 Spring Boot 3 的现代化企业级开发脚手架。坚持“约定大于配置”，通过高度规范化实现组件开箱即用，助力团队快速构建高质量的微服务体系，实现极致开发效率。",
+    "explorePlugins": "探索插件",
+    "coreArchitecture": "核心架构",
+    "coreArchitectureDesc": "Zeka Stack 采用分层架构组织，确保严格的依赖流和模块化。",
+    "learnMore": "了解更多",
     "installPlugin": "安装插件",
     "githubSource": "GitHub 源码",
     "jetbrainsCertified": "JetBrains 官方认证",
@@ -105,6 +110,24 @@
     "codeUnderstanding": {
       "title": "代码理解",
       "description": "深度解析项目结构与依赖关系"
+    },
+    "whyZeka": {
+      "title": "为什么选择 Zeka Stack?",
+      "desc": "构建微服务不应意味着重复造轮子。Zeka Stack 为您的企业应用提供了一致、观点鲜明且久经考验的基础。",
+      "standards": { "title": "统一工程标准", "desc": "严格的 Maven 父级体系 (Arco) 消除了依赖冲突 (DLL 地狱) 并强制执行编码规范。" },
+      "cloud": { "title": "云原生就绪", "desc": "从本地脚手架 (Cubo) 到中间件编排 (Eiko)，一切都为云原生部署预先配置。" },
+      "ai": { "title": "AI 增强开发", "desc": "与 Zeka IDEA 插件深度集成，实现 AI 驱动的编码、文档和调试。" }
+    },
+    "benefits": {
+      "performance": { "title": "高性能", "desc": "优化的内核和轻量级封装确保最小的开销。" },
+      "security": { "title": "企业级安全", "desc": "内置认证 (Blen Auth) 和安全默认设置。" },
+      "developer": { "title": "开发者优先", "desc": "丰富的工具、清晰的文档和智能 IDE 支持。" },
+      "modular": { "title": "模块化设计", "desc": "严格分层。按需使用，灵活替换。" }
+    },
+    "integration": {
+      "title": "完善体验",
+      "desc": "Zeka Stack 旨在与 Zeka IDEA 插件无缝协作。直接从 IDE 生成代码、管理依赖并可视化架构。",
+      "cta": "安装 IDEA 插件"
     }
   },
   "statistics": {
@@ -318,6 +341,55 @@
   "changelog": {
     "title": "更新日志",
     "description": "查看 IntelliAI 插件的历史版本更新记录"
+  },
+  "modules": {
+    "backToStack": "返回生态总览",
+    "viewSource": "查看源码",
+    "submitRequest": "提交功能需求",
+    "overview": "概览",
+    "coreComponents": "核心组件",
+    "keyModules": "关键模块",
+    "starterCatalog": "Starter 目录",
+    "arco": {
+      "title": "Arco Meta",
+      "subtitle": "基石：构建基础设施与工程化",
+      "description": "Arco Meta (L0) 是 Zeka Stack 的绝对构建基础。它通过在根层级严格管理版本和配置，解决了 Maven 依赖的“DLL 地狱”问题。栈中的每个项目都继承自 Arco，确保了统一的工程标准。",
+      "features": {
+        "supreme": { "title": "Arco Supreme", "desc": "全局根父项目。统一整个生态系统的构建配置、依赖版本、代码风格和插件管理。" },
+        "builder": { "title": "Arco Builder", "desc": "分层的 Maven 父结构，专为库模块和业务应用设计，确保构建一致性。" },
+        "processor": { "title": "Arco Processor", "desc": "注解处理器，用于编译时生成 Spring Boot 配置 (spring.factories) 和 SPI 文件。" },
+        "plugin": { "title": "Arco Maven Plugin", "desc": "自定义 Maven 插件，用于构建自动化，包括“90秒自动化”任务和质量检查。" }
+      }
+    },
+    "blen": {
+      "title": "Blen Kernel",
+      "subtitle": "核心内核：工具与规范",
+      "description": "Blen Kernel (L1) 提供了所有其他层使用的基础 Java 库和工具。它封装了认证、Web 响应、验证和分布式追踪的通用逻辑，确保开发者无需为基本能力重复造轮子。",
+      "features": {
+        "common": { "title": "blen-kernel-common", "desc": "通用工具、基础模型、异常和返回结构。" },
+        "auth": { "title": "blen-kernel-auth", "desc": "标准化的认证和授权接口。" },
+        "web": { "title": "blen-kernel-web", "desc": "Web 层封装：异常处理、响应包装、拦截器。" },
+        "validation": { "title": "blen-kernel-validation", "desc": "增强的验证注解和错误处理。" },
+        "tracer": { "title": "blen-kernel-tracer", "desc": "分布式追踪上下文和日志关联。" },
+        "test": { "title": "blen-kernel-test", "desc": "测试支持、基础测试类和集成测试助手。" }
+      }
+    },
+    "cubo": {
+      "title": "Cubo Starter",
+      "subtitle": "Spring Boot Starters 与脚手架",
+      "description": "Cubo Starter (L2) 定义了“如何启动一个 Zeka 项目”。它是与其标准集成的 Spring Boot Starters 集合，集成了最佳开源组件。它提供了对数据库、日志、API 文档和消息传递的开箱即用支持。",
+      "features": {
+        "mybatis": { "title": "cubo-mybatis-spring-boot", "desc": "MyBatis Plus 集成，支持统一配置、分页和代码生成。" },
+        "rest": { "title": "cubo-rest-spring-boot", "desc": "标准化的 REST API 支持，包括全局响应包装和错误处理。" },
+        "logsystem": { "title": "cubo-logsystem-spring-boot", "desc": "结构化日志、审计日志和 Trace ID 注入。" },
+        "openapi": { "title": "cubo-openapi-spring-boot", "desc": "自动配置的 Swagger/OpenAPI 文档。" },
+        "messaging": { "title": "cubo-messaging-spring-boot", "desc": "消息队列（RocketMQ/Kafka）的抽象，支持统一事件发布。" },
+        "launcher": { "title": "cubo-launcher-spring-boot", "desc": "入口 Starter。处理环境设置、Banner 和优雅停机。" }
+      }
+    },
+    "domi": { "title": "Domi Suite", "subtitle": "微服务组件（中台）", "description": "可复用的微服务组件，如认证、网关和用户管理。" },
+    "eiko": { "title": "Eiko Orch", "subtitle": "中间件编排", "description": "统一封装 APM、缓存、Nacos 和调度。" },
+    "felo": { "title": "Felo Space", "subtitle": "业务应用层", "description": "真实业务示例，如电商和支付系统。" }
   },
   "plugins": {
     "engine": {

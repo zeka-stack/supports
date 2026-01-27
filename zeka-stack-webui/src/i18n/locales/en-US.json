@@ -22,6 +22,7 @@
   },
   "header": {
     "home": "Home",
+    "modules": "Modules",
     "plugins": "Plugins",
     "engine": "AI Engine",
     "javadoc": "Javadoc",
@@ -55,7 +56,11 @@
     "nowAvailable": "Now Available",
     "heroTitle": "Zeka Stack",
     "heroTitleHighlight": "Intelli IDEA Plugin",
-    "heroDescription": "Your ultimate IDE companion. Integrated AI coding engine, Changelog generation, Javadoc auto-generation, Nacos configuration center, and more. Redefining development efficiency.",
+    "heroDescription": "A modern enterprise-grade scaffolding based on Spring Boot 3. Adhering to 'Convention over Configuration', providing out-of-the-box components to help teams rapidly build high-quality microservice systems with extreme efficiency.",
+    "explorePlugins": "Explore Plugins",
+    "coreArchitecture": "Core Architecture",
+    "coreArchitectureDesc": "Zeka Stack is organized into a layered architecture, ensuring strict dependency flow and modularity.",
+    "learnMore": "Learn more",
     "installPlugin": "Install Plugin",
     "githubSource": "GitHub Source",
     "jetbrainsCertified": "JetBrains Certified",
@@ -105,6 +110,24 @@
     "codeUnderstanding": {
       "title": "Code Understanding",
       "description": "Deep analysis of project structure and dependencies"
+    },
+    "whyZeka": {
+      "title": "Why Choose Zeka Stack?",
+      "desc": "Building microservices shouldn't mean re-inventing the wheel every time. Zeka Stack provides a consistent, opinionated, and battle-tested foundation for your enterprise applications.",
+      "standards": { "title": "Unified Engineering Standards", "desc": "Strict Maven parent hierarchy (Arco) eliminates dependency conflicts (DLL Hell) and enforces coding standards." },
+      "cloud": { "title": "Box-to-Cloud Ready", "desc": "From local scaffolding (Cubo) to middleware orchestration (Eiko), everything is pre-configured for cloud-native deployment." },
+      "ai": { "title": "AI-Enhanced Development", "desc": "Deep integration with Zeka IDEA Plugin for AI-driven coding, documentation, and debugging." }
+    },
+    "benefits": {
+      "performance": { "title": "High Performance", "desc": "Optimized kernel and lightweight wrappers ensure minimal overhead." },
+      "security": { "title": "Enterprise Security", "desc": "Built-in authentication (Blen Auth) and secure defaults." },
+      "developer": { "title": "Developer First", "desc": "Extensive tooling, clear docs, and intelligent IDE support." },
+      "modular": { "title": "Modular Design", "desc": "Strict layering. Use what you need, replace what you don't." }
+    },
+    "integration": {
+      "title": "Complete the Experience",
+      "desc": "Zeka Stack is designed to work seamlessly with the Zeka IDEA Plugin. Generate code, manage dependencies, and visualize your architecture directly from your IDE.",
+      "cta": "Install IDEA Plugin"
     }
   },
   "statistics": {
@@ -318,6 +341,55 @@
   "changelog": {
     "title": "Changelog",
     "description": "View historical version updates for IntelliAI plugins"
+  },
+  "modules": {
+    "backToStack": "Back to Stack",
+    "viewSource": "View Source",
+    "submitRequest": "Submit Feature Request",
+    "overview": "Overview",
+    "coreComponents": "Core Components",
+    "keyModules": "Key Modules",
+    "starterCatalog": "Starter Catalog",
+    "arco": {
+      "title": "Arco Meta",
+      "subtitle": "The Foundation: Build Infrastructure & Engineering",
+      "description": "Arco Meta (L0) serves as the absolute build infrastructure for the Zeka Stack. It solves the \"DLL Hell\" of Maven dependencies by strictly managing versions and configurations at the root level. Every project in the stack inherits from Arco, ensuring a unified engineering standard.",
+      "features": {
+        "supreme": { "title": "Arco Supreme", "desc": "The global root parent project. Unifies build configurations, dependency versions, code styles, and plugin management for the entire ecosystem." },
+        "builder": { "title": "Arco Builder", "desc": "A layered Maven parent structure designed for both library modules and business applications, ensuring build consistency." },
+        "processor": { "title": "Arco Processor", "desc": "Annotation processor for compile-time generation of Spring Boot configurations (spring.factories) and SPI files." },
+        "plugin": { "title": "Arco Maven Plugin", "desc": "Custom Maven plugins for build automation, including \"90-second automation\" tasks and quality checks." }
+      }
+    },
+    "blen": {
+      "title": "Blen Kernel",
+      "subtitle": "The Core Kernel: Utilities & Standards",
+      "description": "Blen Kernel (L1) provides the foundational Java libraries and utilities used by every other layer. It encapsulates common logic for Authentication, Web responses, Validation, and Distributed Tracing, ensuring that developers don't reinvent the wheel for basic capabilities.",
+      "features": {
+        "common": { "title": "blen-kernel-common", "desc": "Universal utilities, base models, exceptions, and return structures." },
+        "auth": { "title": "blen-kernel-auth", "desc": "Standardized authentication and authorization interfaces." },
+        "web": { "title": "blen-kernel-web", "desc": "Web layer encapsulation: Exception handling, Response wrapping, Interceptors." },
+        "validation": { "title": "blen-kernel-validation", "desc": "Enhanced validation annotations and error processing." },
+        "tracer": { "title": "blen-kernel-tracer", "desc": "Distributed tracing context and log correlation." },
+        "test": { "title": "blen-kernel-test", "desc": "Testing support, base test classes, and integration test helpers." }
+      }
+    },
+    "cubo": {
+      "title": "Cubo Starter",
+      "subtitle": "Spring Boot Starters & Scaffolding",
+      "description": "Cubo Starter (L2) defines \"How to start a Zeka project\". It is a collection of opinionated Spring Boot Starters that integrate best-in-class open source components with Zeka's standards. It provides out-of-the-box support for database, logging, API documentation, and messaging.",
+      "features": {
+        "mybatis": { "title": "cubo-mybatis-spring-boot", "desc": "MyBatis Plus integration with unified config, pagination, and code generation support." },
+        "rest": { "title": "cubo-rest-spring-boot", "desc": "Standardized REST API support, including global response wrapping and error handling." },
+        "logsystem": { "title": "cubo-logsystem-spring-boot", "desc": "Structured logging, audit logs, and trace ID injection." },
+        "openapi": { "title": "cubo-openapi-spring-boot", "desc": "Auto-configured Swagger/OpenAPI documentation." },
+        "messaging": { "title": "cubo-messaging-spring-boot", "desc": "Abstraction for message queues (RocketMQ/Kafka) with unified event publishing." },
+        "launcher": { "title": "cubo-launcher-spring-boot", "desc": "The entry point starter. Handles environment setup, banner, and graceful shutdown." }
+      }
+    },
+    "domi": { "title": "Domi Suite", "subtitle": "Microservice components (Middle Platform)", "description": "Reusable microservice components." },
+    "eiko": { "title": "Eiko Orch", "subtitle": "Middleware orchestration", "description": "Unified encapsulation for APM, Cache, Nacos, and Scheduling." },
+    "felo": { "title": "Felo Space", "subtitle": "Business Applications", "description": "Real-world examples like E-commerce and Payment systems." }
   },
   "plugins": {
     "engine": {
