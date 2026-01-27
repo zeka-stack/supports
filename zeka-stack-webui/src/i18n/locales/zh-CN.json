@@ -376,7 +376,24 @@
       "demoDesc": "根据方法签名和代码逻辑自动生成完整的文档注释",
       "providerTitle": "支持多种 AI 服务商",
       "providerDesc": "选择您喜欢的 AI 服务，或使用本地模型保障隐私",
-      "providerButton": "配置服务商"
+      "providerButton": "配置服务商",
+      "section2Title": "不止于",
+      "section2Highlight": "占位符",
+      "section2Desc": "传统工具只能填充 @param 标签。Zeka 能分析您的代码逻辑、分支和异常，编写出有意义、可读性强的业务解释。",
+      "feature2_1": "推断业务逻辑意图",
+      "feature2_2": "自动检测未检查异常",
+      "feature2_3": "解释返回值条件",
+      "section3Title": "全球化标准",
+      "section3Desc": "无论您遵循 Google Java 规范，还是需要为跨国团队提供双语文档，我们都能完美适配。",
+      "card1Title": "双语支持",
+      "card1Desc": "为开源项目生成英文，或为内部团队生成中文。亦可双语对照。",
+      "card2Title": "规范合规",
+      "card2Desc": "严格遵守 HTML4/5 Javadoc 标准及 Checkstyle 规则。",
+      "card3Title": "模板引擎",
+      "card3Desc": "使用 Velocity 模板自定义每个标签和描述格式。",
+      "privacyTitle": "您的代码，绝对机密",
+      "privacyDesc": "文档往往暴露核心业务逻辑。配合本地模式 (Ollama)，您的代码永远不会离开本机。",
+      "privacyBadge": "100% 隐私安全"
     },
     "changelog": {
       "badge": "IntelliAI Changelog",
@@ -458,6 +475,21 @@
         "install_button": "安装插件",
         "docs_button": "查看文档"
       },
+      "section2Title": "上下文感知",
+      "section2Highlight": "智能",
+      "section2Desc": "它不仅仅是执行命令，更理解您的项目。询问关于文件、Git 状态或构建依赖的问题，AI 都能对答如流。",
+      "contextFeature1": "项目结构分析",
+      "contextFeature2": "Git 状态感知",
+      "contextFeature3": "智能文件过滤",
+      "section3Title": "安全",
+      "section3Highlight": "优先",
+      "section3Desc": "再也不会意外执行破坏性命令。AI 会自动检测危险操作（如删除文件、格式化磁盘）并要求明确确认。",
+      "safetyCard1Title": "破坏性命令检测",
+      "safetyCard1Desc": "对 'rm -rf', 'drop database' 等命令发出警告。",
+      "safetyCard2Title": "执行前解释",
+      "safetyCard2Desc": "详细解释复杂命令的具体作用。",
+      "safetyCard3Title": "Shell 无关",
+      "safetyCard3Desc": "完美支持 Bash, Zsh, PowerShell, Fish。",
       "demo": {
         "comment_text": "# 查找所有包含 \"TODO\" 的 Java 文件",
         "command_text": "find . -name \"*.java\" -exec grep -l \"TODO\" {} \\;",
@@ -553,7 +585,16 @@
       "engine": {
         "title": "由 AI Engine 驱动",
         "description": "利用多种 AI 模型进行全面代码分析"
-      }
+      },
+      "section2Title": "可视化",
+      "section2Highlight": "智能",
+      "section2Desc": "不再猜测代码的去向。Tracer 构建了一个实时、交互式的方法调用图，涵盖所有分支和边界情况。",
+      "section3Title": "性能",
+      "section3Highlight": "热点",
+      "section3Desc": "集成运行时指标，直接在 IDE 中突出显示瓶颈。通过 AI 驱动的重构建议进行优化。",
+      "performanceFeature1": "关键路径分析",
+      "performanceFeature2": "冗余调用检测",
+      "performanceFeature3": "异步流可视化"
     },
     "repairer": {
       "badge": "自动修复",
@@ -611,7 +652,13 @@
         "title": "告别风格问题",
         "description": "让 AI 处理代码质量，专注业务逻辑。",
         "button": "安装插件"
-      }
+      },
+      "section2Title": "外科手术式",
+      "section2Highlight": "精准",
+      "section2Desc": "Repairer 不仅仅是重新格式化；它更懂代码。它能处理复杂的命名重构和保持逻辑完整的修复，这是传统 Linter 无法做到的。",
+      "section3Title": "团队",
+      "section3Highlight": "规范",
+      "section3Desc": "同步您组织的 Checkstyle 或 PMD 规则。Repairer 确保每位开发者都能自动提交整洁、标准化的代码。"
     },
     "swagger": {
       "badge": "API First 开发",
@@ -636,7 +683,13 @@
       "feature2Desc": "一键切换 Dev/Test/Prod 环境变量。自动同步 Authorization Header，告别手动复制 Token 的痛苦。",
       "feature3Title": "格式兼容",
       "feature3Desc": "完美支持 OpenAPI 3.0 与 Swagger 2.0 标准。支持导出为 Markdown、HTML 或 Postman Collection。",
-      "configHint": "需要时可通过简单注解配置"
+      "configHint": "需要时可通过简单注解配置",
+      "section2Title": "注解",
+      "section2Highlight": "无关",
+      "section2Desc": "保持代码库整洁。我们的引擎解析您的源代码和 Javadoc 以构建准确的 API 规范，而不会用装饰器弄乱您的逻辑。",
+      "section3Title": "集成",
+      "section3Highlight": "调试器",
+      "section3Desc": "无需离开 IDE 即可测试接口。支持 OAuth2、环境变量，并能自动从 DTO 生成请求体。"
     },
     "nacos": {
       "badge": "配置管理",
@@ -748,7 +801,13 @@
         "install_button": "安装插件",
         "docs_button": "查看文档",
         "version_info": "版本 2.0.0"
-      }
+      },
+      "section2Title": "版本",
+      "section2Highlight": "控制",
+      "section2Desc": "再也不会丢失配置。内置差异查看器和历史跟踪，让您一键对比并回滚跨命名空间的变更。",
+      "section3Title": "原生",
+      "section3Highlight": "编辑器",
+      "section3Desc": "为您的 YAML 和 Properties 配置发挥 IntelliJ 编辑器的强大功能。支持 Nacos 模式的语法高亮、自动补全和实时验证。"
     }
   }
 }

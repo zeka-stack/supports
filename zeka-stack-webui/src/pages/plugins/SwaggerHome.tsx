@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
-import {ArrowRight, Box, Braces, Code2, Copy, FileJson, Globe, Play, Server, Settings, Terminal, Zap} from 'lucide-react';
+import React, {useRef, useState} from 'react';
+import {ArrowDown, ChevronDown, Code2, FileJson, Globe, Layout, Play, Server, Settings, ShieldCheck, Zap} from 'lucide-react';
 import {useTranslation} from 'react-i18next';
 
 export const SwaggerHome: React.FC = () => {
     const {t} = useTranslation();
+    const scrollRef = useRef<HTMLDivElement>(null);
     const [activeTab, setActiveTab] = useState<'params' | 'headers' | 'body'>('params');
     const [requestStatus, setRequestStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
-    // Simulate API Request Animation
+    const scrollToNext = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({top: scrollRef.current.clientHeight, behavior: 'smooth'});
+        }
+    };
+
     const handleSend = () => {
         setRequestStatus('loading');
         setTimeout(() => {
@@ -16,254 +22,208 @@ export const SwaggerHome: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0c0c0e] text-slate-300 font-sans selection:bg-amber-500/30">
-            {/* Background Grid */}
-            <div className="fixed inset-0 pointer-events-none">
+        <div ref={scrollRef} className="fixed top-16 left-0 right-0 bottom-0 overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#0c0c0e] text-slate-300 font-sans selection:bg-amber-500/30 z-0">
+
+            {/* --- Section 1: Hero --- */}
+            <section className="h-full w-full snap-start relative flex flex-col items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
                 <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none"></div>
-            </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pt-20 pb-20">
-
-                {/* 1. Header Section */}
-                <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
-                    <div className="max-w-2xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/30 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-wider mb-6">
-                            <Globe className="w-3 h-3"/>
-                            <span>{t('plugins.swagger.badge')}</span>
-                        </div>
-                        <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight mb-6">
-                            {t('plugins.swagger.heroTitle1')} <br/>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
-                                {t('plugins.swagger.heroHighlight')}
-                            </span>
-                        </h1>
-                        <p className="text-lg text-slate-400 leading-relaxed">
-                            {t('plugins.swagger.heroDescription')}
-                        </p>
+                <div className="max-w-7xl mx-auto px-6 w-full relative z-10 flex flex-col items-center">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-950/30 border border-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-wider mb-8 animate-fade-in-up">
+                        <Globe className="w-4 h-4"/>
+                        <span>{t('plugins.swagger.badge')}</span>
                     </div>
-                    <div className="flex gap-4">
-                        <button className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-medium transition-all flex items-center gap-2 border border-slate-700">
-                            <FileJson className="w-4 h-4 text-amber-500"/>
-                            {t('plugins.swagger.exportJsonButton')}
-                        </button>
-                        <button className="px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-all shadow-lg shadow-amber-900/20 flex items-center gap-2">
+
+                    <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-8 text-center animate-fade-in-up delay-100">
+                        {t('plugins.swagger.heroTitle1')} <br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+                            {t('plugins.swagger.heroHighlight')}
+                        </span>
+                    </h1>
+
+                    <p className="text-xl text-slate-400 leading-relaxed max-w-2xl text-center mb-12 animate-fade-in-up delay-200">
+                        {t('plugins.swagger.heroDescription')}
+                    </p>
+
+                    <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-300">
+                        <button className="px-10 py-4 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold transition-all shadow-xl flex items-center justify-center gap-2">
                             {t('plugins.swagger.installButton')}
-                            <ArrowRight className="w-4 h-4"/>
+                            <Zap className="w-5 h-5"/>
+                        </button>
+                        <button className="px-10 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            <FileJson className="w-5 h-5 text-amber-500"/>
+                            {t('plugins.swagger.exportJsonButton')}
                         </button>
                     </div>
                 </div>
 
-                {/* 2. Interactive API Console (The "Hero" Visual) */}
-                <div className="rounded-2xl border border-slate-800 bg-[#131316] shadow-2xl overflow-hidden mb-24">
-                    {/* Console Header */}
-                    <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a1e] border-b border-slate-800">
-                        <div className="flex gap-2">
-                            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded text-xs text-slate-400 border border-slate-700/50">
-                                <Server className="w-3 h-3"/>
-                                <span>{t('plugins.swagger.consoleDevEnv')}</span>
+                <div className="absolute bottom-8 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={scrollToNext}>
+                    <ArrowDown className="w-8 h-8 text-amber-500"/>
+                </div>
+            </section>
+
+
+            {/* --- Section 2: Annotation Free --- */}
+            <section className="h-full w-full snap-start bg-[#131316] flex items-center justify-center relative overflow-hidden border-t border-slate-800">
+                <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+                    {/* Left: Code Snippet */}
+                    <div className="order-2 md:order-1 relative">
+                        <div className="absolute -inset-4 bg-amber-500/10 rounded-full blur-3xl"></div>
+                        <div className="relative bg-[#1a1a1e] border border-slate-800 rounded-2xl p-8 shadow-2xl">
+                            <div className="flex items-center gap-2 mb-6 text-slate-500 border-b border-slate-800 pb-4">
+                                <Code2 className="w-5 h-5"/>
+                                <span className="text-xs font-mono tracking-widest uppercase">Pure_Controller.java</span>
                             </div>
-                            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded text-xs text-slate-400 border border-slate-700/50">
-                                <Settings className="w-3 h-3"/>
-                                <span>{t('plugins.swagger.consoleConfig')}</span>
+                            <pre className="font-mono text-sm leading-relaxed overflow-x-auto text-slate-300">
+                                <span className="text-purple-400">@RestController</span><br/>
+                                <span className="text-amber-500">public class</span> <span className="text-blue-400">UserController</span> {'{'}<br/><br/>
+                                &nbsp;&nbsp;
+                                <span className="text-slate-500">/**<br/>&nbsp;&nbsp; * Fetch user by ID<br/>&nbsp;&nbsp; */</span><br/>
+                                &nbsp;&nbsp;
+                                <span className="text-purple-400">@GetMapping</span>(<span className="text-emerald-400">"/users/{'{'}id{'}'}"</span>)<br/>
+                                &nbsp;&nbsp;<span className="text-amber-500">public</span> <span className="text-blue-400">User</span> get(<span className="text-purple-400">@PathVariable</span> Long id) {'{'}...{'}'}<br/>
+                                {'}'}
+                            </pre>
+                            <div className="mt-8 flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                                <ShieldCheck className="w-6 h-6 text-emerald-500"/>
+                                <div className="text-xs font-bold text-emerald-400 uppercase tracking-widest">NO @OPERATION NEEDED</div>
                             </div>
-                        </div>
-                        <div className="flex gap-1.5">
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
-                            <div className="w-2.5 h-2.5 rounded-full bg-slate-600"></div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[500px]">
-                        {/* Sidebar: Endpoints */}
-                        <div className="lg:col-span-3 border-r border-slate-800 bg-[#161619] p-4 hidden lg:block">
-                            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 pl-2">{t('plugins.swagger.endpointsLabel')}</div>
-                            <div className="space-y-1">
-                                {[
-                                    {method: 'GET', path: '/users', active: false},
-                                    {method: 'POST', path: '/users/create', active: true},
-                                    {method: 'GET', path: '/products', active: false},
-                                    {method: 'DELETE', path: '/orders/{id}', active: false},
-                                ].map((ep, i) => (
-                                    <div key={i} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg cursor-pointer transition-colors ${ep.active ? 'bg-amber-500/10 border border-amber-500/20' : 'hover:bg-slate-800/50'}`}>
-                                        <span className={`text-[10px] font-bold w-10 ${
-                                            ep.method === 'GET' ? 'text-blue-400' :
-                                                ep.method === 'POST' ? 'text-emerald-400' :
-                                                    ep.method === 'DELETE' ? 'text-red-400' : 'text-slate-400'
-                                        }`}>{ep.method}</span>
-                                        <span className={`text-sm truncate ${ep.active ? 'text-amber-100' : 'text-slate-400'}`}>{ep.path}</span>
-                                    </div>
-                                ))}
+                    {/* Right: Content */}
+                    <div className="space-y-8">
+                        <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                            {t('plugins.swagger.section2Title')} <br/>
+                            <span className="text-amber-500">{t('plugins.swagger.section2Highlight')}</span>
+                        </h2>
+                        <p className="text-xl text-slate-400 leading-relaxed">
+                            {t('plugins.swagger.section2Desc')}
+                        </p>
+                        <ul className="space-y-4">
+                            {[
+                                t('plugins.swagger.feature1Title'),
+                                t('plugins.swagger.feature3Title')
+                            ].map((item, i) => (
+                                <li key={i} className="flex items-center gap-4 text-slate-200">
+                                    <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                                    <span className="text-lg font-medium">{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                <div className="absolute bottom-8 animate-bounce cursor-pointer opacity-30 hover:opacity-100 transition-opacity" onClick={scrollToNext}>
+                    <ChevronDown className="w-8 h-8 text-white"/>
+                </div>
+            </section>
+
+
+            {/* --- Section 3: Integrated Debugger --- */}
+            <section className="h-full w-full snap-start bg-[#0c0c0e] flex items-center justify-center relative overflow-hidden border-t border-slate-800">
+                <div className="max-w-7xl mx-auto px-6 w-full flex flex-col items-center">
+
+                    <div className="text-center max-w-3xl mb-12">
+                        <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
+                            {t('plugins.swagger.section3Title')} <span className="text-orange-500">{t('plugins.swagger.section3Highlight')}</span>
+                        </h2>
+                        <p className="text-xl text-slate-400">
+                            {t('plugins.swagger.section3Desc')}
+                        </p>
+                    </div>
+
+                    {/* Visual: IDE Mockup with Tabs */}
+                    <div className="w-full max-w-5xl rounded-2xl border border-slate-800 bg-[#131316] shadow-2xl overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 bg-[#1a1a1e] border-b border-slate-800">
+                            <div className="flex gap-4">
+                                <div className="flex items-center gap-2 text-xs text-slate-500 font-mono"><Server className="w-3 h-3"/> DEV_ENV</div>
+                                <div className="flex items-center gap-2 text-xs text-slate-500 font-mono"><Settings className="w-3 h-3"/> CONFIG.JSON</div>
+                            </div>
+                            <div className="flex gap-1.5">
+                                <div className="w-3 h-3 rounded-full bg-slate-700"></div>
+                                <div className="w-3 h-3 rounded-full bg-slate-700"></div>
                             </div>
                         </div>
 
-                        {/* Main: Request/Response */}
-                        <div className="lg:col-span-9 flex flex-col">
-                            {/* URL Bar */}
-                            <div className="p-4 border-b border-slate-800 flex gap-3">
-                                <div className="flex-1 flex bg-[#0c0c0e] border border-slate-700 rounded-lg overflow-hidden items-center">
-                                    <span className="px-3 py-2 text-xs font-bold text-emerald-400 bg-emerald-500/10 border-r border-emerald-500/20">POST</span>
-                                    <span className="flex-1 px-3 text-sm text-slate-300 font-mono">https://api.zeka.io/v1/users/create</span>
+                        <div className="grid grid-cols-1 md:grid-cols-12 min-h-[400px]">
+                            {/* Left: Tabs/Body */}
+                            <div className="md:col-span-7 p-6 border-r border-slate-800">
+                                <div className="flex gap-6 border-b border-slate-800 mb-6">
+                                    {['PARAMS', 'HEADERS', 'BODY'].map(t => (
+                                        <button key={t} className={`pb-2 text-xs font-bold tracking-widest ${t === 'BODY' ? 'text-amber-500 border-b-2 border-amber-500' : 'text-slate-500'}`}>{t}</button>
+                                    ))}
                                 </div>
-                                <button
-                                    onClick={handleSend}
-                                    className="px-6 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold text-sm transition-all flex items-center gap-2"
-                                >
-                                    {requestStatus === 'loading' ? (
-                                        <span className="animate-spin">⏳</span>
-                                    ) : (
-                                        <Play className="w-4 h-4 fill-current"/>
-                                    )}
-                                    Send
+                                <div className="font-mono text-sm text-slate-400 leading-relaxed">
+                                    <div className="text-yellow-500">{'{'}</div>
+                                    <div className="pl-4">
+                                        <span className="text-sky-400">"username"</span>: <span className="text-emerald-400">"dong4j"</span>,<br/>
+                                        <span className="text-sky-400">"role"</span>: <span className="text-emerald-400">"admin"</span>
+                                    </div>
+                                    <div className="text-yellow-500">{'}'}</div>
+                                </div>
+                                <button onClick={handleSend} className="mt-8 px-8 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-lg font-bold transition-all flex items-center gap-2">
+                                    {requestStatus === 'loading' ? <RefreshCw className="animate-spin w-4 h-4"/> : <Play className="w-4 h-4 fill-current"/>}
+                                    SEND REQUEST
                                 </button>
                             </div>
-
-                            <div className="flex-1 grid grid-cols-1 md:grid-cols-2">
-                                {/* Left: Request Body */}
-                                <div className="border-r border-slate-800 p-4">
-                                    <div className="flex gap-4 mb-4 border-b border-slate-800/50 pb-2">
-                                        {[t('plugins.swagger.paramsTab'), t('plugins.swagger.headersTab'), t('plugins.swagger.bodyTab')].map((tab, idx) => (
-                                            <button
-                                                key={tab}
-                                                onClick={() => setActiveTab(['params', 'headers', 'body'][idx] as any)}
-                                                className={`text-xs font-bold pb-2 transition-colors ${activeTab === ['params', 'headers', 'body'][idx] ? 'text-amber-500 border-b-2 border-amber-500' : 'text-slate-500 hover:text-slate-300'}`}
-                                            >
-                                                {tab}
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <div className="font-mono text-sm text-slate-400 leading-6">
-                                        <div className="text-slate-500">{t('plugins.swagger.requestComment')}</div>
+                            {/* Right: Response */}
+                            <div className="md:col-span-5 bg-[#0c0c0e] p-6 relative">
+                                <div className="text-xs font-bold text-slate-500 uppercase mb-4 tracking-widest">Response</div>
+                                {requestStatus === 'success' ? (
+                                    <div className="font-mono text-sm animate-in fade-in slide-in-from-right-2">
+                                        <div className="text-emerald-400 font-bold mb-4">200 OK (145ms)</div>
                                         <div className="text-yellow-500">{'{'}</div>
                                         <div className="pl-4">
-                                            <span className="text-sky-400">"username"</span>: <span className="text-emerald-400">"dong4j"</span>,
-                                        </div>
-                                        <div className="pl-4">
-                                            <span className="text-sky-400">"role"</span>: <span className="text-emerald-400">"admin"</span>,
-                                        </div>
-                                        <div className="pl-4">
-                                            <span className="text-sky-400">"features"</span>: <span className="text-yellow-500">['beta', 'pro']</span>
+                                            <span className="text-sky-400">"id"</span>: <span className="text-orange-400">1024</span>,<br/>
+                                            <span className="text-sky-400">"status"</span>: <span className="text-emerald-400">"success"</span>
                                         </div>
                                         <div className="text-yellow-500">{'}'}</div>
                                     </div>
-                                </div>
-
-                                {/* Right: Response */}
-                                <div className="bg-[#0c0c0e] p-4 relative">
-                                    <div className="flex justify-between items-center mb-4">
-                                        <div className="text-xs font-bold text-slate-500 uppercase">{t('plugins.swagger.responseLabel')}</div>
-                                        {requestStatus === 'success' && (
-                                            <div className="flex gap-3 text-xs">
-                                                <span className="text-emerald-400">{t('plugins.swagger.status200')}</span>
-                                                <span className="text-slate-500">145ms</span>
-                                                <span className="text-slate-500">1.2KB</span>
-                                            </div>
-                                        )}
+                                ) : (
+                                    <div className="h-full flex flex-col items-center justify-center text-slate-700">
+                                        <Layout className="w-12 h-12 opacity-20 mb-4"/>
+                                        <span className="text-xs uppercase tracking-widest">Waiting for request...</span>
                                     </div>
-
-                                    {requestStatus === 'idle' && (
-                                        <div className="h-full flex flex-col items-center justify-center text-slate-600 space-y-3">
-                                            <Zap className="w-10 h-10 opacity-20"/>
-                                            <span className="text-xs">{t('plugins.swagger.clickSendHint')}</span>
-                                        </div>
-                                    )}
-
-                                    {requestStatus === 'loading' && (
-                                        <div className="h-full flex items-center justify-center">
-                                            <div className="w-8 h-8 border-4 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
-                                        </div>
-                                    )}
-
-                                    {requestStatus === 'success' && (
-                                        <div className="font-mono text-sm text-slate-300 animate-in fade-in slide-in-from-bottom-2">
-                                            <div className="text-yellow-500">{'{'}</div>
-                                            <div className="pl-4">
-                                                <span className="text-sky-400">"status"</span>: <span className="text-emerald-400">"success"</span>,
-                                            </div>
-                                            <div className="pl-4">
-                                                <span className="text-sky-400">"data"</span>: {'{'}
-                                            </div>
-                                            <div className="pl-8">
-                                                <span className="text-sky-400">"id"</span>: <span className="text-orange-400">1024</span>,
-                                            </div>
-                                            <div className="pl-8">
-                                                <span className="text-sky-400">"token"</span>: <span className="text-emerald-400">"eyJhbGci..."</span>
-                                            </div>
-                                            <div className="pl-4">{'}'}</div>
-                                            <div className="text-yellow-500">{'}'}</div>
-                                        </div>
-                                    )}
-                                </div>
+                                )}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {/* 3. Feature Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* Card 1: Annotation Free */}
-                    <div className="p-8 rounded-2xl bg-slate-900/30 border border-slate-800 hover:border-amber-500/30 transition-all group">
-                        <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <Code2 className="w-6 h-6 text-amber-500"/>
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature1Title')}</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                            {t('plugins.swagger.feature1Desc')}
-                        </p>
+                <div className="absolute bottom-8 animate-bounce cursor-pointer opacity-30 hover:opacity-100 transition-opacity" onClick={scrollToNext}>
+                    <ChevronDown className="w-8 h-8 text-white"/>
+                </div>
+            </section>
+
+
+            {/* --- Section 4: CTA --- */}
+            <section className="h-full w-full snap-start flex items-center justify-center bg-[#050505] relative overflow-hidden">
+                <div className="absolute inset-0 bg-amber-950/5"></div>
+                <div className="max-w-4xl text-center px-6 relative z-10">
+                    <div className="inline-flex items-center justify-center p-4 bg-amber-500/10 rounded-full mb-10 border border-amber-500/20">
+                        <Globe className="w-12 h-12 text-amber-500"/>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter leading-tight">
+                        API Dev,<br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Accelerated.</span>
+                    </h2>
+
+                    <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
+                        <button className="px-12 py-5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold text-xl transition-all shadow-[0_0_40px_rgba(217,119,6,0.2)]">
+                            {t('plugins.swagger.installButton')}
+                        </button>
                     </div>
 
-                    {/* Card 2: Environment Sync */}
-                    <div className="p-8 rounded-2xl bg-slate-900/30 border border-slate-800 hover:border-orange-500/30 transition-all group">
-                        <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <Box className="w-6 h-6 text-orange-500"/>
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature2Title')}</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                            {t('plugins.swagger.feature2Desc')}
-                        </p>
-                    </div>
-
-                    {/* Card 3: Export & Share */}
-                    <div className="p-8 rounded-2xl bg-slate-900/30 border border-slate-800 hover:border-red-500/30 transition-all group">
-                        <div className="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                            <Terminal className="w-6 h-6 text-red-500"/>
-                        </div>
-                        <h3 className="text-xl font-bold text-white mb-3">{t('plugins.swagger.feature3Title')}</h3>
-                        <p className="text-slate-400 text-sm leading-relaxed">
-                            {t('plugins.swagger.feature3Desc')}
-                        </p>
+                    <div className="mt-20 flex justify-center gap-12 text-slate-600 font-mono text-xs uppercase tracking-[0.2em]">
+                        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-amber-500"></div> OpenAPI 3.0</div>
+                        <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-orange-500"></div> Postman Ready</div>
                     </div>
                 </div>
+            </section>
 
-                {/* 4. Bottom Code Snippet */}
-                <div className="mt-24 border-t border-slate-800 pt-16 text-center">
-                    <div className="inline-flex items-center gap-2 text-slate-500 mb-6 font-mono text-sm">
-                        <Braces className="w-4 h-4"/>
-                        <span>{t('plugins.swagger.configHint')}</span>
-                    </div>
-                    <div className="max-w-3xl mx-auto bg-[#161619] border border-slate-800 rounded-xl p-6 text-left shadow-2xl relative group">
-                        <div className="absolute top-4 right-4 text-slate-600 group-hover:text-amber-500 cursor-pointer transition-colors">
-                            <Copy className="w-4 h-4"/>
-                        </div>
-                        <pre className="font-mono text-sm leading-relaxed overflow-x-auto">
-                            <span className="text-purple-400">@RestController</span><br/>
-                            <span className="text-purple-400">@RequestMapping</span>(<span className="text-emerald-400">"/api/v1"</span>)<br/>
-                            <span className="text-amber-500">public class</span> <span className="text-blue-400">OrderController</span> {'{'}<br/><br/>
-                            &nbsp;&nbsp;
-                            <span className="text-slate-500">/**<br/>&nbsp;&nbsp; * Create a new order with items<br/>&nbsp;&nbsp; */</span><br/>
-                            &nbsp;&nbsp;
-                            <span className="text-purple-400">@PostMapping</span>(<span className="text-emerald-400">"/orders"</span>)<br/>
-                            &nbsp;&nbsp;<span className="text-amber-500">public</span> <span className="text-blue-400">Result</span>&lt;
-                            <span className="text-blue-400">Order</span>&gt; create(<span className="text-purple-400">@RequestBody</span> <span className="text-blue-400">OrderDTO</span> dto) {'{'}<br/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-slate-500">// Zeka automatically generates specs from this signature</span><br/>
-                            &nbsp;&nbsp;{'}'}<br/>
-                            {'}'}
-                        </pre>
-                    </div>
-                </div>
-
-            </div>
         </div>
     );
 };

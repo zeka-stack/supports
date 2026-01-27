@@ -376,7 +376,24 @@
       "demoDesc": "Automatically generates complete documentation comments based on method signatures and code logic",
       "providerTitle": "Support Multiple AI Providers",
       "providerDesc": "Choose your preferred AI service, or use local models for privacy",
-      "providerButton": "Configure Provider"
+      "providerButton": "Configure Provider",
+      "section2Title": "Beyond",
+      "section2Highlight": "Placeholders",
+      "section2Desc": "Traditional tools just fill in @param tags. Zeka analyzes your logic, branches, and exceptions to write meaningful, human-readable explanations.",
+      "feature2_1": "Infers business logic intent",
+      "feature2_2": "Detects unchecked exceptions",
+      "feature2_3": "Explains return value conditions",
+      "section3Title": "Global Standards",
+      "section3Desc": "Whether you follow Google Java Style or need bilingual documentation for international teams, we handle the formatting.",
+      "card1Title": "Bilingual Support",
+      "card1Desc": "Generate English for open source, or Chinese for internal teams. Or both.",
+      "card2Title": "Style Compliance",
+      "card2Desc": "Strict adherence to HTML4/5 Javadoc standards and Checkstyle rules.",
+      "card3Title": "Template Engine",
+      "card3Desc": "Customize every tag and description format using Velocity templates.",
+      "privacyTitle": "Your Code, Your Secret.",
+      "privacyDesc": "Documentation often reveals core business logic. With Local Mode (Ollama), your code never leaves your machine.",
+      "privacyBadge": "100% PRIVATE"
     },
     "changelog": {
       "badge": "IntelliAI Changelog",
@@ -458,6 +475,21 @@
         "install_button": "Install Plugin",
         "docs_button": "View Docs"
       },
+      "section2Title": "Context Aware",
+      "section2Highlight": "Intelligence",
+      "section2Desc": "It doesn't just execute commands; it understands your project. Ask about your files, git status, or build dependencies.",
+      "contextFeature1": "Project Structure Analysis",
+      "contextFeature2": "Git State Awareness",
+      "contextFeature3": "Smart File Filtering",
+      "section3Title": "Safety",
+      "section3Highlight": "First",
+      "section3Desc": "Never run a destructive command by accident again. The AI detects dangerous operations and asks for explicit confirmation.",
+      "safetyCard1Title": "Destructive Command Detection",
+      "safetyCard1Desc": "Alerts on 'rm -rf', 'drop database', etc.",
+      "safetyCard2Title": "Explanation before Execution",
+      "safetyCard2Desc": "Explains what a complex command will do.",
+      "safetyCard3Title": "Shell Agnostic",
+      "safetyCard3Desc": "Works with Bash, Zsh, PowerShell, Fish.",
       "demo": {
         "comment_text": "# Find all Java files containing \"TODO\"",
         "command_text": "find . -name \"*.java\" -exec grep -l \"TODO\" {} \\;",
@@ -553,7 +585,16 @@
       "engine": {
         "title": "Powered by AI Engine",
         "description": "Leverage multiple AI models for comprehensive code analysis"
-      }
+      },
+      "section2Title": "Visual",
+      "section2Highlight": "Intelligence",
+      "section2Desc": "Stop guessing where your code goes. Tracer builds a live, interactive map of your method calls, including branches and edge cases.",
+      "section3Title": "Performance",
+      "section3Highlight": "Hotspots",
+      "section3Desc": "Integrated with runtime metrics to highlight bottlenecks directly in your IDE. Optimize with AI-driven refactoring suggestions.",
+      "performanceFeature1": "Critical Path Analysis",
+      "performanceFeature2": "Redundant Call Detection",
+      "performanceFeature3": "Async Flow Visualization"
     },
     "repairer": {
       "badge": "Auto Fix",
@@ -611,7 +652,13 @@
         "title": "Say Goodbye to Style Issues",
         "description": "Let AI handle code quality, focus on business logic.",
         "button": "Install Plugin"
-      }
+      },
+      "section2Title": "Surgical",
+      "section2Highlight": "Precision",
+      "section2Desc": "Repairer doesn't just reformat; it understands. It handles complex naming refactors and logic-preserving fixes that traditional linters miss.",
+      "section3Title": "Team",
+      "section3Highlight": "Standards",
+      "section3Desc": "Sync your organization's Checkstyle or PMD rules. Repairer ensures every developer commits clean, standardized code automatically."
     },
     "swagger": {
       "badge": "API First Development",
@@ -636,7 +683,13 @@
       "feature2Desc": "One-click switch between Dev/Test/Prod environment variables. Auto-sync Authorization Header, say goodbye to manual Token copying.",
       "feature3Title": "Format Compatible",
       "feature3Desc": "Perfect support for OpenAPI 3.0 and Swagger 2.0 standards. Export to Markdown, HTML or Postman Collection.",
-      "configHint": "Configured via simple annotations if needed"
+      "configHint": "Configured via simple annotations if needed",
+      "section2Title": "Annotation",
+      "section2Highlight": "Free",
+      "section2Desc": "Maintain a clean codebase. Our engine parses your source code and Javadoc to build accurate API specs without cluttering your logic with decorators.",
+      "section3Title": "Integrated",
+      "section3Highlight": "Debugger",
+      "section3Desc": "Test your endpoints without leaving the IDE. Support for OAuth2, environment variables, and automatic request body generation from DTOs."
     },
     "nacos": {
       "badge": "Config Management",
@@ -748,7 +801,13 @@
         "install_button": "Install Plugin",
         "docs_button": "View Documentation",
         "version_info": "Version 2.0.0"
-      }
+      },
+      "section2Title": "Version",
+      "section2Highlight": "Control",
+      "section2Desc": "Never lose a configuration again. Built-in diff viewer and history tracking let you compare and rollback changes across namespaces with one click.",
+      "section3Title": "Native",
+      "section3Highlight": "Editor",
+      "section3Desc": "Use the power of IntelliJ's editor for your YAML and Properties configs. Syntax highlighting, auto-completion, and real-time validation for Nacos schemas."
     }
   }
 }
