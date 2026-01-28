@@ -2,7 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**每次回答前后回答结束后都需要叫我:【dong4j】**
+1. **每次回答前后回答结束后都需要叫我:【dong4j】**
+2. **我提出的需求必须先给出实现方案并征求确认，确认后才能修改代码**
 
 ## Project Overview
 
