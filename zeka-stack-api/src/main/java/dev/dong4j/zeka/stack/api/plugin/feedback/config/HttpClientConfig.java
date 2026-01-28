@@ -2,13 +2,15 @@ package dev.dong4j.zeka.stack.api.plugin.feedback.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 
 /**
  * HTTP 客户端配置类
@@ -23,8 +25,21 @@ import okhttp3.OkHttpClient;
  * @date 2026.01.16
  * @since 1.0.0
  */
+@Slf4j
 @Configuration
 public class HttpClientConfig {
+
+    /** 是否启用 HTTP 代理 */
+    @Value("${app.proxy.enabled:false}")
+    private boolean proxyEnabled;
+
+    /** 代理主机地址 */
+    @Value("${app.proxy.host:127.0.0.1}")
+    private String proxyHost;
+
+    /** 代理端口 */
+    @Value("${app.proxy.port:7890}")
+    private int proxyPort;
 
     /**
      * 创建并配置一个带有超时设置的 OkHttp 客户端实例
@@ -35,11 +50,17 @@ public class HttpClientConfig {
      */
     @Bean
     public OkHttpClient okHttpClient() {
-        return new OkHttpClient.Builder()
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .build();
+            .writeTimeout(30, TimeUnit.SECONDS);
+
+        if (proxyEnabled) {
+            log.info("Enabling HTTP proxy: {}:{}", proxyHost, proxyPort);
+            builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort)));
+        }
+
+        return builder.build();
     }
 
     /**
@@ -55,4 +76,3 @@ public class HttpClientConfig {
         return mapper;
     }
 }
-
