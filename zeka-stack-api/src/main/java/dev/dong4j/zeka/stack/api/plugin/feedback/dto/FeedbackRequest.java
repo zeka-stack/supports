@@ -1,11 +1,9 @@
 package dev.dong4j.zeka.stack.api.plugin.feedback.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
 
@@ -32,14 +30,12 @@ import lombok.Getter;
 @Data
 public class FeedbackRequest {
 
-    /** 反馈标题, 最大长度为 255 个字符 */
+    /** 反馈标题 */
     @NotBlank(message = "标题不能为空")
-    @Size(max = 255, message = "标题长度不能超过255个字符")
     private String title;
 
-    /** 反馈内容, 不能为空且长度不能超过 10000 个字符 */
+    /** 反馈内容, 不能为空 */
     @NotBlank(message = "内容不能为空")
-    @Size(max = 10000, message = "内容长度不能超过10000个字符")
     private String content;
 
     /** 反馈类型, 不能为空 */
@@ -168,15 +164,12 @@ public class FeedbackRequest {
     @Data
     public static class UserInfo {
         /** 用户姓名 (可选) */
-        @Size(max = 100, message = "姓名长度不能超过100个字符")
         private String name;
 
         /** 用户邮箱 (可选) */
-        @Size(max = 255, message = "邮箱长度不能超过255个字符")
         private String email;
 
-        /** GitHub 用户名 (可选, 用于 @ 提及), 长度不能超过 39 个字符 */
-        @Size(max = 39, message = "GitHub 用户名长度不能超过39个字符")
+        /** GitHub 用户名 (可选, 用于 @ 提及) */
         private String githubUsername;
 
         /**
@@ -186,19 +179,15 @@ public class FeedbackRequest {
          * @see #setPluginName(String)
          * @see #getPluginName()
          */
-        @Size(max = 100, message = "插件名称长度不能超过100个字符")
         private String pluginName;
 
-        /** 插件版本, 最大长度为 50 个字符 */
-        @Size(max = 50, message = "插件版本长度不能超过50个字符")
+        /** 插件版本 */
         private String pluginVersion;
 
         /** IDEA 版本 */
-        @Size(max = 50, message = "IDEA 版本长度不能超过50个字符")
         private String ideaVersion;
 
         /** 操作系统信息 <p> 包含操作系统名称, 版本等详细信息 <a href="https://en.wikipedia.org/wiki/Operating_system"> 操作系统 </a></p> */
-        @Size(max = 100, message = "操作系统信息长度不能超过100个字符")
         private String os;
     }
 
@@ -222,4 +211,3 @@ public class FeedbackRequest {
         private Long timestamp;
     }
 }
-
