@@ -19,7 +19,7 @@ logging:
 
 app:
   proxy:
-    enabled: ${APP_PROXY_ENABLED:false}
+    enabled: ${APP_PROXY_ENABLED:true}
     host: ${APP_PROXY_HOST:127.0.0.1}
     port: ${APP_PROXY_PORT:7890}
 
