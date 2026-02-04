@@ -24,3 +24,145 @@ body {
     animation-duration: 0.8s;
     animation-fill-mode: both;
 }
+
+/* --- Engine Monitor Animations --- */
+
+/* 1. Data Packet Stream */
+/* Optimized for fixed width segments: -100% to 100% ensures no dead time */
+@keyframes dataStream {
+    0% { transform: translateX(-120%) scaleX(0.6); opacity: 0; }
+    10% { opacity: 0.85; }
+    50% { transform: translateX(0%) scaleX(1); opacity: 0.95; }
+    90% { opacity: 0.8; }
+    100% { transform: translateX(120%) scaleX(0.7); opacity: 0; }
+}
+.animate-data-stream {
+    animation: dataStream 2.2s ease-in-out infinite;
+}
+
+@keyframes dataStreamSmooth {
+    0% { transform: translateX(-120%); opacity: 0; }
+    15% { opacity: 0.6; }
+    50% { transform: translateX(0%); opacity: 0.75; }
+    85% { opacity: 0.55; }
+    100% { transform: translateX(120%); opacity: 0; }
+}
+.animate-data-stream-smooth {
+    animation: dataStreamSmooth 2s linear infinite;
+}
+
+@keyframes streamGlow {
+    0% { opacity: 0.25; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0.25; }
+}
+.animate-stream-glow {
+    animation: streamGlow 2.2s ease-in-out infinite;
+}
+
+@keyframes dataStreamSoft {
+    0% { transform: translateX(-120%) scaleX(0.7); opacity: 0; }
+    15% { opacity: 0.5; }
+    50% { transform: translateX(0%) scaleX(1); opacity: 0.6; }
+    85% { opacity: 0.45; }
+    100% { transform: translateX(120%) scaleX(0.8); opacity: 0; }
+}
+.animate-data-stream-soft {
+    animation: dataStreamSoft 2.8s ease-in-out infinite;
+}
+
+@keyframes streamGlowSoft {
+    0% { opacity: 0.12; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.12; }
+}
+.animate-stream-glow-soft {
+    animation: streamGlowSoft 2.8s ease-in-out infinite;
+}
+
+@keyframes dataStreamFast {
+    0% { transform: translateX(-140%) scaleX(0.5); opacity: 0; }
+    12% { opacity: 0.9; }
+    45% { transform: translateX(-5%) scaleX(1.1); opacity: 1; }
+    70% { opacity: 0.85; }
+    100% { transform: translateX(140%) scaleX(0.6); opacity: 0; }
+}
+.animate-data-stream-fast {
+    animation: dataStreamFast 1.4s ease-out infinite;
+}
+
+@keyframes streamHead {
+    0% { transform: translateY(-50%) scale(0.7); opacity: 0.4; }
+    50% { transform: translateY(-50%) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-50%) scale(0.8); opacity: 0.6; }
+}
+.animate-stream-head {
+    animation: streamHead 0.9s ease-in-out infinite;
+}
+
+/* 2. Slow Pulse (Ambient Glows) */
+.animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 3. Slow Bounce (Floating Nodes) */
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(-3%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+    50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+.animate-bounce-slow {
+    animation: bounceSlow 4s infinite;
+}
+
+/* 4. Particle Drift (Background) */
+@keyframes drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, -50px); }
+}
+.animate-drift {
+    animation: drift 20s linear infinite alternate;
+}
+
+@keyframes drift-reverse {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-50px, 30px); }
+}
+.animate-drift-reverse {
+    animation: drift-reverse 25s linear infinite alternate;
+}
+
+/* 5. Scanline (Cyberpunk Effect) */
+@keyframes scanline {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(500%); opacity: 0; }
+}
+.animate-scanline {
+    animation: scanline 3s linear infinite;
+}
+
+/* 6. Spin & Ping (Decorations) */
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
+}
+
+@keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+.animate-ping-slow {
+    animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* 7. Grid Perspective Movement */
+@keyframes gridMove {
+    0% { transform: perspective(1000px) rotateX(60deg) translateY(0); }
+    100% { transform: perspective(1000px) rotateX(60deg) translateY(40px); }
+}
+.animate-grid-move {
+    animation: gridMove 3s linear infinite;
+}

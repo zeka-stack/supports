@@ -399,6 +399,7 @@
       "heroDescription": "Unified AI service orchestration layer. Connecting IDE to infinite intelligence, providing standardized neural power for Zeka family plugins.",
       "sdkButton": "Access Engine SDK",
       "configButton": "View Configuration",
+      "monitorButton": "Live Monitor",
       "matrixTitle": "Panoramic Intelligent Dispatch Matrix",
       "matrixDesc": "Shield model differences, achieve deep decoupling and efficient collaboration between business plugins and AI capabilities.",
       "consumersLabel": "Consumers",

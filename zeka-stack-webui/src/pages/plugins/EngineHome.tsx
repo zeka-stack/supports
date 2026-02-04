@@ -60,6 +60,13 @@ export const EngineHome: React.FC = () => {
                                 {t('plugins.engine.sdkButton')}
                             </span>
                         </button>
+                        <button 
+                            onClick={() => window.location.hash = '#/plugins/engine/monitor'}
+                            className="px-8 py-3.5 bg-cyan-900/30 hover:bg-cyan-900/60 border border-cyan-500/20 text-cyan-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm group"
+                        >
+                            <Activity className="w-5 h-5 group-hover:animate-pulse"/>
+                            {t('plugins.engine.monitorButton')}
+                        </button>
                         <button className="px-8 py-3.5 bg-[#1a103c]/30 hover:bg-[#1a103c]/60 border border-violet-500/20 text-violet-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm">
                             <Settings className="w-5 h-5"/>
                             {t('plugins.engine.configButton')}

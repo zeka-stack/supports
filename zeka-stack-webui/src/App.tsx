@@ -10,6 +10,7 @@ import {FeatureRequests} from './pages/FeatureRequests';
 import {PrivacyPolicy} from './pages/PrivacyPolicy';
 import {Statistics} from './pages/Statistics';
 import {EngineHome} from './pages/plugins/EngineHome';
+import {EngineMonitor} from './pages/plugins/EngineMonitor';
 import {JavadocHome} from './pages/plugins/JavadocHome';
 import {ChangelogHome} from './pages/plugins/ChangelogHome';
 import {TerminalHome} from './pages/plugins/TerminalHome';
@@ -48,6 +49,10 @@ function App() {
     // Handle routes
     if (route === '#/plugins/engine') {
         Component = EngineHome;
+        footerVariant = 'dark';
+        headerVariant = 'dark';
+    } else if (route === '#/plugins/engine/monitor') {
+        Component = EngineMonitor;
         footerVariant = 'dark';
         headerVariant = 'dark';
     } else if (route === '#/plugins/javadoc') {

@@ -60,3 +60,69 @@ oauth:
     success-redirect: ${ZEKA_STACK_GITHUB_SUCCESS_REDIRECT:https://zekastack.dong4j.site/#/login}
     failure-redirect: ${ZEKA_STACK_GITHUB_FAILURE_REDIRECT:https://zekastack.dong4j.site/#/login}
     session-days: ${ZEKA_STACK_GITHUB_SESSION_DAYS:30}
+
+monitor:
+  nodes:
+    # --- Root Nodes ---
+    - id: engine
+      name: Zeka Engine
+      type: client
+      host: 127.0.0.1
+      check-type: ping
+    - id: cloud
+      name: Public Cloud
+      type: cloud
+      host: 1.1.1.1
+      check-type: ping
+    # --- Homelab Gateways ---
+    - id: proxy
+      name: AI Proxy
+      type: gateway
+      group: homelab.gateways
+      host: 192.168.31.10
+    # --- Homelab Compute ---
+    - id: mac-m4
+      name: Mac mini M4 Pro
+      type: compute
+      group: homelab.compute
+      host: 192.168.31.20
+    - id: mac-m2
+      name: Mac mini M2
+      type: compute
+      group: homelab.compute
+      host: 192.168.31.21
+    - id: free-api
+      name: Free API
+      type: container
+      group: homelab.compute
+      host: 192.168.31.22
+    # --- Sub Services (M4) ---
+    - id: cc-proxy
+      name: CC Proxy
+      type: service
+      parent-id: mac-m4
+      host: 192.168.31.20
+      port: 7890
+      check-type: tcp
+    - id: lm-studio
+      name: LM Studio
+      type: service
+      parent-id: mac-m4
+      host: 192.168.31.20
+      port: 1234
+      check-type: tcp
+    - id: ollama-m4
+      name: Ollama
+      type: service
+      parent-id: mac-m4
+      host: 192.168.31.20
+      port: 11434
+      check-type: tcp
+    # --- Sub Services (M2) ---
+    - id: ollama-m2
+      name: Ollama
+      type: service
+      parent-id: mac-m2
+      host: 192.168.31.21
+      port: 11434
+      check-type: tcp

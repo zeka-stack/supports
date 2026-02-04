@@ -399,6 +399,7 @@
       "heroDescription": "统一的 AI 服务编排层。连接 IDE 与无限智能，为 Zeka 家族插件提供标准化的神经动力。",
       "sdkButton": "接入 Engine SDK",
       "configButton": "查看配置",
+      "monitorButton": "实时监控",
       "matrixTitle": "全景智能调度矩阵",
       "matrixDesc": "屏蔽模型差异，实现业务插件与 AI 能力的深度解耦与高效协同。",
       "consumersLabel": "消费者",

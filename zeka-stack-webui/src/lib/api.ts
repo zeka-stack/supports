@@ -75,6 +75,33 @@ export interface TokenRanking {
     rank: number;
 }
 
+export interface ServiceNode {
+    id: string;
+    name: string;
+    type: 'client' | 'cloud' | 'gateway' | 'compute' | 'container' | 'service';
+    status: 'online' | 'offline' | 'warning' | 'idle';
+    subNodes?: ServiceNode[];
+    stats?: {
+        label: string;
+        value: string;
+    }[];
+}
+
+export interface MonitorData {
+    engine: ServiceNode;
+    cloud: ServiceNode;
+    homelab: {
+        gateways: ServiceNode[];
+        compute: ServiceNode[];
+    };
+    stats: {
+        totalTokens: number;
+        requests: number;
+        avgLatency: string;
+        uptime: string;
+    };
+}
+
 // 通用分页响应结构
 export interface PageResult<T> {
     records: T[];
@@ -106,6 +133,13 @@ export const api = {
         // Handle both direct array and wrapped response
         const data = json?.data ?? json;
         return Array.isArray(data) ? data : [];
+    },
+
+    getMonitorStatus: async (): Promise<MonitorData> => {
+        const res = await fetch(`${BASE_URL}/monitor/status`);
+        if (!res.ok) throw new Error('Failed to fetch monitor status');
+        const json = await res.json();
+        return json?.data ?? json;
     },
 
     getProjects: async (): Promise<Project[]> => {
