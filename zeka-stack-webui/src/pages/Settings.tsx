@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Copy, Github, LogOut, RefreshCw, Trash2} from 'lucide-react';
+import {Check, Copy, Github, LogOut, RefreshCw, Trash2} from 'lucide-react';
 import {authHeaders, authStorage} from '../lib/auth';
 import {useTranslation} from 'react-i18next';
 
@@ -21,6 +21,7 @@ export const Settings = () => {
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
     const [freeAiApiKey, setFreeAiApiKey] = useState('');
     const [freeAiApiKeyExpiresAt, setFreeAiApiKeyExpiresAt] = useState<number | null>(null);
+    const [copySuccess, setCopySuccess] = useState(false);
 
     const fetchMe = async () => {
         setLoading(true);
@@ -110,6 +111,8 @@ export const Settings = () => {
         }
         try {
             await navigator.clipboard.writeText(freeAiApiKey);
+            setCopySuccess(true);
+            window.setTimeout(() => setCopySuccess(false), 1500);
         } catch {
             setError(t('settings.copyFreeAiApiKeyFailed'));
         }
@@ -161,20 +164,25 @@ export const Settings = () => {
                             <div className="mt-8 space-y-4">
                                 <div>
                                     <label className="text-sm font-medium text-slate-700">{t('settings.freeAiApiKeyLabel')}</label>
-                                    <div className="mt-2 flex gap-2">
+                                    <div className="mt-2 flex items-stretch gap-2">
                                         <input
                                             value={freeAiApiKey}
                                             readOnly
-                                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none"
+                                            className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-700 outline-none"
                                         />
                                         <button
                                             type="button"
                                             onClick={handleCopyFreeAiApiKey}
                                             disabled={!freeAiApiKey}
-                                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-slate-300 disabled:cursor-not-allowed disabled:opacity-60"
+                                            title={copySuccess ? t('settings.copied') : t('settings.copy')}
+                                            aria-label={copySuccess ? t('settings.copied') : t('settings.copy')}
+                                            className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-white text-sm font-semibold shadow-sm transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-60 ${
+                                                copySuccess
+                                                    ? 'border-emerald-300 text-emerald-700'
+                                                    : 'border-slate-200 text-slate-700 hover:border-slate-300'
+                                            }`}
                                         >
-                                            <Copy className="h-4 w-4"/>
-                                            {t('settings.copy')}
+                                            {copySuccess ? <Check className="h-4 w-4"/> : <Copy className="h-4 w-4"/>}
                                         </button>
                                     </div>
                                     <p className="mt-2 text-xs text-slate-500">

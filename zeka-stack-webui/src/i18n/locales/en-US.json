@@ -229,6 +229,7 @@
         "freeAiApiKeyUnavailable": "FREEAI API Key is unavailable. Ensure your deviceId is bound and server master secret is configured.",
         "freeAiApiKeyExpiresAt": "Expires at: {{date}} (same as current login session)",
         "copy": "Copy",
+        "copied": "Copied",
         "copyFreeAiApiKeyFailed": "Failed to copy FREEAI API Key",
         "deviceIdLabel": "deviceId",
         "updateDeviceId": "Update deviceId",

@@ -229,6 +229,7 @@
         "freeAiApiKeyUnavailable": "当前账号未生成 FREEAI API Key，请确认 deviceId 已绑定且服务端已配置主密钥。",
         "freeAiApiKeyExpiresAt": "有效期至：{{date}}（与当前登录会话一致）",
         "copy": "复制",
+        "copied": "已复制",
         "copyFreeAiApiKeyFailed": "复制 FREEAI API Key 失败",
         "deviceIdLabel": "deviceId",
         "updateDeviceId": "更换 deviceId",

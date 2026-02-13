@@ -516,6 +516,7 @@ const StatusDot = ({ status }: { status: any }) => {
 const NodeCard = ({ node, size = 'md', pulse = false }: { node: ServiceNode, size?: 'sm' | 'md' | 'lg', pulse?: boolean }) => {
     const { theme } = node;
     const isOffline = node.status === 'offline';
+    const primaryStat = node.stats?.[0];
     const sizeClasses = {
         sm: 'w-48 p-3 min-h-[100px]',
         md: 'w-56 p-5 min-h-[140px]',
@@ -550,10 +551,10 @@ const NodeCard = ({ node, size = 'md', pulse = false }: { node: ServiceNode, siz
                         {node.type}
                     </p>
                 </div>
-                {node.stats && (
+                {primaryStat && (
                     <div className="flex items-center gap-2 mt-1 px-2 py-1 bg-black/30 rounded border border-white/5">
-                        <span className="text-[10px] text-gray-500 uppercase">{node.stats[0].label}</span>
-                        <span className="text-xs font-mono font-medium text-gray-300">{node.stats[0].value}</span>
+                        <span className="text-[10px] text-gray-500 uppercase">{primaryStat.label}</span>
+                        <span className="text-xs font-mono font-medium text-gray-300">{primaryStat.value}</span>
                     </div>
                 )}
             </div>
