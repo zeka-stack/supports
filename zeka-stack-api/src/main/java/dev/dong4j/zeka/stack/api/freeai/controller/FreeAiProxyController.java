@@ -101,12 +101,17 @@ public class FreeAiProxyController {
             response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, "freeai upstream is not configured");
             return;
         }
+        if (!StringUtils.hasText(freeAiProperties.getUpstreamApiKey())) {
+            response.sendError(HttpServletResponse.SC_SERVICE_UNAVAILABLE, "freeai upstream api key is not configured");
+            return;
+        }
 
         String upstreamUrl = buildUpstreamUrl(request);
         byte[] requestBody = request.getInputStream().readAllBytes();
 
         Request.Builder builder = new Request.Builder().url(upstreamUrl);
         copyRequestHeaders(request, builder);
+        applyUpstreamAuthorization(builder);
 
         RequestBody body = buildRequestBody(request, requestBody);
         builder.method(request.getMethod(), body);
@@ -175,6 +180,19 @@ public class FreeAiProxyController {
                 builder.addHeader(headerName, values.nextElement());
             }
         }
+    }
+
+    /**
+     * 向上游请求注入服务端配置的鉴权头, 避免暴露真实上游 API Key 给客户端
+     *
+     * @param builder 上游请求构建器
+     */
+    private void applyUpstreamAuthorization(Request.Builder builder) {
+        String authHeader = StringUtils.hasText(freeAiProperties.getUpstreamAuthHeader())
+                            ? freeAiProperties.getUpstreamAuthHeader()
+                            : HttpHeaders.AUTHORIZATION;
+        String authPrefix = freeAiProperties.getUpstreamAuthPrefix() == null ? "" : freeAiProperties.getUpstreamAuthPrefix();
+        builder.header(authHeader, authPrefix + freeAiProperties.getUpstreamApiKey());
     }
 
     /**

@@ -30,6 +30,15 @@ public class FreeAiProperties {
     /** FreeAI 上游服务地址 */
     private String upstreamBaseUrl;
 
+    /** FreeAI 上游 API Key（仅服务端持有） */
+    private String upstreamApiKey;
+
+    /** FreeAI 上游鉴权头名，默认 Authorization */
+    private String upstreamAuthHeader = "Authorization";
+
+    /** FreeAI 上游鉴权前缀，默认 Bearer */
+    private String upstreamAuthPrefix = "Bearer ";
+
     /** 设备密钥派生主密钥 */
     private String masterSecret;
 

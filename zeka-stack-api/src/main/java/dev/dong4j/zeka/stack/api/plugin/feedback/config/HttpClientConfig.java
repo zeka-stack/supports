@@ -2,8 +2,7 @@ package dev.dong4j.zeka.stack.api.plugin.feedback.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.concurrent.TimeUnit;
+
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
 
 /**
  * HTTP 客户端配置类
@@ -34,11 +36,11 @@ public class HttpClientConfig {
     private boolean proxyEnabled;
 
     /** 代理主机地址 */
-    @Value("${app.proxy.host:127.0.0.1}")
+    @Value("${app.proxy.host:192.168.31.4}")
     private String proxyHost;
 
     /** 代理端口 */
-    @Value("${app.proxy.port:7890}")
+    @Value("${app.proxy.port:6152}")
     private int proxyPort;
 
     /**
