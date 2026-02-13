@@ -25,6 +25,8 @@ import dev.dong4j.zeka.stack.api.auth.entity.po.UserAccount;
 import dev.dong4j.zeka.stack.api.auth.entity.po.UserSession;
 import dev.dong4j.zeka.stack.api.auth.security.OAuthStateCache;
 import dev.dong4j.zeka.stack.api.auth.service.AuthService;
+import dev.dong4j.zeka.stack.api.freeai.config.FreeAiProperties;
+import dev.dong4j.zeka.stack.api.freeai.security.FreeAiApiKeyCodec;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,6 +60,8 @@ public class AuthServiceImpl implements AuthService {
      * @see UserSession
      */
     private final UserSessionMapper userSessionMapper;
+    /** FREEAI 配置 */
+    private final FreeAiProperties freeAiProperties;
 
     /**
      * 生成 GitHub 授权跳转 URL
@@ -158,11 +162,32 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public AuthStatusDTO getStatus(String token) {
-        UserAccount account = resolveAccountByToken(token);
-        if (account == null) {
-            return new AuthStatusDTO(false, null);
+        UserSession session = resolveSession(token);
+        if (session == null) {
+            return new AuthStatusDTO(false, null, null, null);
         }
-        return new AuthStatusDTO(true, UserAccountConverter.INSTANCE.p2d(account));
+        UserAccount account = userAccountMapper.selectById(session.getUserId());
+        if (account == null) {
+            return new AuthStatusDTO(false, null, null, null);
+        }
+
+        String freeAiApiKey = null;
+        Long freeAiApiKeyExpiresAt = null;
+        if (account.getDeviceId() != null && !account.getDeviceId().isBlank()
+            && freeAiProperties.getMasterSecret() != null && !freeAiProperties.getMasterSecret().isBlank()
+            && session.getExpiresAt() != null) {
+            try {
+                freeAiApiKeyExpiresAt = session.getExpiresAt().getTime();
+                freeAiApiKey = FreeAiApiKeyCodec.generate(
+                    freeAiProperties.getMasterSecret(),
+                    account.getDeviceId(),
+                    freeAiApiKeyExpiresAt
+                                                         );
+            } catch (Exception e) {
+                log.warn("Failed to generate freeai api key for device: {}", account.getDeviceId(), e);
+            }
+        }
+        return new AuthStatusDTO(true, UserAccountConverter.INSTANCE.p2d(account), freeAiApiKey, freeAiApiKeyExpiresAt);
     }
 
     /**

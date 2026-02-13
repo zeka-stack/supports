@@ -39,6 +39,8 @@ export interface UserAccount {
 export interface AuthStatus {
     loggedIn: boolean;
     user: UserAccount | null;
+    freeAiApiKey?: string;
+    freeAiApiKeyExpiresAt?: number;
 }
 
 export interface FeedbackComment {

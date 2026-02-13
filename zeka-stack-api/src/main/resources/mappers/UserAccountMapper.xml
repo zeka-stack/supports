@@ -52,4 +52,10 @@
             <include refid="date_query"/>
         </where>
     </select>
+
+    <select id="countByDeviceId" resultType="int" parameterType="string">
+        select count(1)
+        from user_account
+        where device_id = #{deviceId}
+    </select>
 </mapper>

@@ -32,4 +32,12 @@ public class AuthStatusDTO extends BaseDTO<Long> {
     /** 用户信息, 包含用户的基本资料和权限配置 <a href="https://example.com/user-account"> 用户账户详情 </a> */
     @Schema(description = "用户信息")
     private UserAccountDTO user;
+
+    /** freeai 可用的 api key */
+    @Schema(description = "freeai api key")
+    private String freeAiApiKey;
+
+    /** freeai api key 过期时间（毫秒时间戳） */
+    @Schema(description = "freeai api key 过期时间（毫秒时间戳）")
+    private Long freeAiApiKeyExpiresAt;
 }

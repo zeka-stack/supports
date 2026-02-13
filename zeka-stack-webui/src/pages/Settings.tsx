@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Github, LogOut, RefreshCw, Trash2} from 'lucide-react';
+import {Copy, Github, LogOut, RefreshCw, Trash2} from 'lucide-react';
 import {authHeaders, authStorage} from '../lib/auth';
 import {useTranslation} from 'react-i18next';
 
@@ -19,6 +19,8 @@ export const Settings = () => {
     const [actionLoading, setActionLoading] = useState('');
     const [error, setError] = useState('');
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+    const [freeAiApiKey, setFreeAiApiKey] = useState('');
+    const [freeAiApiKeyExpiresAt, setFreeAiApiKeyExpiresAt] = useState<number | null>(null);
 
     const fetchMe = async () => {
         setLoading(true);
@@ -33,6 +35,8 @@ export const Settings = () => {
             }
             setUser(data.user);
             setDeviceId(data.user?.deviceId || '');
+            setFreeAiApiKey(data?.freeAiApiKey || '');
+            setFreeAiApiKeyExpiresAt(data?.freeAiApiKeyExpiresAt || null);
         } catch {
             setError(t('settings.cannotGetUserInfo'));
         } finally {
@@ -61,10 +65,11 @@ export const Settings = () => {
                 headers: {'Content-Type': 'application/json', ...authHeaders()},
                 body: JSON.stringify({deviceId: deviceId.trim()})
             });
-            const json = await response.json();
-            const data = json?.data ?? json;
-            setUser(data || user);
+            if (!response.ok) {
+                throw new Error('update device failed');
+            }
             authStorage.setDeviceId(deviceId.trim());
+            await fetchMe();
         } catch {
             setError(t('settings.deviceIdUpdateFailed'));
         } finally {
@@ -96,6 +101,17 @@ export const Settings = () => {
             window.location.hash = '#/login';
             setActionLoading('');
             setShowDeleteConfirm(false);
+        }
+    };
+
+    const handleCopyFreeAiApiKey = async () => {
+        if (!freeAiApiKey) {
+            return;
+        }
+        try {
+            await navigator.clipboard.writeText(freeAiApiKey);
+        } catch {
+            setError(t('settings.copyFreeAiApiKeyFailed'));
         }
     };
 
@@ -143,6 +159,30 @@ export const Settings = () => {
                             </div>
 
                             <div className="mt-8 space-y-4">
+                                <div>
+                                    <label className="text-sm font-medium text-slate-700">{t('settings.freeAiApiKeyLabel')}</label>
+                                    <div className="mt-2 flex gap-2">
+                                        <input
+                                            value={freeAiApiKey}
+                                            readOnly
+                                            className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 outline-none"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={handleCopyFreeAiApiKey}
+                                            disabled={!freeAiApiKey}
+                                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:border-slate-300 disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            <Copy className="h-4 w-4"/>
+                                            {t('settings.copy')}
+                                        </button>
+                                    </div>
+                                    <p className="mt-2 text-xs text-slate-500">
+                                        {freeAiApiKeyExpiresAt
+                                            ? t('settings.freeAiApiKeyExpiresAt', {date: new Date(freeAiApiKeyExpiresAt).toLocaleString()})
+                                            : t('settings.freeAiApiKeyUnavailable')}
+                                    </p>
+                                </div>
                                 <div>
                                     <label className="text-sm font-medium text-slate-700">{t('settings.deviceIdLabel')}</label>
                                     <input

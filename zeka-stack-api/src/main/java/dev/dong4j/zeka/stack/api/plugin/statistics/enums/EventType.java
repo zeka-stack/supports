@@ -53,6 +53,7 @@ public enum EventType implements SerializeEnum<String> {
     /** 终端命令生成 */
     TERMINAL_COMMAND("terminal_command", "终端命令生成"),
 
+    /** 未知事件类型 */
     UNKNOWN("Unknown", "未知");
 
     /** 数据库存储的值 */

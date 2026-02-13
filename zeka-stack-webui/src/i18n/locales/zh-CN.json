@@ -1,886 +1,972 @@
 {
-  "common": {
-    "appName": "Zeka Stack",
-    "loading": "加载中...",
-    "error": "错误",
-    "success": "成功",
-    "cancel": "取消",
-    "confirm": "确认",
-    "save": "保存",
-    "delete": "删除",
-    "edit": "编辑",
-    "search": "搜索",
-    "back": "返回",
-    "close": "关闭",
-    "submit": "提交",
-    "reset": "重置",
-    "clear": "清空",
-    "install": "安装",
-    "download": "下载",
-    "viewDocs": "查看文档",
-    "explore": "探索"
-  },
-  "header": {
-    "home": "首页",
-    "modules": "模块",
-    "plugins": "插件",
-    "engine": "AI 引擎",
-    "javadoc": "Javadoc",
-    "changelog": "更新日志",
-    "terminal": "终端命令",
-    "tracer": "链路追踪",
-    "repairer": "代码修复",
-    "swagger": "Swagger",
-    "nacos": "Nacos",
-    "feedback": "反馈建议",
-    "statistics": "数据统计",
-    "settings": "设置",
-    "login": "登录",
-    "logout": "退出登录",
-    "language": "语言",
-    "donate": "捐赠",
-    "privacy": "隐私政策",
-    "engineDesc": "AI 核心",
-    "javadocDesc": "AI 生成规范的 Javadoc",
-    "changelogDesc": "AI 生成提交/更新/发布日志",
-    "terminalDesc": "AI 终端助手",
-    "tracerDesc": "代码流分析",
-    "repairerDesc": "Checkstyle 问题修复",
-    "swaggerDesc": "Swagger 注解生成",
-    "nacosDesc": "IDEA 中操作 Nacos"
-  },
-  "home": {
-    "title": "Zeka Stack",
-    "subtitle": "智能插件生态系统",
-    "description": "一套强大的 IntelliJ IDEA 插件集合，提升您的开发效率",
-    "nowAvailable": "现已推出",
-    "heroTitle": "Zeka Stack",
-    "heroTitleHighlight": "Intelli IDEA 插件",
-    "heroDescription": "基于 Spring Boot 3 的现代化企业级开发脚手架。坚持“约定大于配置”，通过高度规范化实现组件开箱即用，助力团队快速构建高质量的微服务体系，实现极致开发效率。",
-    "explorePlugins": "探索插件",
-    "coreArchitecture": "核心架构",
-    "coreArchitectureDesc": "Zeka Stack 采用分层架构组织，确保严格的依赖流和模块化。",
-    "learnMore": "了解更多",
-    "installPlugin": "安装插件",
-    "githubSource": "GitHub 源码",
-    "jetbrainsCertified": "JetBrains 官方认证",
-    "freeOpenSource": "免费开源",
-    "fullStackToolbox": "全栈开发工具箱",
-    "toolboxDescription": "Zeka Plugin 不仅仅是 AI，它包含了后端开发所需的各类实用工具，无缝集成在您的 IDE 中。",
-    "aiAgentTitle": "下一代开发体验：",
-    "aiAgentHighlight": "Intelli AI Agent",
-    "aiAgentDescription": "超越简单的自动补全。Zeka Agent 能够理解您的自然语言指令，分析整个项目代码库，自主规划并执行复杂的修改任务。从修复 Bug 到功能迁移，一气呵成。",
-    "ctaTitle": "准备好提升开发效率了吗？",
-    "ctaDescription": "加入数千名使用 Zeka Stack 的开发者行列，体验更智能、更流畅的编码工作流。",
-    "freeDownload": "免费下载插件",
-    "viewDocsButton": "查看文档",
-    "exploreAgentCapabilities": "探索 Agent 能力",
-    "projectLevelContext": "项目级上下文感知",
-    "automatedRefactoring": "自动化重构与迁移",
-    "smartBugDiagnostics": "智能 Bug 诊断与修复",
-    "engine": {
-      "title": "Intelli AI Engine",
-      "description": "基于上下文的智能代码补全、自然语言生成代码、单元测试生成以及代码解释。让 AI 成为您的结对编程伙伴。",
-      "badge": "核心"
+    "common": {
+        "appName": "Zeka Stack",
+        "loading": "加载中...",
+        "error": "错误",
+        "success": "成功",
+        "cancel": "取消",
+        "confirm": "确认",
+        "save": "保存",
+        "delete": "删除",
+        "edit": "编辑",
+        "search": "搜索",
+        "back": "返回",
+        "close": "关闭",
+        "submit": "提交",
+        "reset": "重置",
+        "clear": "清空",
+        "install": "安装",
+        "download": "下载",
+        "viewDocs": "查看文档",
+        "explore": "探索"
     },
-    "javadoc": {
-      "title": "Javadoc 生成器",
-      "description": "一键生成标准的 Java 文档注释。支持自定义模板，自动解析方法签名、参数和返回值，保持文档与代码同步。"
+    "header": {
+        "home": "首页",
+        "modules": "模块",
+        "plugins": "插件",
+        "engine": "AI 引擎",
+        "javadoc": "Javadoc",
+        "changelog": "更新日志",
+        "terminal": "终端命令",
+        "tracer": "链路追踪",
+        "repairer": "代码修复",
+        "swagger": "Swagger",
+        "nacos": "Nacos",
+        "feedback": "反馈建议",
+        "statistics": "数据统计",
+        "settings": "设置",
+        "login": "登录",
+        "logout": "退出登录",
+        "language": "语言",
+        "donate": "捐赠",
+        "privacy": "隐私政策",
+        "engineDesc": "AI 核心",
+        "javadocDesc": "AI 生成规范的 Javadoc",
+        "changelogDesc": "AI 生成提交/更新/发布日志",
+        "terminalDesc": "AI 终端助手",
+        "tracerDesc": "代码流分析",
+        "repairerDesc": "Checkstyle 问题修复",
+        "swaggerDesc": "Swagger 注解生成",
+        "nacosDesc": "IDEA 中操作 Nacos"
     },
-    "swagger": {
-      "title": "Swagger 管理器",
-      "description": "直接在 IDE 中浏览、搜索和测试 Swagger/OpenAPI 接口。支持接口文档预览和 Mock 数据生成。"
+    "home": {
+        "title": "Zeka Stack",
+        "subtitle": "智能插件生态系统",
+        "description": "一套强大的 IntelliJ IDEA 插件集合，提升您的开发效率",
+        "nowAvailable": "现已推出",
+        "heroTitle": "Zeka Stack",
+        "heroTitleHighlight": "Intelli IDEA 插件",
+        "heroDescription": "基于 Spring Boot 3 的现代化企业级开发脚手架。坚持“约定大于配置”，通过高度规范化实现组件开箱即用，助力团队快速构建高质量的微服务体系，实现极致开发效率。",
+        "explorePlugins": "探索插件",
+        "coreArchitecture": "核心架构",
+        "coreArchitectureDesc": "Zeka Stack 采用分层架构组织，确保严格的依赖流和模块化。",
+        "learnMore": "了解更多",
+        "installPlugin": "安装插件",
+        "githubSource": "GitHub 源码",
+        "jetbrainsCertified": "JetBrains 官方认证",
+        "freeOpenSource": "免费开源",
+        "fullStackToolbox": "全栈开发工具箱",
+        "toolboxDescription": "Zeka Plugin 不仅仅是 AI，它包含了后端开发所需的各类实用工具，无缝集成在您的 IDE 中。",
+        "aiAgentTitle": "下一代开发体验：",
+        "aiAgentHighlight": "Intelli AI Agent",
+        "aiAgentDescription": "超越简单的自动补全。Zeka Agent 能够理解您的自然语言指令，分析整个项目代码库，自主规划并执行复杂的修改任务。从修复 Bug 到功能迁移，一气呵成。",
+        "ctaTitle": "准备好提升开发效率了吗？",
+        "ctaDescription": "加入数千名使用 Zeka Stack 的开发者行列，体验更智能、更流畅的编码工作流。",
+        "freeDownload": "免费下载插件",
+        "viewDocsButton": "查看文档",
+        "exploreAgentCapabilities": "探索 Agent 能力",
+        "projectLevelContext": "项目级上下文感知",
+        "automatedRefactoring": "自动化重构与迁移",
+        "smartBugDiagnostics": "智能 Bug 诊断与修复",
+        "engine": {
+            "title": "Intelli AI Engine",
+            "description": "基于上下文的智能代码补全、自然语言生成代码、单元测试生成以及代码解释。让 AI 成为您的结对编程伙伴。",
+            "badge": "核心"
+        },
+        "javadoc": {
+            "title": "Javadoc 生成器",
+            "description": "一键生成标准的 Java 文档注释。支持自定义模板，自动解析方法签名、参数和返回值，保持文档与代码同步。"
+        },
+        "swagger": {
+            "title": "Swagger 管理器",
+            "description": "直接在 IDE 中浏览、搜索和测试 Swagger/OpenAPI 接口。支持接口文档预览和 Mock 数据生成。"
+        },
+        "nacos": {
+            "title": "Nacos 配置",
+            "description": "无需离开编辑器即可管理 Nacos 配置。支持多环境切换、配置版本对比和快速修改发布。"
+        },
+        "tracer": {
+            "title": "链路追踪分析",
+            "description": "集成分布式链路追踪分析，快速定位微服务调用链中的性能瓶颈和异常节点。"
+        },
+        "devHelper": {
+            "title": "开发助手",
+            "description": "内置常用开发工具集：JSON 格式化、Base64 编解码、时间戳转换、正则测试等。"
+        },
+        "agent": {
+            "title": "智能体",
+            "description": "自主规划任务，执行复杂重构"
+        },
+        "codeUnderstanding": {
+            "title": "代码理解",
+            "description": "深度解析项目结构与依赖关系"
+        },
+        "whyZeka": {
+            "title": "为什么选择 Zeka Stack?",
+            "desc": "构建微服务不应意味着重复造轮子。Zeka Stack 为您的企业应用提供了一致、观点鲜明且久经考验的基础。",
+            "standards": {
+                "title": "统一工程标准",
+                "desc": "严格的 Maven 父级体系 (Arco) 消除了依赖冲突 (DLL 地狱) 并强制执行编码规范。"
+            },
+            "cloud": {
+                "title": "云原生就绪",
+                "desc": "从本地脚手架 (Cubo) 到中间件编排 (Eiko)，一切都为云原生部署预先配置。"
+            },
+            "ai": {
+                "title": "AI 增强开发",
+                "desc": "与 Zeka IDEA 插件深度集成，实现 AI 驱动的编码、文档和调试。"
+            }
+        },
+        "benefits": {
+            "performance": {
+                "title": "高性能",
+                "desc": "优化的内核和轻量级封装确保最小的开销。"
+            },
+            "security": {
+                "title": "企业级安全",
+                "desc": "内置认证 (Blen Auth) 和安全默认设置。"
+            },
+            "developer": {
+                "title": "开发者优先",
+                "desc": "丰富的工具、清晰的文档和智能 IDE 支持。"
+            },
+            "modular": {
+                "title": "模块化设计",
+                "desc": "严格分层。按需使用，灵活替换。"
+            }
+        },
+        "integration": {
+            "title": "完善体验",
+            "desc": "Zeka Stack 旨在与 Zeka IDEA 插件无缝协作。直接从 IDE 生成代码、管理依赖并可视化架构。",
+            "cta": "安装 IDEA 插件"
+        }
     },
-    "nacos": {
-      "title": "Nacos 配置",
-      "description": "无需离开编辑器即可管理 Nacos 配置。支持多环境切换、配置版本对比和快速修改发布。"
+    "statistics": {
+        "dashboard": "统计仪表板",
+        "connectedDevice": "连接设备",
+        "totalEvents": "总事件数",
+        "successRate": "成功率",
+        "avgLatency": "平均延迟",
+        "totalTokens": "总 Token 数",
+        "activityTrend": "活动趋势",
+        "tokenConsumption": "Token 消耗",
+        "eventCount": "事件数",
+        "eventType": "事件类型",
+        "providerUsage": "服务商使用",
+        "projectTokenUsage": "项目 Token 使用",
+        "entryPointUsage": "入口使用",
+        "dailyEventTypeBreakdown": "每日事件类型分布",
+        "dailyActionBreakdown": "每日用户行为分布",
+        "dailySuccessFailureBreakdown": "每日成功/失败分布",
+        "tokenUsageRanking": "Token 使用量排名",
+        "top5TokenUsers": "Top 5 Token 用户",
+        "recentActivityLog": "最近活动日志",
+        "page": "页码",
+        "total": "总计",
+        "time": "时间",
+        "type": "类型",
+        "providerModel": "服务商/模型",
+        "latency": "延迟",
+        "tokens": "Tokens",
+        "project": "项目",
+        "status": "状态",
+        "noEventsFound": "暂无事件数据",
+        "stable": "稳定",
+        "attention": "需要关注",
+        "ms": "ms"
     },
-    "tracer": {
-      "title": "链路追踪分析",
-      "description": "集成分布式链路追踪分析，快速定位微服务调用链中的性能瓶颈和异常节点。"
+    "footer": {
+        "copyright": "© 2026 IntelliAI Plugin",
+        "poweredBy": "Powered by zeka.stack",
+        "tagline": "Engine powers every AI plugin · Build beyond limits",
+        "github": "GitHub",
+        "homepage": "主页",
+        "blog": "博客"
     },
-    "devHelper": {
-      "title": "开发助手",
-      "description": "内置常用开发工具集：JSON 格式化、Base64 编解码、时间戳转换、正则测试等。"
+    "login": {
+        "title": "登录你的 AI 工作台",
+        "subtitle": "绑定设备，开启专属体验",
+        "badge": "Zeka Stack · GitHub 认证",
+        "description": "我们使用 GitHub OAuth 进行登录，安全、可靠。绑定 deviceId 后，你的配置将持续可用。",
+        "authorizeToUse": "授权即用",
+        "authorizeDesc": "只读权限，隐私安全。",
+        "deviceBinding": "设备绑定",
+        "deviceDesc": "独立 deviceId 唯一标识。",
+        "githubLoginLabel": "GitHub 登录",
+        "githubLoginDesc": "快速、安全的认证。",
+        "bindDeviceAndLogin": "绑定设备并登录",
+        "deviceDesc2": "deviceId 将与 GitHub 账号唯一绑定。",
+        "deviceIdLabel": "deviceId",
+        "deviceIdPlaceholder": "例如 dev-xxxx",
+        "changeDeviceIdSettings": "可在设置页更换 deviceId。",
+        "generateDeviceId": "生成 deviceId",
+        "loginWithGithub": "使用 GitHub 登录",
+        "redirecting": "正在跳转...",
+        "loginFailed": "GitHub 登录失败，请重试",
+        "loginValidationError": "登录状态校验失败，请重试",
+        "pleaseFillDeviceId": "请先填写 deviceId",
+        "cannotGetLoginUrl": "无法获取登录地址",
+        "getLoginUrlFailed": "获取 GitHub 登录地址失败",
+        "agreeToPrivacy": "登录即表示你同意我们的",
+        "privacyPolicy": "隐私政策"
     },
-    "agent": {
-      "title": "智能体",
-      "description": "自主规划任务，执行复杂重构"
+    "settings": {
+        "title": "账号设置",
+        "subtitle": "你的 GitHub 绑定信息",
+        "logout": "退出登录",
+        "loadingAccount": "正在加载账号信息...",
+        "freeAiApiKeyLabel": "FREEAI API Key",
+        "freeAiApiKeyUnavailable": "当前账号未生成 FREEAI API Key，请确认 deviceId 已绑定且服务端已配置主密钥。",
+        "freeAiApiKeyExpiresAt": "有效期至：{{date}}（与当前登录会话一致）",
+        "copy": "复制",
+        "copyFreeAiApiKeyFailed": "复制 FREEAI API Key 失败",
+        "deviceIdLabel": "deviceId",
+        "updateDeviceId": "更换 deviceId",
+        "updating": "更新中...",
+        "dangerZone": "危险操作",
+        "dangerZoneDesc": "删除账号会解绑 GitHub 与 deviceId，所有会话会被清理。",
+        "deleteAccount": "删除账号",
+        "deleting": "删除中...",
+        "confirmDeleteTitle": "确认删除账号",
+        "confirmDeleteDesc": "此操作不可恢复，将清除账号绑定与所有会话。",
+        "cancel": "取消",
+        "confirmDelete": "确认删除",
+        "cannotGetUserInfo": "无法获取用户信息",
+        "deviceIdCannotBeEmpty": "deviceId 不能为空",
+        "deviceIdUpdateFailed": "deviceId 更新失败"
     },
-    "codeUnderstanding": {
-      "title": "代码理解",
-      "description": "深度解析项目结构与依赖关系"
+    "featureRequests": {
+        "title": "功能请求",
+        "description": "为现有请求投票或提交您的想法，帮助我们改进。",
+        "selectProject": "选择项目",
+        "searchPlaceholder": "搜索...",
+        "submitIdea": "提交想法",
+        "newRequests": "新需求",
+        "inProgress": "处理中",
+        "completed": "已完成",
+        "noRequests": "暂无请求",
+        "poweredBy": "Powered by"
     },
-    "whyZeka": {
-      "title": "为什么选择 Zeka Stack?",
-      "desc": "构建微服务不应意味着重复造轮子。Zeka Stack 为您的企业应用提供了一致、观点鲜明且久经考验的基础。",
-      "standards": { "title": "统一工程标准", "desc": "严格的 Maven 父级体系 (Arco) 消除了依赖冲突 (DLL 地狱) 并强制执行编码规范。" },
-      "cloud": { "title": "云原生就绪", "desc": "从本地脚手架 (Cubo) 到中间件编排 (Eiko)，一切都为云原生部署预先配置。" },
-      "ai": { "title": "AI 增强开发", "desc": "与 Zeka IDEA 插件深度集成，实现 AI 驱动的编码、文档和调试。" }
+    "privacyPolicy": {
+        "title": "隐私政策与免责声明",
+        "subtitle": "Zeka Engine 插件如何收集、使用和保护您的信息",
+        "section1": {
+            "title": "1. 我们收集的信息",
+            "description": "为了提供更好的编码辅助服务及持续优化产品体验，Zeka Engine 插件可能会收集以下类型的信息：",
+            "codeContext": {
+                "title": "A. 代码片段与上下文（仅临时处理）",
+                "description": "为了进行代码补全、分析、生成和重构，我们需要临时读取您编辑器中当前活跃文件的代码片段及相关上下文（如光标位置、选中内容）。",
+                "note": "注意：这些数据仅用于实时处理，处理完成后会立即从内存中丢弃，不会被持久化存储到我们的服务器。"
+            },
+            "usageStats": {
+                "title": "B. 使用统计数据（匿名化）",
+                "description": "我们仅收集与插件功能相关的匿名统计数据，用于优化性能与功能体验，包含以下类型的信息：",
+                "featureUsage": "功能使用情况：事件类型（如 Javadoc/Commit Message/Changelog 等）与使用频次。",
+                "performanceMetrics": "性能指标：单次请求耗时、成功/失败状态。",
+                "modelInfo": "模型信息：AI 服务商与模型名称（仅名称，不含任何凭据）。",
+                "tokenConsumption": "消耗统计：Token 消耗概况（输入/输出/总量）。",
+                "entryPoints": "触发入口：项目树/编辑器/快捷键/提交面板/Git 日志面板等入口类型。",
+                "timeDimensions": "时间与维度：事件时间、项目名称（仅用于统计维度，不包含代码）。",
+                "anonymousDevice": "匿名设备标识：本地生成的匿名标识，仅用于统计去重与跨设备一致性。",
+                "noCredentials": "我们不会收集或存储您的 API Key、Access Token、Secret 等任何凭据。"
+            },
+            "notCollect": {
+                "title": "C. 明确不收集的信息",
+                "noApiKeys": "用户的 API Key、密钥、Token、密码或任何敏感凭据",
+                "noCodeContent": "代码文件内容、项目源代码、提交 diff 或文件路径",
+                "noOtherData": "与本隐私政策描述无关的任何数据",
+                "statement": "我们不会收集本段描述之外的任何数据。"
+            }
+        },
+        "section2": {
+            "title": "2. 信息的用途",
+            "description": "我们收集的数据仅用于统计页面的数据展示与聚合分析，不用于广告投放、用户画像或任何个性化营销。",
+            "usage1": "展示功能使用量与事件类型分布",
+            "usage2": "展示性能与耗时等统计指标",
+            "usage3": "展示模型与服务商使用占比",
+            "usage4": "展示入口来源分布与趋势变化"
+        },
+        "section3": {
+            "title": "3. 数据保护与安全",
+            "description": "我们将您的数据安全视为重中之重。",
+            "encryptedTransmission": "加密传输：所有数据传输均采用 HTTPS/TLS 加密协议。",
+            "localFirst": "本地处理优先：我们尽可能将逻辑放在本地运行。对于必须依赖云端 AI 的功能，我们仅发送最小必要上下文。",
+            "sensitiveStorage": "敏感信息存储：您的 API Key 等敏感凭证存储在 IDE 本地的安全存储区（IntelliJ Password Safe），我们无法直接读取，更不会上传。",
+            "noCodeStorage": "不留存代码：除非您明确参与特定的数据贡献计划，否则我们绝对不会在服务器上持久化存储您的任何业务代码。"
+        },
+        "section4": {
+            "title": "4. 第三方服务",
+            "description": "本插件集成了多家第三方大语言模型（LLM）服务商（如 OpenAI, Aliyun Qianwen, Anthropic 等）以提供 AI 能力。当您配置并使用这些服务时，您的请求数据（包含代码片段）将直接发送至相应的服务商。这些数据的处理将遵循各第三方服务商的隐私政策。我们强烈建议您在使用前查阅相关服务商的隐私条款。我们会尽最大努力筛选合规且注重隐私的合作伙伴，但不做最终担保。"
+        },
+        "section5": {
+            "title": "5. 免责声明",
+            "aiAccuracy": {
+                "title": "A. AI 生成内容的准确性",
+                "description": "AI 模型生成的内容（包括代码、注释、文档等）基于概率预测，可能存在错误、遗漏或不准确之处。用户必须在使用前对生成内容进行人工审查和测试。开发者不对因直接使用 AI 生成代码而导致的 Bug、安全漏洞、数据丢失或业务损失承担任何责任。"
+            },
+            "asIsSoftware": {
+                "title": "B. 软件按「原样」提供",
+                "description": "本插件按「原样」和「现有」基础提供，不附带任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性和不侵权的担保。"
+            },
+            "securityRisks": {
+                "title": "C. 数据安全风险",
+                "description": "虽然我们采取了合理的安全措施，但互联网传输本质上无法保证 100% 安全。对于因不可抗力、黑客攻击、系统病毒、用户自身配置不当或第三方服务漏洞导致的数据泄露或丢失，我们不承担法律责任。"
+            }
+        },
+        "lastUpdated": "最后更新日期："
     },
-    "benefits": {
-      "performance": { "title": "高性能", "desc": "优化的内核和轻量级封装确保最小的开销。" },
-      "security": { "title": "企业级安全", "desc": "内置认证 (Blen Auth) 和安全默认设置。" },
-      "developer": { "title": "开发者优先", "desc": "丰富的工具、清晰的文档和智能 IDE 支持。" },
-      "modular": { "title": "模块化设计", "desc": "严格分层。按需使用，灵活替换。" }
-    },
-    "integration": {
-      "title": "完善体验",
-      "desc": "Zeka Stack 旨在与 Zeka IDEA 插件无缝协作。直接从 IDE 生成代码、管理依赖并可视化架构。",
-      "cta": "安装 IDEA 插件"
-    }
-  },
-  "statistics": {
-    "dashboard": "统计仪表板",
-    "connectedDevice": "连接设备",
-    "totalEvents": "总事件数",
-    "successRate": "成功率",
-    "avgLatency": "平均延迟",
-    "totalTokens": "总 Token 数",
-    "activityTrend": "活动趋势",
-    "tokenConsumption": "Token 消耗",
-    "eventCount": "事件数",
-    "eventType": "事件类型",
-    "providerUsage": "服务商使用",
-    "projectTokenUsage": "项目 Token 使用",
-    "entryPointUsage": "入口使用",
-    "dailyEventTypeBreakdown": "每日事件类型分布",
-    "dailyActionBreakdown": "每日用户行为分布",
-    "dailySuccessFailureBreakdown": "每日成功/失败分布",
-    "tokenUsageRanking": "Token 使用量排名",
-    "top5TokenUsers": "Top 5 Token 用户",
-    "recentActivityLog": "最近活动日志",
-    "page": "页码",
-    "total": "总计",
-    "time": "时间",
-    "type": "类型",
-    "providerModel": "服务商/模型",
-    "latency": "延迟",
-    "tokens": "Tokens",
-    "project": "项目",
-    "status": "状态",
-    "noEventsFound": "暂无事件数据",
-    "stable": "稳定",
-    "attention": "需要关注",
-    "ms": "ms"
-  },
-  "footer": {
-    "copyright": "© 2026 IntelliAI Plugin",
-    "poweredBy": "Powered by zeka.stack",
-    "tagline": "Engine powers every AI plugin · Build beyond limits",
-    "github": "GitHub",
-    "homepage": "主页",
-    "blog": "博客"
-  },
-  "login": {
-    "title": "登录你的 AI 工作台",
-    "subtitle": "绑定设备，开启专属体验",
-    "badge": "Zeka Stack · GitHub 认证",
-    "description": "我们使用 GitHub OAuth 进行登录，安全、可靠。绑定 deviceId 后，你的配置将持续可用。",
-    "authorizeToUse": "授权即用",
-    "authorizeDesc": "只读权限，隐私安全。",
-    "deviceBinding": "设备绑定",
-    "deviceDesc": "独立 deviceId 唯一标识。",
-    "githubLoginLabel": "GitHub 登录",
-    "githubLoginDesc": "快速、安全的认证。",
-    "bindDeviceAndLogin": "绑定设备并登录",
-    "deviceDesc2": "deviceId 将与 GitHub 账号唯一绑定。",
-    "deviceIdLabel": "deviceId",
-    "deviceIdPlaceholder": "例如 dev-xxxx",
-    "changeDeviceIdSettings": "可在设置页更换 deviceId。",
-    "generateDeviceId": "生成 deviceId",
-    "loginWithGithub": "使用 GitHub 登录",
-    "redirecting": "正在跳转...",
-    "loginFailed": "GitHub 登录失败，请重试",
-    "loginValidationError": "登录状态校验失败，请重试",
-    "pleaseFillDeviceId": "请先填写 deviceId",
-    "cannotGetLoginUrl": "无法获取登录地址",
-    "getLoginUrlFailed": "获取 GitHub 登录地址失败",
-    "agreeToPrivacy": "登录即表示你同意我们的",
-    "privacyPolicy": "隐私政策"
-  },
-  "settings": {
-    "title": "账号设置",
-    "subtitle": "你的 GitHub 绑定信息",
-    "logout": "退出登录",
-    "loadingAccount": "正在加载账号信息...",
-    "deviceIdLabel": "deviceId",
-    "updateDeviceId": "更换 deviceId",
-    "updating": "更新中...",
-    "dangerZone": "危险操作",
-    "dangerZoneDesc": "删除账号会解绑 GitHub 与 deviceId，所有会话会被清理。",
-    "deleteAccount": "删除账号",
-    "deleting": "删除中...",
-    "confirmDeleteTitle": "确认删除账号",
-    "confirmDeleteDesc": "此操作不可恢复，将清除账号绑定与所有会话。",
-    "cancel": "取消",
-    "confirmDelete": "确认删除",
-    "cannotGetUserInfo": "无法获取用户信息",
-    "deviceIdCannotBeEmpty": "deviceId 不能为空",
-    "deviceIdUpdateFailed": "deviceId 更新失败"
-  },
-  "featureRequests": {
-    "title": "功能请求",
-    "description": "为现有请求投票或提交您的想法，帮助我们改进。",
-    "selectProject": "选择项目",
-    "searchPlaceholder": "搜索...",
-    "submitIdea": "提交想法",
-    "newRequests": "新需求",
-    "inProgress": "处理中",
-    "completed": "已完成",
-    "noRequests": "暂无请求",
-    "poweredBy": "Powered by"
-  },
-  "privacyPolicy": {
-    "title": "隐私政策与免责声明",
-    "subtitle": "Zeka Engine 插件如何收集、使用和保护您的信息",
-    "section1": {
-      "title": "1. 我们收集的信息",
-      "description": "为了提供更好的编码辅助服务及持续优化产品体验，Zeka Engine 插件可能会收集以下类型的信息：",
-      "codeContext": {
-        "title": "A. 代码片段与上下文（仅临时处理）",
-        "description": "为了进行代码补全、分析、生成和重构，我们需要临时读取您编辑器中当前活跃文件的代码片段及相关上下文（如光标位置、选中内容）。",
-        "note": "注意：这些数据仅用于实时处理，处理完成后会立即从内存中丢弃，不会被持久化存储到我们的服务器。"
-      },
-      "usageStats": {
-        "title": "B. 使用统计数据（匿名化）",
-        "description": "我们仅收集与插件功能相关的匿名统计数据，用于优化性能与功能体验，包含以下类型的信息：",
-        "featureUsage": "功能使用情况：事件类型（如 Javadoc/Commit Message/Changelog 等）与使用频次。",
-        "performanceMetrics": "性能指标：单次请求耗时、成功/失败状态。",
-        "modelInfo": "模型信息：AI 服务商与模型名称（仅名称，不含任何凭据）。",
-        "tokenConsumption": "消耗统计：Token 消耗概况（输入/输出/总量）。",
-        "entryPoints": "触发入口：项目树/编辑器/快捷键/提交面板/Git 日志面板等入口类型。",
-        "timeDimensions": "时间与维度：事件时间、项目名称（仅用于统计维度，不包含代码）。",
-        "anonymousDevice": "匿名设备标识：本地生成的匿名标识，仅用于统计去重与跨设备一致性。",
-        "noCredentials": "我们不会收集或存储您的 API Key、Access Token、Secret 等任何凭据。"
-      },
-      "notCollect": {
-        "title": "C. 明确不收集的信息",
-        "noApiKeys": "用户的 API Key、密钥、Token、密码或任何敏感凭据",
-        "noCodeContent": "代码文件内容、项目源代码、提交 diff 或文件路径",
-        "noOtherData": "与本隐私政策描述无关的任何数据",
-        "statement": "我们不会收集本段描述之外的任何数据。"
-      }
-    },
-    "section2": {
-      "title": "2. 信息的用途",
-      "description": "我们收集的数据仅用于统计页面的数据展示与聚合分析，不用于广告投放、用户画像或任何个性化营销。",
-      "usage1": "展示功能使用量与事件类型分布",
-      "usage2": "展示性能与耗时等统计指标",
-      "usage3": "展示模型与服务商使用占比",
-      "usage4": "展示入口来源分布与趋势变化"
-    },
-    "section3": {
-      "title": "3. 数据保护与安全",
-      "description": "我们将您的数据安全视为重中之重。",
-      "encryptedTransmission": "加密传输：所有数据传输均采用 HTTPS/TLS 加密协议。",
-      "localFirst": "本地处理优先：我们尽可能将逻辑放在本地运行。对于必须依赖云端 AI 的功能，我们仅发送最小必要上下文。",
-      "sensitiveStorage": "敏感信息存储：您的 API Key 等敏感凭证存储在 IDE 本地的安全存储区（IntelliJ Password Safe），我们无法直接读取，更不会上传。",
-      "noCodeStorage": "不留存代码：除非您明确参与特定的数据贡献计划，否则我们绝对不会在服务器上持久化存储您的任何业务代码。"
-    },
-    "section4": {
-      "title": "4. 第三方服务",
-      "description": "本插件集成了多家第三方大语言模型（LLM）服务商（如 OpenAI, Aliyun Qianwen, Anthropic 等）以提供 AI 能力。当您配置并使用这些服务时，您的请求数据（包含代码片段）将直接发送至相应的服务商。这些数据的处理将遵循各第三方服务商的隐私政策。我们强烈建议您在使用前查阅相关服务商的隐私条款。我们会尽最大努力筛选合规且注重隐私的合作伙伴，但不做最终担保。"
-    },
-    "section5": {
-      "title": "5. 免责声明",
-      "aiAccuracy": {
-        "title": "A. AI 生成内容的准确性",
-        "description": "AI 模型生成的内容（包括代码、注释、文档等）基于概率预测，可能存在错误、遗漏或不准确之处。用户必须在使用前对生成内容进行人工审查和测试。开发者不对因直接使用 AI 生成代码而导致的 Bug、安全漏洞、数据丢失或业务损失承担任何责任。"
-      },
-      "asIsSoftware": {
-        "title": "B. 软件按「原样」提供",
-        "description": "本插件按「原样」和「现有」基础提供，不附带任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性和不侵权的担保。"
-      },
-      "securityRisks": {
-        "title": "C. 数据安全风险",
-        "description": "虽然我们采取了合理的安全措施，但互联网传输本质上无法保证 100% 安全。对于因不可抗力、黑客攻击、系统病毒、用户自身配置不当或第三方服务漏洞导致的数据泄露或丢失，我们不承担法律责任。"
-      }
-    },
-    "lastUpdated": "最后更新日期："
-  },
-  "donate": {
-    "donationMethods": "捐赠方式",
-    "wechatDonation": "微信捐赠",
-    "alipayDonation": "支付宝捐赠",
-    "feedback": "意见反馈",
-    "feedbackSubmitted": "反馈已提交",
-    "feedbackThanks": "感谢你的支持，我们会尽快查看。",
-    "viewDiscussion": "前往查看",
-    "gotIt": "知道了",
-    "feedbackType": "反馈类型",
-    "bugReport": "Bug 报告",
-    "featureSuggestion": "功能建议",
-    "usageQuestion": "使用问题",
-    "other": "其他",
-    "title": "标题",
-    "titlePlaceholder": "请输入反馈标题",
-    "content": "内容",
-    "contentPlaceholder": "请详细描述您的反馈内容...",
-    "maxChars": "最多 10000 个字符",
-    "githubUsername": "GitHub 用户名",
-    "githubUsernamePlaceholder": "用于 @ 提及",
-    "pluginName": "插件名称",
-    "pluginNamePlaceholder": "例如：IntelliAI Javadoc",
-    "pluginVersion": "插件版本",
-    "pluginVersionPlaceholder": "例如：1.0.0",
-    "ideaVersion": "IDEA 版本",
-    "ideaVersionPlaceholder": "例如：2024.1",
-    "operatingSystem": "操作系统",
-    "operatingSystemPlaceholder": "例如：macOS 14.0",
-    "clear": "清空",
-    "submitFeedback": "提交反馈",
-    "submitting": "提交中...",
-    "requiredField": "必填项",
-    "requiredFields": "请输入必填字段（标题和内容）",
-    "submittingFeedback": "正在提交反馈，请稍候...",
-    "submitSuccess": "反馈提交成功！感谢您的反馈。",
-    "submitFailed": "提交失败，请稍后重试。",
-    "networkError": "网络错误"
-  },
-  "changelog": {
-    "title": "更新日志",
-    "description": "查看 IntelliAI 插件的历史版本更新记录"
-  },
-  "modules": {
-    "backToStack": "返回生态总览",
-    "viewSource": "查看源码",
-    "submitRequest": "提交功能需求",
-    "overview": "概览",
-    "coreComponents": "核心组件",
-    "keyModules": "关键模块",
-    "starterCatalog": "Starter 目录",
-    "arco": {
-      "title": "Arco Meta",
-      "subtitle": "基石：构建基础设施与工程化",
-      "description": "Arco Meta (L0) 是 Zeka Stack 的绝对构建基础。它通过在根层级严格管理版本和配置，解决了 Maven 依赖的“DLL 地狱”问题。栈中的每个项目都继承自 Arco，确保了统一的工程标准。",
-      "features": {
-        "supreme": { "title": "Arco Supreme", "desc": "全局根父项目。统一整个生态系统的构建配置、依赖版本、代码风格和插件管理。" },
-        "builder": { "title": "Arco Builder", "desc": "分层的 Maven 父结构，专为库模块和业务应用设计，确保构建一致性。" },
-        "processor": { "title": "Arco Processor", "desc": "注解处理器，用于编译时生成 Spring Boot 配置 (spring.factories) 和 SPI 文件。" },
-        "plugin": { "title": "Arco Maven Plugin", "desc": "自定义 Maven 插件，用于构建自动化，包括“90秒自动化”任务和质量检查。" }
-      }
-    },
-    "blen": {
-      "title": "Blen Kernel",
-      "subtitle": "核心内核：工具与规范",
-      "description": "Blen Kernel (L1) 提供了所有其他层使用的基础 Java 库和工具。它封装了认证、Web 响应、验证和分布式追踪的通用逻辑，确保开发者无需为基本能力重复造轮子。",
-      "features": {
-        "common": { "title": "blen-kernel-common", "desc": "通用工具、基础模型、异常和返回结构。" },
-        "auth": { "title": "blen-kernel-auth", "desc": "标准化的认证和授权接口。" },
-        "web": { "title": "blen-kernel-web", "desc": "Web 层封装：异常处理、响应包装、拦截器。" },
-        "validation": { "title": "blen-kernel-validation", "desc": "增强的验证注解和错误处理。" },
-        "tracer": { "title": "blen-kernel-tracer", "desc": "分布式追踪上下文和日志关联。" },
-        "test": { "title": "blen-kernel-test", "desc": "测试支持、基础测试类和集成测试助手。" }
-      }
-    },
-    "cubo": {
-      "title": "Cubo Starter",
-      "subtitle": "Spring Boot Starters 与脚手架",
-      "description": "Cubo Starter (L2) 定义了“如何启动一个 Zeka 项目”。它是与其标准集成的 Spring Boot Starters 集合，集成了最佳开源组件。它提供了对数据库、日志、API 文档和消息传递的开箱即用支持。",
-      "features": {
-        "mybatis": { "title": "cubo-mybatis-spring-boot", "desc": "MyBatis Plus 集成，支持统一配置、分页和代码生成。" },
-        "rest": { "title": "cubo-rest-spring-boot", "desc": "标准化的 REST API 支持，包括全局响应包装和错误处理。" },
-        "logsystem": { "title": "cubo-logsystem-spring-boot", "desc": "结构化日志、审计日志和 Trace ID 注入。" },
-        "openapi": { "title": "cubo-openapi-spring-boot", "desc": "自动配置的 Swagger/OpenAPI 文档。" },
-        "messaging": { "title": "cubo-messaging-spring-boot", "desc": "消息队列（RocketMQ/Kafka）的抽象，支持统一事件发布。" },
-        "launcher": { "title": "cubo-launcher-spring-boot", "desc": "入口 Starter。处理环境设置、Banner 和优雅停机。" }
-      }
-    },
-    "domi": { "title": "Domi Suite", "subtitle": "微服务组件（中台）", "description": "可复用的微服务组件，如认证、网关和用户管理。" },
-    "eiko": { "title": "Eiko Orch", "subtitle": "中间件编排", "description": "统一封装 APM、缓存、Nacos 和调度。" },
-    "felo": { "title": "Felo Space", "subtitle": "业务应用层", "description": "真实业务示例，如电商和支付系统。" }
-  },
-  "plugins": {
-    "engine": {
-      "badge": "核心智能基础设施",
-      "heroTitle": "IntelliAI",
-      "heroHighlight": "Engine",
-      "heroDescription": "统一的 AI 服务编排层。连接 IDE 与无限智能，为 Zeka 家族插件提供标准化的神经动力。",
-      "sdkButton": "接入 Engine SDK",
-      "configButton": "查看配置",
-      "monitorButton": "实时监控",
-      "matrixTitle": "全景智能调度矩阵",
-      "matrixDesc": "屏蔽模型差异，实现业务插件与 AI 能力的深度解耦与高效协同。",
-      "consumersLabel": "消费者",
-      "providersLabel": "服务商",
-      "engineLabel": "ENGINE",
-      "activeStatus": "活跃",
-      "freedomBadge": "自由选择",
-      "providersTitle": "连接 80+ 主流 AI 服务商",
-      "providersDesc": "无论是云端巨头还是本地私有化模型，Engine 均提供原生级支持。打破厂商锁定，一键自由切换最强模型。",
-      "openaiCardTitle": "OpenAI 兼容协议",
-      "openaiCardDesc": "完美支持所有兼容 OpenAI 接口规范的服务商，从 DeepSeek 到 Moonshot，一键无缝接入。",
-      "openaiCardMore": "+50 更多",
-      "anthropicCardTitle": "Anthropic 原生支持",
-      "anthropicCardDesc": "深度适配 Claude 系列模型，支持其特有的 Prompt Caching 与超长上下文视觉能力。",
-      "localCardTitle": "本地与私有化",
-      "localCardDesc": "数据不出域。无缝对接本地推理引擎，构建极致安全、零延迟的内部编码环境。",
-      "unifiedApiTitle": "统一 API",
-      "unifiedApiDesc": "标准化的抽象层，让插件开发者无需关心底层模型差异。",
-      "secureVaultTitle": "安全保险箱",
-      "secureVaultDesc": "API Key 加密存储于 IntelliJ Password Safe，杜绝泄露。",
-      "streamRoutingTitle": "流式路由",
-      "streamRoutingDesc": "支持 SSE 流式传输与自动降级路由，确保服务高可用。",
-      "contextMgmtTitle": "上下文管理",
-      "contextMgmtDesc": "智能上下文窗口管理，自动压缩 Prompt，最大化利用 Token。",
-      "simpleConfigTitle": "极简的配置体验",
-      "configPath": "IntelliJ Settings > Tools > IntelliAI Engine",
-      "configDesc": "直观的配置面板，支持自定义 API Endpoint、模型参数及连接测试。"
-    },
-    "javadoc": {
-      "badge": "AI 文档生成",
-      "heroTitle": "Javadoc",
-      "heroHighlight": "生成器",
-      "heroDescription": "AI 自动生成标准 Java 文档注释。一键完成，保持代码与文档同步。",
-      "generateButton": "生成 Javadoc",
-      "viewDocsButton": "查看文档",
-      "stripTitle1": "智能分析",
-      "stripDesc1": "深度理解代码逻辑与意图",
-      "stripTitle2": "标准格式",
-      "stripDesc2": "遵循 Java 规范与最佳实践",
-      "stripTitle3": "多语言",
-      "stripDesc3": "支持中英文文档",
-      "stripTitle4": "自定义模板",
-      "stripDesc4": "灵活的模板定制",
-      "demoTitle": "AI 驱动生成演示",
-      "demoBefore": "之前",
-      "demoAfter": "之后",
-      "demoDesc": "根据方法签名和代码逻辑自动生成完整的文档注释",
-      "providerTitle": "支持多种 AI 服务商",
-      "providerDesc": "选择您喜欢的 AI 服务，或使用本地模型保障隐私",
-      "providerButton": "配置服务商",
-      "section2Title": "不止于",
-      "section2Highlight": "占位符",
-      "section2Desc": "传统工具只能填充 @param 标签。Zeka 能分析您的代码逻辑、分支和异常，编写出有意义、可读性强的业务解释。",
-      "feature2_1": "推断业务逻辑意图",
-      "feature2_2": "自动检测未检查异常",
-      "feature2_3": "解释返回值条件",
-      "section3Title": "全球化标准",
-      "section3Desc": "无论您遵循 Google Java 规范，还是需要为跨国团队提供双语文档，我们都能完美适配。",
-      "card1Title": "双语支持",
-      "card1Desc": "为开源项目生成英文，或为内部团队生成中文。亦可双语对照。",
-      "card2Title": "规范合规",
-      "card2Desc": "严格遵守 HTML4/5 Javadoc 标准及 Checkstyle 规则。",
-      "card3Title": "模板引擎",
-      "card3Desc": "使用 Velocity 模板自定义每个标签和描述格式。",
-      "privacyTitle": "您的代码，绝对机密",
-      "privacyDesc": "文档往往暴露核心业务逻辑。配合本地模式 (Ollama)，您的代码永远不会离开本机。",
-      "privacyBadge": "100% 隐私安全"
+    "donate": {
+        "donationMethods": "捐赠方式",
+        "wechatDonation": "微信捐赠",
+        "alipayDonation": "支付宝捐赠",
+        "feedback": "意见反馈",
+        "feedbackSubmitted": "反馈已提交",
+        "feedbackThanks": "感谢你的支持，我们会尽快查看。",
+        "viewDiscussion": "前往查看",
+        "gotIt": "知道了",
+        "feedbackType": "反馈类型",
+        "bugReport": "Bug 报告",
+        "featureSuggestion": "功能建议",
+        "usageQuestion": "使用问题",
+        "other": "其他",
+        "title": "标题",
+        "titlePlaceholder": "请输入反馈标题",
+        "content": "内容",
+        "contentPlaceholder": "请详细描述您的反馈内容...",
+        "maxChars": "最多 10000 个字符",
+        "githubUsername": "GitHub 用户名",
+        "githubUsernamePlaceholder": "用于 @ 提及",
+        "pluginName": "插件名称",
+        "pluginNamePlaceholder": "例如：IntelliAI Javadoc",
+        "pluginVersion": "插件版本",
+        "pluginVersionPlaceholder": "例如：1.0.0",
+        "ideaVersion": "IDEA 版本",
+        "ideaVersionPlaceholder": "例如：2024.1",
+        "operatingSystem": "操作系统",
+        "operatingSystemPlaceholder": "例如：macOS 14.0",
+        "clear": "清空",
+        "submitFeedback": "提交反馈",
+        "submitting": "提交中...",
+        "requiredField": "必填项",
+        "requiredFields": "请输入必填字段（标题和内容）",
+        "submittingFeedback": "正在提交反馈，请稍候...",
+        "submitSuccess": "反馈提交成功！感谢您的反馈。",
+        "submitFailed": "提交失败，请稍后重试。",
+        "networkError": "网络错误"
     },
     "changelog": {
-      "badge": "IntelliAI Changelog",
-      "heroTitle1": "将 Git 提交",
-      "heroTitle2": "转化为",
-      "heroHighlight": "精彩故事",
-      "heroDescription": "不再需要从 git log 复制粘贴。使用 AI 自动生成结构化的更新日志、日报和智能提交信息。",
-      "feature1Title": "日报与周报",
-      "feature1Desc": "即时总结您的工作内容，用于站会汇报。",
-      "feature2Title": "语义化更新日志",
-      "feature2Desc": "自动按功能、修复、重构分类提交。",
-      "feature3Title": "智能提交信息",
-      "feature3Desc": "让 AI 根据暂存区的差异编写提交信息。",
-      "gitLogLabel": "GIT 日志",
-      "reportLabel": "报告",
-      "reportType": "日报",
-      "reportFormat": "Markdown",
-      "completedFeatures": "已完成功能",
-      "bugFixes": "Bug 修复",
-      "optimization": "优化",
-      "reportDesc1": "实现了系统范围内的深色模式支持。",
-      "reportDesc2": "解决了 UserService 中的空指针异常。",
-      "reportDesc3": "优化了数据库查询（速度提升 30%）。",
-      "section2Title": "撰写提交信息",
-      "section2Highlight": "无需动手",
-      "section2Desc": "不再盯着空的提交框发呆。AI 分析您的暂存更改，生成简洁、符合 Conventional Commits 标准的描述性信息。",
-      "feature2_1": "逐行分析差异",
-      "feature2_2": "自动检测破坏性变更",
-      "feature2_3": "支持自定义提交模板",
-      "feature2_4": "多语言支持",
-      "conventionalBadge": "符合 Conventional Commits 规范",
-      "section3Title": "您的格式，您的规则",
-      "section3Desc": "无论是 Slack 的简单列表还是 Jira 的复杂 Markdown 表格，我们的模板引擎都能满足。",
-      "template1Title": "用于 Slack / Teams",
-      "template1Desc": "简洁的要点列表，聚焦「变更内容」。非常适合日报站会。",
-      "template2Badge": "热门",
-      "template2Title": "用于发布说明",
-      "template2Desc": "按类型（功能、修复）分类，附带问题链接。专业且整洁。",
-      "template3Title": "自定义 Freemarker",
-      "template3Desc": "使用 Freemarker 模板完全控制。可访问提交哈希、作者、日期等。",
-      "ctaTitle": "从今天开始节省时间",
-      "ctaDesc": "加入数千名已停止编写手动报告、开始更多编码的开发者行列。",
-      "installButton": "安装 IntelliJ IDEA 插件",
-      "docsButton": "文档",
-      "stat1Label": "下载量",
-      "stat2Label": "评分",
-      "stat3Label": "开源"
+        "title": "更新日志",
+        "description": "查看 IntelliAI 插件的历史版本更新记录"
     },
-    "terminal": {
-      "system_online": "系统在线",
-      "badge": "AI 终端",
-      "heroTitle": "自然语言",
-      "heroHighlight": "转 Shell",
-      "heroDescription": "将自然语言瞬间转化为 Shell 命令。为开发者打造的 AI 终端助手。",
-      "typePlaceholder": "用通俗语言描述您的命令...",
-      "exampleButton": "试试示例",
-      "suggestionsTitle": "或者试试这些：",
-      "suggestion1": "查找过去 7 天内修改的所有 Java 文件",
-      "suggestion2": "终止运行在 8080 端口的进程",
-      "suggestion3": "将所有日志文件压缩归档",
-      "outputTitle": "生成的命令",
-      "copyButton": "复制",
-      "runButton": "在终端运行",
-      "feature1Title": "自然语言理解",
-      "feature1Desc": "用通俗英语描述您的需求，AI 生成准确的 shell 命令",
-      "feature2Title": "多 Shell 支持",
-      "feature2Desc": "支持 Bash、Zsh、PowerShell 等主流 Shell",
-      "feature3Title": "安全检查",
-      "feature3Desc": "在执行 rm 和 format 等破坏性操作前发出警告",
-      "feature4Title": "学习与改进",
-      "feature4Desc": "AI 从您的使用模式中学习，提供越来越准确的建议",
-      "ctaTitle": "提升终端效率",
-      "ctaDesc": "无需记忆复杂命令。让 AI 成为您的终端专家。",
-      "installButton": "安装插件",
-      "hero": {
-        "tagline1": "将自然语言瞬间转化为 Shell 命令。",
-        "tagline2": "AI 驱动，深度集成于 IDE 终端。",
-        "tagline3": "只需输入描述并按 TAB 即可生成。",
-        "install_button": "安装插件",
-        "docs_button": "查看文档"
-      },
-      "section2Title": "上下文感知",
-      "section2Highlight": "智能",
-      "section2Desc": "它不仅仅是执行命令，更理解您的项目。询问关于文件、Git 状态或构建依赖的问题，AI 都能对答如流。",
-      "contextFeature1": "项目结构分析",
-      "contextFeature2": "Git 状态感知",
-      "contextFeature3": "智能文件过滤",
-      "section3Title": "安全",
-      "section3Highlight": "优先",
-      "section3Desc": "再也不会意外执行破坏性命令。AI 会自动检测危险操作（如删除文件、格式化磁盘）并要求明确确认。",
-      "safetyCard1Title": "破坏性命令检测",
-      "safetyCard1Desc": "对 'rm -rf', 'drop database' 等命令发出警告。",
-      "safetyCard2Title": "执行前解释",
-      "safetyCard2Desc": "详细解释复杂命令的具体作用。",
-      "safetyCard3Title": "Shell 无关",
-      "safetyCard3Desc": "完美支持 Bash, Zsh, PowerShell, Fish。",
-      "demo": {
-        "comment_text": "# 查找所有包含 \"TODO\" 的 Java 文件",
-        "command_text": "find . -name \"*.java\" -exec grep -l \"TODO\" {} \\;",
-        "analyzing": "正在分析输入..."
-      },
-      "features": {
-        "section_title": "功能特性",
-        "command_generation": {
-          "title": "命令生成",
-          "desc": "AI 即时将自然语言转换为 bash 命令"
-        },
-        "smart_extraction": {
-          "title": "智能提取",
-          "desc": "自动从代码上下文中提取命令模式"
-        },
-        "security_check": {
-          "title": "安全检查",
-          "desc": "执行前验证命令以防止意外"
-        },
-        "engine_powered": {
-          "title": "Engine 驱动",
-          "desc": "利用多种 AI 服务商获得最佳结果"
-        },
-        "dual_mode": {
-          "title": "双模式",
-          "desc": "在 AI 生成和手动输入之间无缝切换"
-        },
-        "flexible_config": {
-          "title": "灵活配置",
-          "desc": "可自定义提示词和命令模板"
-        }
-      }
-    },
-    "tracer": {
-      "badge": "代码流分析",
-      "heroTitle": "深度追踪代码",
-      "heroHighlight": "执行流",
-      "heroDescription": "追踪整个调用链中的代码执行路径。可视化数据流，立即识别性能瓶颈。",
-      "scanButton": "扫描代码流",
-      "diagnosticTitle": "智能代码诊断",
-      "diagnosticDesc": "AI 驱动的分析在运行时之前检测潜在问题：",
-      "diagnostic1": "识别冗余代码路径",
-      "diagnostic2": "检测空指针风险",
-      "diagnostic3": "发现循环依赖",
-      "diagnostic4": "分析方法复杂度",
-      "capabilitiesTitle": "强大能力",
-      "capability1Title": "可视化调用图",
-      "capability1Desc": "方法调用关系的交互式可视化",
-      "capability2Title": "数据流追踪",
-      "capability2Desc": "跨整个栈跟踪变量传播",
-      "capability3Title": "性能分析",
-      "capability3Desc": "识别热点和优化机会",
-      "capability4Title": "AI 洞察",
-      "capability4Desc": "获取代码优化的智能建议",
-      "aiEngineTitle": "由 AI Engine 驱动",
-      "aiEngineDesc": "利用多种 AI 模型进行全面代码分析",
-      "ctaTitle": "掌握您的代码库",
-      "ctaDesc": "通过智能追踪理解复杂系统。",
-      "hero": {
-        "badge": "代码流分析",
-        "description": "追踪整个调用链中的代码执行路径",
-        "install_button": "安装插件",
-        "docs_button": "查看文档"
-      },
-      "diagnostic": {
-        "title": "智能代码诊断",
-        "description": "AI 驱动的分析在运行时之前检测潜在问题：",
-        "call_chain": {
-          "title": "调用链分析",
-          "desc": "跟踪整个项目的方法调用"
-        },
-        "class_modeling": {
-          "title": "类建模",
-          "desc": "可视化类关系和依赖"
-        }
-      },
-      "capabilities": {
-        "title": "强大能力",
-        "subtitle": "代码流分析所需的一切功能",
-        "ai_workflow": {
-          "title": "AI 工作流",
-          "desc": "集成 AI 的智能工作流自动化"
-        },
-        "sequence_diagram": {
-          "title": "时序图",
-          "desc": "自动生成 UML 时序图"
-        },
-        "architecture_optimization": {
-          "title": "架构优化",
-          "desc": "识别架构模式并提出改进建议"
-        }
-      },
-      "engine": {
-        "title": "由 AI Engine 驱动",
-        "description": "利用多种 AI 模型进行全面代码分析"
-      },
-      "section2Title": "可视化",
-      "section2Highlight": "智能",
-      "section2Desc": "不再猜测代码的去向。Tracer 构建了一个实时、交互式的方法调用图，涵盖所有分支和边界情况。",
-      "section3Title": "性能",
-      "section3Highlight": "热点",
-      "section3Desc": "集成运行时指标，直接在 IDE 中突出显示瓶颈。通过 AI 驱动的重构建议进行优化。",
-      "performanceFeature1": "关键路径分析",
-      "performanceFeature2": "冗余调用检测",
-      "performanceFeature3": "异步流可视化"
-    },
-    "repairer": {
-      "badge": "自动修复",
-      "heroTitle": "代码质量，",
-      "heroHighlight": "恢复如初",
-      "heroDescription": "AI 自动修复 Checkstyle 问题。精准的外科手术式修复，保持代码风格一致性。",
-      "scanButton": "扫描问题",
-      "fixAllButton": "修复所有问题",
-      "demoTitle": "观看 AI 实时修复代码",
-      "demoBefore": "修复前",
-      "demoAfter": "修复后",
-      "demoIssue": "Checkstyle 问题",
-      "demoFixed": "自动修复",
-      "feature1Title": "智能检测",
-      "feature1Desc": "自动识别 Checkstyle 违规，包括命名、格式和文档问题",
-      "feature2Title": "精准修复",
-      "feature2Desc": "针对性修复，不影响无关代码，保持逻辑完整性",
-      "feature3Title": "批量处理",
-      "feature3Desc": "一次性修复多个文件，大幅提升重构效率",
-      "feature4Title": "自定义规则",
-      "feature4Desc": "支持自定义 Checkstyle 配置，符合团队规范",
-      "ctaTitle": "告别风格问题",
-      "ctaDesc": "让 AI 处理代码质量，专注业务逻辑。",
-      "installButton": "安装 Repairer",
-      "hero": {
-        "badge": "自动修复",
-        "title": "代码质量，恢复如初",
-        "subtitle": "AI 自动修复 Checkstyle 问题",
-        "description": "精准的外科手术式修复，保持代码风格一致性",
-        "fix_button": "修复所有问题",
-        "demo_button": "观看演示",
-        "supported_tools": {
-          "checkstyle": "Checkstyle",
-          "pmd": "PMD",
-          "alibaba_guide": "阿里巴巴 Java 规范"
-        }
-      },
-      "features": {
-        "title": "强大功能",
-        "subtitle": "代码质量自动化所需的一切",
-        "quickfix": {
-          "title": "智能快速修复",
-          "desc": "AI 驱动的快速修复建议，一键应用"
-        },
-        "configurable_rules": {
-          "title": "可配置规则",
-          "desc": "支持自定义 Checkstyle 配置"
-        },
-        "batch_processing": {
-          "title": "批量处理",
-          "desc": "一次性修复整个项目的多个文件"
-        }
-      },
-      "cta": {
-        "title": "告别风格问题",
-        "description": "让 AI 处理代码质量，专注业务逻辑。",
-        "button": "安装插件"
-      },
-      "section2Title": "外科手术式",
-      "section2Highlight": "精准",
-      "section2Desc": "Repairer 不仅仅是重新格式化；它更懂代码。它能处理复杂的命名重构和保持逻辑完整的修复，这是传统 Linter 无法做到的。",
-      "section3Title": "团队",
-      "section3Highlight": "规范",
-      "section3Desc": "同步您组织的 Checkstyle 或 PMD 规则。Repairer 确保每位开发者都能自动提交整洁、标准化的代码。"
-    },
-    "swagger": {
-      "badge": "API First 开发",
-      "heroTitle1": "即时",
-      "heroHighlight": "Open API 规范",
-      "heroDescription": "从 Java 代码直接生成 Swagger/OpenAPI 文档。内置现代化调试器，让 IDEA 变身 Postman，接口开发从未如此流畅。",
-      "exportJsonButton": "导出 JSON",
-      "installButton": "安装插件",
-      "consoleDevEnv": "开发环境",
-      "consoleConfig": "配置文件",
-      "endpointsLabel": "接口列表",
-      "paramsTab": "参数",
-      "headersTab": "请求头",
-      "bodyTab": "请求体",
-      "requestComment": "// 请求体 (JSON)",
-      "responseLabel": "响应",
-      "clickSendHint": "点击发送触发请求",
-      "status200": "200 成功",
-      "feature1Title": "零侵入生成",
-      "feature1Desc": "直接解析 JavaDoc 与 Controller 代码逻辑。无需添加繁琐的 @Operation 或 @Api 注解，保持代码纯净。",
-      "feature2Title": "多环境管理",
-      "feature2Desc": "一键切换 Dev/Test/Prod 环境变量。自动同步 Authorization Header，告别手动复制 Token 的痛苦。",
-      "feature3Title": "格式兼容",
-      "feature3Desc": "完美支持 OpenAPI 3.0 与 Swagger 2.0 标准。支持导出为 Markdown、HTML 或 Postman Collection。",
-      "configHint": "需要时可通过简单注解配置",
-      "section2Title": "注解",
-      "section2Highlight": "无关",
-      "section2Desc": "保持代码库整洁。我们的引擎解析您的源代码和 Javadoc 以构建准确的 API 规范，而不会用装饰器弄乱您的逻辑。",
-      "section3Title": "集成",
-      "section3Highlight": "调试器",
-      "section3Desc": "无需离开 IDE 即可测试接口。支持 OAuth2、环境变量，并能自动从 DTO 生成请求体。"
-    },
-    "nacos": {
-      "badge": "配置管理",
-      "heroTitle": "在 IDE 中管理",
-      "heroHighlight": "Nacos 配置",
-      "heroDescription": "无需离开 IDEA 即可管理 Nacos 配置。多环境切换、版本对比、快速发布。",
-      "connectButton": "连接 Nacos",
-      "feature1Title": "IDE 原生体验",
-      "feature1Desc": "告别浏览器控制台，在 IDE 中掌控一切",
-      "feature2Title": "多环境支持",
-      "feature2Desc": "快速切换开发、测试、生产环境",
-      "feature3Title": "版本历史",
-      "feature3Desc": "查看和对比配置变更历史",
-      "feature4Title": "实时同步",
-      "feature4Desc": "即时推送到远程，自动刷新",
-      "ctaTitle": "简化配置管理",
-      "ctaDesc": "高效、安全、可靠的 Nacos 操作。",
-      "connectNow": "立即连接",
-      "demoNamespace": "命名空间",
-      "demoGroup": "分组",
-      "demoDataId": "数据 ID",
-      "demoConfigFile": "application.yml",
-      "demoAction": "编辑",
-      "demoAction2": "发布",
-      "hero": {
-        "badge": "配置管理",
-        "title": "Nacos 配置",
-        "subtitle": "在 IDE 中管理",
-        "description": "无需离开 IDEA 即可管理 Nacos 配置。多环境切换、版本对比、快速发布。",
-        "download_button": "下载插件",
-        "demo_button": "观看演示"
-      },
-      "demo": {
-        "tabs": {
-          "config": "配置",
-          "service": "服务"
-        },
-        "sidebar": {
-          "remote_prod": "远程 (生产)",
-          "namespaces": "命名空间",
-          "namespace_public": "public",
-          "namespace_dev": "dev",
-          "file_user_service": "user-service.yml",
-          "file_gateway": "gateway.yml",
-          "file_order": "order-service.yml",
-          "local_dev": "本地 (开发)"
-        },
-        "editor": {
-          "tab_remote": "远程",
-          "tab_comparison": "对比",
-          "status_valid": "有效",
-          "status_utf8": "UTF-8",
-          "button_reset": "重置",
-          "button_publish": "发布"
-        },
-        "service": {
-          "instances": "实例",
-          "subscribers": "订阅者",
-          "filter_placeholder": "筛选...",
-          "table_header": {
-            "ip": "IP",
-            "port": "端口",
-            "weight": "权重",
-            "healthy": "健康",
-            "metadata": "元数据"
-          }
-        }
-      },
-      "features": {
-        "title": "强大功能",
-        "local_lifecycle": {
-          "title": "本地生命周期管理",
-          "desc": "直接从 IDE 管理本地 Nacos 服务器，<strong>一键启动/停止</strong>",
-          "status_running": "运行中",
-          "port": "端口: 8848",
-          "version": "v2.2.0"
-        },
-        "version_control": {
-          "title": "版本控制与对比",
-          "desc": "通过内置版本历史跟踪每次配置变更",
-          "history": {
-            "v3": {
-              "msg": "添加缓存配置",
-              "time": "2 分钟前"
-            },
-            "v2": {
-              "msg": "更新数据库 URL",
-              "time": "1 小时前"
-            },
-            "v1": {
-              "msg": "初始版本",
-              "time": "昨天"
+    "modules": {
+        "backToStack": "返回生态总览",
+        "viewSource": "查看源码",
+        "submitRequest": "提交功能需求",
+        "overview": "概览",
+        "coreComponents": "核心组件",
+        "keyModules": "关键模块",
+        "starterCatalog": "Starter 目录",
+        "arco": {
+            "title": "Arco Meta",
+            "subtitle": "基石：构建基础设施与工程化",
+            "description": "Arco Meta (L0) 是 Zeka Stack 的绝对构建基础。它通过在根层级严格管理版本和配置，解决了 Maven 依赖的“DLL 地狱”问题。栈中的每个项目都继承自 Arco，确保了统一的工程标准。",
+            "features": {
+                "supreme": {
+                    "title": "Arco Supreme",
+                    "desc": "全局根父项目。统一整个生态系统的构建配置、依赖版本、代码风格和插件管理。"
+                },
+                "builder": {
+                    "title": "Arco Builder",
+                    "desc": "分层的 Maven 父结构，专为库模块和业务应用设计，确保构建一致性。"
+                },
+                "processor": {
+                    "title": "Arco Processor",
+                    "desc": "注解处理器，用于编译时生成 Spring Boot 配置 (spring.factories) 和 SPI 文件。"
+                },
+                "plugin": {
+                    "title": "Arco Maven Plugin",
+                    "desc": "自定义 Maven 插件，用于构建自动化，包括“90秒自动化”任务和质量检查。"
+                }
             }
-          }
         },
-        "intelligent_editor": {
-          "title": "智能配置编辑器",
-          "desc": "YAML 和 Properties 文件的语法高亮、验证和自动补全"
+        "blen": {
+            "title": "Blen Kernel",
+            "subtitle": "核心内核：工具与规范",
+            "description": "Blen Kernel (L1) 提供了所有其他层使用的基础 Java 库和工具。它封装了认证、Web 响应、验证和分布式追踪的通用逻辑，确保开发者无需为基本能力重复造轮子。",
+            "features": {
+                "common": {
+                    "title": "blen-kernel-common",
+                    "desc": "通用工具、基础模型、异常和返回结构。"
+                },
+                "auth": {
+                    "title": "blen-kernel-auth",
+                    "desc": "标准化的认证和授权接口。"
+                },
+                "web": {
+                    "title": "blen-kernel-web",
+                    "desc": "Web 层封装：异常处理、响应包装、拦截器。"
+                },
+                "validation": {
+                    "title": "blen-kernel-validation",
+                    "desc": "增强的验证注解和错误处理。"
+                },
+                "tracer": {
+                    "title": "blen-kernel-tracer",
+                    "desc": "分布式追踪上下文和日志关联。"
+                },
+                "test": {
+                    "title": "blen-kernel-test",
+                    "desc": "测试支持、基础测试类和集成测试助手。"
+                }
+            }
         },
-        "security": {
-          "title": "安全与加密",
-          "desc": "加密凭据存储，安全传输到远程 Nacos 服务器"
+        "cubo": {
+            "title": "Cubo Starter",
+            "subtitle": "Spring Boot Starters 与脚手架",
+            "description": "Cubo Starter (L2) 定义了“如何启动一个 Zeka 项目”。它是与其标准集成的 Spring Boot Starters 集合，集成了最佳开源组件。它提供了对数据库、日志、API 文档和消息传递的开箱即用支持。",
+            "features": {
+                "mybatis": {
+                    "title": "cubo-mybatis-spring-boot",
+                    "desc": "MyBatis Plus 集成，支持统一配置、分页和代码生成。"
+                },
+                "rest": {
+                    "title": "cubo-rest-spring-boot",
+                    "desc": "标准化的 REST API 支持，包括全局响应包装和错误处理。"
+                },
+                "logsystem": {
+                    "title": "cubo-logsystem-spring-boot",
+                    "desc": "结构化日志、审计日志和 Trace ID 注入。"
+                },
+                "openapi": {
+                    "title": "cubo-openapi-spring-boot",
+                    "desc": "自动配置的 Swagger/OpenAPI 文档。"
+                },
+                "messaging": {
+                    "title": "cubo-messaging-spring-boot",
+                    "desc": "消息队列（RocketMQ/Kafka）的抽象，支持统一事件发布。"
+                },
+                "launcher": {
+                    "title": "cubo-launcher-spring-boot",
+                    "desc": "入口 Starter。处理环境设置、Banner 和优雅停机。"
+                }
+            }
+        },
+        "domi": {
+            "title": "Domi Suite",
+            "subtitle": "微服务组件（中台）",
+            "description": "可复用的微服务组件，如认证、网关和用户管理。"
+        },
+        "eiko": {
+            "title": "Eiko Orch",
+            "subtitle": "中间件编排",
+            "description": "统一封装 APM、缓存、Nacos 和调度。"
+        },
+        "felo": {
+            "title": "Felo Space",
+            "subtitle": "业务应用层",
+            "description": "真实业务示例，如电商和支付系统。"
         }
-      },
-      "cta": {
-        "rating": "4.8",
-        "title": "准备好简化您的配置管理了吗？",
-        "description": "加入数千名已简化 Nacos 工作流的开发者行列。",
-        "install_button": "安装插件",
-        "docs_button": "查看文档",
-        "version_info": "版本 2.0.0"
-      },
-      "section2Title": "版本",
-      "section2Highlight": "控制",
-      "section2Desc": "再也不会丢失配置。内置差异查看器和历史跟踪，让您一键对比并回滚跨命名空间的变更。",
-      "section3Title": "原生",
-      "section3Highlight": "编辑器",
-      "section3Desc": "为您的 YAML 和 Properties 配置发挥 IntelliJ 编辑器的强大功能。支持 Nacos 模式的语法高亮、自动补全和实时验证。"
+    },
+    "plugins": {
+        "engine": {
+            "badge": "核心智能基础设施",
+            "heroTitle": "IntelliAI",
+            "heroHighlight": "Engine",
+            "heroDescription": "统一的 AI 服务编排层。连接 IDE 与无限智能，为 Zeka 家族插件提供标准化的神经动力。",
+            "sdkButton": "接入 Engine SDK",
+            "configButton": "查看配置",
+            "monitorButton": "实时监控",
+            "matrixTitle": "全景智能调度矩阵",
+            "matrixDesc": "屏蔽模型差异，实现业务插件与 AI 能力的深度解耦与高效协同。",
+            "consumersLabel": "消费者",
+            "providersLabel": "服务商",
+            "engineLabel": "ENGINE",
+            "activeStatus": "活跃",
+            "freedomBadge": "自由选择",
+            "providersTitle": "连接 80+ 主流 AI 服务商",
+            "providersDesc": "无论是云端巨头还是本地私有化模型，Engine 均提供原生级支持。打破厂商锁定，一键自由切换最强模型。",
+            "openaiCardTitle": "OpenAI 兼容协议",
+            "openaiCardDesc": "完美支持所有兼容 OpenAI 接口规范的服务商，从 DeepSeek 到 Moonshot，一键无缝接入。",
+            "openaiCardMore": "+50 更多",
+            "anthropicCardTitle": "Anthropic 原生支持",
+            "anthropicCardDesc": "深度适配 Claude 系列模型，支持其特有的 Prompt Caching 与超长上下文视觉能力。",
+            "localCardTitle": "本地与私有化",
+            "localCardDesc": "数据不出域。无缝对接本地推理引擎，构建极致安全、零延迟的内部编码环境。",
+            "unifiedApiTitle": "统一 API",
+            "unifiedApiDesc": "标准化的抽象层，让插件开发者无需关心底层模型差异。",
+            "secureVaultTitle": "安全保险箱",
+            "secureVaultDesc": "API Key 加密存储于 IntelliJ Password Safe，杜绝泄露。",
+            "streamRoutingTitle": "流式路由",
+            "streamRoutingDesc": "支持 SSE 流式传输与自动降级路由，确保服务高可用。",
+            "contextMgmtTitle": "上下文管理",
+            "contextMgmtDesc": "智能上下文窗口管理，自动压缩 Prompt，最大化利用 Token。",
+            "simpleConfigTitle": "极简的配置体验",
+            "configPath": "IntelliJ Settings > Tools > IntelliAI Engine",
+            "configDesc": "直观的配置面板，支持自定义 API Endpoint、模型参数及连接测试。"
+        },
+        "javadoc": {
+            "badge": "AI 文档生成",
+            "heroTitle": "Javadoc",
+            "heroHighlight": "生成器",
+            "heroDescription": "AI 自动生成标准 Java 文档注释。一键完成，保持代码与文档同步。",
+            "generateButton": "生成 Javadoc",
+            "viewDocsButton": "查看文档",
+            "stripTitle1": "智能分析",
+            "stripDesc1": "深度理解代码逻辑与意图",
+            "stripTitle2": "标准格式",
+            "stripDesc2": "遵循 Java 规范与最佳实践",
+            "stripTitle3": "多语言",
+            "stripDesc3": "支持中英文文档",
+            "stripTitle4": "自定义模板",
+            "stripDesc4": "灵活的模板定制",
+            "demoTitle": "AI 驱动生成演示",
+            "demoBefore": "之前",
+            "demoAfter": "之后",
+            "demoDesc": "根据方法签名和代码逻辑自动生成完整的文档注释",
+            "providerTitle": "支持多种 AI 服务商",
+            "providerDesc": "选择您喜欢的 AI 服务，或使用本地模型保障隐私",
+            "providerButton": "配置服务商",
+            "section2Title": "不止于",
+            "section2Highlight": "占位符",
+            "section2Desc": "传统工具只能填充 @param 标签。Zeka 能分析您的代码逻辑、分支和异常，编写出有意义、可读性强的业务解释。",
+            "feature2_1": "推断业务逻辑意图",
+            "feature2_2": "自动检测未检查异常",
+            "feature2_3": "解释返回值条件",
+            "section3Title": "全球化标准",
+            "section3Desc": "无论您遵循 Google Java 规范，还是需要为跨国团队提供双语文档，我们都能完美适配。",
+            "card1Title": "双语支持",
+            "card1Desc": "为开源项目生成英文，或为内部团队生成中文。亦可双语对照。",
+            "card2Title": "规范合规",
+            "card2Desc": "严格遵守 HTML4/5 Javadoc 标准及 Checkstyle 规则。",
+            "card3Title": "模板引擎",
+            "card3Desc": "使用 Velocity 模板自定义每个标签和描述格式。",
+            "privacyTitle": "您的代码，绝对机密",
+            "privacyDesc": "文档往往暴露核心业务逻辑。配合本地模式 (Ollama)，您的代码永远不会离开本机。",
+            "privacyBadge": "100% 隐私安全"
+        },
+        "changelog": {
+            "badge": "IntelliAI Changelog",
+            "heroTitle1": "将 Git 提交",
+            "heroTitle2": "转化为",
+            "heroHighlight": "精彩故事",
+            "heroDescription": "不再需要从 git log 复制粘贴。使用 AI 自动生成结构化的更新日志、日报和智能提交信息。",
+            "feature1Title": "日报与周报",
+            "feature1Desc": "即时总结您的工作内容，用于站会汇报。",
+            "feature2Title": "语义化更新日志",
+            "feature2Desc": "自动按功能、修复、重构分类提交。",
+            "feature3Title": "智能提交信息",
+            "feature3Desc": "让 AI 根据暂存区的差异编写提交信息。",
+            "gitLogLabel": "GIT 日志",
+            "reportLabel": "报告",
+            "reportType": "日报",
+            "reportFormat": "Markdown",
+            "completedFeatures": "已完成功能",
+            "bugFixes": "Bug 修复",
+            "optimization": "优化",
+            "reportDesc1": "实现了系统范围内的深色模式支持。",
+            "reportDesc2": "解决了 UserService 中的空指针异常。",
+            "reportDesc3": "优化了数据库查询（速度提升 30%）。",
+            "section2Title": "撰写提交信息",
+            "section2Highlight": "无需动手",
+            "section2Desc": "不再盯着空的提交框发呆。AI 分析您的暂存更改，生成简洁、符合 Conventional Commits 标准的描述性信息。",
+            "feature2_1": "逐行分析差异",
+            "feature2_2": "自动检测破坏性变更",
+            "feature2_3": "支持自定义提交模板",
+            "feature2_4": "多语言支持",
+            "conventionalBadge": "符合 Conventional Commits 规范",
+            "section3Title": "您的格式，您的规则",
+            "section3Desc": "无论是 Slack 的简单列表还是 Jira 的复杂 Markdown 表格，我们的模板引擎都能满足。",
+            "template1Title": "用于 Slack / Teams",
+            "template1Desc": "简洁的要点列表，聚焦「变更内容」。非常适合日报站会。",
+            "template2Badge": "热门",
+            "template2Title": "用于发布说明",
+            "template2Desc": "按类型（功能、修复）分类，附带问题链接。专业且整洁。",
+            "template3Title": "自定义 Freemarker",
+            "template3Desc": "使用 Freemarker 模板完全控制。可访问提交哈希、作者、日期等。",
+            "ctaTitle": "从今天开始节省时间",
+            "ctaDesc": "加入数千名已停止编写手动报告、开始更多编码的开发者行列。",
+            "installButton": "安装 IntelliJ IDEA 插件",
+            "docsButton": "文档",
+            "stat1Label": "下载量",
+            "stat2Label": "评分",
+            "stat3Label": "开源"
+        },
+        "terminal": {
+            "system_online": "系统在线",
+            "badge": "AI 终端",
+            "heroTitle": "自然语言",
+            "heroHighlight": "转 Shell",
+            "heroDescription": "将自然语言瞬间转化为 Shell 命令。为开发者打造的 AI 终端助手。",
+            "typePlaceholder": "用通俗语言描述您的命令...",
+            "exampleButton": "试试示例",
+            "suggestionsTitle": "或者试试这些：",
+            "suggestion1": "查找过去 7 天内修改的所有 Java 文件",
+            "suggestion2": "终止运行在 8080 端口的进程",
+            "suggestion3": "将所有日志文件压缩归档",
+            "outputTitle": "生成的命令",
+            "copyButton": "复制",
+            "runButton": "在终端运行",
+            "feature1Title": "自然语言理解",
+            "feature1Desc": "用通俗英语描述您的需求，AI 生成准确的 shell 命令",
+            "feature2Title": "多 Shell 支持",
+            "feature2Desc": "支持 Bash、Zsh、PowerShell 等主流 Shell",
+            "feature3Title": "安全检查",
+            "feature3Desc": "在执行 rm 和 format 等破坏性操作前发出警告",
+            "feature4Title": "学习与改进",
+            "feature4Desc": "AI 从您的使用模式中学习，提供越来越准确的建议",
+            "ctaTitle": "提升终端效率",
+            "ctaDesc": "无需记忆复杂命令。让 AI 成为您的终端专家。",
+            "installButton": "安装插件",
+            "hero": {
+                "tagline1": "将自然语言瞬间转化为 Shell 命令。",
+                "tagline2": "AI 驱动，深度集成于 IDE 终端。",
+                "tagline3": "只需输入描述并按 TAB 即可生成。",
+                "install_button": "安装插件",
+                "docs_button": "查看文档"
+            },
+            "section2Title": "上下文感知",
+            "section2Highlight": "智能",
+            "section2Desc": "它不仅仅是执行命令，更理解您的项目。询问关于文件、Git 状态或构建依赖的问题，AI 都能对答如流。",
+            "contextFeature1": "项目结构分析",
+            "contextFeature2": "Git 状态感知",
+            "contextFeature3": "智能文件过滤",
+            "section3Title": "安全",
+            "section3Highlight": "优先",
+            "section3Desc": "再也不会意外执行破坏性命令。AI 会自动检测危险操作（如删除文件、格式化磁盘）并要求明确确认。",
+            "safetyCard1Title": "破坏性命令检测",
+            "safetyCard1Desc": "对 'rm -rf', 'drop database' 等命令发出警告。",
+            "safetyCard2Title": "执行前解释",
+            "safetyCard2Desc": "详细解释复杂命令的具体作用。",
+            "safetyCard3Title": "Shell 无关",
+            "safetyCard3Desc": "完美支持 Bash, Zsh, PowerShell, Fish。",
+            "demo": {
+                "comment_text": "# 查找所有包含 \"TODO\" 的 Java 文件",
+                "command_text": "find . -name \"*.java\" -exec grep -l \"TODO\" {} \\;",
+                "analyzing": "正在分析输入..."
+            },
+            "features": {
+                "section_title": "功能特性",
+                "command_generation": {
+                    "title": "命令生成",
+                    "desc": "AI 即时将自然语言转换为 bash 命令"
+                },
+                "smart_extraction": {
+                    "title": "智能提取",
+                    "desc": "自动从代码上下文中提取命令模式"
+                },
+                "security_check": {
+                    "title": "安全检查",
+                    "desc": "执行前验证命令以防止意外"
+                },
+                "engine_powered": {
+                    "title": "Engine 驱动",
+                    "desc": "利用多种 AI 服务商获得最佳结果"
+                },
+                "dual_mode": {
+                    "title": "双模式",
+                    "desc": "在 AI 生成和手动输入之间无缝切换"
+                },
+                "flexible_config": {
+                    "title": "灵活配置",
+                    "desc": "可自定义提示词和命令模板"
+                }
+            }
+        },
+        "tracer": {
+            "badge": "代码流分析",
+            "heroTitle": "深度追踪代码",
+            "heroHighlight": "执行流",
+            "heroDescription": "追踪整个调用链中的代码执行路径。可视化数据流，立即识别性能瓶颈。",
+            "scanButton": "扫描代码流",
+            "diagnosticTitle": "智能代码诊断",
+            "diagnosticDesc": "AI 驱动的分析在运行时之前检测潜在问题：",
+            "diagnostic1": "识别冗余代码路径",
+            "diagnostic2": "检测空指针风险",
+            "diagnostic3": "发现循环依赖",
+            "diagnostic4": "分析方法复杂度",
+            "capabilitiesTitle": "强大能力",
+            "capability1Title": "可视化调用图",
+            "capability1Desc": "方法调用关系的交互式可视化",
+            "capability2Title": "数据流追踪",
+            "capability2Desc": "跨整个栈跟踪变量传播",
+            "capability3Title": "性能分析",
+            "capability3Desc": "识别热点和优化机会",
+            "capability4Title": "AI 洞察",
+            "capability4Desc": "获取代码优化的智能建议",
+            "aiEngineTitle": "由 AI Engine 驱动",
+            "aiEngineDesc": "利用多种 AI 模型进行全面代码分析",
+            "ctaTitle": "掌握您的代码库",
+            "ctaDesc": "通过智能追踪理解复杂系统。",
+            "hero": {
+                "badge": "代码流分析",
+                "description": "追踪整个调用链中的代码执行路径",
+                "install_button": "安装插件",
+                "docs_button": "查看文档"
+            },
+            "diagnostic": {
+                "title": "智能代码诊断",
+                "description": "AI 驱动的分析在运行时之前检测潜在问题：",
+                "call_chain": {
+                    "title": "调用链分析",
+                    "desc": "跟踪整个项目的方法调用"
+                },
+                "class_modeling": {
+                    "title": "类建模",
+                    "desc": "可视化类关系和依赖"
+                }
+            },
+            "capabilities": {
+                "title": "强大能力",
+                "subtitle": "代码流分析所需的一切功能",
+                "ai_workflow": {
+                    "title": "AI 工作流",
+                    "desc": "集成 AI 的智能工作流自动化"
+                },
+                "sequence_diagram": {
+                    "title": "时序图",
+                    "desc": "自动生成 UML 时序图"
+                },
+                "architecture_optimization": {
+                    "title": "架构优化",
+                    "desc": "识别架构模式并提出改进建议"
+                }
+            },
+            "engine": {
+                "title": "由 AI Engine 驱动",
+                "description": "利用多种 AI 模型进行全面代码分析"
+            },
+            "section2Title": "可视化",
+            "section2Highlight": "智能",
+            "section2Desc": "不再猜测代码的去向。Tracer 构建了一个实时、交互式的方法调用图，涵盖所有分支和边界情况。",
+            "section3Title": "性能",
+            "section3Highlight": "热点",
+            "section3Desc": "集成运行时指标，直接在 IDE 中突出显示瓶颈。通过 AI 驱动的重构建议进行优化。",
+            "performanceFeature1": "关键路径分析",
+            "performanceFeature2": "冗余调用检测",
+            "performanceFeature3": "异步流可视化"
+        },
+        "repairer": {
+            "badge": "自动修复",
+            "heroTitle": "代码质量，",
+            "heroHighlight": "恢复如初",
+            "heroDescription": "AI 自动修复 Checkstyle 问题。精准的外科手术式修复，保持代码风格一致性。",
+            "scanButton": "扫描问题",
+            "fixAllButton": "修复所有问题",
+            "demoTitle": "观看 AI 实时修复代码",
+            "demoBefore": "修复前",
+            "demoAfter": "修复后",
+            "demoIssue": "Checkstyle 问题",
+            "demoFixed": "自动修复",
+            "feature1Title": "智能检测",
+            "feature1Desc": "自动识别 Checkstyle 违规，包括命名、格式和文档问题",
+            "feature2Title": "精准修复",
+            "feature2Desc": "针对性修复，不影响无关代码，保持逻辑完整性",
+            "feature3Title": "批量处理",
+            "feature3Desc": "一次性修复多个文件，大幅提升重构效率",
+            "feature4Title": "自定义规则",
+            "feature4Desc": "支持自定义 Checkstyle 配置，符合团队规范",
+            "ctaTitle": "告别风格问题",
+            "ctaDesc": "让 AI 处理代码质量，专注业务逻辑。",
+            "installButton": "安装 Repairer",
+            "hero": {
+                "badge": "自动修复",
+                "title": "代码质量，恢复如初",
+                "subtitle": "AI 自动修复 Checkstyle 问题",
+                "description": "精准的外科手术式修复，保持代码风格一致性",
+                "fix_button": "修复所有问题",
+                "demo_button": "观看演示",
+                "supported_tools": {
+                    "checkstyle": "Checkstyle",
+                    "pmd": "PMD",
+                    "alibaba_guide": "阿里巴巴 Java 规范"
+                }
+            },
+            "features": {
+                "title": "强大功能",
+                "subtitle": "代码质量自动化所需的一切",
+                "quickfix": {
+                    "title": "智能快速修复",
+                    "desc": "AI 驱动的快速修复建议，一键应用"
+                },
+                "configurable_rules": {
+                    "title": "可配置规则",
+                    "desc": "支持自定义 Checkstyle 配置"
+                },
+                "batch_processing": {
+                    "title": "批量处理",
+                    "desc": "一次性修复整个项目的多个文件"
+                }
+            },
+            "cta": {
+                "title": "告别风格问题",
+                "description": "让 AI 处理代码质量，专注业务逻辑。",
+                "button": "安装插件"
+            },
+            "section2Title": "外科手术式",
+            "section2Highlight": "精准",
+            "section2Desc": "Repairer 不仅仅是重新格式化；它更懂代码。它能处理复杂的命名重构和保持逻辑完整的修复，这是传统 Linter 无法做到的。",
+            "section3Title": "团队",
+            "section3Highlight": "规范",
+            "section3Desc": "同步您组织的 Checkstyle 或 PMD 规则。Repairer 确保每位开发者都能自动提交整洁、标准化的代码。"
+        },
+        "swagger": {
+            "badge": "API First 开发",
+            "heroTitle1": "即时",
+            "heroHighlight": "Open API 规范",
+            "heroDescription": "从 Java 代码直接生成 Swagger/OpenAPI 文档。内置现代化调试器，让 IDEA 变身 Postman，接口开发从未如此流畅。",
+            "exportJsonButton": "导出 JSON",
+            "installButton": "安装插件",
+            "consoleDevEnv": "开发环境",
+            "consoleConfig": "配置文件",
+            "endpointsLabel": "接口列表",
+            "paramsTab": "参数",
+            "headersTab": "请求头",
+            "bodyTab": "请求体",
+            "requestComment": "// 请求体 (JSON)",
+            "responseLabel": "响应",
+            "clickSendHint": "点击发送触发请求",
+            "status200": "200 成功",
+            "feature1Title": "零侵入生成",
+            "feature1Desc": "直接解析 JavaDoc 与 Controller 代码逻辑。无需添加繁琐的 @Operation 或 @Api 注解，保持代码纯净。",
+            "feature2Title": "多环境管理",
+            "feature2Desc": "一键切换 Dev/Test/Prod 环境变量。自动同步 Authorization Header，告别手动复制 Token 的痛苦。",
+            "feature3Title": "格式兼容",
+            "feature3Desc": "完美支持 OpenAPI 3.0 与 Swagger 2.0 标准。支持导出为 Markdown、HTML 或 Postman Collection。",
+            "configHint": "需要时可通过简单注解配置",
+            "section2Title": "注解",
+            "section2Highlight": "无关",
+            "section2Desc": "保持代码库整洁。我们的引擎解析您的源代码和 Javadoc 以构建准确的 API 规范，而不会用装饰器弄乱您的逻辑。",
+            "section3Title": "集成",
+            "section3Highlight": "调试器",
+            "section3Desc": "无需离开 IDE 即可测试接口。支持 OAuth2、环境变量，并能自动从 DTO 生成请求体。"
+        },
+        "nacos": {
+            "badge": "配置管理",
+            "heroTitle": "在 IDE 中管理",
+            "heroHighlight": "Nacos 配置",
+            "heroDescription": "无需离开 IDEA 即可管理 Nacos 配置。多环境切换、版本对比、快速发布。",
+            "connectButton": "连接 Nacos",
+            "feature1Title": "IDE 原生体验",
+            "feature1Desc": "告别浏览器控制台，在 IDE 中掌控一切",
+            "feature2Title": "多环境支持",
+            "feature2Desc": "快速切换开发、测试、生产环境",
+            "feature3Title": "版本历史",
+            "feature3Desc": "查看和对比配置变更历史",
+            "feature4Title": "实时同步",
+            "feature4Desc": "即时推送到远程，自动刷新",
+            "ctaTitle": "简化配置管理",
+            "ctaDesc": "高效、安全、可靠的 Nacos 操作。",
+            "connectNow": "立即连接",
+            "demoNamespace": "命名空间",
+            "demoGroup": "分组",
+            "demoDataId": "数据 ID",
+            "demoConfigFile": "application.yml",
+            "demoAction": "编辑",
+            "demoAction2": "发布",
+            "hero": {
+                "badge": "配置管理",
+                "title": "Nacos 配置",
+                "subtitle": "在 IDE 中管理",
+                "description": "无需离开 IDEA 即可管理 Nacos 配置。多环境切换、版本对比、快速发布。",
+                "download_button": "下载插件",
+                "demo_button": "观看演示"
+            },
+            "demo": {
+                "tabs": {
+                    "config": "配置",
+                    "service": "服务"
+                },
+                "sidebar": {
+                    "remote_prod": "远程 (生产)",
+                    "namespaces": "命名空间",
+                    "namespace_public": "public",
+                    "namespace_dev": "dev",
+                    "file_user_service": "user-service.yml",
+                    "file_gateway": "gateway.yml",
+                    "file_order": "order-service.yml",
+                    "local_dev": "本地 (开发)"
+                },
+                "editor": {
+                    "tab_remote": "远程",
+                    "tab_comparison": "对比",
+                    "status_valid": "有效",
+                    "status_utf8": "UTF-8",
+                    "button_reset": "重置",
+                    "button_publish": "发布"
+                },
+                "service": {
+                    "instances": "实例",
+                    "subscribers": "订阅者",
+                    "filter_placeholder": "筛选...",
+                    "table_header": {
+                        "ip": "IP",
+                        "port": "端口",
+                        "weight": "权重",
+                        "healthy": "健康",
+                        "metadata": "元数据"
+                    }
+                }
+            },
+            "features": {
+                "title": "强大功能",
+                "local_lifecycle": {
+                    "title": "本地生命周期管理",
+                    "desc": "直接从 IDE 管理本地 Nacos 服务器，<strong>一键启动/停止</strong>",
+                    "status_running": "运行中",
+                    "port": "端口: 8848",
+                    "version": "v2.2.0"
+                },
+                "version_control": {
+                    "title": "版本控制与对比",
+                    "desc": "通过内置版本历史跟踪每次配置变更",
+                    "history": {
+                        "v3": {
+                            "msg": "添加缓存配置",
+                            "time": "2 分钟前"
+                        },
+                        "v2": {
+                            "msg": "更新数据库 URL",
+                            "time": "1 小时前"
+                        },
+                        "v1": {
+                            "msg": "初始版本",
+                            "time": "昨天"
+                        }
+                    }
+                },
+                "intelligent_editor": {
+                    "title": "智能配置编辑器",
+                    "desc": "YAML 和 Properties 文件的语法高亮、验证和自动补全"
+                },
+                "security": {
+                    "title": "安全与加密",
+                    "desc": "加密凭据存储，安全传输到远程 Nacos 服务器"
+                }
+            },
+            "cta": {
+                "rating": "4.8",
+                "title": "准备好简化您的配置管理了吗？",
+                "description": "加入数千名已简化 Nacos 工作流的开发者行列。",
+                "install_button": "安装插件",
+                "docs_button": "查看文档",
+                "version_info": "版本 2.0.0"
+            },
+            "section2Title": "版本",
+            "section2Highlight": "控制",
+            "section2Desc": "再也不会丢失配置。内置差异查看器和历史跟踪，让您一键对比并回滚跨命名空间的变更。",
+            "section3Title": "原生",
+            "section3Highlight": "编辑器",
+            "section3Desc": "为您的 YAML 和 Properties 配置发挥 IntelliJ 编辑器的强大功能。支持 Nacos 模式的语法高亮、自动补全和实时验证。"
+        }
     }
-  }
 }

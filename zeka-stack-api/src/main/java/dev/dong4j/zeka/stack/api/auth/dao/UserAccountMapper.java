@@ -17,4 +17,12 @@ import dev.dong4j.zeka.starter.mybatis.base.BaseDao;
 @Mapper
 public interface UserAccountMapper extends BaseDao<UserAccount> {
 
+    /**
+     * 按设备 ID 统计用户数量
+     *
+     * @param deviceId 设备 ID
+     * @return 记录数
+     */
+    int countByDeviceId(String deviceId);
+
 }

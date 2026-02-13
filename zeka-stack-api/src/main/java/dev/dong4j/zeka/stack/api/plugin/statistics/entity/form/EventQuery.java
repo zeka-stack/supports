@@ -34,6 +34,7 @@ public class EventQuery extends BaseQuery<Long> {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /** 设备 ID */
     @Schema(description = "设备 ID")
     private String deviceId;
 }

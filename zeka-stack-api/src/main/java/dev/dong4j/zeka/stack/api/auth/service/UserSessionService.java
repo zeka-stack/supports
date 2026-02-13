@@ -14,9 +14,7 @@ import dev.dong4j.zeka.starter.mybatis.service.BaseService;
  * @date 2026.01.19 18:54
  * @since 1.0.0
  */
-public interface UserSessionService extends
-
-                                    BaseService<UserSession> {
+public interface UserSessionService extends BaseService<UserSession> {
 
     /**
      * 根据 ID 获取详细信息

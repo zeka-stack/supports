@@ -68,6 +68,20 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccountMapper, U
         final int updatedCount = this.baseMapper.updateById(UserAccountConverter.INSTANCE.f2p(form));
         BaseCodes.OPTION_FAILURE.isTrue(updatedCount == 1);
     }
-}
 
+    /**
+     * 检查指定设备 ID 是否已存在
+     * <p> 通过设备 ID 查询数据库, 判断是否存在对应的账号绑定记录. 如果设备 ID 为空或空白字符串, 则直接返回 false
+     *
+     * @param deviceId 设备 ID
+     * @return 如果设备 ID 存在对应的记录则返回 true, 否则返回 false
+     */
+    @Override
+    public boolean existsByDeviceId(String deviceId) {
+        if (deviceId == null || deviceId.isBlank()) {
+            return false;
+        }
+        return this.baseMapper.countByDeviceId(deviceId) > 0;
+    }
+}
 

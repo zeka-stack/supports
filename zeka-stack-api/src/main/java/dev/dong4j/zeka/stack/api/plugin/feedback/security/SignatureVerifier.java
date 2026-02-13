@@ -119,6 +119,35 @@ public class SignatureVerifier {
         String bodySha256,
         String signature
                                 ) throws Exception {
+        return verify(secret, method, pathWithQuery, body, timestamp, nonce, bodySha256, signature, TIMESTAMP_TOLERANCE);
+    }
+
+    /**
+     * 验证 HTTP 请求签名（支持自定义时间窗）
+     *
+     * @param secret             密钥
+     * @param method             HTTP 方法
+     * @param pathWithQuery      路径和查询参数
+     * @param body               请求体
+     * @param timestamp          时间戳（秒）
+     * @param nonce              随机串
+     * @param bodySha256         请求体哈希
+     * @param signature          传入签名
+     * @param timestampTolerance 允许偏差秒数
+     * @return 是否通过
+     * @throws Exception 异常
+     */
+    public static boolean verify(
+        String secret,
+        String method,
+        String pathWithQuery,
+        byte[] body,
+        String timestamp,
+        String nonce,
+        String bodySha256,
+        String signature,
+        long timestampTolerance
+                                ) throws Exception {
         // 1. 验证时间戳（必须在 ±300 秒内）
         long now = Instant.now().getEpochSecond();
         long t;
@@ -128,7 +157,7 @@ public class SignatureVerifier {
             log.debug("Invalid timestamp format: {}", timestamp);
             return false;
         }
-        if (Math.abs(now - t) > TIMESTAMP_TOLERANCE) {
+        if (Math.abs(now - t) > timestampTolerance) {
             log.debug("Timestamp out of tolerance: now={}, request={}, diff={}", now, t, Math.abs(now - t));
             return false;
         }
@@ -160,4 +189,3 @@ public class SignatureVerifier {
         return isValid;
     }
 }
-

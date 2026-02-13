@@ -14,9 +14,7 @@ import dev.dong4j.zeka.starter.mybatis.service.BaseService;
  * @date 2026.01.19 18:54
  * @since 1.0.0
  */
-public interface UserAccountService extends
-
-                                    BaseService<UserAccount> {
+public interface UserAccountService extends BaseService<UserAccount> {
 
     /**
      * 根据 ID 获取详细信息
@@ -43,5 +41,12 @@ public interface UserAccountService extends
      */
     void edit(UserAccountForm form);
 
-}
+    /**
+     * 判断设备 ID 是否已注册
+     *
+     * @param deviceId 设备 ID
+     * @return 已注册返回 true
+     */
+    boolean existsByDeviceId(String deviceId);
 
+}
