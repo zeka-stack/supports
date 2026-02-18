@@ -99,7 +99,7 @@ const capitalize = (str: string) => {
 const getNodeTheme = (id: string, type: string): ThemeColor => {
     if (id === 'engine') return THEMES.purple;
     if (id === 'cloud') return THEMES.blue;
-    if (id === 'mac-studio-m1') return THEMES.red;
+    if (id === 'mac-studio-m2ultra') return THEMES.emerald;
     if (type === 'gateway') return THEMES.cyan;
     if (id.includes('m4')) return THEMES.emerald;
     if (id.includes('m2')) return THEMES.orange;
@@ -115,6 +115,15 @@ const mapIcon = (id: string, type: string): React.ElementType => {
     if (type === 'container') return Box;
     if (type === 'service') return Bot;
     return Server;
+};
+
+const VALID_STATUS = new Set(['online', 'offline', 'warning', 'idle']);
+const COMPUTE_ORDER = ['mac-studio-m2ultra', 'mac-m4', 'mac-m2', 'free-api'];
+const MONITOR_API_TIMEOUT_MS = 5000;
+const MACHINE_SHORT_NAME: Record<string, string> = {
+    'mac-studio-m2ultra': 'M2U',
+    'mac-m4': 'M4',
+    'mac-m2': 'M2'
 };
 
 // --- Main Component ---
@@ -150,10 +159,11 @@ export const EngineMonitor: React.FC = () => {
             ],
             compute: [
                 {
-                    id: 'mac-studio-m1', name: 'Mac Studio M1 Ultra', type: 'compute', status: 'online',
+                    id: 'mac-studio-m2ultra', name: 'Mac Studio M2 Ultra', type: 'compute', status: 'online',
                     subNodes: [
-                        { id: 'lm-studio-m1', name: 'LM Studio', type: 'service', status: 'online' },
-                        { id: 'ollama-m1', name: 'Ollama', type: 'service', status: 'online' }
+                        { id: 'cc-proxy-m2ultra', name: 'CC Proxy', type: 'service', status: 'online' },
+                        { id: 'lm-studio-m2ultra', name: 'LM Studio', type: 'service', status: 'online' },
+                        { id: 'ollama-m2ultra', name: 'Ollama', type: 'service', status: 'online' }
                     ]
                 },
                 {
@@ -181,16 +191,125 @@ export const EngineMonitor: React.FC = () => {
         }
     };
 
+    const normalizeStatus = (status: unknown): ApiServiceNode['status'] => {
+        const value = typeof status === 'string' ? status.toLowerCase() : '';
+        return VALID_STATUS.has(value) ? (value as ApiServiceNode['status']) : 'idle';
+    };
+
+    const normalizeNode = (node: any, fallback: ApiServiceNode): ApiServiceNode => {
+        const id = typeof node?.id === 'string' && node.id.trim() ? node.id : fallback.id;
+        const name = typeof node?.name === 'string' && node.name.trim() ? node.name : fallback.name;
+        const type = typeof node?.type === 'string' && node.type.trim() ? node.type : fallback.type;
+        const stats = Array.isArray(node?.stats) ? node.stats : fallback.stats;
+        const subNodes = Array.isArray(node?.subNodes)
+            ? node.subNodes.map((sub: any) => normalizeNode(sub, {
+                id: typeof sub?.id === 'string' ? sub.id : 'unknown-service',
+                name: typeof sub?.name === 'string' ? sub.name : 'Unknown Service',
+                type: typeof sub?.type === 'string' ? sub.type : 'service',
+                status: normalizeStatus(sub?.status)
+            }))
+            : fallback.subNodes;
+
+        return {
+            id,
+            name,
+            type,
+            status: normalizeStatus(node?.status ?? fallback.status),
+            ...(Array.isArray(subNodes) ? { subNodes } : {}),
+            ...(Array.isArray(stats) ? { stats } : {})
+        };
+    };
+
+    const ensureComputeNode = (nodes: ApiServiceNode[], fallback: ApiServiceNode): ApiServiceNode[] => {
+        if (nodes.some(node => node.id === fallback.id)) return nodes;
+        return [...nodes, fallback];
+    };
+
+    const ensureSubServices = (node: ApiServiceNode, requiredSubs: ApiServiceNode[]): ApiServiceNode => {
+        const currentSubs = Array.isArray(node.subNodes) ? [...node.subNodes] : [];
+        const merged = requiredSubs.reduce((acc, required) => {
+            if (acc.some(sub => sub.id === required.id)) return acc;
+            acc.push(required);
+            return acc;
+        }, currentSubs);
+        return { ...node, subNodes: merged };
+    };
+
+    const normalizeMonitorData = (input: unknown): MonitorData => {
+        const raw = (input && typeof input === 'object') ? input as any : {};
+        const homelab = (raw.homelab && typeof raw.homelab === 'object') ? raw.homelab : {};
+        const stats = (raw.stats && typeof raw.stats === 'object') ? raw.stats : {};
+
+        const gateways = Array.isArray(homelab.gateways)
+            ? homelab.gateways.map((node: any) => normalizeNode(node, mockData.homelab.gateways[0]))
+            : mockData.homelab.gateways;
+
+        const computeRaw = Array.isArray(homelab.compute)
+            ? homelab.compute.map((node: any) => normalizeNode(node, {
+                id: typeof node?.id === 'string' ? node.id : 'unknown-compute',
+                name: typeof node?.name === 'string' ? node.name : 'Unknown Compute',
+                type: typeof node?.type === 'string' ? node.type : 'compute',
+                status: normalizeStatus(node?.status)
+            }))
+            : mockData.homelab.compute;
+
+        const studioRequired = mockData.homelab.compute.find(node => node.id === 'mac-studio-m2ultra')!;
+        const m4Required = mockData.homelab.compute.find(node => node.id === 'mac-m4')!;
+        const m2Required = mockData.homelab.compute.find(node => node.id === 'mac-m2')!;
+        const freeApiRequired = mockData.homelab.compute.find(node => node.id === 'free-api')!;
+
+        let compute = ensureComputeNode(computeRaw, studioRequired);
+        compute = ensureComputeNode(compute, m4Required);
+        compute = ensureComputeNode(compute, m2Required);
+        compute = ensureComputeNode(compute, freeApiRequired);
+
+        compute = compute.map(node => {
+            if (node.id === 'mac-studio-m2ultra') {
+                return ensureSubServices(node, studioRequired.subNodes || []);
+            }
+            return node;
+        });
+
+        const orderedKnown = COMPUTE_ORDER
+            .map(id => compute.find(node => node.id === id))
+            .filter(Boolean) as ApiServiceNode[];
+        const rest = compute.filter(node => !COMPUTE_ORDER.includes(node.id));
+
+        return {
+            engine: normalizeNode(raw.engine, mockData.engine),
+            cloud: normalizeNode(raw.cloud, mockData.cloud),
+            homelab: {
+                gateways,
+                compute: [...orderedKnown, ...rest]
+            },
+            stats: {
+                totalTokens: Number(stats.totalTokens ?? mockData.stats.totalTokens),
+                requests: Number(stats.requests ?? mockData.stats.requests),
+                avgLatency: typeof stats.avgLatency === 'string' ? stats.avgLatency : mockData.stats.avgLatency,
+                uptime: typeof stats.uptime === 'string' ? stats.uptime : mockData.stats.uptime
+            }
+        };
+    };
+
     // Helper: Initialize fake history on first load
     const initHistory = (data: MonitorData) => {
         const history: Record<string, ServiceStatus> = {};
-        const allNodes = [
+        const rootNodes = [
             data.engine,
             data.cloud,
             ...data.homelab.gateways,
-            ...data.homelab.compute,
-            ...data.homelab.compute.flatMap(c => c.subNodes || [])
+            ...data.homelab.compute
         ];
+
+        const subNodes = data.homelab.compute.flatMap(compute => {
+            const machineCode = MACHINE_SHORT_NAME[compute.id];
+            return (compute.subNodes || []).map(subNode => ({
+                ...subNode,
+                name: machineCode ? `${subNode.name} (${machineCode})` : subNode.name
+            }));
+        });
+
+        const allNodes = [...rootNodes, ...subNodes];
 
         allNodes.forEach(node => {
             const hist: ('online' | 'offline' | 'warning')[] = [];
@@ -208,13 +327,22 @@ export const EngineMonitor: React.FC = () => {
     // Helper: Update history with new data
     const updateHistory = (prevHistory: Record<string, ServiceStatus>, data: MonitorData) => {
         const newHistory = { ...prevHistory };
-        const allNodes = [
+        const rootNodes = [
             data.engine,
             data.cloud,
             ...data.homelab.gateways,
-            ...data.homelab.compute,
-            ...data.homelab.compute.flatMap(c => c.subNodes || [])
+            ...data.homelab.compute
         ];
+
+        const subNodes = data.homelab.compute.flatMap(compute => {
+            const machineCode = MACHINE_SHORT_NAME[compute.id];
+            return (compute.subNodes || []).map(subNode => ({
+                ...subNode,
+                name: machineCode ? `${subNode.name} (${machineCode})` : subNode.name
+            }));
+        });
+
+        const allNodes = [...rootNodes, ...subNodes];
 
         allNodes.forEach(node => {
             if (!newHistory[node.id]) {
@@ -231,13 +359,18 @@ export const EngineMonitor: React.FC = () => {
     // Transform API data to Component data
     const transformData = (data: MonitorData) => {
         function transformNode(node: ApiServiceNode): ServiceNode {
+            const safeId = typeof node.id === 'string' && node.id ? node.id : 'unknown-node';
+            const safeType = typeof node.type === 'string' && node.type ? node.type : 'service';
+            const safeName = typeof node.name === 'string' && node.name ? node.name : safeId;
             return {
                 ...node,
-                name: capitalize(node.name),
-                type: capitalize(node.type) as any,
-                icon: mapIcon(node.id, node.type),
-                theme: getNodeTheme(node.id, node.type),
-                subNodes: node.subNodes?.map(transformNode)
+                id: safeId,
+                name: capitalize(safeName),
+                type: capitalize(safeType) as any,
+                status: normalizeStatus(node.status),
+                icon: mapIcon(safeId, safeType),
+                theme: getNodeTheme(safeId, safeType),
+                subNodes: Array.isArray(node.subNodes) ? node.subNodes.map(transformNode) : []
             };
         }
 
@@ -253,33 +386,40 @@ export const EngineMonitor: React.FC = () => {
 
     const fetchData = async () => {
         try {
-            const data = await api.getMonitorStatus();
+            const data = await Promise.race<MonitorData>([
+                api.getMonitorStatus(),
+                new Promise<MonitorData>((_, reject) => {
+                    setTimeout(() => reject(new Error('Monitor API timeout')), MONITOR_API_TIMEOUT_MS);
+                })
+            ]);
+            const normalizedData = normalizeMonitorData(data);
             setStats({
-                totalTokens: data.stats.totalTokens,
-                requests: data.stats.requests,
-                avgLatency: data.stats.avgLatency,
-                uptime: data.stats.uptime
+                totalTokens: normalizedData.stats.totalTokens,
+                requests: normalizedData.stats.requests,
+                avgLatency: normalizedData.stats.avgLatency,
+                uptime: normalizedData.stats.uptime
             });
-            setNodes(transformData(data));
+            setNodes(transformData(normalizedData));
             
             setStatusHistory(prev => {
-                if (Object.keys(prev).length === 0) return initHistory(data);
-                return updateHistory(prev, data);
+                if (Object.keys(prev).length === 0) return initHistory(normalizedData);
+                return updateHistory(prev, normalizedData);
             });
 
         } catch (e) {
             console.warn("Failed to fetch monitor status, using mock data", e);
+            const fallbackData = normalizeMonitorData(mockData);
             setStats({
-                totalTokens: mockData.stats.totalTokens,
-                requests: mockData.stats.requests,
-                avgLatency: mockData.stats.avgLatency,
-                uptime: mockData.stats.uptime
+                totalTokens: fallbackData.stats.totalTokens,
+                requests: fallbackData.stats.requests,
+                avgLatency: fallbackData.stats.avgLatency,
+                uptime: fallbackData.stats.uptime
             });
-            setNodes(transformData(mockData));
+            setNodes(transformData(fallbackData));
             
             setStatusHistory(prev => {
-                if (Object.keys(prev).length === 0) return initHistory(mockData);
-                return updateHistory(prev, mockData);
+                if (Object.keys(prev).length === 0) return initHistory(fallbackData);
+                return updateHistory(prev, fallbackData);
             });
         }
     };
@@ -317,7 +457,7 @@ export const EngineMonitor: React.FC = () => {
             </div>
 
             {/* 2. HUD Header */}
-            <header className="fixed top-0 left-0 right-0 h-20 bg-[#0a051e]/60 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-8 z-50">
+            <header className="fixed top-16 left-0 right-0 h-20 bg-[#0a051e]/60 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-8 z-10">
                 <div className="flex items-center gap-6">
                     <button 
                         onClick={() => window.history.back()}
@@ -350,7 +490,7 @@ export const EngineMonitor: React.FC = () => {
             </header>
 
             {/* 3. Main Stage Container */}
-            <div className="fixed top-20 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden scrollbar-hide z-10">
+            <div className="fixed top-36 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden scrollbar-hide z-10">
                 <div className="min-h-full w-full flex flex-col items-center justify-center py-4 gap-4">
                 
                 {/* 3.1 Topology Graph Section */}
@@ -431,7 +571,6 @@ export const EngineMonitor: React.FC = () => {
                             <div key={service.id} className="flex items-center gap-4 group hover:bg-white/5 py-1 px-3 rounded-lg transition-colors">
                                 <div className="w-32 flex-shrink-0">
                                     <div className="text-xs font-bold text-gray-300 group-hover:text-white transition-colors">{service.name}</div>
-                                    <div className="text-[10px] text-gray-600 font-mono">Uptime: 99.9%</div>
                                 </div>
                                 <div className="flex-1 flex items-center gap-[4px] h-5 px-2">
                                     {service.history.map((status, idx) => (
@@ -565,7 +704,6 @@ const NodeCard = ({ node, size = 'md', pulse = false }: { node: ServiceNode, siz
 const ComputeRackCard = ({ node }: { node: ServiceNode }) => {
     const { theme } = node;
     const isOffline = node.status === 'offline';
-    const isWarning = node.status === 'warning';
 
     return (
         <div className={`
@@ -591,19 +729,6 @@ const ComputeRackCard = ({ node }: { node: ServiceNode }) => {
                             {node.status.toUpperCase()}
                         </span>
                     </div>
-                    {!isOffline && (
-                        <div className="mt-2 flex items-center gap-1">
-                            <span className="text-[10px] text-gray-600 font-mono w-6">CPU</span>
-                            <div className="flex-1 h-1 bg-gray-800 rounded-full overflow-hidden flex gap-[1px]">
-                                {[...Array(12)].map((_, i) => (
-                                    <div 
-                                        key={i} 
-                                        className={`flex-1 h-full rounded-sm ${i < (isWarning ? 10 : 4) ? (isWarning ? 'bg-orange-500' : theme.primary.replace('text-', 'bg-')) : 'bg-transparent'}`} 
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    )}
                 </div>
                 {node.subNodes && node.subNodes.length > 0 && (
                     <div className="flex flex-col gap-1.5 border-l border-white/10 pl-4">

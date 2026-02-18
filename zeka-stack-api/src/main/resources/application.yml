@@ -72,50 +72,82 @@ monitor:
     - id: cloud
       name: Public Cloud
       type: cloud
-      host: 1.1.1.1
+      host: zekastack.dong4j.site
       check-type: ping
     # --- Homelab Gateways ---
     - id: proxy
       name: AI Proxy
       type: gateway
       group: homelab.gateways
-      host: 192.168.31.10
+      host: 2.0.0.1
+      check-type: ping
     # --- Homelab Compute ---
+    - id: mac-studio-m2ultra
+      name: Mac Studio M2 Ultra
+      type: compute
+      group: homelab.compute
+      host: 192.168.31.6
+      check-type: ping
     - id: mac-m4
       name: Mac mini M4 Pro
       type: compute
       group: homelab.compute
-      host: 192.168.31.20
+      host: 192.168.31.5
+      check-type: ping
     - id: mac-m2
       name: Mac mini M2
       type: compute
       group: homelab.compute
-      host: 192.168.31.21
+      host: 192.168.31.4
+      check-type: ping
     - id: free-api
       name: Free API
       type: container
       group: homelab.compute
-      host: 192.168.31.22
+      host: 192.168.31.5
+      port: 3000
+      check-type: tcp
+    # --- Sub Services (M2 Ultra) ---
+    - id: cc-proxy-m2ultra
+      name: CC Proxy
+      type: service
+      parent-id: mac-studio-m2ultra
+      host: 192.168.31.6
+      check-type: ping
+    - id: lm-studio-m2ultra
+      name: LM Studio
+      type: service
+      parent-id: mac-studio-m2ultra
+      host: 192.168.31.6
+      port: 1234
+      check-type: tcp
+    - id: ollama-m2ultra
+      name: Ollama
+      type: service
+      parent-id: mac-studio-m2ultra
+      host: 192.168.31.6
+      port: 11434
+      check-type: tcp
     # --- Sub Services (M4) ---
     - id: cc-proxy
       name: CC Proxy
       type: service
       parent-id: mac-m4
-      host: 192.168.31.20
+      host: 192.168.31.5
       port: 7890
       check-type: tcp
     - id: lm-studio
       name: LM Studio
       type: service
       parent-id: mac-m4
-      host: 192.168.31.20
+      host: 192.168.31.5
       port: 1234
       check-type: tcp
     - id: ollama-m4
       name: Ollama
       type: service
       parent-id: mac-m4
-      host: 192.168.31.20
+      host: 192.168.31.5
       port: 11434
       check-type: tcp
     # --- Sub Services (M2) ---
@@ -123,6 +155,6 @@ monitor:
       name: Ollama
       type: service
       parent-id: mac-m2
-      host: 192.168.31.21
+      host: 192.168.31.4
       port: 11434
       check-type: tcp
