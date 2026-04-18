@@ -30,6 +30,21 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!-- Avoid inherited module export flags that conflict with javac release mode. -->
+                    <compilerArgs combine.self="override">
+                        <arg>-parameters</arg>
+                        <arg>-Xlint:all,-classfile,-rawtypes,-unchecked,-deprecation,-processing</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>dev.dong4j</groupId>
