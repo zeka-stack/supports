@@ -30,6 +30,9 @@ export const BlenHome = () => {
             </p>
 
              <div className="flex gap-4 mb-12">
+                <a href="https://zekastack.dong4j.site/docs/blen-kernel/" target="_blank" rel="noreferrer" className="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-700 border border-blue-100 rounded-lg font-medium hover:bg-blue-100 transition-colors">
+                    {t('modules.viewDocs')}
+                </a>
                 <a href="https://github.com/zeka-stack/zeka-stack/tree/main/blen-kernel" target="_blank" rel="noreferrer" className="inline-flex items-center px-4 py-2 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors">
                     <GitBranch className="w-4 h-4 mr-2" /> {t('modules.viewSource')}
                 </a>

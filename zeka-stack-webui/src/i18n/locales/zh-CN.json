@@ -22,6 +22,7 @@
     },
     "header": {
         "home": "首页",
+        "docs": "文档",
         "modules": "模块",
         "plugins": "插件",
         "engine": "AI 引擎",
@@ -58,6 +59,7 @@
         "heroTitleHighlight": "Intelli IDEA 插件",
         "heroDescription": "基于 Spring Boot 3 的现代化企业级开发脚手架。坚持“约定大于配置”，通过高度规范化实现组件开箱即用，助力团队快速构建高质量的微服务体系，实现极致开发效率。",
         "explorePlugins": "探索插件",
+        "docsSite": "快速开始",
         "coreArchitecture": "核心架构",
         "coreArchitectureDesc": "Zeka Stack 采用分层架构组织，确保严格的依赖流和模块化。",
         "learnMore": "了解更多",
@@ -387,6 +389,7 @@
     },
     "modules": {
         "backToStack": "返回生态总览",
+        "viewDocs": "查看文档",
         "viewSource": "查看源码",
         "submitRequest": "提交功能需求",
         "overview": "概览",

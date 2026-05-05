@@ -14,6 +14,7 @@ SERVER_ALIAS="aliyun"
 REMOTE_DIR="/var/www/zeka-stack-webui/dist"
 REMOTE_NGINX_DIR="/etc/nginx/conf.d"
 NGINX_CONF_LOCAL="zekastack.dong4j.site.conf"
+LOCAL_NGINX_SYNC_DIR="${HOME}/Developer/3.Knowledge/site/hexo/dependencies/ecs/aliyun/nginx/conf.d"
 
 # 获取脚本所在目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -115,6 +116,22 @@ echo ""
 if [ ! -f "${SCRIPT_DIR}/${NGINX_CONF_LOCAL}" ]; then
   echo -e "${RED}错误: 找不到 Nginx 配置文件: ${SCRIPT_DIR}/${NGINX_CONF_LOCAL}${NC}"
   exit 1
+fi
+
+# -n 模式下，额外同步本地知识库 nginx 配置目录（直接覆盖）
+if [ "$NGINX_ONLY" = true ]; then
+  if [ ! -d "${LOCAL_NGINX_SYNC_DIR}" ]; then
+    echo -e "${RED}错误: 本地 Nginx 同步目录不存在: ${LOCAL_NGINX_SYNC_DIR}${NC}"
+    exit 1
+  fi
+
+  cp -f "${SCRIPT_DIR}/${NGINX_CONF_LOCAL}" "${LOCAL_NGINX_SYNC_DIR}/${NGINX_CONF_LOCAL}"
+  if [ $? -ne 0 ]; then
+    echo -e "${RED}本地 Nginx 配置覆盖失败${NC}"
+    exit 1
+  fi
+  echo -e "${GREEN}✓${NC} 已同步本地 Nginx 配置到: ${LOCAL_NGINX_SYNC_DIR}/${NGINX_CONF_LOCAL}"
+  echo ""
 fi
 
 rsync -avz --progress "${SCRIPT_DIR}/${NGINX_CONF_LOCAL}" "${SERVER_ALIAS}:${REMOTE_NGINX_DIR}/"

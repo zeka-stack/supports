@@ -22,6 +22,7 @@
     },
     "header": {
         "home": "Home",
+        "docs": "Docs",
         "modules": "Modules",
         "plugins": "Plugins",
         "engine": "AI Engine",
@@ -58,6 +59,7 @@
         "heroTitleHighlight": "Intelli IDEA Plugin",
         "heroDescription": "A modern enterprise-grade scaffolding based on Spring Boot 3. Adhering to 'Convention over Configuration', providing out-of-the-box components to help teams rapidly build high-quality microservice systems with extreme efficiency.",
         "explorePlugins": "Explore Plugins",
+        "docsSite": "Quick Start",
         "coreArchitecture": "Core Architecture",
         "coreArchitectureDesc": "Zeka Stack is organized into a layered architecture, ensuring strict dependency flow and modularity.",
         "learnMore": "Learn more",
@@ -387,6 +389,7 @@
     },
     "modules": {
         "backToStack": "Back to Stack",
+        "viewDocs": "View Documentation",
         "viewSource": "View Source",
         "submitRequest": "Submit Feature Request",
         "overview": "Overview",

@@ -114,6 +114,7 @@ export const Header: React.FC<HeaderProps> = ({variant = 'default'}) => {
                 <nav className="flex items-center gap-6">
                     <div className={`hidden md:flex items-center gap-6 text-[15px] font-medium ${s.navText} transition-colors`}>
                         <a href="#/" className={`${s.navHover} transition-colors`}>{t('header.home')}</a>
+                        <a href="https://zekastack.dong4j.site/docs/" target="_blank" rel="noreferrer" className={`${s.navHover} transition-colors`}>{t('header.docs')}</a>
 
                         {/* Modules Dropdown */}
                         <div className="relative group">

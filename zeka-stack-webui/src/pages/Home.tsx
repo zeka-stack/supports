@@ -82,6 +82,9 @@ export const Home = () => {
             {t('home.heroDescription')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="https://zekastack.dong4j.site/docs/" target="_blank" rel="noreferrer" className="px-8 py-4 bg-cyan-600 text-white rounded-lg font-bold hover:bg-cyan-500 transition-all shadow-lg shadow-cyan-500/25">
+              {t('home.docsSite')}
+            </a>
             <a href="#/plugins/engine" className="px-8 py-4 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/25">
               {t('home.explorePlugins')}
             </a>
