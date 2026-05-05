@@ -59,10 +59,10 @@ export const JavadocHome: React.FC = () => {
                                 <Sparkles className="w-5 h-5 text-yellow-400"/>
                                 {t('plugins.javadoc.generateButton')}
                             </button>
-                            <button className="px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all shadow-sm hover:shadow-md flex items-center gap-2">
+                            <a href="https://ideaplugin.dong4j.site/javadoc/docs.html" target="_blank" rel="noreferrer" className="px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all shadow-sm hover:shadow-md flex items-center gap-2">
                                 <FileCode className="w-5 h-5 text-gray-500"/>
                                 {t('plugins.javadoc.viewDocsButton')}
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -280,9 +280,9 @@ export const JavadocHome: React.FC = () => {
                         <h3 className="text-3xl font-bold mb-4">Start Documenting Now</h3>
                         <p className="text-gray-400 mb-8">Install the Zeka Javadoc plugin and never write manual @param tags again.</p>
 
-                        <button className="w-full py-4 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/30 mb-4">
+                        <a href="https://plugins.jetbrains.com/plugin/28835" target="_blank" rel="noreferrer" className="w-full py-4 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/30 mb-4 flex items-center justify-center">
                             Install from JetBrains Marketplace
-                        </button>
+                        </a>
                         <p className="text-xs text-gray-500">Requires IntelliJ IDEA 2023.1+</p>
                     </div>
 

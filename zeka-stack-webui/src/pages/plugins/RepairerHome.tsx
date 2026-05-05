@@ -222,9 +222,12 @@ export const RepairerHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button className="px-12 py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full font-bold text-xl transition-all shadow-[0_0_40px_rgba(16,185,129,0.2)]">
+                        <a href="https://plugins.jetbrains.com/vendor/9afaba35-91ea-4364-8ced-64db868dd23e" target="_blank" rel="noreferrer" className="px-12 py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-full font-bold text-xl transition-all shadow-[0_0_40px_rgba(16,185,129,0.2)]">
                             {t('plugins.repairer.cta.button')}
-                        </button>
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/repairer/docs.html" target="_blank" rel="noreferrer" className="px-12 py-5 bg-transparent border border-emerald-500/50 text-emerald-300 rounded-full font-bold text-xl hover:bg-emerald-500/10 transition-all">
+                            {t('common.viewDocs')}
+                        </a>
                     </div>
 
                     <div className="mt-20 flex justify-center gap-12 text-stone-600 font-mono text-xs uppercase tracking-[0.2em]">

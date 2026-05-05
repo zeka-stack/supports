@@ -38,14 +38,14 @@ export const TracerHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up delay-200">
-                        <button className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 group">
+                        <a href="https://plugins.jetbrains.com/plugin/29155" target="_blank" rel="noreferrer" className="px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 group">
                             {t('plugins.tracer.hero.install_button')}
                             <Zap className="w-5 h-5 group-hover:scale-110 transition-transform"/>
-                        </button>
-                        <button className="px-10 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl font-bold transition-all flex items-center gap-2">
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/tracer/docs.html" target="_blank" rel="noreferrer" className="px-10 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl font-bold transition-all flex items-center gap-2">
                             <FileText className="w-5 h-5"/>
                             {t('plugins.tracer.hero.docs_button')}
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -182,9 +182,9 @@ export const TracerHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button className="px-12 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xl transition-all shadow-2xl hover:shadow-blue-500/40">
+                        <a href="https://plugins.jetbrains.com/plugin/29155" target="_blank" rel="noreferrer" className="px-12 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xl transition-all shadow-2xl hover:shadow-blue-500/40">
                             {t('plugins.tracer.hero.install_button')}
-                        </button>
+                        </a>
                     </div>
 
                     <div className="mt-20 pt-10 border-t border-slate-800/50">

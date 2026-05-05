@@ -327,14 +327,14 @@ export const ChangelogHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                        <button className="px-10 py-5 bg-white text-[#14532D] rounded-xl font-bold text-lg hover:bg-green-50 transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-3">
+                        <a href="https://plugins.jetbrains.com/plugin/29154" target="_blank" rel="noreferrer" className="px-10 py-5 bg-white text-[#14532D] rounded-xl font-bold text-lg hover:bg-green-50 transition-all shadow-xl hover:scale-105 flex items-center justify-center gap-3">
                             <Download className="w-6 h-6"/>
                             {t('plugins.changelog.installButton')}
-                        </button>
-                        <button className="px-10 py-5 bg-[#166534] text-white border border-[#16A34A] rounded-xl font-bold text-lg hover:bg-[#15803D] transition-all flex items-center justify-center gap-3">
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/changelog/docs.html" target="_blank" rel="noreferrer" className="px-10 py-5 bg-[#166534] text-white border border-[#16A34A] rounded-xl font-bold text-lg hover:bg-[#15803D] transition-all flex items-center justify-center gap-3">
                             <Terminal className="w-6 h-6"/>
                             {t('plugins.changelog.docsButton')}
-                        </button>
+                        </a>
                     </div>
 
                     <div className="mt-16 pt-8 border-t border-green-800 flex justify-center gap-12 opacity-60">

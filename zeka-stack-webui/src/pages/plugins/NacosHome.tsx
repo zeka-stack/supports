@@ -38,10 +38,10 @@ export const NacosHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-300">
-                        <button className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-xl shadow-blue-200/50 flex items-center gap-2 hover:-translate-y-1">
+                        <a href="https://plugins.jetbrains.com/plugin/29156" target="_blank" rel="noreferrer" className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-xl shadow-blue-200/50 flex items-center gap-2 hover:-translate-y-1">
                             {t('plugins.nacos.hero.download_button')}
                             <Download className="w-5 h-5"/>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -187,12 +187,12 @@ export const NacosHome: React.FC = () => {
                     </h2>
 
                     <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-                        <button className="px-12 py-5 bg-white text-blue-700 font-bold text-xl rounded-xl transition-all shadow-2xl hover:bg-blue-50">
+                        <a href="https://plugins.jetbrains.com/plugin/29156" target="_blank" rel="noreferrer" className="px-12 py-5 bg-white text-blue-700 font-bold text-xl rounded-xl transition-all shadow-2xl hover:bg-blue-50">
                             {t('plugins.nacos.cta.install_button')}
-                        </button>
-                        <button className="px-12 py-5 bg-blue-800/50 hover:bg-blue-800 text-white font-bold text-xl rounded-xl transition-all border border-blue-400/30 backdrop-blur-sm">
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/nacos/docs.html" target="_blank" rel="noreferrer" className="px-12 py-5 bg-blue-800/50 hover:bg-blue-800 text-white font-bold text-xl rounded-xl transition-all border border-blue-400/30 backdrop-blur-sm">
                             {t('plugins.nacos.cta.docs_button')}
-                        </button>
+                        </a>
                     </div>
 
                     <div className="mt-20 flex flex-wrap justify-center gap-12 text-blue-200/40 font-mono text-xs uppercase tracking-[0.3em]">

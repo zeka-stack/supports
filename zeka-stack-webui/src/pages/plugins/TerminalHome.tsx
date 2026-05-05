@@ -168,13 +168,13 @@ export const TerminalHome: React.FC = () => {
                     </div>
 
                      <div className="flex flex-col sm:flex-row gap-6 mt-12 animate-fade-in-up delay-500">
-                        <button className="group relative px-8 py-4 bg-[#33ff00] text-black font-bold text-lg hover:bg-[#2adb00] transition-all">
+                        <a href="https://plugins.jetbrains.com/plugin/29989" target="_blank" rel="noreferrer" className="group relative px-8 py-4 bg-[#33ff00] text-black font-bold text-lg hover:bg-[#2adb00] transition-all">
                             <div className="absolute inset-0 border-2 border-[#33ff00] translate-x-1.5 translate-y-1.5 group-hover:translate-x-2.5 group-hover:translate-y-2.5 transition-transform bg-transparent content-[''] -z-10 border-dashed"></div>
                             <span className="flex items-center gap-2">
                                 <Download className="w-5 h-5"/>
                                 {t('plugins.terminal.hero.install_button')}
                             </span>
-                        </button>
+                        </a>
                     </div>
 
                 </div>
@@ -314,12 +314,12 @@ export const TerminalHome: React.FC = () => {
                     </h2>
 
                     <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-                         <button className="px-12 py-5 bg-[#33ff00] text-black font-bold text-xl rounded hover:bg-[#2adb00] transition-all shadow-[0_0_30px_rgba(51,255,0,0.3)] hover:shadow-[0_0_50px_rgba(51,255,0,0.5)]">
+                         <a href="https://plugins.jetbrains.com/plugin/29989" target="_blank" rel="noreferrer" className="px-12 py-5 bg-[#33ff00] text-black font-bold text-xl rounded hover:bg-[#2adb00] transition-all shadow-[0_0_30px_rgba(51,255,0,0.3)] hover:shadow-[0_0_50px_rgba(51,255,0,0.5)]">
                              {t('plugins.terminal.hero.install_button')}
-                         </button>
-                         <button className="px-12 py-5 bg-transparent border-2 border-gray-700 text-white font-bold text-xl rounded hover:border-[#33ff00] hover:text-[#33ff00] transition-all">
+                         </a>
+                         <a href="https://ideaplugin.dong4j.site/terminal/docs.html" target="_blank" rel="noreferrer" className="px-12 py-5 bg-transparent border-2 border-gray-700 text-white font-bold text-xl rounded hover:border-[#33ff00] hover:text-[#33ff00] transition-all">
                              {t('plugins.terminal.hero.docs_button')}
-                         </button>
+                         </a>
                     </div>
 
                     <div className="mt-16 flex justify-center gap-8 text-gray-600 font-mono text-sm">

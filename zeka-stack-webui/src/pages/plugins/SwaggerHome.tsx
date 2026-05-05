@@ -46,10 +46,10 @@ export const SwaggerHome: React.FC = () => {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 animate-fade-in-up delay-300">
-                        <button className="px-10 py-4 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold transition-all shadow-xl flex items-center justify-center gap-2">
+                        <a href="https://plugins.jetbrains.com/vendor/9afaba35-91ea-4364-8ced-64db868dd23e" target="_blank" rel="noreferrer" className="px-10 py-4 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold transition-all shadow-xl flex items-center justify-center gap-2">
                             {t('plugins.swagger.installButton')}
                             <Zap className="w-5 h-5"/>
-                        </button>
+                        </a>
                         <button className="px-10 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2">
                             <FileJson className="w-5 h-5 text-amber-500"/>
                             {t('plugins.swagger.exportJsonButton')}
@@ -211,9 +211,12 @@ export const SwaggerHome: React.FC = () => {
                     </h2>
 
                     <div className="flex flex-col sm:flex-row justify-center gap-6 mt-12">
-                        <button className="px-12 py-5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold text-xl transition-all shadow-[0_0_40px_rgba(217,119,6,0.2)]">
+                        <a href="https://plugins.jetbrains.com/vendor/9afaba35-91ea-4364-8ced-64db868dd23e" target="_blank" rel="noreferrer" className="px-12 py-5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-bold text-xl transition-all shadow-[0_0_40px_rgba(217,119,6,0.2)]">
                             {t('plugins.swagger.installButton')}
-                        </button>
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/swagger/docs.html" target="_blank" rel="noreferrer" className="px-12 py-5 bg-transparent border border-amber-500/40 text-amber-300 rounded-xl font-bold text-xl hover:bg-amber-500/10 transition-all">
+                            {t('common.viewDocs')}
+                        </a>
                     </div>
 
                     <div className="mt-20 flex justify-center gap-12 text-slate-600 font-mono text-xs uppercase tracking-[0.2em]">

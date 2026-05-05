@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Activity, ArrowDown, Bot, ChevronDown, Cpu, Database, Globe, Layers, Lock, Network, Settings, Sparkles, Zap} from 'lucide-react';
+import {Activity, ArrowDown, Bot, ChevronDown, Cpu, Database, Download, Globe, Layers, Lock, Network, Settings, Sparkles, Zap} from 'lucide-react';
 import {useTranslation} from 'react-i18next';
 
 export const EngineHome: React.FC = () => {
@@ -53,13 +53,22 @@ export const EngineHome: React.FC = () => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fade-in-up delay-300">
-                        <button className="relative px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] flex items-center gap-3 group overflow-hidden">
+                        <a
+                            href="https://plugins.jetbrains.com/plugin/29152"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-8 py-3.5 bg-amber-900/30 hover:bg-amber-900/60 border border-amber-500/20 text-amber-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm"
+                        >
+                            <Download className="w-5 h-5"/>
+                            {t('home.installPlugin')}
+                        </a>
+                        <a href="https://ideaplugin.dong4j.site/engine/docs.html" target="_blank" rel="noreferrer" className="relative px-8 py-3.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(124,58,237,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.6)] flex items-center gap-3 group overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[length:200%_100%] animate-gradient-x"></div>
                             <span className="relative flex items-center gap-2">
                                 <Zap className="w-5 h-5 fill-current"/>
                                 {t('plugins.engine.sdkButton')}
                             </span>
-                        </button>
+                        </a>
                         <button 
                             onClick={() => window.location.hash = '#/plugins/engine/monitor'}
                             className="px-8 py-3.5 bg-cyan-900/30 hover:bg-cyan-900/60 border border-cyan-500/20 text-cyan-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm group"
@@ -67,10 +76,24 @@ export const EngineHome: React.FC = () => {
                             <Activity className="w-5 h-5 group-hover:animate-pulse"/>
                             {t('plugins.engine.monitorButton')}
                         </button>
-                        <button className="px-8 py-3.5 bg-[#1a103c]/30 hover:bg-[#1a103c]/60 border border-violet-500/20 text-violet-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm">
+                        <a
+                            href="https://ideaplugin.dong4j.site/engine/docs.html"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-8 py-3.5 bg-emerald-900/30 hover:bg-emerald-900/60 border border-emerald-500/20 text-emerald-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm"
+                        >
+                            <Globe className="w-5 h-5"/>
+                            {t('common.viewDocs')}
+                        </a>
+                        <a
+                            href="https://ideaplugin.dong4j.site/engine/docs.html"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-8 py-3.5 bg-[#1a103c]/30 hover:bg-[#1a103c]/60 border border-violet-500/20 text-violet-200 rounded-xl font-bold transition-all flex items-center gap-3 backdrop-blur-sm"
+                        >
                             <Settings className="w-5 h-5"/>
                             {t('plugins.engine.configButton')}
-                        </button>
+                        </a>
                     </div>
                 </div>
 
