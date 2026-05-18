@@ -134,7 +134,8 @@ if [ "$NGINX_ONLY" = true ]; then
   echo ""
 fi
 
-rsync -avz --progress "${SCRIPT_DIR}/${NGINX_CONF_LOCAL}" "${SERVER_ALIAS}:${REMOTE_NGINX_DIR}/"
+# 本地配置允许是指向 ECS nginx/conf.d 的 symlink; 部署到服务器时必须上传真实文件内容.
+rsync -avz --copy-links --progress "${SCRIPT_DIR}/${NGINX_CONF_LOCAL}" "${SERVER_ALIAS}:${REMOTE_NGINX_DIR}/"
 
 if [ $? -ne 0 ]; then
   echo -e "${RED}Nginx 配置上传失败${NC}"
