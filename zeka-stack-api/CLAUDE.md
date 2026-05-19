@@ -185,7 +185,7 @@ Key configuration sections:
 
 ### Parent POM
 
-- `arco-business-parent:2.0.0-SNAPSHOT`
+- `arco-business-parent:3.0.0-SNAPSHOT`
 - Managed by `cubo-boot-dependencies`
 
 ### Key Dependencies
