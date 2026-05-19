@@ -9,17 +9,18 @@ description: Polish a rough email draft and batch-send it to a recipient list vi
 
 ## 核心原则
 
-1. **永远先 dry-run,永远等用户二次确认**。即使用户上来就说"发送",也必须先打印预览,询问确认,收到**明确的**"发送/send/确认"类回复后才加 `--send`。
+1. **永远先 dry-run,永远等用户二次确认**。即使用户上来就说"发送",也必须先打印预览,询问确认,收到**明确的**"发送/send/确认"类回复后才加
+   `--send`。
 2. 邮件是**不可撤销操作**。任何疑问(收件人名单、主题、正文语气)都要先问用户,不要猜。
 3. **不要**把 SMTP 密码写进 spec 文件或 shell 历史可见的地方。密码通过按域名匹配的环境变量传入(见下表),兜底变量是 `SMTP_PASS`。
 
-   | 发件邮箱域名 | 密码环境变量(首选) |
-   |---|---|
-   | `@gmail.com` | `GMAIL_SMTP_PASS` |
-   | `@qq.com` | `QQ_SMTP_PASS` |
-   | `@163.com` / `@126.com` | `NETEASE_SMTP_PASS` |
-   | `@outlook.com` / `@hotmail.com` / `@live.com` | `OUTLOOK_SMTP_PASS` |
-   | 其他 | `SMTP_PASS` |
+| 发件邮箱域名                                        | 密码环境变量(首选)          |
+|-----------------------------------------------|---------------------|
+| `@gmail.com`                                  | `GMAIL_SMTP_PASS`   |
+| `@qq.com`                                     | `QQ_SMTP_PASS`      |
+| `@163.com` / `@126.com`                       | `NETEASE_SMTP_PASS` |
+| `@outlook.com` / `@hotmail.com` / `@live.com` | `OUTLOOK_SMTP_PASS` |
+| 其他                                            | `SMTP_PASS`         |
 
 ## 工作流程
 
@@ -122,22 +123,22 @@ python3 ~/.cursor/skills/send-email-batch/scripts/send_email.py /tmp/send-email-
 
 脚本会按 `SMTP_USER` 域名自动选 SMTP 服务器,常见提供商无需额外配置:
 
-| 域名 | 自动使用 |
-|---|---|
-| `@gmail.com` | smtp.gmail.com:465 (SSL),**必须 App Password** |
-| `@qq.com` | smtp.qq.com:465 (SSL),**需要授权码** |
-| `@163.com` / `@126.com` | smtp.163.com:465 / smtp.126.com:465,**需要授权码** |
-| `@outlook.com` / `@hotmail.com` | smtp-mail.outlook.com:587 (STARTTLS) |
-| 其他 | 必须 `export SMTP_HOST=... SMTP_PORT=... SMTP_MODE=ssl|starttls` |
+| 域名                              | 自动使用                                                 |
+|---------------------------------|------------------------------------------------------|
+| `@gmail.com`                    | smtp.gmail.com:465 (SSL),**必须 App Password**         |
+| `@qq.com`                       | smtp.qq.com:465 (SSL),**需要授权码**                      |
+| `@163.com` / `@126.com`         | smtp.163.com:465 / smtp.126.com:465,**需要授权码**        |
+| `@outlook.com` / `@hotmail.com` | smtp-mail.outlook.com:587 (STARTTLS)                 |
+| 其他                              | 必须 `export SMTP_HOST=... SMTP_PORT=... SMTP_MODE=ssl |starttls` |
 
 ## 常见错误与处理
 
-| 错误 | 说明 | 建议 |
-|---|---|---|
-| `SMTPAuthenticationError 535 5.7.8` | 密码错,或 Gmail 用了登录密码 | 去 https://myaccount.google.com/apppasswords 生成 App Password |
-| `ssl.SSLEOFError: UNEXPECTED_EOF_WHILE_READING` | 本地代理劫持了 DNS (Clash/Surge TUN 模式) 但没代理 SMTP | 让用户暂时关代理,或在代理规则里加 `DST-PORT,465,PROXY` |
-| `SMTPRecipientsRefused` | 某些地址被拒 | 记录下来,别的照发;最后报告给用户 |
-| 发 Gmail 超过 500/天 | 个人 Gmail 每日上限 | 达上限前停,或分多天发 |
+| 错误                                              | 说明                                         | 建议                                                          |
+|-------------------------------------------------|--------------------------------------------|-------------------------------------------------------------|
+| `SMTPAuthenticationError 535 5.7.8`             | 密码错,或 Gmail 用了登录密码                         | 去 https://myaccount.google.com/apppasswords 生成 App Password |
+| `ssl.SSLEOFError: UNEXPECTED_EOF_WHILE_READING` | 本地代理劫持了 DNS (Clash/Surge TUN 模式) 但没代理 SMTP | 让用户暂时关代理,或在代理规则里加 `DST-PORT,465,PROXY`                      |
+| `SMTPRecipientsRefused`                         | 某些地址被拒                                     | 记录下来,别的照发;最后报告给用户                                           |
+| 发 Gmail 超过 500/天                                | 个人 Gmail 每日上限                              | 达上限前停,或分多天发                                                 |
 
 ## 反模式(不要这么做)
 
@@ -153,6 +154,7 @@ python3 ~/.cursor/skills/send-email-batch/scripts/send_email.py /tmp/send-email-
 > 我要给 a@qq.com 和 b@gmail.com 发邮件,内容是告知 X 服务今晚 23:00 停机维护 1 小时。发件人 dong4j@gmail.com。
 
 Agent 动作:
+
 1. 因为收件人中英混合,生成双语内容
 2. 写 `/tmp/send-email-20260418.json`,包含 `subject_cn/body_cn/subject_en/body_en`
 3. 跑 dry-run,打印给用户
