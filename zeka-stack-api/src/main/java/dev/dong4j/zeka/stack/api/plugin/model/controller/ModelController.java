@@ -1,27 +1,28 @@
 package dev.dong4j.zeka.stack.api.plugin.model.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+import java.util.Map;
 
 import dev.dong4j.zeka.stack.api.plugin.model.dto.ModelResponse;
-import dev.dong4j.zeka.stack.api.plugin.model.service.ZhipuModelService;
+import dev.dong4j.zeka.stack.api.plugin.model.service.ModelCatalogService;
 import dev.dong4j.zeka.starter.rest.annotation.RestControllerWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 模型控制器类
- * <p> 用于处理与智谱 AI 模型相关的查询请求, 通过 RESTful 接口暴露模型列表信息. 该控制器不负责请求处理逻辑本身, 而是专注于模型数据的检索与封装, 确保业务逻辑与基础设施解耦.</p>
- * <p> 控制器路径为 <code>/plugin/v1/models</code>, 提供 <code>GET /zhipu</code> 接口用于获取智谱 AI 可用模型列表. 支持通过 <code>apiKey</code> 参数指定访问密钥,
- * 若未提供则使用默认配置.</p>
- * <p> 返回结构为 <code>ModelResponse</code>, 包含提供者名称, 模型列表及总数, 便于前端或下游服务消费.</p>
- * <p> 本类为内部使用组件, 不对外暴露请求处理细节, 符合面向对象设计原则, 专注于模型数据的封装与响应.</p>
+ * 插件推荐模型目录接口
+ * <p>
+ * 路径前缀 {@code /plugin/v1/models}：
+ * <ul>
+ *   <li>{@code GET /} — 全部已配置服务商</li>
+ *   <li>{@code GET /{providerId}} — 单个服务商（与插件 AIProviderType.providerId 对齐）</li>
+ *   <li>{@code GET /zhipu} — 历史兼容，等同 {@code glm}/{@code zhipu}</li>
+ * </ul>
  *
  * @author dong4j
  * @version 1.0.0
- * @email "mailto:dong4j@gmail.com"
- * @date 2026.01.16
  * @since 1.0.0
  */
 @Slf4j
@@ -29,25 +30,36 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ModelController {
 
-    /** 智谱 AI 模型服务, 用于获取可用模型列表 */
-    private final ZhipuModelService zhipuModelService;
+    private final ModelCatalogService modelCatalogService;
 
     /**
-     * 获取智谱 AI 可用模型列表
-     * <p> 通过 HTTP GET 请求获取智谱 AI 平台支持的模型列表, 支持传入 API Key 以获取个性化模型列表.
-     * 若未提供 API Key, 则返回默认公开模型列表.
+     * 获取全部推荐模型目录
      *
-     * @return 包含模型提供商名称, 模型列表及总数的响应对象
+     * @return providerId → ModelResponse
+     */
+    @GetMapping
+    public Map<String, ModelResponse> listAll() {
+        return modelCatalogService.getAll();
+    }
+
+    /**
+     * 历史兼容：智谱推荐列表
+     *
+     * @return 智谱/glm 模型目录
      */
     @GetMapping("/zhipu")
     public ModelResponse getZhipuModels() {
+        return modelCatalogService.getByProviderId("zhipu");
+    }
 
-        List<String> models = zhipuModelService.getAvailableModels();
-
-        return ModelResponse.builder()
-            .provider("zhipu")
-            .models(models)
-            .total(models.size())
-            .build();
+    /**
+     * 按插件 providerId 获取推荐模型目录
+     *
+     * @param providerId 如 anthropic、deepseek、deepseek_anthropic、glm、moonshot_anthropic
+     * @return 模型目录
+     */
+    @GetMapping("/{providerId}")
+    public ModelResponse getByProvider(@PathVariable("providerId") String providerId) {
+        return modelCatalogService.getByProviderId(providerId);
     }
 }

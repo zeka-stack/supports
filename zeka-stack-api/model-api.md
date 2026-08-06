@@ -7,7 +7,8 @@ Zeka Stack 框架的 REST API 服务，为 IDEA 插件提供后端接口支持�
 本项目提供以下核心功能：
 
 - ✅ 提供 AI 服务商模型列表查询接口
-- ✅ 支持智谱 AI (Zhipu) 模型列表获取
+- ✅ 支持多服务商推荐目录（`plugin.models.providers`，按插件 providerId）
+- ✅ 兼容历史 `GET /zhipu` 接口
 - ✅ RESTful API 设计
 - ✅ 统一的响应格式
 
@@ -72,11 +73,23 @@ java -jar target/zeka-stack-api-1.0.0.jar
 
 ### 4. 测试 API
 
-#### 获取智谱 AI 模型列表
+#### 获取推荐模型目录（按服务商）
 
 ```bash
-curl http://localhost:8080/api/v1/models/zhipu
+curl http://localhost:8080/api/plugin/v1/models/anthropic
+curl http://localhost:8080/api/plugin/v1/models/deepseek
+curl http://localhost:8080/api/plugin/v1/models/glm
+# 历史兼容
+curl http://localhost:8080/api/plugin/v1/models/zhipu
 ```
+
+全量：
+
+```bash
+curl http://localhost:8080/api/plugin/v1/models
+```
+
+目录在 `application.yml` → `plugin.models.providers` 维护（精选主力模型，2026-08 已对齐官方当前代际）。
 
 响应示例：
 
