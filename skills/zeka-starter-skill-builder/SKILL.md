@@ -198,7 +198,7 @@ rg -n "<artifactId>|<module>|<dependency>" <component-root> -g pom.xml
 ---
 name: <starter-artifact-id>
 description: 在使用 Zeka Stack <Starter 名称> 编写相关功能时使用。
-license: Apache-2.0
+license: MIT
 ---
 
 # <Starter Name>
@@ -328,7 +328,7 @@ JAR，也不会扫描 reactor 中所有模块的 `target/classes`。
 合格的 starter `SKILL.md` 应满足：
 
 - 路径符合 `skills/<starter-artifact-id>/SKILL.md`。
-- frontmatter 至少包含 `name`、`description`、`license`。
+- frontmatter 至少包含 `name`、`description`、`license`；license 与组件所属仓库的实际 LICENSE 一致，本仓库当前为 MIT。
 - `name` 与 starter artifactId 一致。
 - 正文为中文，技术术语可保留英文。
 - 内容自包含，不引用使用方不可见的仓库文档。
