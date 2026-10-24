@@ -173,16 +173,16 @@ rg -n "<artifactId>|<module>|<dependency>" <component-root> -g pom.xml
 
 读取后先形成一份内部理解，再写 `SKILL.md`。至少回答这些问题：
 
-| 问题                     | 需要从哪里确认                                          |
-|------------------------|--------------------------------------------------|
-| starter 暴露给使用方的核心能力是什么 | starter 依赖、核心实现、自动配置类                            |
-| 使用方应该写什么类型的业务代码        | controller、service、mapper、listener、endpoint 等实现类 |
-| 自动配置了哪些 Bean           | `@Bean` 方法、自动配置类、条件装配注解                          |
-| 哪些 Bean 允许用户覆盖         | `@ConditionalOnMissingBean`、扩展接口、配置属性            |
-| 配置项有哪些                 | `@ConfigurationProperties`、配置常量、条件装配属性           |
-| 默认行为是什么                | 自动配置、默认 Bean、默认属性值                               |
-| 什么情况下应该换用其他 starter    | 同组件其他 starter 或其他技术栈（如传统 Spring Boot）的差异         |
-| 哪些底层模块对使用方透明           | core/common/autoconfigure 依赖和封装关系                |
+| 问题                                 | 需要从哪里确认                                              |
+|--------------------------------------|-------------------------------------------------------------|
+| starter 暴露给使用方的核心能力是什么 | starter 依赖、核心实现、自动配置类                          |
+| 使用方应该写什么类型的业务代码       | controller、service、mapper、listener、endpoint 等实现类    |
+| 自动配置了哪些 Bean                  | `@Bean` 方法、自动配置类、条件装配注解                      |
+| 哪些 Bean 允许用户覆盖               | `@ConditionalOnMissingBean`、扩展接口、配置属性             |
+| 配置项有哪些                         | `@ConfigurationProperties`、配置常量、条件装配属性          |
+| 默认行为是什么                       | 自动配置、默认 Bean、默认属性值                             |
+| 什么情况下应该换用其他 starter       | 同组件其他 starter 或其他技术栈（如传统 Spring Boot）的差异 |
+| 哪些底层模块对使用方透明             | core/common/autoconfigure 依赖和封装关系                    |
 
 ### Step 4：生成 SKILL.md
 
